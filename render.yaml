@@ -4,7 +4,7 @@ services:
     runtime: go
     plan: free
     rootDir: backend-go
-    buildCommand: go build -o main .
+    buildCommand: go mod tidy && go build -o main .
     startCommand: ./main
     envVars:
       - key: PORT
@@ -19,4 +19,3 @@ services:
 databases:
   - name: portfolio-postgres
     plan: free
-
