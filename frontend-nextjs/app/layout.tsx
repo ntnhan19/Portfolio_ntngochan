@@ -13,8 +13,31 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio - My Projects",
-  description: "Portfolio showcasing my projects and technical reports",
+  title: "Nguyen Tran Ngoc Han - Software Engineer Portfolio",
+  description: "Full-Stack Developer chuyên Backend (Go, Node.js), AI/LLM, và Network Programming. Sinh viên xuất sắc HUTECH với các dự án real-world production-ready.",
+  keywords: [
+    "software engineer",
+    "golang developer", 
+    "backend developer",
+    "AI developer",
+    "HUTECH",
+    "Vietnam developer",
+    "full-stack developer",
+    "nodejs developer"
+  ].join(", "),
+  authors: [{ name: "Nguyen Tran Ngoc Han", url: "https://github.com/ntnhan19" }],
+  openGraph: {
+    title: "Nguyen Tran Ngoc Han - Portfolio",
+    description: "Khám phá các dự án AI, Network Programming và Full-Stack Development",
+    url: "https://portfolio-fullstack-wine-seven.vercel.app",
+    siteName: "Ngoc Han Portfolio",
+    locale: "vi_VN",
+    type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -23,7 +46,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="vi">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
