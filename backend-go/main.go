@@ -49,7 +49,10 @@ func main() {
 	{
 		api.GET("/projects", ctrl.GetProjects)
 		api.GET("/profile", ctrl.GetProfile)
-		api.POST("/seed", ctrl.CreateSampleData) // API để tạo data giả test nhanh
+		api.GET("/certificates", ctrl.GetCertificates)
+		api.GET("/activities", ctrl.GetActivities)
+		api.GET("/blog-posts", ctrl.GetBlogPosts)
+		api.POST("/seed", ctrl.CreateSampleData)
 	}
 
 	// 6. Chạy Server

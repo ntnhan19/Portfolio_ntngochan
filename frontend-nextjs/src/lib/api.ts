@@ -20,3 +20,13 @@ export const getProfile = async () => {
   const response = await api.get('/profile');
   return response.data;
 };
+
+export const getActivities = async () => {
+  const response = await api.get('/activities');
+  return response.data;
+};
+
+export const getCertificates = async () => {
+  const response = await api.get('/certificates');
+  return response.data;
+};

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Project } from '../types/index';
 import { Github, ExternalLink, Code, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export default function ProjectCard({ project, index }: { project: Project; index: number }) {
     return (
@@ -11,54 +12,59 @@ export default function ProjectCard({ project, index }: { project: Project; inde
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1, duration: 0.5 }}
-            className="group relative flex flex-col h-full"
+            className="group relative flex flex-col h-full bg-gray-900/90 backdrop-blur-xl border border-white/10 rounded-xl overflow-hidden hover:border-blue-500/30 transition-all hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-900/20"
         >
-            {/* Hiệu ứng Glow phía sau */}
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl opacity-20 group-hover:opacity-100 transition duration-500 blur-lg group-hover:blur-xl"></div>
-
-            {/* Nội dung Card chính */}
-            <div className="relative flex flex-col h-full bg-gray-900/90 backdrop-blur-xl border border-white/10 rounded-xl p-6 hover:border-white/20 transition-colors">
-
-                {/* Header: Category & Links */}
-                <div className="flex justify-between items-start mb-4">
-                    <span className="px-3 py-1 text-xs font-medium text-blue-300 bg-blue-500/10 rounded-full border border-blue-500/20">
+            {/* 1. Phần Ảnh Bìa (Mới) */}
+            <div className="relative h-48 w-full overflow-hidden bg-gray-800">
+                {project.image_url ? (
+                    <Image
+                        src={project.image_url}
+                        alt={project.title}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                ) : (
+                    // Fallback nếu không có ảnh thì hiện gradient
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-900 to-gray-900 flex items-center justify-center">
+                        <Code className="text-white/20 w-16 h-16" />
+                    </div>
+                )}
+                {/* Badge Category */}
+                <div className="absolute top-3 right-3">
+                    <span className="px-3 py-1 text-xs font-bold text-white bg-black/60 backdrop-blur-md rounded-full border border-white/10">
                         {project.category}
                     </span>
-                    <div className="flex gap-3">
-                        {project.repo_url && (
-                            <a href={project.repo_url} target="_blank" className="text-gray-400 hover:text-white transition-colors p-1 hover:bg-white/10 rounded">
-                                <Github size={18} />
-                            </a>
-                        )}
-                        {project.demo_url && (
-                            <a href={project.demo_url} target="_blank" className="text-gray-400 hover:text-white transition-colors p-1 hover:bg-white/10 rounded">
-                                <ExternalLink size={18} />
-                            </a>
-                        )}
-                    </div>
                 </div>
+            </div>
 
-                {/* Title & Desc */}
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">
+            {/* 2. Nội dung */}
+            <div className="p-6 flex flex-col flex-grow">
+                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors line-clamp-1">
                     {project.title}
                 </h3>
-                <p className="text-gray-400 text-sm mb-6 flex-grow line-clamp-3 leading-relaxed">
+                <p className="text-gray-400 text-sm mb-4 flex-grow line-clamp-3 leading-relaxed">
                     {project.description}
                 </p>
 
-                {/* Footer: Stack & Button */}
                 <div className="mt-auto space-y-4">
                     <div className="flex items-center text-gray-500 text-xs py-3 border-t border-white/5">
                         <Code size={14} className="mr-2 text-purple-400" />
                         <span className="truncate">{project.tech_stack}</span>
                     </div>
 
-                    <Link
-                        href={`/projects/${project.id}`}
-                        className="flex items-center justify-center w-full py-2.5 bg-white/5 hover:bg-blue-600/20 text-sm font-medium text-gray-300 hover:text-blue-400 border border-white/5 hover:border-blue-500/50 rounded-lg transition-all group-active:scale-[0.98]"
-                    >
-                        Xem Báo Cáo Chi Tiết <ArrowRight size={14} className="ml-2" />
-                    </Link>
+                    <div className="flex gap-3">
+                        <Link
+                            href={`/projects/${project.id}`}
+                            className="flex-1 flex items-center justify-center py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors"
+                        >
+                            Chi tiết
+                        </Link>
+                        {project.repo_url && (
+                            <a href={project.repo_url} target="_blank" className="p-2 bg-white/5 hover:bg-white/10 rounded-lg text-gray-300 hover:text-white transition-colors" title="Source Code">
+                                <Github size={20} />
+                            </a>
+                        )}
+                    </div>
                 </div>
             </div>
         </motion.div>
