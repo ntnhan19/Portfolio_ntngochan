@@ -30,3 +30,8 @@ export const getCertificates = async () => {
   const response = await api.get('/certificates');
   return response.data;
 };
+
+export const getBlogPosts = async () => {
+  const response = await api.get('/blog-posts');
+  return response.data;
+};
