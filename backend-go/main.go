@@ -29,7 +29,16 @@ func main() {
 	}
 
 	// 3. Auto Migrate (Tự động tạo bảng từ Code - Cực tiện cho đồ án gấp)
-	db.AutoMigrate(&models.Project{}, &models.Profile{})
+	err = db.AutoMigrate(
+		&models.Project{},
+		&models.Profile{},
+		&models.Certificate{}, // <--- Mới thêm
+		&models.Activity{},    // <--- Mới thêm
+		&models.BlogPost{},
+	)
+	if err != nil {
+		log.Fatal("Failed to migrate database:", err)
+	}
 
 	// 4. Khởi tạo Router
 	r := gin.Default()

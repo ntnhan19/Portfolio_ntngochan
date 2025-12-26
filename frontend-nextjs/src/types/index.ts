@@ -40,3 +40,13 @@ export interface Profile {
   linkedin: string;
   image_url?: string;
 }
+
+export interface BlogPost {
+  id: number;
+  title: string;
+  summary: string;
+  content: string;
+  cover_image: string;
+  tags: string;
+  date: string;
+}
