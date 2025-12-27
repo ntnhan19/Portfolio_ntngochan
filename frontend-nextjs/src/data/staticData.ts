@@ -1,5 +1,8 @@
 // src/data/staticData.ts
 
+// 👇 KHAI BÁO BIẾN NÀY ĐỂ QUẢN LÝ ĐƯỜNG DẪN ẢNH DỄ HƠN
+const BASE_PATH = '/Portfolio_ntngochan';
+
 export interface Project {
   id: number;
   title: string;
@@ -42,12 +45,30 @@ export const profile = {
   linkedin: "https://linkedin.com/in/nguyentranngochan"
 };
 
-// Giữ nguyên Blog cũ (Java/JS) để portfolio trông đầy đặn
+// CẬP NHẬT blogPosts (Đủ 9 bài theo yêu cầu)
 export const blogPosts: BlogPost[] = [
   {
     id: 1,
+    title: "Hành trình từ .NET sang Go: Tại sao tôi chuyển stack?",
+    summary: "Chia sẻ trải nghiệm học Golang sau 1 năm làm việc với C# .NET. Performance benchmark, learning curve, và những cú sốc văn hóa.",
+    content: `# Hành trình từ .NET sang Go\n\n## Coming soon...\nBài viết đang được hoàn thiện.`,
+    cover_image: `${BASE_PATH}/images/blog/golang_vs_dotnet.jpg`, // 👈 Đã thêm BASE_PATH
+    tags: "Career,Backend,Golang",
+    date: "27/12/2024"
+  },
+  {
+    id: 2,
+    title: "3 bài học quý giá từ Hackathon PIONE DREAM 2025",
+    summary: "48 giờ không ngủ, 1 MVP hoàn chỉnh, và những insight quý giá về làm việc nhóm dưới áp lực thời gian.",
+    content: `# PIONE DREAM 2025\n\n## Coming soon...\nBài viết đang được hoàn thiện.`,
+    cover_image: `${BASE_PATH}/images/blog/hackathon.jpg`,
+    tags: "Experience,Hackathon,Soft Skills",
+    date: "26/12/2024"
+  },
+  {
+    id: 3,
     title: "Java Collections Framework: ArrayList vs LinkedList",
-    summary: "So sánh chi tiết hiệu năng và cách sử dụng ArrayList và LinkedList trong Java. Khi nào nên dùng cái nào?",
+    summary: "So sánh chi tiết hiệu năng và cách sử dụng ArrayList và LinkedList trong Java. Khi nào nên dùng cái nào để tối ưu bộ nhớ?",
     content: `# Java Collections Framework: ArrayList vs LinkedList
   
   ## Giới thiệu
@@ -121,17 +142,40 @@ export const blogPosts: BlogPost[] = [
   
   - **ArrayList**: Default choice cho hầu hết trường hợp
   - **LinkedList**: Chỉ khi cần thao tác đầu/cuối thường xuyên
-  - Luôn benchmark với data thực tế!
-  
-  ## Tham khảo
-  - [Java Docs - ArrayList](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html)
-  - [Java Docs - LinkedList](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html)`,
-    cover_image: "/images/blog/java-collections.jpg",
+  - Luôn benchmark với data thực tế!`,
+    cover_image: `${BASE_PATH}/images/blog/java-collections.jpg`,
     tags: "Java,Data Structures",
     date: "15/12/2024"
   },
   {
-    id: 2,
+    id: 4,
+    title: "Java Stream API: Lập trình hàm trong Java 8+",
+    summary: "Stream API giúp code Java ngắn gọn và dễ đọc hơn. Tìm hiểu cách sử dụng map, filter, reduce hiệu quả.",
+    content: `# Java Stream API...\n(Nội dung chi tiết)`,
+    cover_image: `${BASE_PATH}/images/blog/java-streams.jpg`,
+    tags: "Java,Functional Programming",
+    date: "20/12/2024"
+  },
+  {
+    id: 5,
+    title: "Java Exception Handling: Best Practices",
+    summary: "Cách xử lý exceptions đúng chuẩn trong Java - try-catch, custom exceptions, và error handling patterns.",
+    content: `# Java Exception Handling...\n(Nội dung chi tiết)`,
+    cover_image: `${BASE_PATH}/images/blog/java-exceptions.jpg`,
+    tags: "Java,Error Handling",
+    date: "23/12/2024"
+  },
+  {
+    id: 6,
+    title: "Java Spring Boot cơ bản: REST API đầu tiên",
+    summary: "Hướng dẫn từng bước xây dựng REST API với Spring Boot cho người mới bắt đầu. Cấu trúc project chuẩn.",
+    content: `# Spring Boot Tutorial...\n(Nội dung chi tiết)`,
+    cover_image: `${BASE_PATH}/images/blog/spring-boot.jpg`,
+    tags: "Java,Spring Boot,Backend",
+    date: "25/12/2024"
+  },
+  {
+    id: 7,
     title: "JavaScript Closures: Hiểu đúng và sử dụng hiệu quả",
     summary: "Closures là một trong những khái niệm khó nhất trong JavaScript. Hãy cùng tìm hiểu chi tiết qua ví dụ thực tế.",
     content: `# JavaScript Closures: Hiểu đúng và sử dụng hiệu quả
@@ -157,11 +201,6 @@ export const blogPosts: BlogPost[] = [
   console.log(counter());  // 2
   console.log(counter());  // 3
   \`\`\`
-  
-  **Giải thích:**
-  - Inner function "nhớ" được biến \`count\`
-  - \`count\` không bị garbage collected
-  - Mỗi lần gọi \`counter()\` đều access được \`count\`
   
   ## 2. Use Cases thực tế
   
@@ -205,9 +244,45 @@ export const blogPosts: BlogPost[] = [
   **Nhược điểm:**
   - Có thể gây memory leaks nếu không cẩn thận
   - Khó debug hơn`,
-    cover_image: "/images/blog/js-closures.jpg",
+    cover_image: `${BASE_PATH}/images/blog/js-closures.jpg`,
     tags: "JavaScript,Fundamentals",
     date: "18/12/2024"
+  },
+  {
+    id: 8,
+    title: "JavaScript Promises và Async/Await toàn tập",
+    summary: "Từ callback hell đến async/await - cách viết code bất đồng bộ sạch đẹp và dễ maintain trong JavaScript.",
+    content: `# Async JavaScript...\n(Nội dung chi tiết)`,
+    cover_image: `${BASE_PATH}/images/blog/js-async.jpg`,
+    tags: "JavaScript,Async",
+    date: "22/12/2024"
+  },
+  {
+    id: 9,
+    title: "JavaScript ES6+: Arrow Functions và Destructuring",
+    summary: "Các tính năng mới của ES6 giúp code JavaScript hiện đại và ngắn gọn hơn. Tại sao nên dùng const/let thay vì var?",
+    content: `# ES6 Features...\n(Nội dung chi tiết)`,
+    cover_image: `${BASE_PATH}/images/blog/js-es6.jpg`,
+    tags: "JavaScript,ES6",
+    date: "24/12/2024"
+  },
+  {
+    id: 10,
+    title: "JavaScript Design Patterns: Module và Singleton",
+    summary: "Các design patterns thường dùng trong JavaScript để tổ chức code tốt hơn, tránh ô nhiễm global scope.",
+    content: `# JS Design Patterns...\n(Nội dung chi tiết)`,
+    cover_image: `${BASE_PATH}/images/blog/js-patterns.jpg`,
+    tags: "JavaScript,Design Patterns",
+    date: "26/12/2024"
+  },
+  {
+    id: 11,
+    title: "So sánh Java vs JavaScript: Những lầm tưởng phổ biến",
+    summary: "Tuy tên giống nhau nhưng bản chất hoàn toàn khác biệt. Phân tích sự khác biệt về Type System, Runtime và Use cases.",
+    content: `# Java vs JavaScript...\n(Nội dung chi tiết)`,
+    cover_image: `${BASE_PATH}/images/blog/java-vs-js.jpg`,
+    tags: "Java,JavaScript,Comparison",
+    date: "27/12/2024"
   }
 ];
 
@@ -287,7 +362,7 @@ export const projects: Project[] = [
     tech_stack: "Python, FastAPI, LangChain, Google Gemini API, Pinecone, React.js",
     category: "AI/Machine Learning",
     repo_url: "https://github.com/ntnhan19/DocMentor",
-    image_url: "/images/projects/docmentor.png",
+    image_url: `${BASE_PATH}/images/projects/docmentor.png`,
     highlights: "Academic Project,RAG Pipeline,Vector Search",
     duration: "3 tháng (Sep - Dec 2025)",
     team_size: "3 người"
@@ -352,25 +427,6 @@ io.to(\`room-\${movieId}\`).emit('seat:updated', {
 });
 \`\`\`
 
-### 3. Database Transaction
-
-\`\`\`javascript
-await db.transaction(async (trx) => {
-  // Lock row để đảm bảo consistency
-  const seat = await trx('seats')
-    .where({ id: seatId })
-    .forUpdate()
-    .first();
-   
-  if (seat.status !== 'available') {
-    throw new Error('Ghế không khả dụng');
-  }
-   
-  await trx('bookings').insert({...});
-  await trx('seats').update({ status: 'locked' });
-});
-\`\`\`
-
 ## 📊 Kết quả testing
 
 ### Load Test với Artillery
@@ -410,7 +466,7 @@ Dự án này giúp tôi hiểu rằng:
     tech_stack: "Node.js, Express, Socket.io, PostgreSQL, Redis",
     category: "Network Programming",
     repo_url: "https://github.com/ntnhan19/Project_MovieTicketBooking_NodeJS",
-    image_url: "/images/projects/cinema.png",
+    image_url: `${BASE_PATH}/images/projects/cinema.png`,
     highlights: "Academic Project,Real-time System,Race Condition Handling",
     duration: "3 tháng (Mar - Jun 2025)",
     team_size: "3 người"
@@ -424,7 +480,7 @@ export const certificates = [
     issuer: "Đại học Công nghệ TP.HCM (HUTECH)",
     type: "Title",
     date: "2024",
-    image_url: "/images/certs/sv5tot.jpg"
+    image_url: `${BASE_PATH}/images/certs/sv5tot.jpg`
   },
   {
     id: 2,
@@ -432,7 +488,7 @@ export const certificates = [
     issuer: "Khoa Công nghệ Thông tin - HUTECH",
     type: "Title",
     date: "2024",
-    image_url: "/images/certs/svtbieu.jpg"
+    image_url: `${BASE_PATH}/images/certs/svtbieu.jpg`
   },
   {
     id: 3,
@@ -440,7 +496,7 @@ export const certificates = [
     issuer: "Cisco Networking Academy",
     type: "Course",
     date: "Tháng 12/2024",
-    image_url: "/images/certs/cisco_basics.jpg",
+    image_url: `${BASE_PATH}/images/certs/cisco_basics.jpg`,
     url: "https://www.credly.com/badges/849ccbed-8429-4e57-a3be-e3177f447cce/public_url"
   },
   {
@@ -449,7 +505,7 @@ export const certificates = [
     issuer: "Cisco Networking Academy",
     type: "Course",
     date: "Tháng 12/2024",
-    image_url: "/images/certs/javascript1.jpg",
+    image_url: `${BASE_PATH}/images/certs/javascript1.jpg`,
     url: "https://www.credly.com/badges/04dcaaad-cc55-4403-af59-ad15cd36150f/public_url"
   },
   {
@@ -458,7 +514,7 @@ export const certificates = [
     issuer: "Cisco Networking Academy",
     type: "Course",
     date: "Tháng 12/2024",
-    image_url: "/images/certs/javascript2.jpg",
+    image_url: `${BASE_PATH}/images/certs/javascript2.jpg`,
     url: "https://www.credly.com/badges/7b330edf-fa4c-46d6-ac25-74e50e2c3773/public_url"
   },
   {
@@ -467,7 +523,7 @@ export const certificates = [
     issuer: "CLB Đổi mới Sáng tạo HUTECH",
     type: "Award",
     date: "Tháng 10/2024",
-    image_url: "/images/certs/genz_award.jpg"
+    image_url: `${BASE_PATH}/images/certs/genz_award.jpg`
   },
   {
     id: 7,
@@ -475,7 +531,7 @@ export const certificates = [
     issuer: "Đại học HUTECH",
     type: "Award",
     date: "Tháng 1/2025",
-    image_url: "/images/certs/pionehackathon.jpg"
+    image_url: `${BASE_PATH}/images/certs/pionehackathon.jpg`
   }
 ];
 
@@ -486,7 +542,7 @@ export const activities = [
     role: "Vận động viên - Đội Bóng Đá Nữ Khoa CNTT",
     description: "Tham gia thi đấu bộ môn Bóng đá nữ, đạt giải Nhì toàn trường. Hoạt động rèn luyện sức khỏe, tinh thần đồng đội và kết nối với các bạn sinh viên khác khoa.",
     date: "Tháng 3/2024",
-    image_url: "/images/activities/hoithao.jpg"
+    image_url: `${BASE_PATH}/images/activities/hoithao.jpg`
   },
   {
     id: 2,
@@ -494,6 +550,6 @@ export const activities = [
     role: "Tình nguyện viên - Liên Chi Hội Khoa CNTT",
     description: "Tham gia gói quà Tết cho người nghèo tại Thành phố Hồ Chí Minh. Hoạt động kéo dài 2 ngày với 50+ tình nguyện viên, gói được 500+ phần quà.",
     date: "Tháng 1/2025",
-    image_url: "/images/activities/tinhnguyenvien.png"
+    image_url: `${BASE_PATH}/images/activities/tinhnguyenvien.png`
   }
 ];
