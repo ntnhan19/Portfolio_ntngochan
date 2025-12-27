@@ -381,7 +381,7 @@ System.out.println("LinkedList get: " + (System.nanoTime() - start) / 1000000 + 
 - **LinkedList**: Chỉ khi cần thao t\xe1c đầu/cuối thường xuy\xean
 - Lu\xf4n benchmark với data thực tế!
 
-**Rule of thumb:** Nếu nghi ngờ, d\xf9ng ArrayList.`,cover_image:`${a}/images/blog/java-collections.jpg`,tags:"Java,Data Structures",date:"15/12/2024"},{id:4,title:"Java Stream API: Lập trình hàm trong Java 8+",summary:"Stream API giúp code Java ngắn gọn và dễ đọc hơn. Tìm hiểu cách sử dụng map, filter, reduce hiệu quả.",content:`# Java Stream API: Lập tr\xecnh h\xe0m trong Java 8+
+**Rule of thumb:** Nếu nghi ngờ, d\xf9ng ArrayList.`,cover_image:`${a}/images/blog/java-collections.png`,tags:"Java,Data Structures",date:"15/12/2024"},{id:4,title:"Java Stream API: Lập trình hàm trong Java 8+",summary:"Stream API giúp code Java ngắn gọn và dễ đọc hơn. Tìm hiểu cách sử dụng map, filter, reduce hiệu quả.",content:`# Java Stream API: Lập tr\xecnh h\xe0m trong Java 8+
 
 ## 🎯 Tại sao cần Stream API?
 
@@ -600,7 +600,7 @@ stream.count(); // IllegalStateException!
 - ❌ Performance critical với small collections
 - ❌ Debugging kh\xf3 (stack trace kh\xf4ng r\xf5 r\xe0ng)
 
-**Rule of thumb:** Nếu for-loop đơn giản hơn, h\xe3y d\xf9ng for-loop!`,cover_image:`${a}/images/blog/java-streams.jpg`,tags:"Java,Functional Programming",date:"20/12/2024"},{id:5,title:"Java Exception Handling: Best Practices",summary:"Cách xử lý exceptions đúng chuẩn trong Java - try-catch, custom exceptions, và error handling patterns.",content:`# Java Exception Handling: Best Practices
+**Rule of thumb:** Nếu for-loop đơn giản hơn, h\xe3y d\xf9ng for-loop!`,cover_image:`${a}/images/blog/java-streams.png`,tags:"Java,Functional Programming",date:"20/12/2024"},{id:5,title:"Java Exception Handling: Best Practices",summary:"Cách xử lý exceptions đúng chuẩn trong Java - try-catch, custom exceptions, và error handling patterns.",content:`# Java Exception Handling: Best Practices
 
 ## 🎯 Exception l\xe0 g\xec?
 
@@ -912,7 +912,7 @@ public void fetchDataWithRetry(String url) {
 4. Log exceptions trước khi rethrow
 5. Use try-with-resources cho auto-closing resources
 
-**Remember:** Good exception handling = Better debugging experience!`,cover_image:`${a}/images/blog/java-exceptions.jpg`,tags:"Java,Error Handling",date:"23/12/2024"},{id:6,title:"Java Spring Boot cơ bản: REST API đầu tiên",summary:"Hướng dẫn từng bước xây dựng REST API với Spring Boot cho người mới bắt đầu. Cấu trúc project chuẩn.",content:`# Java Spring Boot cơ bản: REST API đầu ti\xean
+**Remember:** Good exception handling = Better debugging experience!`,cover_image:`${a}/images/blog/java-exceptions.png`,tags:"Java,Error Handling",date:"23/12/2024"},{id:6,title:"Java Spring Boot cơ bản: REST API đầu tiên",summary:"Hướng dẫn từng bước xây dựng REST API với Spring Boot cho người mới bắt đầu. Cấu trúc project chuẩn.",content:`# Java Spring Boot cơ bản: REST API đầu ti\xean
 
 ## 🎯 Spring Boot l\xe0 g\xec?
 
@@ -1196,7 +1196,7 @@ public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
 - Học Spring Security (authentication)
 - Implement pagination & sorting
 - Write unit tests với JUnit & Mockito
-- Deploy l\xean Heroku/Railway`,cover_image:`${a}/images/blog/spring-boot.jpg`,tags:"Java,Spring Boot,Backend",date:"25/12/2024"},{id:7,title:"JavaScript Closures: Hiểu đúng và sử dụng hiệu quả",summary:"Closures là một trong những khái niệm khó nhất trong JavaScript. Hãy cùng tìm hiểu chi tiết qua ví dụ thực tế.",content:`# JavaScript Closures: Hiểu đ\xfang v\xe0 sử dụng hiệu quả
+- Deploy l\xean Heroku/Railway`,cover_image:`${a}/images/blog/spring-boot.png`,tags:"Java,Spring Boot,Backend",date:"25/12/2024"},{id:7,title:"JavaScript Closures: Hiểu đúng và sử dụng hiệu quả",summary:"Closures là một trong những khái niệm khó nhất trong JavaScript. Hãy cùng tìm hiểu chi tiết qua ví dụ thực tế.",content:`# JavaScript Closures: Hiểu đ\xfang v\xe0 sử dụng hiệu quả
   
   ## Closure l\xe0 g\xec?
   
@@ -1321,7 +1321,7 @@ const [user, posts] = await Promise.all([
 - D\xf9ng \`async/await\` cho readability
 - Xử l\xfd error tập trung nếu c\xf3 thể
 
-**Kết luận:** Async/await l\xe0 c\xe1ch viết async code hiện đại nhất hiện nay.`,cover_image:`${a}/images/blog/js-async.jpg`,tags:"JavaScript,Async",date:"22/12/2024"},{id:9,title:"JavaScript ES6+: Arrow Functions và Destructuring",summary:"Các tính năng mới của ES6 giúp code JavaScript hiện đại và ngắn gọn hơn. Tại sao nên dùng const/let thay vì var?",content:`# JavaScript ES6+: Arrow Functions v\xe0 Destructuring
+**Kết luận:** Async/await l\xe0 c\xe1ch viết async code hiện đại nhất hiện nay.`,cover_image:`${a}/images/blog/js-async.png`,tags:"JavaScript,Async",date:"22/12/2024"},{id:9,title:"JavaScript ES6+: Arrow Functions và Destructuring",summary:"Các tính năng mới của ES6 giúp code JavaScript hiện đại và ngắn gọn hơn. Tại sao nên dùng const/let thay vì var?",content:`# JavaScript ES6+: Arrow Functions v\xe0 Destructuring
 
 ## Arrow Functions
 
