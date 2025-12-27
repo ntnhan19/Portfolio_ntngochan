@@ -446,7 +446,7 @@ System.out.println("LinkedList get: " + (System.nanoTime() - start) / 1000000 + 
 - Luôn benchmark với data thực tế!
 
 **Rule of thumb:** Nếu nghi ngờ, dùng ArrayList.`,
-    cover_image: `${BASE_PATH}/images/blog/java-collections.jpg`,
+    cover_image: `${BASE_PATH}/images/blog/java-collections.png`,
     tags: "Java,Data Structures",
     date: "15/12/2024"
   },
@@ -674,7 +674,7 @@ stream.count(); // IllegalStateException!
 - ❌ Debugging khó (stack trace không rõ ràng)
 
 **Rule of thumb:** Nếu for-loop đơn giản hơn, hãy dùng for-loop!`,
-    cover_image: `${BASE_PATH}/images/blog/java-streams.jpg`,
+    cover_image: `${BASE_PATH}/images/blog/java-streams.png`,
     tags: "Java,Functional Programming",
     date: "20/12/2024"
   },
@@ -995,7 +995,7 @@ public void fetchDataWithRetry(String url) {
 5. Use try-with-resources cho auto-closing resources
 
 **Remember:** Good exception handling = Better debugging experience!`,
-    cover_image: `${BASE_PATH}/images/blog/java-exceptions.jpg`,
+    cover_image: `${BASE_PATH}/images/blog/java-exceptions.png`,
     tags: "Java,Error Handling",
     date: "23/12/2024"
   },
@@ -1288,7 +1288,7 @@ public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
 - Implement pagination & sorting
 - Write unit tests với JUnit & Mockito
 - Deploy lên Heroku/Railway`,
-    cover_image: `${BASE_PATH}/images/blog/spring-boot.jpg`,
+    cover_image: `${BASE_PATH}/images/blog/spring-boot.png`,
     tags: "Java,Spring Boot,Backend",
     date: "25/12/2024"
   },
@@ -1431,7 +1431,7 @@ const [user, posts] = await Promise.all([
 - Xử lý error tập trung nếu có thể
 
 **Kết luận:** Async/await là cách viết async code hiện đại nhất hiện nay.`,
-    cover_image: `${BASE_PATH}/images/blog/js-async.jpg`,
+    cover_image: `${BASE_PATH}/images/blog/js-async.png`,
     tags: "JavaScript,Async",
     date: "22/12/2024"
   },
