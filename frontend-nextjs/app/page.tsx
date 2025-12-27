@@ -5,6 +5,7 @@ import { Mail, Github, Linkedin, MapPin, BookOpen, Code2, Award, ArrowUp, Menu, 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import ReactMarkdown from 'react-markdown';
 
 // Animation variants
 const fadeInUp = {
@@ -140,9 +141,18 @@ export default function Home() {
               <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
                 <span className="w-2 h-8 bg-blue-600 rounded-full"></span> Về tôi
               </h2>
-              <p className="text-slate-600 leading-relaxed whitespace-pre-line text-lg">
-                {profile.bio}
-              </p>
+              <div className="prose prose-slate prose-lg max-w-none text-slate-600">
+                <ReactMarkdown
+                  components={{
+                    strong: ({ node, ...props }) => <strong className="font-bold text-slate-900" {...props} />,
+                    p: ({ node, ...props }) => <p className="leading-relaxed mb-4" {...props} />,
+                    ul: ({ node, ...props }) => <ul className="list-disc list-inside space-y-2 my-4" {...props} />,
+                    li: ({ node, ...props }) => <li className="leading-relaxed" {...props} />,
+                  }}
+                >
+                  {profile.bio}
+                </ReactMarkdown>
+              </div>
             </motion.div>
 
             {/* 2. Skills Box (Hardcoded for Visuals) */}
