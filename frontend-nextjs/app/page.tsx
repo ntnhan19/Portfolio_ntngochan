@@ -93,9 +93,22 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            {/* Avatar Placeholder hoặc Ảnh thật */}
-            <div className="w-32 h-32 mx-auto rounded-full border-4 border-white shadow-xl overflow-hidden bg-slate-200 mb-6 flex items-center justify-center">
-              <span className="text-4xl font-bold text-slate-500">{profile.full_name.charAt(0)}</span>
+            {/* Avatar Image */}
+            <div className="w-32 h-32 mx-auto rounded-full border-4 border-white shadow-xl overflow-hidden bg-slate-200 mb-6 relative">
+              <img
+                src={profile.avatar}
+                alt={profile.full_name}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  // Nếu ảnh lỗi hoặc chưa load được thì hiện fallback màu xám
+                  e.currentTarget.style.display = 'none';
+                  e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                }}
+              />
+              {/* Fallback hiển thị chữ cái đầu nếu ảnh lỗi */}
+              <div className="hidden w-full h-full absolute inset-0 bg-slate-200 flex items-center justify-center">
+                <span className="text-4xl font-bold text-slate-500">{profile.full_name.charAt(0)}</span>
+              </div>
             </div>
 
             <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">

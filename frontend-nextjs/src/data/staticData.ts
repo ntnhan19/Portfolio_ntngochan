@@ -42,7 +42,8 @@ export const profile = {
 **Mục tiêu:** Tìm kiếm vị trí Backend Developer Intern tại các công ty công nghệ để học hỏi kinh nghiệm thực tế về hệ thống quy mô lớn, microservices architecture và best practices từ các senior developers.`,
   email: "ngochanpt2018@gmail.com",
   github: "https://github.com/ntnhan19",
-  linkedin: "https://linkedin.com/in/nguyentranngochan"
+  linkedin: "https://linkedin.com/in/nguyentranngochan",
+  avatar: `${BASE_PATH}/avatar.jpg`
 };
 
 // CẬP NHẬT blogPosts (Đủ 9 bài theo yêu cầu)
