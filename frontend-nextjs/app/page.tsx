@@ -59,10 +59,21 @@ export default function Home() {
             {profile.full_name} <span className="text-blue-600">.</span>
           </span>
           <div className="hidden md:flex gap-8">
-            {['Home', 'About', 'Blog', 'Projects', 'Certificates'].map((item) => (
-              <button key={item} onClick={() => scrollToSection(item.toLowerCase())} className={`font-medium text-sm hover:text-blue-600 transition-colors ${isScrolled ? 'text-slate-600' : 'text-slate-700'}`}>
-                {item}
-              </button>
+            {[
+              { name: 'Home', href: '/' },
+              { name: 'About', href: '/about' },
+              { name: 'Blog', href: '/blog' },
+              { name: 'Projects', href: '#projects' },
+              { name: 'Certificates', href: '#certificates' }
+            ].map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={`font-medium text-sm transition-colors hover:text-blue-600 ${isScrolled ? 'text-slate-600' : 'text-slate-700'
+                  }`}
+              >
+                {item.name}
+              </Link>
             ))}
           </div>
           <button className="md:hidden text-slate-700" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
