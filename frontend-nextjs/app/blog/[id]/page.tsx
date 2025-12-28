@@ -1,98 +1,75 @@
+'use client';
+
 import { blogPosts } from '../../../src/data/staticData';
 import Link from 'next/link';
-import { ArrowLeft, Calendar, Tag } from 'lucide-react';
+import { ArrowLeft, Calendar, Tag, Clock } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
-import { notFound } from 'next/navigation';
+import { notFound, useParams } from 'next/navigation';
+import { motion } from 'framer-motion';
 
-export async function generateStaticParams() {
-    return blogPosts.map((post) => ({
-        id: post.id.toString(),
-    }));
-}
-
-export default async function BlogDetail({ params }: { params: Promise<{ id: string }> }) {
-    const { id } = await params;
+export default function BlogDetail() {
+    const params = useParams();
+    const id = params?.id;
     const post = blogPosts.find(p => p.id.toString() === id);
 
-    if (!post) {
-        notFound();
-    }
-
-    const tags = post.tags.split(',');
+    if (!post) return notFound();
 
     return (
-        <main className="min-h-screen bg-slate-50">
-            {/* Hero với ảnh cover */}
-            <section className="relative h-96 md:h-[500px] overflow-hidden">
-                <img
+        <main className="min-h-screen bg-white selection:bg-blue-100 selection:text-blue-900">
+            {/* Header / Cover Section */}
+            <header className="relative h-[60vh] min-h-[400px] flex items-end pb-12 overflow-hidden">
+                <motion.img
+                    initial={{ scale: 1.1 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 1.5 }}
                     src={post.cover_image}
+                    className="absolute inset-0 w-full h-full object-cover"
                     alt={post.title}
-                    className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-                <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 text-white">
-                    <div className="max-w-5xl mx-auto">
-                        <div className="flex flex-wrap gap-3 mb-4">
-                            {tags.map((tag, i) => (
-                                <span key={i} className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent"></div>
+
+                <div className="relative max-w-4xl mx-auto px-6 w-full text-white">
+                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                        <div className="flex flex-wrap gap-2 mb-6">
+                            {post.tags.split(',').map((tag, i) => (
+                                <span key={i} className="px-3 py-1 bg-blue-600/80 backdrop-blur-md rounded-full text-xs font-bold uppercase tracking-widest">
                                     {tag.trim()}
                                 </span>
                             ))}
                         </div>
-                        <h1 className="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight">
+                        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 leading-[1.1]">
                             {post.title}
                         </h1>
-                        <div className="flex items-center gap-2 text-white/80">
-                            <Calendar size={18} />
-                            <span>{post.date}</span>
+                        <div className="flex items-center gap-6 text-slate-300 text-sm font-medium">
+                            <span className="flex items-center gap-2"><Calendar size={16} className="text-blue-400" /> {post.date}</span>
+                            <span className="flex items-center gap-2"><Clock size={16} className="text-blue-400" /> 5 phút đọc</span>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
-            </section>
+            </header>
 
-            {/* Content */}
-            <section className="px-6 py-12">
-                <div className="max-w-4xl mx-auto">
-                    <div className="bg-white rounded-3xl shadow-xl border border-slate-100 p-8 md:p-12">
-                        <Link
-                            href="/#blog"
-                            className="inline-flex items-center text-slate-600 hover:text-blue-600 font-medium mb-10 transition-colors"
-                        >
-                            <ArrowLeft size={20} className="mr-2" />
-                            Quay lại bài viết
-                        </Link>
+            {/* Content Section */}
+            <section className="max-w-4xl mx-auto px-6 py-16">
+                <Link href="/#blog" className="inline-flex items-center text-slate-500 hover:text-blue-600 mb-12 transition-all font-medium group">
+                    <ArrowLeft size={18} className="mr-2 group-hover:-translate-x-1 transition-transform" />
+                    Quay lại danh sách bài viết
+                </Link>
 
-                        <div className="prose prose-lg max-w-none prose-slate">
-                            <ReactMarkdown
-                                components={{
-                                    h1: ({ children }) => <h1 className="text-4xl font-bold text-slate-900 mt-12 mb-6">{children}</h1>,
-                                    h2: ({ children }) => <h2 className="text-3xl font-bold text-slate-900 mt-12 mb-6 flex items-center gap-3"><span className="w-2 h-8 bg-blue-600 rounded-full"></span>{children}</h2>,
-                                    h3: ({ children }) => <h3 className="text-2xl font-bold text-slate-900 mt-10 mb-4">{children}</h3>,
-                                    p: ({ children }) => <p className="text-slate-600 leading-relaxed mb-6 text-lg">{children}</p>,
-                                    ul: ({ children }) => <ul className="list-disc list-inside space-y-3 mb-6 text-slate-600">{children}</ul>,
-                                    code: ({ node, className, children, ...props }) => {
-                                        const match = /language-(\w+)/.exec(className || '');
-                                        return !match ? (
-                                            <code className="bg-slate-100 text-slate-800 px-2 py-1 rounded text-sm font-mono" {...props}>
-                                                {children}
-                                            </code>
-                                        ) : (
-                                            <pre className="bg-slate-900 text-slate-100 p-6 rounded-2xl overflow-x-auto my-8 text-sm font-mono">
-                                                <code className={className} {...props}>
-                                                    {children}
-                                                </code>
-                                            </pre>
-                                        );
-                                    },
-                                    blockquote: ({ children }) => (
-                                        <blockquote className="border-l-4 border-purple-500 pl-6 italic text-slate-600 my-8 text-lg bg-purple-50/50 p-4 rounded-r-lg">
-                                            {children}
-                                        </blockquote>
-                                    ),
-                                }}
-                            >
-                                {post.content}
-                            </ReactMarkdown>
+                <article className="prose prose-slate prose-lg max-w-none 
+                    prose-headings:text-slate-900 prose-headings:font-bold
+                    prose-p:text-slate-600 prose-p:leading-relaxed
+                    prose-strong:text-slate-900 prose-strong:font-bold
+                    prose-code:text-blue-600 prose-code:bg-blue-50 prose-code:px-1 prose-code:rounded
+                    prose-pre:bg-slate-900 prose-pre:rounded-2xl prose-pre:shadow-2xl">
+                    <ReactMarkdown>{post.content}</ReactMarkdown>
+                </article>
+
+                <div className="mt-20 pt-10 border-t border-slate-100 flex justify-between items-center">
+                    <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-full bg-slate-100 border border-slate-200"></div>
+                        <div>
+                            <p className="text-sm text-slate-500 italic">Tác giả</p>
+                            <p className="font-bold text-slate-900">Nguyễn Trần Ngọc Hân</p>
                         </div>
                     </div>
                 </div>

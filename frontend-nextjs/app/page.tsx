@@ -4,8 +4,10 @@ import { profile, blogPosts, projects, certificates, activities } from '../src/d
 import { Mail, Github, Linkedin, MapPin, BookOpen, Code2, Award, ArrowUp, Menu, X, ExternalLink, Download, Database, Server, Cpu, Globe } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy } from 'react';
 import ReactMarkdown from 'react-markdown';
+import StatsSection from './components/StatsSection';
+import Timeline from './components/Timeline';
 
 // Animation variants
 const fadeInUp = {
@@ -137,21 +139,12 @@ export default function Home() {
             className="grid grid-cols-1 md:grid-cols-3 gap-6"
           >
             {/* 1. Bio Box */}
-            <motion.div variants={fadeInUp} className="md:col-span-2 bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
-              <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-2">
-                <span className="w-2 h-8 bg-blue-600 rounded-full"></span> Về tôi
+            <motion.div variants={fadeInUp} className="md:col-span-2 bg-white p-10 rounded-3xl border border-slate-100 shadow-sm">
+              <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                <span className="w-1.5 h-8 bg-blue-600 rounded-full"></span> Về tôi
               </h2>
-              <div className="prose prose-slate prose-lg max-w-none text-slate-600">
-                <ReactMarkdown
-                  components={{
-                    strong: ({ node, ...props }) => <strong className="font-bold text-slate-900" {...props} />,
-                    p: ({ node, ...props }) => <p className="leading-relaxed mb-4" {...props} />,
-                    ul: ({ node, ...props }) => <ul className="list-disc list-inside space-y-2 my-4" {...props} />,
-                    li: ({ node, ...props }) => <li className="leading-relaxed" {...props} />,
-                  }}
-                >
-                  {profile.bio}
-                </ReactMarkdown>
+              <div className="prose prose-slate prose-lg max-w-none prose-strong:text-slate-900 prose-strong:font-bold prose-ul:list-disc prose-li:text-slate-600">
+                <ReactMarkdown>{profile.bio}</ReactMarkdown>
               </div>
             </motion.div>
 
@@ -208,6 +201,10 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      <StatsSection />
+      <Timeline />
+
 
       {/* --- PROJECTS SECTION --- */}
       <section id="projects" className="py-24 px-6 bg-white">
@@ -295,6 +292,7 @@ export default function Home() {
                   <img
                     src={post.cover_image}
                     alt={post.title}
+                    loading="lazy"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     onError={(e) => { e.currentTarget.src = 'https://placehold.co/600x400/e2e8f0/64748b?text=Blog'; }}
                   />
