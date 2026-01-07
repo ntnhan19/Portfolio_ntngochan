@@ -1,4 +1,4 @@
-(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["object"==typeof document?document.currentScript:void 0,22726,75254,e=>{"use strict";let t="/Portfolio_ntngochan",n={full_name:"Nguyễn Trần Ngọc Hân",title:"Sinh viên Kỹ thuật Phần mềm | Ứng viên Backend Developer Intern",bio:`L\xe0 sinh vi\xean năm 4 chuy\xean ng\xe0nh Kỹ thuật Phần mềm tại HUTECH, t\xf4i đ\xe3 x\xe2y dựng nền tảng vững chắc về Backend Development th\xf4ng qua c\xe1c dự \xe1n học thuật v\xe0 tự học.
+(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["object"==typeof document?document.currentScript:void 0,98183,(e,t,n)=>{"use strict";Object.defineProperty(n,"__esModule",{value:!0});var r={assign:function(){return c},searchParamsToUrlQuery:function(){return a},urlQueryToSearchParams:function(){return s}};for(var i in r)Object.defineProperty(n,i,{enumerable:!0,get:r[i]});function a(e){let t={};for(let[n,r]of e.entries()){let e=t[n];void 0===e?t[n]=r:Array.isArray(e)?e.push(r):t[n]=[e,r]}return t}function o(e){return"string"==typeof e?e:("number"!=typeof e||isNaN(e))&&"boolean"!=typeof e?"":String(e)}function s(e){let t=new URLSearchParams;for(let[n,r]of Object.entries(e))if(Array.isArray(r))for(let e of r)t.append(n,o(e));else t.set(n,o(r));return t}function c(e,...t){for(let n of t){for(let t of n.keys())e.delete(t);for(let[t,r]of n.entries())e.append(t,r)}return e}},95057,(e,t,n)=>{"use strict";Object.defineProperty(n,"__esModule",{value:!0});var r={formatUrl:function(){return s},formatWithValidation:function(){return u},urlObjectKeys:function(){return c}};for(var i in r)Object.defineProperty(n,i,{enumerable:!0,get:r[i]});let a=e.r(90809)._(e.r(98183)),o=/https?|ftp|gopher|file/;function s(e){let{auth:t,hostname:n}=e,r=e.protocol||"",i=e.pathname||"",s=e.hash||"",c=e.query||"",u=!1;t=t?encodeURIComponent(t).replace(/%3A/i,":")+"@":"",e.host?u=t+e.host:n&&(u=t+(~n.indexOf(":")?`[${n}]`:n),e.port&&(u+=":"+e.port)),c&&"object"==typeof c&&(c=String(a.urlQueryToSearchParams(c)));let l=e.search||c&&`?${c}`||"";return r&&!r.endsWith(":")&&(r+=":"),e.slashes||(!r||o.test(r))&&!1!==u?(u="//"+(u||""),i&&"/"!==i[0]&&(i="/"+i)):u||(u=""),s&&"#"!==s[0]&&(s="#"+s),l&&"?"!==l[0]&&(l="?"+l),i=i.replace(/[?#]/g,encodeURIComponent),l=l.replace("#","%23"),`${r}${u}${i}${l}${s}`}let c=["auth","hash","host","hostname","href","path","pathname","port","protocol","query","search","slashes"];function u(e){return s(e)}},18581,(e,t,n)=>{"use strict";Object.defineProperty(n,"__esModule",{value:!0}),Object.defineProperty(n,"useMergedRef",{enumerable:!0,get:function(){return i}});let r=e.r(71645);function i(e,t){let n=(0,r.useRef)(null),i=(0,r.useRef)(null);return(0,r.useCallback)(r=>{if(null===r){let e=n.current;e&&(n.current=null,e());let t=i.current;t&&(i.current=null,t())}else e&&(n.current=a(e,r)),t&&(i.current=a(t,r))},[e,t])}function a(e,t){if("function"!=typeof e)return e.current=t,()=>{e.current=null};{let n=e(t);return"function"==typeof n?n:()=>e(null)}}("function"==typeof n.default||"object"==typeof n.default&&null!==n.default)&&void 0===n.default.__esModule&&(Object.defineProperty(n.default,"__esModule",{value:!0}),Object.assign(n.default,n),t.exports=n.default)},18967,(e,t,n)=>{"use strict";Object.defineProperty(n,"__esModule",{value:!0});var r={DecodeError:function(){return f},MiddlewareNotFoundError:function(){return k},MissingStaticPage:function(){return b},NormalizeError:function(){return v},PageNotFoundError:function(){return y},SP:function(){return m},ST:function(){return x},WEB_VITALS:function(){return a},execOnce:function(){return o},getDisplayName:function(){return h},getLocationOrigin:function(){return u},getURL:function(){return l},isAbsoluteUrl:function(){return c},isResSent:function(){return d},loadGetInitialProps:function(){return p},normalizeRepeatedSlashes:function(){return g},stringifyError:function(){return S}};for(var i in r)Object.defineProperty(n,i,{enumerable:!0,get:r[i]});let a=["CLS","FCP","FID","INP","LCP","TTFB"];function o(e){let t,n=!1;return(...r)=>(n||(n=!0,t=e(...r)),t)}let s=/^[a-zA-Z][a-zA-Z\d+\-.]*?:/,c=e=>s.test(e);function u(){let{protocol:e,hostname:t,port:n}=window.location;return`${e}//${t}${n?":"+n:""}`}function l(){let{href:e}=window.location,t=u();return e.substring(t.length)}function h(e){return"string"==typeof e?e:e.displayName||e.name||"Unknown"}function d(e){return e.finished||e.headersSent}function g(e){let t=e.split("?");return t[0].replace(/\\/g,"/").replace(/\/\/+/g,"/")+(t[1]?`?${t.slice(1).join("?")}`:"")}async function p(e,t){let n=t.res||t.ctx&&t.ctx.res;if(!e.getInitialProps)return t.ctx&&t.Component?{pageProps:await p(t.Component,t.ctx)}:{};let r=await e.getInitialProps(t);if(n&&d(n))return r;if(!r)throw Object.defineProperty(Error(`"${h(e)}.getInitialProps()" should resolve to an object. But found "${r}" instead.`),"__NEXT_ERROR_CODE",{value:"E394",enumerable:!1,configurable:!0});return r}let m="undefined"!=typeof performance,x=m&&["mark","measure","getEntriesByName"].every(e=>"function"==typeof performance[e]);class f extends Error{}class v extends Error{}class y extends Error{constructor(e){super(),this.code="ENOENT",this.name="PageNotFoundError",this.message=`Cannot find module for page: ${e}`}}class b extends Error{constructor(e,t){super(),this.message=`Failed to load static file for page: ${e} ${t}`}}class k extends Error{constructor(){super(),this.code="ENOENT",this.message="Cannot find the middleware module"}}function S(e){return JSON.stringify({message:e.message,stack:e.stack})}},73668,(e,t,n)=>{"use strict";Object.defineProperty(n,"__esModule",{value:!0}),Object.defineProperty(n,"isLocalURL",{enumerable:!0,get:function(){return a}});let r=e.r(18967),i=e.r(52817);function a(e){if(!(0,r.isAbsoluteUrl)(e))return!0;try{let t=(0,r.getLocationOrigin)(),n=new URL(e,t);return n.origin===t&&(0,i.hasBasePath)(n.pathname)}catch(e){return!1}}},84508,(e,t,n)=>{"use strict";Object.defineProperty(n,"__esModule",{value:!0}),Object.defineProperty(n,"errorOnce",{enumerable:!0,get:function(){return r}});let r=e=>{}},22016,(e,t,n)=>{"use strict";Object.defineProperty(n,"__esModule",{value:!0});var r={default:function(){return f},useLinkStatus:function(){return y}};for(var i in r)Object.defineProperty(n,i,{enumerable:!0,get:r[i]});let a=e.r(90809),o=e.r(43476),s=a._(e.r(71645)),c=e.r(95057),u=e.r(8372),l=e.r(18581),h=e.r(18967),d=e.r(5550);e.r(33525);let g=e.r(91949),p=e.r(73668),m=e.r(9396);function x(e){return"string"==typeof e?e:(0,c.formatUrl)(e)}function f(t){var n;let r,i,a,[c,f]=(0,s.useOptimistic)(g.IDLE_LINK_STATUS),y=(0,s.useRef)(null),{href:b,as:k,children:S,prefetch:T=null,passHref:E,replace:C,shallow:w,scroll:L,onClick:A,onMouseEnter:R,onTouchStart:P,legacyBehavior:j=!1,onNavigate:U,ref:I,unstable_dynamicOnHover:D,...O}=t;r=S,j&&("string"==typeof r||"number"==typeof r)&&(r=(0,o.jsx)("a",{children:r}));let N=s.default.useContext(u.AppRouterContext),B=!1!==T,G=!1!==T?null===(n=T)||"auto"===n?m.FetchStrategy.PPR:m.FetchStrategy.Full:m.FetchStrategy.PPR,{href:M,as:H}=s.default.useMemo(()=>{let e=x(b);return{href:e,as:k?x(k):e}},[b,k]);if(j){if(r?.$$typeof===Symbol.for("react.lazy"))throw Object.defineProperty(Error("`<Link legacyBehavior>` received a direct child that is either a Server Component, or JSX that was loaded with React.lazy(). This is not supported. Either remove legacyBehavior, or make the direct child a Client Component that renders the Link's `<a>` tag."),"__NEXT_ERROR_CODE",{value:"E863",enumerable:!1,configurable:!0});i=s.default.Children.only(r)}let _=j?i&&"object"==typeof i&&i.ref:I,F=s.default.useCallback(e=>(null!==N&&(y.current=(0,g.mountLinkInstance)(e,M,N,G,B,f)),()=>{y.current&&((0,g.unmountLinkForCurrentNavigation)(y.current),y.current=null),(0,g.unmountPrefetchableInstance)(e)}),[B,M,N,G,f]),q={ref:(0,l.useMergedRef)(F,_),onClick(t){j||"function"!=typeof A||A(t),j&&i.props&&"function"==typeof i.props.onClick&&i.props.onClick(t),!N||t.defaultPrevented||function(t,n,r,i,a,o,c){if("undefined"!=typeof window){let u,{nodeName:l}=t.currentTarget;if("A"===l.toUpperCase()&&((u=t.currentTarget.getAttribute("target"))&&"_self"!==u||t.metaKey||t.ctrlKey||t.shiftKey||t.altKey||t.nativeEvent&&2===t.nativeEvent.which)||t.currentTarget.hasAttribute("download"))return;if(!(0,p.isLocalURL)(n)){a&&(t.preventDefault(),location.replace(n));return}if(t.preventDefault(),c){let e=!1;if(c({preventDefault:()=>{e=!0}}),e)return}let{dispatchNavigateAction:h}=e.r(99781);s.default.startTransition(()=>{h(r||n,a?"replace":"push",o??!0,i.current)})}}(t,M,H,y,C,L,U)},onMouseEnter(e){j||"function"!=typeof R||R(e),j&&i.props&&"function"==typeof i.props.onMouseEnter&&i.props.onMouseEnter(e),N&&B&&(0,g.onNavigationIntent)(e.currentTarget,!0===D)},onTouchStart:function(e){j||"function"!=typeof P||P(e),j&&i.props&&"function"==typeof i.props.onTouchStart&&i.props.onTouchStart(e),N&&B&&(0,g.onNavigationIntent)(e.currentTarget,!0===D)}};return(0,h.isAbsoluteUrl)(H)?q.href=H:j&&!E&&("a"!==i.type||"href"in i.props)||(q.href=(0,d.addBasePath)(H)),a=j?s.default.cloneElement(i,q):(0,o.jsx)("a",{...O,...q,children:r}),(0,o.jsx)(v.Provider,{value:c,children:a})}e.r(84508);let v=(0,s.createContext)(g.IDLE_LINK_STATUS),y=()=>(0,s.useContext)(v);("function"==typeof n.default||"object"==typeof n.default&&null!==n.default)&&void 0===n.default.__esModule&&(Object.defineProperty(n.default,"__esModule",{value:!0}),Object.assign(n.default,n),t.exports=n.default)},22726,75254,e=>{"use strict";let t="/Portfolio_ntngochan",n={full_name:"Nguyễn Trần Ngọc Hân",title:"Sinh viên Kỹ thuật Phần mềm | Ứng viên Backend Developer Intern",bio:`L\xe0 sinh vi\xean năm 4 chuy\xean ng\xe0nh Kỹ thuật Phần mềm tại HUTECH, t\xf4i đ\xe3 x\xe2y dựng nền tảng vững chắc về Backend Development th\xf4ng qua c\xe1c dự \xe1n học thuật v\xe0 tự học.
 
 **Điểm mạnh:**
 - X\xe2y dựng RESTful API với Go (Gin) v\xe0 Node.js (Express)
@@ -1570,7 +1570,249 @@ name = 123; // OK → name giờ l\xe0 number
 - Nhiều developer giỏi cả hai (full-stack Java + Spring + React)
 - T\xean giống nhau chỉ l\xe0 lịch sử → đừng nhầm lẫn!
 
-**Advice:** Học cả hai để mở rộng cơ hội việc l\xe0m!`,cover_image:`${t}/images/blog/java-vs-js.jpg`,tags:"Java,JavaScript,Comparison",date:"27/12/2024"}],i=[{id:1,title:"DocMentor - AI RAG Knowledge Assistant",description:"Ứng dụng AI Assistant hỗ trợ trả lời câu hỏi từ tài liệu PDF/DOCX sử dụng công nghệ RAG và Vector Database. Đồ án môn Trí tuệ nhân tạo.",content:`## 🎯 Bối cảnh dự \xe1n
+**Advice:** Học cả hai để mở rộng cơ hội việc l\xe0m!`,cover_image:`${t}/images/blog/java-vs-js.jpg`,tags:"Java,JavaScript,Comparison",date:"27/12/2024"},{id:12,title:"Xử lý Race Condition trong hệ thống đặt vé với Redis",summary:"Case study thực tế: Làm sao đảm bảo chỉ 1 người book được ghế khi 100 users cùng click? Deep dive vào Redis distributed lock.",content:`# Xử l\xfd Race Condition trong Hệ thống Đặt V\xe9
+  
+  ## 🎯 B\xe0i to\xe1n thực tế
+  
+  Trong dự \xe1n **DHL Cinema** (hệ thống đặt v\xe9 xem phim real-time), t\xf4i gặp một vấn đề kinh điển:
+  
+  > **100 người c\xf9ng l\xfac chọn ghế A1. L\xe0m sao đảm bảo chỉ 1 người book th\xe0nh c\xf4ng?**
+  
+  Đ\xe2y l\xe0 race condition - một trong những bug kh\xf3 debug nhất trong distributed systems.
+  
+  ## 🔴 Vấn đề: Race Condition l\xe0 g\xec?
+  
+  ### Kịch bản lỗi:
+  
+  \`\`\`
+  User A: Check ghế A1 → Trống → Bắt đầu booking
+  User B: Check ghế A1 → Trống → Bắt đầu booking (c\xf9ng l\xfac)
+  ---
+  Kết quả: CẢ HAI đều booking th\xe0nh c\xf4ng! 💥
+  \`\`\`
+  
+  ### Code lỗi (naive approach):
+  
+  \`\`\`javascript
+  // ❌ BAD: C\xf3 race condition
+  async function bookSeat(seatId, userId) {
+    const seat = await db.query('SELECT * FROM seats WHERE id = $1', [seatId]);
+    
+    if (!seat.is_booked) {
+      // 🚨 RACE CONDITION ở đ\xe2y!
+      // Giữa 2 d\xf2ng n\xe0y, user kh\xe1c c\xf3 thể chen v\xe0o
+      await db.query('UPDATE seats SET is_booked = true, user_id = $1 WHERE id = $2', 
+        [userId, seatId]);
+      return { success: true };
+    }
+    
+    return { success: false, error: 'Ghế đ\xe3 được đặt' };
+  }
+  \`\`\`
+  
+  ## ✅ Giải ph\xe1p 1: Database Row-Level Locking
+  
+  \`\`\`javascript
+  // ✅ GOOD: D\xf9ng SELECT FOR UPDATE
+  async function bookSeatWithLock(seatId, userId) {
+    const client = await pool.connect();
+    
+    try {
+      await client.query('BEGIN');
+      
+      // Lock row n\xe0y, c\xe1c transaction kh\xe1c phải đợi
+      const result = await client.query(
+        'SELECT * FROM seats WHERE id = $1 FOR UPDATE',
+        [seatId]
+      );
+      
+      const seat = result.rows[0];
+      
+      if (!seat.is_booked) {
+        await client.query(
+          'UPDATE seats SET is_booked = true, user_id = $1 WHERE id = $2',
+          [userId, seatId]
+        );
+        await client.query('COMMIT');
+        return { success: true };
+      } else {
+        await client.query('ROLLBACK');
+        return { success: false, error: 'Ghế đ\xe3 được đặt' };
+      }
+    } catch (error) {
+      await client.query('ROLLBACK');
+      throw error;
+    } finally {
+      client.release();
+    }
+  }
+  \`\`\`
+  
+  **Ưu điểm:**
+  - Đơn giản, built-in của PostgreSQL
+  - Đảm bảo consistency 100%
+  
+  **Nhược điểm:**
+  - Chỉ hoạt động trong 1 database instance
+  - Kh\xf4ng scale với microservices
+  
+  ## 🚀 Giải ph\xe1p 2: Redis Distributed Lock (Production-ready)
+  
+  Đ\xe2y l\xe0 giải ph\xe1p t\xf4i d\xf9ng trong DHL Cinema:
+  
+  \`\`\`javascript
+  const Redis = require('ioredis');
+  const redis = new Redis();
+  
+  // ✅ BEST: Redis distributed lock
+  async function bookSeatWithRedis(seatId, userId) {
+    const lockKey = \`seat:lock:\${seatId}\`;
+    const lockValue = userId; // Để verify owner
+    const lockTTL = 30; // 30 gi\xe2y auto-expire
+    
+    try {
+      // Bước 1: Acquire lock (atomic operation)
+      const acquired = await redis.set(
+        lockKey,
+        lockValue,
+        'EX', lockTTL,  // Expire sau 30s
+        'NX'            // Chỉ set nếu key chưa tồn tại
+      );
+      
+      if (!acquired) {
+        return { 
+          success: false, 
+          error: 'Ghế đang được xử l\xfd bởi người kh\xe1c' 
+        };
+      }
+      
+      // Bước 2: Check & Update database
+      const seat = await db.query('SELECT * FROM seats WHERE id = $1', [seatId]);
+      
+      if (seat.is_booked) {
+        await redis.del(lockKey); // Release lock
+        return { success: false, error: 'Ghế đ\xe3 được đặt' };
+      }
+      
+      await db.query(
+        'UPDATE seats SET is_booked = true, user_id = $1 WHERE id = $2',
+        [userId, seatId]
+      );
+      
+      // Bước 3: Release lock
+      await redis.del(lockKey);
+      
+      // Bước 4: Broadcast real-time update
+      io.to(\`movie:\${movieId}\`).emit('seat:updated', {
+        seatId,
+        status: 'booked',
+        userId
+      });
+      
+      return { success: true };
+      
+    } catch (error) {
+      // Ensure lock được release kể cả khi lỗi
+      await redis.del(lockKey);
+      throw error;
+    }
+  }
+  \`\`\`
+  
+  ### Chi tiết Redis SET command:
+  
+  \`\`\`javascript
+  redis.set(key, value, 'EX', seconds, 'NX')
+  //       │    │      │     │        │
+  //       │    │      │     │        └─ NX = "Set if Not eXists"
+  //       │    │      │     └────────── TTL (Time To Live)
+  //       │    │      └──────────────── EX = Expire (gi\xe2y)
+  //       │    └─────────────────────── Value để verify owner
+  //       └──────────────────────────── Lock key
+  \`\`\`
+  
+  ## ⚡ Real-time Update Flow
+  
+  \`\`\`
+  User A click ghế A1
+    ↓
+  Redis lock acquired ✅
+    ↓
+  Database updated
+    ↓
+  Socket.io broadcast → ALL users nhận update
+    ↓
+  User B's UI disabled ghế A1 ngay lập tức
+    ↓
+  Redis lock released
+  \`\`\`
+  
+  ## 🧪 Testing Race Condition
+  
+  ### Load test với Artillery:
+  
+  \`\`\`yaml
+  # artillery.yml
+  config:
+    target: "http://localhost:3000"
+    phases:
+      - duration: 10
+        arrivalRate: 10  # 10 users/gi\xe2y
+  
+  scenarios:
+    - name: "Concurrent seat booking"
+      flow:
+        - post:
+            url: "/api/seats/book"
+            json:
+              seatId: "A1"
+              userId: "{{ $randomString() }}"
+  \`\`\`
+  
+  ### Kết quả test:
+  
+  | Approach | Requests | Success | Failed | Double Booking |
+  |----------|----------|---------|--------|----------------|
+  | Naive (no lock) | 100 | 100 ❌ | 0 | 99 ghế |
+  | DB Row Lock | 100 | 1 ✅ | 99 ✅ | 0 |
+  | Redis Lock | 100 | 1 ✅ | 99 ✅ | 0 |
+  
+  ## 💡 Lessons Learned
+  
+  ### 1. **Auto-expiring locks l\xe0 MUST**
+  Kh\xf4ng c\xf3 TTL → user đ\xf3ng tr\xecnh duyệt → lock m\xe3i m\xe3i → deadlock
+  
+  ### 2. **Idempotency matters**
+  User spam click → Multiple requests → Cần check trước khi update
+  
+  ### 3. **Error handling**
+  \`\`\`javascript
+  // ✅ ALWAYS release lock trong finally block
+  try {
+    await acquireLock();
+    await processBooking();
+  } finally {
+    await releaseLock(); // Đảm bảo chạy d\xf9 c\xf3 lỗi
+  }
+  \`\`\`
+  
+  ## 🎓 Kết luận
+  
+  **Khi n\xe0o d\xf9ng c\xe1i n\xe0o?**
+  
+  - **Small app, single server**: Database row locking
+  - **Production, distributed**: Redis distributed lock
+  - **Ultra high-scale**: Th\xeam queue (RabbitMQ, Kafka)
+  
+  **Key takeaways:**
+  - Race condition xảy ra khi c\xf3 concurrent writes
+  - Lock mechanism l\xe0 giải ph\xe1p chuẩn
+  - Testing với load l\xe0 BẮT BUỘC
+  - Redis lock pattern dễ implement v\xe0 scale tốt
+  
+  ---
+  
+  *Code đầy đủ c\xf3 trong repo: [DHL Cinema GitHub](https://github.com/ntnhan19/Project_MovieTicketBooking_NodeJS)*`,cover_image:`${t}/images/blog/race-condition.jpg`,tags:"Backend,Distributed Systems,Redis",date:"28/12/2024"}],i=[{id:1,title:"DocMentor - AI RAG Knowledge Assistant",description:"Ứng dụng AI Assistant hỗ trợ trả lời câu hỏi từ tài liệu PDF/DOCX sử dụng công nghệ RAG và Vector Database. Đồ án môn Trí tuệ nhân tạo.",content:`## 🎯 Bối cảnh dự \xe1n
 
 Đ\xe2y l\xe0 dự \xe1n của học phần **Đồ \xc1n Chuy\xean Ng\xe0nh** học kỳ 1 năm 2025. B\xe0i to\xe1n đặt ra: Sinh vi\xean v\xe0 giảng vi\xean thường phải đọc h\xe0ng trăm trang t\xe0i liệu để t\xecm th\xf4ng tin cần thiết. L\xe0m sao để AI c\xf3 thể "đọc hiểu" t\xe0i liệu v\xe0 trả lời c\xe2u hỏi ch\xednh x\xe1c?
 
@@ -1728,4 +1970,4 @@ io.to(\`room-\${movieId}\`).emit('seat:updated', {
 Dự \xe1n n\xe0y gi\xfap t\xf4i hiểu rằng:
 - Distributed systems kh\xf4ng đơn giản như tưởng
 - Testing với race condition cần cẩn thận v\xe0 c\xf3 methodology
-- Real-world problems thường phức tạp hơn l\xfd thuyết rất nhiều`,tech_stack:"Node.js, Express, Socket.io, PostgreSQL, Redis",category:"Network Programming",repo_url:"https://github.com/ntnhan19/Project_MovieTicketBooking_NodeJS",image_url:`${t}/images/projects/cinema.png`,highlights:"Academic Project,Real-time System,Race Condition Handling",duration:"3 tháng (Mar - Jun 2025)",team_size:"3 người"}],a=[{id:1,name:"Sinh viên 5 Tốt Cấp Khoa",issuer:"Đại học Công nghệ TP.HCM (HUTECH)",type:"Title",date:"2024",image_url:`${t}/images/certs/sv5tot.jpg`},{id:2,name:"Sinh viên Tiêu Biểu Cấp Khoa",issuer:"Khoa Công nghệ Thông tin - HUTECH",type:"Title",date:"2024",image_url:`${t}/images/certs/svtbieu.jpg`},{id:3,name:"Networking Basics",issuer:"Cisco Networking Academy",type:"Course",date:"Tháng 12/2024",image_url:`${t}/images/certs/cisco_basics.jpg`,url:"https://www.credly.com/badges/849ccbed-8429-4e57-a3be-e3177f447cce/public_url"},{id:4,name:"JavaScript Essentials 1",issuer:"Cisco Networking Academy",type:"Course",date:"Tháng 12/2024",image_url:`${t}/images/certs/javascript1.jpg`,url:"https://www.credly.com/badges/04dcaaad-cc55-4403-af59-ad15cd36150f/public_url"},{id:5,name:"JavaScript Essentials 2",issuer:"Cisco Networking Academy",type:"Course",date:"Tháng 12/2024",image_url:`${t}/images/certs/javascript2.jpg`,url:"https://www.credly.com/badges/7b330edf-fa4c-46d6-ac25-74e50e2c3773/public_url"},{id:6,name:"Giải Ba - Cuộc thi Genz's Thinking",issuer:"CLB Đổi mới Sáng tạo HUTECH",type:"Award",date:"Tháng 10/2024",image_url:`${t}/images/certs/genz_award.jpg`},{id:7,name:"Giải Ba - PIONE DREAM HACKATHON 2025",issuer:"Đại học HUTECH",type:"Award",date:"Tháng 1/2025",image_url:`${t}/images/certs/pionehackathon.jpg`}],o=[{id:1,name:"Hội Thao Sinh Viên HUTECH 2024",role:"Vận động viên - Đội Bóng Đá Nữ Khoa CNTT",description:"Tham gia thi đấu bộ môn Bóng đá nữ, đạt giải Nhì toàn trường. Hoạt động rèn luyện sức khỏe, tinh thần đồng đội và kết nối với các bạn sinh viên khác khoa.",date:"Tháng 3/2024",image_url:`${t}/images/activities/hoithao.jpg`},{id:2,name:"Tết Đầy Đủ - Xuân Trọn Vẹn 2025",role:"Tình nguyện viên - Liên Chi Hội Khoa CNTT",description:"Tham gia gói quà Tết cho người nghèo tại Thành phố Hồ Chí Minh. Hoạt động kéo dài 2 ngày với 50+ tình nguyện viên, gói được 500+ phần quà.",date:"Tháng 1/2025",image_url:`${t}/images/activities/tinhnguyenvien.png`}];e.s(["activities",0,o,"blogPosts",0,r,"certificates",0,a,"profile",0,n,"projects",0,i],22726);var s=e.i(71645);let c=e=>{let t=e.replace(/^([A-Z])|[\s-_]+(\w)/g,(e,t,n)=>n?n.toUpperCase():t.toLowerCase());return t.charAt(0).toUpperCase()+t.slice(1)},u=(...e)=>e.filter((e,t,n)=>!!e&&""!==e.trim()&&n.indexOf(e)===t).join(" ").trim();var l={xmlns:"http://www.w3.org/2000/svg",width:24,height:24,viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:2,strokeLinecap:"round",strokeLinejoin:"round"};let h=(0,s.forwardRef)(({color:e="currentColor",size:t=24,strokeWidth:n=2,absoluteStrokeWidth:r,className:i="",children:a,iconNode:o,...c},h)=>(0,s.createElement)("svg",{ref:h,...l,width:t,height:t,stroke:e,strokeWidth:r?24*Number(n)/Number(t):n,className:u("lucide",i),...!a&&!(e=>{for(let t in e)if(t.startsWith("aria-")||"role"===t||"title"===t)return!0})(c)&&{"aria-hidden":"true"},...c},[...o.map(([e,t])=>(0,s.createElement)(e,t)),...Array.isArray(a)?a:[a]])),g=(e,t)=>{let n=(0,s.forwardRef)(({className:n,...r},i)=>(0,s.createElement)(h,{ref:i,iconNode:t,className:u(`lucide-${c(e).replace(/([a-z0-9])([A-Z])/g,"$1-$2").toLowerCase()}`,`lucide-${e}`,n),...r}));return n.displayName=c(e),n};e.s(["default",()=>g],75254)},98183,(e,t,n)=>{"use strict";Object.defineProperty(n,"__esModule",{value:!0});var r={assign:function(){return c},searchParamsToUrlQuery:function(){return a},urlQueryToSearchParams:function(){return s}};for(var i in r)Object.defineProperty(n,i,{enumerable:!0,get:r[i]});function a(e){let t={};for(let[n,r]of e.entries()){let e=t[n];void 0===e?t[n]=r:Array.isArray(e)?e.push(r):t[n]=[e,r]}return t}function o(e){return"string"==typeof e?e:("number"!=typeof e||isNaN(e))&&"boolean"!=typeof e?"":String(e)}function s(e){let t=new URLSearchParams;for(let[n,r]of Object.entries(e))if(Array.isArray(r))for(let e of r)t.append(n,o(e));else t.set(n,o(r));return t}function c(e,...t){for(let n of t){for(let t of n.keys())e.delete(t);for(let[t,r]of n.entries())e.append(t,r)}return e}},95057,(e,t,n)=>{"use strict";Object.defineProperty(n,"__esModule",{value:!0});var r={formatUrl:function(){return s},formatWithValidation:function(){return u},urlObjectKeys:function(){return c}};for(var i in r)Object.defineProperty(n,i,{enumerable:!0,get:r[i]});let a=e.r(90809)._(e.r(98183)),o=/https?|ftp|gopher|file/;function s(e){let{auth:t,hostname:n}=e,r=e.protocol||"",i=e.pathname||"",s=e.hash||"",c=e.query||"",u=!1;t=t?encodeURIComponent(t).replace(/%3A/i,":")+"@":"",e.host?u=t+e.host:n&&(u=t+(~n.indexOf(":")?`[${n}]`:n),e.port&&(u+=":"+e.port)),c&&"object"==typeof c&&(c=String(a.urlQueryToSearchParams(c)));let l=e.search||c&&`?${c}`||"";return r&&!r.endsWith(":")&&(r+=":"),e.slashes||(!r||o.test(r))&&!1!==u?(u="//"+(u||""),i&&"/"!==i[0]&&(i="/"+i)):u||(u=""),s&&"#"!==s[0]&&(s="#"+s),l&&"?"!==l[0]&&(l="?"+l),i=i.replace(/[?#]/g,encodeURIComponent),l=l.replace("#","%23"),`${r}${u}${i}${l}${s}`}let c=["auth","hash","host","hostname","href","path","pathname","port","protocol","query","search","slashes"];function u(e){return s(e)}},18581,(e,t,n)=>{"use strict";Object.defineProperty(n,"__esModule",{value:!0}),Object.defineProperty(n,"useMergedRef",{enumerable:!0,get:function(){return i}});let r=e.r(71645);function i(e,t){let n=(0,r.useRef)(null),i=(0,r.useRef)(null);return(0,r.useCallback)(r=>{if(null===r){let e=n.current;e&&(n.current=null,e());let t=i.current;t&&(i.current=null,t())}else e&&(n.current=a(e,r)),t&&(i.current=a(t,r))},[e,t])}function a(e,t){if("function"!=typeof e)return e.current=t,()=>{e.current=null};{let n=e(t);return"function"==typeof n?n:()=>e(null)}}("function"==typeof n.default||"object"==typeof n.default&&null!==n.default)&&void 0===n.default.__esModule&&(Object.defineProperty(n.default,"__esModule",{value:!0}),Object.assign(n.default,n),t.exports=n.default)},18967,(e,t,n)=>{"use strict";Object.defineProperty(n,"__esModule",{value:!0});var r={DecodeError:function(){return f},MiddlewareNotFoundError:function(){return S},MissingStaticPage:function(){return b},NormalizeError:function(){return v},PageNotFoundError:function(){return y},SP:function(){return m},ST:function(){return x},WEB_VITALS:function(){return a},execOnce:function(){return o},getDisplayName:function(){return h},getLocationOrigin:function(){return u},getURL:function(){return l},isAbsoluteUrl:function(){return c},isResSent:function(){return g},loadGetInitialProps:function(){return p},normalizeRepeatedSlashes:function(){return d},stringifyError:function(){return k}};for(var i in r)Object.defineProperty(n,i,{enumerable:!0,get:r[i]});let a=["CLS","FCP","FID","INP","LCP","TTFB"];function o(e){let t,n=!1;return(...r)=>(n||(n=!0,t=e(...r)),t)}let s=/^[a-zA-Z][a-zA-Z\d+\-.]*?:/,c=e=>s.test(e);function u(){let{protocol:e,hostname:t,port:n}=window.location;return`${e}//${t}${n?":"+n:""}`}function l(){let{href:e}=window.location,t=u();return e.substring(t.length)}function h(e){return"string"==typeof e?e:e.displayName||e.name||"Unknown"}function g(e){return e.finished||e.headersSent}function d(e){let t=e.split("?");return t[0].replace(/\\/g,"/").replace(/\/\/+/g,"/")+(t[1]?`?${t.slice(1).join("?")}`:"")}async function p(e,t){let n=t.res||t.ctx&&t.ctx.res;if(!e.getInitialProps)return t.ctx&&t.Component?{pageProps:await p(t.Component,t.ctx)}:{};let r=await e.getInitialProps(t);if(n&&g(n))return r;if(!r)throw Object.defineProperty(Error(`"${h(e)}.getInitialProps()" should resolve to an object. But found "${r}" instead.`),"__NEXT_ERROR_CODE",{value:"E394",enumerable:!1,configurable:!0});return r}let m="undefined"!=typeof performance,x=m&&["mark","measure","getEntriesByName"].every(e=>"function"==typeof performance[e]);class f extends Error{}class v extends Error{}class y extends Error{constructor(e){super(),this.code="ENOENT",this.name="PageNotFoundError",this.message=`Cannot find module for page: ${e}`}}class b extends Error{constructor(e,t){super(),this.message=`Failed to load static file for page: ${e} ${t}`}}class S extends Error{constructor(){super(),this.code="ENOENT",this.message="Cannot find the middleware module"}}function k(e){return JSON.stringify({message:e.message,stack:e.stack})}},73668,(e,t,n)=>{"use strict";Object.defineProperty(n,"__esModule",{value:!0}),Object.defineProperty(n,"isLocalURL",{enumerable:!0,get:function(){return a}});let r=e.r(18967),i=e.r(52817);function a(e){if(!(0,r.isAbsoluteUrl)(e))return!0;try{let t=(0,r.getLocationOrigin)(),n=new URL(e,t);return n.origin===t&&(0,i.hasBasePath)(n.pathname)}catch(e){return!1}}},84508,(e,t,n)=>{"use strict";Object.defineProperty(n,"__esModule",{value:!0}),Object.defineProperty(n,"errorOnce",{enumerable:!0,get:function(){return r}});let r=e=>{}},22016,(e,t,n)=>{"use strict";Object.defineProperty(n,"__esModule",{value:!0});var r={default:function(){return f},useLinkStatus:function(){return y}};for(var i in r)Object.defineProperty(n,i,{enumerable:!0,get:r[i]});let a=e.r(90809),o=e.r(43476),s=a._(e.r(71645)),c=e.r(95057),u=e.r(8372),l=e.r(18581),h=e.r(18967),g=e.r(5550);e.r(33525);let d=e.r(91949),p=e.r(73668),m=e.r(9396);function x(e){return"string"==typeof e?e:(0,c.formatUrl)(e)}function f(t){var n;let r,i,a,[c,f]=(0,s.useOptimistic)(d.IDLE_LINK_STATUS),y=(0,s.useRef)(null),{href:b,as:S,children:k,prefetch:C=null,passHref:T,replace:E,shallow:P,scroll:j,onClick:w,onMouseEnter:L,onTouchStart:A,legacyBehavior:R=!1,onNavigate:U,ref:O,unstable_dynamicOnHover:N,...D}=t;r=k,R&&("string"==typeof r||"number"==typeof r)&&(r=(0,o.jsx)("a",{children:r}));let I=s.default.useContext(u.AppRouterContext),B=!1!==C,G=!1!==C?null===(n=C)||"auto"===n?m.FetchStrategy.PPR:m.FetchStrategy.Full:m.FetchStrategy.PPR,{href:M,as:H}=s.default.useMemo(()=>{let e=x(b);return{href:e,as:S?x(S):e}},[b,S]);if(R){if(r?.$$typeof===Symbol.for("react.lazy"))throw Object.defineProperty(Error("`<Link legacyBehavior>` received a direct child that is either a Server Component, or JSX that was loaded with React.lazy(). This is not supported. Either remove legacyBehavior, or make the direct child a Client Component that renders the Link's `<a>` tag."),"__NEXT_ERROR_CODE",{value:"E863",enumerable:!1,configurable:!0});i=s.default.Children.only(r)}let F=R?i&&"object"==typeof i&&i.ref:O,_=s.default.useCallback(e=>(null!==I&&(y.current=(0,d.mountLinkInstance)(e,M,I,G,B,f)),()=>{y.current&&((0,d.unmountLinkForCurrentNavigation)(y.current),y.current=null),(0,d.unmountPrefetchableInstance)(e)}),[B,M,I,G,f]),J={ref:(0,l.useMergedRef)(_,F),onClick(t){R||"function"!=typeof w||w(t),R&&i.props&&"function"==typeof i.props.onClick&&i.props.onClick(t),!I||t.defaultPrevented||function(t,n,r,i,a,o,c){if("undefined"!=typeof window){let u,{nodeName:l}=t.currentTarget;if("A"===l.toUpperCase()&&((u=t.currentTarget.getAttribute("target"))&&"_self"!==u||t.metaKey||t.ctrlKey||t.shiftKey||t.altKey||t.nativeEvent&&2===t.nativeEvent.which)||t.currentTarget.hasAttribute("download"))return;if(!(0,p.isLocalURL)(n)){a&&(t.preventDefault(),location.replace(n));return}if(t.preventDefault(),c){let e=!1;if(c({preventDefault:()=>{e=!0}}),e)return}let{dispatchNavigateAction:h}=e.r(99781);s.default.startTransition(()=>{h(r||n,a?"replace":"push",o??!0,i.current)})}}(t,M,H,y,E,j,U)},onMouseEnter(e){R||"function"!=typeof L||L(e),R&&i.props&&"function"==typeof i.props.onMouseEnter&&i.props.onMouseEnter(e),I&&B&&(0,d.onNavigationIntent)(e.currentTarget,!0===N)},onTouchStart:function(e){R||"function"!=typeof A||A(e),R&&i.props&&"function"==typeof i.props.onTouchStart&&i.props.onTouchStart(e),I&&B&&(0,d.onNavigationIntent)(e.currentTarget,!0===N)}};return(0,h.isAbsoluteUrl)(H)?J.href=H:R&&!T&&("a"!==i.type||"href"in i.props)||(J.href=(0,g.addBasePath)(H)),a=R?s.default.cloneElement(i,J):(0,o.jsx)("a",{...D,...J,children:r}),(0,o.jsx)(v.Provider,{value:c,children:a})}e.r(84508);let v=(0,s.createContext)(d.IDLE_LINK_STATUS),y=()=>(0,s.useContext)(v);("function"==typeof n.default||"object"==typeof n.default&&null!==n.default)&&void 0===n.default.__esModule&&(Object.defineProperty(n.default,"__esModule",{value:!0}),Object.assign(n.default,n),t.exports=n.default)}]);
+- Real-world problems thường phức tạp hơn l\xfd thuyết rất nhiều`,tech_stack:"Node.js, Express, Socket.io, PostgreSQL, Redis",category:"Network Programming",repo_url:"https://github.com/ntnhan19/Project_MovieTicketBooking_NodeJS",image_url:`${t}/images/projects/cinema.png`,highlights:"Academic Project,Real-time System,Race Condition Handling",duration:"3 tháng (Mar - Jun 2025)",team_size:"3 người"}],a=[{id:1,name:"Sinh viên 5 Tốt Cấp Khoa",issuer:"Đại học Công nghệ TP.HCM (HUTECH)",type:"Title",date:"2024",image_url:`${t}/images/certs/sv5tot.jpg`},{id:2,name:"Sinh viên Tiêu Biểu Cấp Khoa",issuer:"Khoa Công nghệ Thông tin - HUTECH",type:"Title",date:"2024",image_url:`${t}/images/certs/svtbieu.jpg`},{id:3,name:"Networking Basics",issuer:"Cisco Networking Academy",type:"Course",date:"Tháng 12/2024",image_url:`${t}/images/certs/cisco_basics.jpg`,url:"https://www.credly.com/badges/849ccbed-8429-4e57-a3be-e3177f447cce/public_url"},{id:4,name:"JavaScript Essentials 1",issuer:"Cisco Networking Academy",type:"Course",date:"Tháng 12/2024",image_url:`${t}/images/certs/javascript1.jpg`,url:"https://www.credly.com/badges/04dcaaad-cc55-4403-af59-ad15cd36150f/public_url"},{id:5,name:"JavaScript Essentials 2",issuer:"Cisco Networking Academy",type:"Course",date:"Tháng 12/2024",image_url:`${t}/images/certs/javascript2.jpg`,url:"https://www.credly.com/badges/7b330edf-fa4c-46d6-ac25-74e50e2c3773/public_url"},{id:6,name:"Giải Ba - Cuộc thi Genz's Thinking",issuer:"CLB Đổi mới Sáng tạo HUTECH",type:"Award",date:"Tháng 10/2024",image_url:`${t}/images/certs/genz_award.jpg`},{id:7,name:"Giải Ba - PIONE DREAM HACKATHON 2025",issuer:"Đại học HUTECH",type:"Award",date:"Tháng 1/2025",image_url:`${t}/images/certs/pionehackathon.jpg`}],o=[{id:1,name:"Hội Thao Sinh Viên HUTECH 2024",role:"Vận động viên - Đội Bóng Đá Nữ Khoa CNTT",description:"Tham gia thi đấu bộ môn Bóng đá nữ, đạt giải Nhì toàn trường. Hoạt động rèn luyện sức khỏe, tinh thần đồng đội và kết nối với các bạn sinh viên khác khoa.",date:"Tháng 3/2024",image_url:`${t}/images/activities/hoithao.jpg`},{id:2,name:"Tết Đầy Đủ - Xuân Trọn Vẹn 2025",role:"Tình nguyện viên - Liên Chi Hội Khoa CNTT",description:"Tham gia gói quà Tết cho người nghèo tại Thành phố Hồ Chí Minh. Hoạt động kéo dài 2 ngày với 50+ tình nguyện viên, gói được 500+ phần quà.",date:"Tháng 1/2025",image_url:`${t}/images/activities/tinhnguyenvien.png`}];e.s(["activities",0,o,"blogPosts",0,r,"certificates",0,a,"profile",0,n,"projects",0,i],22726);var s=e.i(71645);let c=e=>{let t=e.replace(/^([A-Z])|[\s-_]+(\w)/g,(e,t,n)=>n?n.toUpperCase():t.toLowerCase());return t.charAt(0).toUpperCase()+t.slice(1)},u=(...e)=>e.filter((e,t,n)=>!!e&&""!==e.trim()&&n.indexOf(e)===t).join(" ").trim();var l={xmlns:"http://www.w3.org/2000/svg",width:24,height:24,viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:2,strokeLinecap:"round",strokeLinejoin:"round"};let h=(0,s.forwardRef)(({color:e="currentColor",size:t=24,strokeWidth:n=2,absoluteStrokeWidth:r,className:i="",children:a,iconNode:o,...c},h)=>(0,s.createElement)("svg",{ref:h,...l,width:t,height:t,stroke:e,strokeWidth:r?24*Number(n)/Number(t):n,className:u("lucide",i),...!a&&!(e=>{for(let t in e)if(t.startsWith("aria-")||"role"===t||"title"===t)return!0})(c)&&{"aria-hidden":"true"},...c},[...o.map(([e,t])=>(0,s.createElement)(e,t)),...Array.isArray(a)?a:[a]])),d=(e,t)=>{let n=(0,s.forwardRef)(({className:n,...r},i)=>(0,s.createElement)(h,{ref:i,iconNode:t,className:u(`lucide-${c(e).replace(/([a-z0-9])([A-Z])/g,"$1-$2").toLowerCase()}`,`lucide-${e}`,n),...r}));return n.displayName=c(e),n};e.s(["default",()=>d],75254)}]);
