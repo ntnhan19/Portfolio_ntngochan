@@ -38,25 +38,31 @@ const skillCategories = [
         title: "Backend Development",
         icon: Code2,
         color: "from-blue-500 to-cyan-500",
-        skills: ["Go (Gin, Fiber, GORM)", "Node.js (Express, NestJS)", "FastAPI (Python)", "Java Spring Boot", "RESTful & GraphQL API"]
+        skills: ["Node.js", "Express.js", "RESTful APIs", "Socket.io"]
     },
     {
-        title: "Database & Infrastructure",
+        title: "Frontend Development",
+        icon: Code2,
+        color: "from-blue-500 to-cyan-500",
+        skills: ["React.js", "Next.js (App Router)", "HTML", "CSS", "TailwindCSS"]
+    },
+    {
+        title: "Database",
         icon: Database,
         color: "from-green-500 to-emerald-500",
-        skills: ["PostgreSQL & MySQL", "Redis (Caching & Pub/Sub)", "MongoDB", "Database Design & Query Optimization"]
+        skills: ["PostgreSQL", "Prisma ORM", "SQL Server"]
     },
     {
-        title: "AI & Modern Tech",
+        title: "AI & LLM",
         icon: Cpu,
         color: "from-purple-500 to-pink-500",
-        skills: ["LangChain & LlamaIndex", "RAG Pipeline", "Vector DB (Pinecone, Qdrant)", "Gemini / OpenAI / Groq API", "WebSocket & Real-time Systems"]
+        skills: ["LangChain & LlamaIndex", "RAG Pipeline", "Vector DB (Pinecone)", "Gemini", "WebSocket & Real-time Systems"]
     },
     {
         title: "DevOps & Tools",
         icon: Globe,
         color: "from-orange-500 to-red-500",
-        skills: ["Docker & Docker Compose", "Git & GitHub Actions", "Linux & Bash Scripting", "Postman & API Testing"]
+        skills: ["Docker & Docker Compose", "Git", "GitHub", "Postman"]
     }
 ];
 
@@ -207,11 +213,11 @@ export default function AboutPage() {
                                     Đại học Công nghệ TP.HCM (HUTECH)
                                 </h3>
                                 <p className="text-xl text-slate-700 mb-4">
-                                    Cử nhân Kỹ thuật Phần mềm • 2025 – Hiện tại
+                                    Cử nhân Kỹ thuật Phần mềm • 2022 – 2026
                                 </p>
                                 <div className="flex flex-wrap gap-6 justify-center md:justify-start text-slate-600 text-base">
                                     <span className="flex items-center gap-2"><Calendar size={18} /> Năm 4 (Dự kiến tốt nghiệp 2026)</span>
-                                    <span className="flex items-center gap-2"><Award size={18} /> GPA: 3.4/4.0</span>
+                                    <span className="flex items-center gap-2"><Award size={18} /> GPA: 3.30/4.0</span>
                                 </div>
                             </div>
                         </div>
@@ -371,7 +377,7 @@ export default function AboutPage() {
                             Sẵn sàng bắt đầu hành trình Intern cùng team!
                         </h2>
                         <p className="text-lg md:text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
-                            Tôi đang tìm kiếm cơ hội <strong>Backend Developer Intern</strong> tại các startup công nghệ, đặc biệt trong lĩnh vực AI/ML, hệ thống real-time và microservices.
+                            Tôi đang tìm kiếm cơ hội <strong>Fullstack Developer Intern</strong> tại các công ty công nghệ, đặc biệt trong lĩnh vực AI/ML, hệ thống real-time và microservices.
                         </p>
 
                         <div className="flex flex-wrap justify-center gap-6 mt-10">

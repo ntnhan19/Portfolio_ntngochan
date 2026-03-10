@@ -5,6 +5,8 @@ import { Mail, Github, Linkedin, ArrowUp, Menu, X, ExternalLink, ChevronRight, S
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { Download, Moon, Sun, MapPin } from 'lucide-react';
+import { useTheme } from 'next-themes';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -24,6 +26,13 @@ export default function OptimizedHome() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { scrollYProgress } = useScroll();
   const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const { theme, setTheme } = useTheme();
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -46,351 +55,791 @@ export default function OptimizedHome() {
       />
 
       {/* Navigation */}
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-sm py-3'
-          : 'bg-transparent py-6'
-        }`}>
-        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-          <Link href="/" className={`font-bold text-xl tracking-tighter ${isScrolled ? 'text-slate-900' : 'text-slate-800'
-            }`}>
-            {profile.full_name.split(' ').pop()} <span className="text-blue-600">.</span>
-          </Link>
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+          ? 'bg-slate-900/80 backdrop-blur-xl shadow-lg shadow-slate-900/50 py-3 border-b border-slate-800'
+          : 'bg-transparent py-5'
+          }`}
+      >
+        <div className="max-w-6xl mx-auto px-6 flex justify-between items-center">
+          {/* Logo / Name with gradient */}
+          <motion.span
+            onClick={() => scrollToSection('home')}
+            className={`font-bold text-xl cursor-pointer transition-all ${isScrolled
+              ? 'bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent'
+              : 'text-white'
+              }`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            {profile.full_name.split(' ').slice(-1)[0]} {/* Show last name only */}
+          </motion.span>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-8">
-            {[
-              { name: 'Home', href: '/' },
-              { name: 'About', href: '/about' },
-              { name: 'Projects', href: '/projects' },
-              { name: 'Blog', href: '/blog' },
-              { name: 'Resume', href: '/resume' }
-            ].map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`font-medium text-sm transition-colors hover:text-blue-600 ${isScrolled ? 'text-slate-600' : 'text-slate-700'
+          <div className="hidden md:flex gap-8">
+            {['Home', 'About', 'Blog', 'Projects', 'Certificates'].map((item, idx) => (
+              <motion.button
+                key={item}
+                onClick={() => scrollToSection(item.toLowerCase())}
+                className={`relative font-medium text-sm transition-colors ${isScrolled ? 'text-slate-300 hover:text-cyan-400' : 'text-slate-200 hover:text-white'
                   }`}
+                whileHover={{ y: -2 }}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.1 }}
               >
-                {item.name}
-              </Link>
+                {item}
+                {/* Underline effect */}
+                <motion.span
+                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500"
+                  initial={{ scaleX: 0 }}
+                  whileHover={{ scaleX: 1 }}
+                  transition={{ duration: 0.3 }}
+                />
+              </motion.button>
             ))}
-            <Link
-              href="/contact"
-              className="px-5 py-2 bg-blue-600 text-white font-semibold rounded-full hover:bg-blue-700 transition-all text-sm shadow-lg shadow-blue-600/30 hover:scale-105"
-            >
-              Contact
-            </Link>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-slate-700"
+            className={`md:hidden transition-colors ${isScrolled ? 'text-slate-300' : 'text-white'}`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu Dropdown */}
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="md:hidden absolute top-full left-0 right-0 bg-white shadow-lg border-t border-slate-100 p-4"
+            className="md:hidden absolute top-full left-0 right-0 bg-slate-900/95 backdrop-blur-xl shadow-lg border-b border-slate-800 p-4 flex flex-col gap-3"
           >
-            {['Home', 'About', 'Projects', 'Blog', 'Resume', 'Contact'].map((item) => (
-              <Link
+            {['Home', 'About', 'Blog', 'Projects', 'Certificates'].map((item) => (
+              <button
                 key={item}
-                href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="block py-3 px-4 text-slate-700 hover:bg-slate-50 rounded-lg font-medium transition-colors"
+                onClick={() => scrollToSection(item.toLowerCase())}
+                className="text-left font-medium text-slate-300 hover:text-cyan-400 py-3 border-b border-slate-800 last:border-0 transition-colors"
               >
                 {item}
-              </Link>
+              </button>
             ))}
           </motion.div>
         )}
       </nav>
 
-      {/* Hero Section - Avatar lớn + thông điệp mới */}
-      <section className="relative min-h-screen flex flex-col justify-center pt-24 pb-16 px-6 overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50">
-        {/* Animated background blobs */}
+      {/* --- 2. HERO SECTION (UPDATED) --- */}
+      <section id="home" className="relative pt-32 pb-20 px-6 min-h-screen bg-slate-950 overflow-hidden">
+        {/* Animated Grid Background */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000,transparent)]"></div>
+
+        {/* Floating Particles */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob" />
-          <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000" />
-          <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000" />
+          {[...Array(15)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-cyan-400/30 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [0, -30, 0],
+                opacity: [0.2, 0.5, 0.2],
+              }}
+              transition={{
+                duration: 3 + Math.random() * 2,
+                repeat: Infinity,
+                delay: Math.random() * 2,
+              }}
+            />
+          ))}
         </div>
 
-        <div className="max-w-5xl mx-auto text-center relative z-10">
-          <motion.div initial="hidden" animate="visible" variants={staggerContainer}>
-            {/* Avatar lớn hơn */}
-            <motion.div variants={fadeInUp} className="relative w-64 h-64 mx-auto mb-12">
-              <div className="relative w-full h-full rounded-full border-8 border-white shadow-2xl overflow-hidden group ring-4 ring-blue-100/50">
-                <img
-                  src={profile.avatar || '/placeholder-avatar.png'}
-                  alt={profile.full_name}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  onError={(e) => {
-                    e.currentTarget.style.display = 'none';
-                    e.currentTarget.nextElementSibling?.classList.remove('hidden');
-                  }}
-                />
-                <div className="hidden absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-5xl font-bold text-white">
-                  {profile.full_name.charAt(0)}
-                </div>
+        <div className="relative z-10 max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12">
+
+          {/* Left: Profile Info */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="flex-1 text-center lg:text-left"
+          >
+            {/* Avatar with Glow */}
+            <div className="relative inline-block mb-6">
+              <div className="absolute inset-0 bg-cyan-500/20 blur-3xl rounded-full animate-pulse"></div>
+              <div className="relative w-32 h-32 rounded-full border-4 border-cyan-400/30 overflow-hidden bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center shadow-2xl">
+                <span className="text-5xl font-bold text-cyan-400">{profile.avatar.split('/').pop()?.split('.').shift()}</span>
               </div>
-              <div className="absolute -top-2 -right-2 w-10 h-10 bg-green-500 rounded-full border-4 border-white animate-pulse" />
-            </motion.div>
+            </div>
 
-            {/* Heading & Description với thông điệp mới */}
-            <motion.div variants={fadeInUp} className="mb-12">
-              <h1 className="text-5xl md:text-7xl font-extrabold text-slate-900 mb-4 tracking-tight">
-                Hi, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600">Hân</span>
-              </h1>
-              <p className="text-2xl md:text-3xl font-bold text-slate-700 mb-6">
-                Backend Developer
-              </p>
-              {/* Thông điệp mới - ngắn gọn, truyền cảm hứng */}
-              <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto italic">
-                “First, solve the problem. Then, write the code.” – John Johnson
-              </p>
-              <p className="text-base text-slate-500 mt-4">
-                Đang tìm kiếm cơ hội thực tập Backend / AI để học hỏi và đóng góp.
-              </p>
-            </motion.div>
+            {/* Name with Gradient */}
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-cyan-200 to-blue-400 bg-clip-text text-transparent">
+              {profile.full_name}
+            </h1>
 
-            {/* CTA Buttons */}
-            <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row justify-center gap-6 mb-12 px-4">
-              <Link
-                href="/projects"
-                className="group px-8 py-4 bg-slate-900 text-white font-bold rounded-full hover:bg-slate-800 transition-all hover:scale-105 flex items-center justify-center gap-2 shadow-2xl"
-              >
-                Xem dự án
-                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link
-                href="/contact"
-                className="px-8 py-4 bg-white text-slate-900 font-bold rounded-full border-2 border-slate-200 hover:border-blue-500 hover:text-blue-600 transition-all hover:scale-105 flex items-center justify-center gap-2 shadow-lg"
-              >
-                <Mail size={20} />
-                Liên hệ
-              </Link>
-            </motion.div>
+            <p className="text-xl text-slate-300 mb-6">
+              Backend Developer • AI Enthusiast
+            </p>
+
+            <p className="text-slate-400 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+              Đam mê xây dựng <span className="text-cyan-400 font-semibold">scalable backend systems</span> và{' '}
+              <span className="text-cyan-400 font-semibold">AI-powered applications</span>.
+              Hiện đang tìm kiếm vị trí Backend Developer Intern.
+            </p>
+
+            {/* Status & Location */}
+            <div className="flex flex-wrap justify-center lg:justify-start gap-3 mb-8">
+              <span className="flex items-center gap-2 bg-slate-800/50 backdrop-blur-sm border border-slate-700 px-4 py-2 rounded-full text-sm text-slate-300">
+                <MapPin size={14} className="text-cyan-400" />
+                TP. Hồ Chí Minh
+              </span>
+              <span className="flex items-center gap-2 bg-green-500/10 border border-green-500/30 px-4 py-2 rounded-full text-sm">
+                <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                <span className="text-green-400 font-medium">Open to work</span>
+              </span>
+            </div>
 
             {/* Social Links */}
-            <motion.div variants={fadeInUp} className="flex justify-center gap-6 mb-16">
-              <a href={profile.github} target="_blank" rel="noopener noreferrer"
-                className="p-4 bg-white rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-110 hover:bg-slate-900 hover:text-white group">
-                <Github size={24} />
-              </a>
-              <a href={profile.linkedin} target="_blank" rel="noopener noreferrer"
-                className="p-4 bg-white rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-110 hover:bg-blue-600 hover:text-white group">
-                <Linkedin size={24} />
-              </a>
-              <a href={`mailto:${profile.email}`}
-                className="p-4 bg-white rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-110 hover:bg-red-500 hover:text-white group">
-                <Mail size={24} />
-              </a>
-            </motion.div>
+            <div className="flex flex-wrap justify-center lg:justify-start gap-4">
+              <motion.a
+                href={profile.github}
+                target="_blank"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="group px-6 py-3 bg-white text-slate-900 font-semibold rounded-xl hover:bg-slate-100 transition-all flex items-center gap-2 shadow-lg shadow-cyan-500/20"
+              >
+                <Github size={20} className="group-hover:rotate-12 transition-transform" />
+                GitHub
+              </motion.a>
+              <motion.a
+                href={profile.linkedin}
+                target="_blank"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-500 transition-all flex items-center gap-2 shadow-lg shadow-blue-500/30"
+              >
+                <Linkedin size={20} />
+                LinkedIn
+              </motion.a>
+              <motion.a
+                href={`mailto:${profile.email}`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-6 py-3 bg-slate-800 border border-slate-700 text-white font-semibold rounded-xl hover:border-cyan-500 transition-all flex items-center gap-2"
+              >
+                <Mail size={20} />
+                Email
+              </motion.a>
+            </div>
+          </motion.div>
 
-            {/* Quick Stats */}
-            <motion.div variants={fadeInUp} className="grid grid-cols-3 gap-6 max-w-md mx-auto">
-              {stats.map((stat, i) => {
-                const Icon = stat.icon;
-                return (
-                  <div key={i} className="bg-white/80 backdrop-blur-sm rounded-2xl py-6 px-4 shadow-lg border border-slate-200">
-                    <Icon className={`w-8 h-8 mx-auto mb-3 text-${stat.color}-600`} />
-                    <div className="text-3xl font-bold text-slate-900">{stat.value}+</div>
-                    <div className="text-sm text-slate-600 mt-1">{stat.label}</div>
+          {/* Right: Animated Code Terminal */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="flex-1 w-full lg:w-auto"
+          >
+            <div className="bg-slate-900/50 backdrop-blur-md border border-slate-700 rounded-2xl overflow-hidden shadow-2xl shadow-cyan-900/20">
+              {/* Terminal Header */}
+              <div className="bg-slate-800/80 px-4 py-3 flex items-center gap-2 border-b border-slate-700">
+                <div className="flex gap-2">
+                  <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
+                  <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                  <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
+                </div>
+                <span className="text-sm text-slate-400 font-mono ml-4">developer.js</span>
+              </div>
+
+              {/* Terminal Content */}
+              <div className="p-6 font-mono text-sm">
+                <div className="text-slate-300 space-y-1">
+                  <div><span className="text-purple-400">const</span> <span className="text-cyan-400">developer</span> = {'{'}</div>
+                  <div className="pl-4"><span className="text-green-400">name</span>: <span className="text-orange-300">"{profile.full_name}"</span>,</div>
+                  <div className="pl-4"><span className="text-green-400">role</span>: <span className="text-orange-300">"Backend Developer"</span>,</div>
+                  <div className="pl-4"><span className="text-green-400">skills</span>: [<span className="text-orange-300">"Go", "Node.js", "AI/LLM"</span>],</div>
+                  <div className="pl-4"><span className="text-green-400">passion</span>: <span className="text-orange-300">"Building scalable systems ⚡"</span></div>
+                  <div>{'};'}</div>
+                  <div className="mt-4 text-cyan-400">
+                    → <span className="animate-pulse">Ready to ship production code! 🚀</span>
                   </div>
-                );
-              })}
-            </motion.div>
+                </div>
+              </div>
+            </div>
+
+            {/* Tech Stack Pills */}
+            <div className="mt-6 flex flex-wrap gap-2 justify-center lg:justify-start">
+              {['Go', 'Node.js', 'PostgreSQL', 'Redis', 'Docker'].map((tech) => (
+                <motion.span
+                  key={tech}
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  className="px-3 py-1 bg-slate-800/50 border border-slate-700 rounded-full text-xs text-slate-300 hover:border-cyan-500 hover:text-cyan-400 transition-all cursor-default"
+                >
+                  {tech}
+                </motion.span>
+              ))}
+            </div>
           </motion.div>
         </div>
 
-        {/* Scroll indicator */}
+        {/* Scroll Indicator */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1, repeat: Infinity, duration: 1.5 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2"
         >
-          <div className="w-6 h-10 border-2 border-slate-400 rounded-full flex justify-center">
-            <div className="w-1.5 h-3 bg-slate-400 rounded-full mt-2 animate-bounce" />
+          <div className="w-6 h-10 border-2 border-slate-600 rounded-full flex justify-center p-2">
+            <div className="w-1 h-3 bg-cyan-500 rounded-full"></div>
           </div>
         </motion.div>
       </section>
 
-      {/* Các section còn lại giữ nguyên như trước */}
-      {/* Featured Projects */}
-      <section className="py-24 px-6 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-600 rounded-full font-semibold text-sm mb-4">
-              <Sparkles size={16} />
-              Featured Work
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Dự án nổi bật</h2>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-              Các dự án thực tế về Backend Development và AI
-            </p>
-          </motion.div>
+      {/* SECTION 2: About + Skills */}
+      <section id="about" className="py-24 px-6 bg-white relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: 'radial-gradient(circle at 1px 1px, rgb(148 163 184) 1px, transparent 0)',
+            backgroundSize: '40px 40px'
+          }}></div>
+        </div>
 
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            {projects.slice(0, 2).map((project, index) => (
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.2 }}
-                viewport={{ once: true }}
-                className="group bg-slate-50 rounded-3xl overflow-hidden border border-slate-200 hover:shadow-2xl hover:border-blue-300 transition-all duration-500"
-              >
-                <div className="relative h-64 overflow-hidden">
-                  <img
-                    src={project.image_url}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    onError={(e) => {
-                      e.currentTarget.src = 'https://placehold.co/800x600/e2e8f0/64748b?text=Project';
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold">
-                      {project.category}
-                    </span>
+        <div className="max-w-6xl mx-auto relative z-10">
+
+          {/* Header */}
+          <div className="text-center mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-4xl font-bold text-slate-900 mb-4">Về tôi</h2>
+              <div className="w-16 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto rounded-full"></div>
+            </motion.div>
+          </div>
+
+          {/* About Content + Quick Stats */}
+          <div className="grid lg:grid-cols-2 gap-12 mb-20">
+
+            {/* Left: Bio */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="bg-slate-50 p-8 rounded-2xl border border-slate-200"
+            >
+              <div className="prose prose-slate max-w-none">
+                <p className="text-slate-700 leading-relaxed text-lg mb-6">
+                  Là sinh viên năm 4 chuyên ngành Kỹ thuật Phần mềm tại HUTECH, tôi đã xây dựng nền tảng vững chắc về Backend Development thông qua các dự án học thuật và tự học.
+                </p>
+
+                <h3 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                  <span className="text-cyan-500">💪</span> Điểm mạnh
+                </h3>
+                <ul className="space-y-2 text-slate-700 mb-6 list-none">
+                  <li className="flex items-start gap-2">
+                    <span className="text-cyan-500 mt-1">▸</span>
+                    <span>Xây dựng RESTful API với Go (Gin) và Node.js (Express)</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-cyan-500 mt-1">▸</span>
+                    <span>Thiết kế database schema và tối ưu query với PostgreSQL</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-cyan-500 mt-1">▸</span>
+                    <span>Xử lý real-time communication với WebSocket/Socket.io</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-cyan-500 mt-1">▸</span>
+                    <span>Làm việc với AI/LLM: RAG pipeline, Vector Database (Pinecone)</span>
+                  </li>
+                </ul>
+
+                <h3 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                  <span className="text-purple-500">🎯</span> Mục tiêu
+                </h3>
+                <p className="text-slate-700 leading-relaxed">
+                  Tìm kiếm vị trí <span className="text-cyan-600 font-semibold">Backend Developer Intern</span> tại các công ty công nghệ để học hỏi kinh nghiệm thực tế về hệ thống quy mô lớn, microservices architecture và best practices từ các senior developers.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Right: Quick Stats */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="space-y-6"
+            >
+              {[
+                { label: 'Dự án hoàn thành', value: `${projects.length}+`, icon: '🚀', color: 'from-cyan-500 to-blue-500', bg: 'bg-cyan-50', border: 'border-cyan-200' },
+                { label: 'Blog posts kỹ thuật', value: blogPosts.length, icon: '📝', color: 'from-purple-500 to-pink-500', bg: 'bg-purple-50', border: 'border-purple-200' },
+                { label: 'Chứng chỉ & Giải thưởng', value: certificates.length, icon: '🏆', color: 'from-orange-500 to-red-500', bg: 'bg-orange-50', border: 'border-orange-200' },
+                { label: 'Năm kinh nghiệm', value: '2+', icon: '⚡', color: 'from-green-500 to-teal-500', bg: 'bg-green-50', border: 'border-green-200' }
+              ].map((stat, idx) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                  className="group relative"
+                >
+                  <div className={`relative ${stat.bg} border ${stat.border} rounded-2xl p-6 transition-all hover:shadow-lg`}>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className={`text-4xl font-bold mb-2 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>
+                          {stat.value}
+                        </div>
+                        <div className="text-slate-600 text-sm font-medium">{stat.label}</div>
+                      </div>
+                      <div className="text-4xl">{stat.icon}</div>
+                    </div>
                   </div>
-                </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
 
-                <div className="p-8">
-                  <h3 className="font-bold text-2xl text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-slate-600 mb-6 line-clamp-2 leading-relaxed">
-                    {project.description}
-                  </p>
+          {/* Skills Section */}
+          <div className="text-center mb-12">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-3xl font-bold text-slate-900 mb-2">Technical Skills</h2>
+              <p className="text-slate-600">Hover để xem chi tiết từng lĩnh vực</p>
+            </motion.div>
+          </div>
 
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.tech_stack.split(',').slice(0, 4).map((tech, i) => (
-                      <span key={i} className="text-xs font-medium text-slate-600 bg-white border border-slate-200 px-3 py-1.5 rounded-lg">
-                        {tech.trim()}
-                      </span>
+          {/* Skills Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                name: 'Backend',
+                icon: '⚙️',
+                level: 85,
+                skills: ['Go (Gin)', 'Node.js (Express)', 'RESTful API', 'gRPC'],
+                color: 'cyan',
+                bg: 'bg-cyan-50',
+                border: 'border-cyan-200',
+                text: 'text-cyan-600'
+              },
+              {
+                name: 'Database',
+                icon: '🗄️',
+                level: 80,
+                skills: ['PostgreSQL', 'Redis', 'MongoDB', 'Pinecone'],
+                color: 'green',
+                bg: 'bg-green-50',
+                border: 'border-green-200',
+                text: 'text-green-600'
+              },
+              {
+                name: 'AI/ML',
+                icon: '🤖',
+                level: 70,
+                skills: ['LangChain', 'RAG Pipeline', 'Vector DB', 'Gemini API'],
+                color: 'purple',
+                bg: 'bg-purple-50',
+                border: 'border-purple-200',
+                text: 'text-purple-600'
+              },
+              {
+                name: 'DevOps',
+                icon: '🐳',
+                level: 65,
+                skills: ['Docker', 'GitHub Actions', 'Linux', 'Nginx'],
+                color: 'orange',
+                bg: 'bg-orange-50',
+                border: 'border-orange-200',
+                text: 'text-orange-600'
+              },
+              {
+                name: 'Frontend',
+                icon: '🎨',
+                level: 75,
+                skills: ['React.js', 'Next.js', 'Tailwind CSS', 'TypeScript'],
+                color: 'blue',
+                bg: 'bg-blue-50',
+                border: 'border-blue-200',
+                text: 'text-blue-600'
+              },
+              {
+                name: 'Real-time',
+                icon: '⚡',
+                level: 80,
+                skills: ['WebSocket', 'Socket.io', 'SSE'],
+                color: 'yellow',
+                bg: 'bg-yellow-50',
+                border: 'border-yellow-200',
+                text: 'text-yellow-600'
+              }
+            ].map((skill, idx) => (
+              <motion.div
+                key={skill.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className="group relative"
+              >
+                <div className={`relative h-full ${skill.bg} border ${skill.border} rounded-2xl p-6 transition-all hover:shadow-xl hover:scale-105`}>
+
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="text-3xl">{skill.icon}</div>
+                    <div className="flex-1">
+                      <h3 className="font-bold text-slate-900 text-lg">{skill.name}</h3>
+                      <span className={`text-sm font-bold ${skill.text}`}>{skill.level}%</span>
+                    </div>
+                  </div>
+
+                  {/* Progress Bar */}
+                  <div className="mb-4">
+                    <div className="h-2 bg-white rounded-full overflow-hidden">
+                      <motion.div
+                        className={`h-full bg-gradient-to-r ${skill.color === 'cyan' ? 'from-cyan-500 to-blue-500' :
+                          skill.color === 'green' ? 'from-green-500 to-teal-500' :
+                            skill.color === 'purple' ? 'from-purple-500 to-pink-500' :
+                              skill.color === 'orange' ? 'from-orange-500 to-red-500' :
+                                skill.color === 'blue' ? 'from-blue-500 to-indigo-500' :
+                                  'from-yellow-500 to-orange-500'
+                          }`}
+                        initial={{ width: 0 }}
+                        whileInView={{ width: `${skill.level}%` }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, delay: idx * 0.1 }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Skills List */}
+                  <div className="space-y-2">
+                    {skill.skills.map((item, i) => (
+                      <div
+                        key={i}
+                        className="flex items-center gap-2 text-sm text-slate-700"
+                      >
+                        <div className={`w-1.5 h-1.5 rounded-full ${skill.bg} border ${skill.border}`}></div>
+                        {item}
+                      </div>
                     ))}
                   </div>
-
-                  <Link
-                    href={`/projects/${project.id}`}
-                    className="inline-flex items-center gap-2 text-blue-600 font-semibold hover:gap-3 transition-all group/link"
-                  >
-                    Xem chi tiết
-                    <ChevronRight size={18} className="group-hover/link:translate-x-1 transition-transform" />
-                  </Link>
                 </div>
               </motion.div>
             ))}
           </div>
 
+          {/* Learning Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center"
+            className="mt-12 bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-2xl p-8 text-center"
           >
-            <Link
-              href="/projects"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-slate-900 text-white font-bold rounded-full hover:bg-slate-800 transition-all hover:scale-105 shadow-xl"
-            >
-              Xem tất cả {projects.length} dự án
-              <ArrowRight size={20} />
-            </Link>
+            <p className="text-slate-700 mb-4">
+              🚀 <span className="font-semibold">Đang học thêm:</span> <span className="text-cyan-600 font-semibold">Kubernetes, AWS, Microservices Architecture</span>
+            </p>
+            <p className="text-slate-500 text-sm">
+              Cập nhật liên tục qua side projects và online courses
+            </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Latest Blog Posts */}
-      <section className="py-24 px-6 bg-slate-50">
-        <div className="max-w-7xl mx-auto">
+      {/* SECTION 3: Featured Projects - Bento Grid Layout */}
+      <section id="projects" className="py-24 px-6 bg-slate-900 relative overflow-hidden">
+        {/* Background decorations */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-20 right-20 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 left-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
+        </div>
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          {/* Header Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-50 text-purple-600 rounded-full font-semibold text-sm mb-4">
-              <BookOpen size={16} />
-              Latest Posts
+            <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-purple-500/10 border border-purple-500/30 rounded-full">
+              <Code2 className="text-purple-400" size={20} />
+              <span className="text-sm font-semibold text-purple-400">SHOWCASE</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Bài viết mới nhất</h2>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-              Chia sẻ kiến thức về Backend Development và AI
+
+            <h2 className="text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-purple-100 to-pink-100 bg-clip-text text-transparent">
+              Dự án tiêu biểu
+            </h2>
+
+            <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+              Real-world applications giải quyết production-grade problems
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            {blogPosts.slice(0, 3).map((post, i) => (
-              <motion.article
-                key={post.id}
+          {/* Bento Grid Layout */}
+          <div className="grid lg:grid-cols-2 gap-6 mb-12">
+
+            {projects.map((project, idx) => (
+              <motion.div
+                key={project.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white rounded-2xl overflow-hidden border border-slate-200 hover:shadow-xl hover:border-purple-300 transition-all group"
+                transition={{ delay: idx * 0.2 }}
+                className={`group relative overflow-hidden rounded-2xl ${idx === 0 ? 'lg:col-span-2 lg:row-span-2' : '' // First project is featured (2x size)
+                  }`}
               >
-                <div className="h-48 overflow-hidden">
+                {/* Background Image with Overlay */}
+                <div className={`absolute inset-0 ${idx === 0 ? 'min-h-[600px]' : 'min-h-[400px]'}`}>
                   <img
-                    src={post.cover_image}
-                    alt={post.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    src={project.image_url}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     onError={(e) => {
-                      e.currentTarget.src = 'https://placehold.co/600x400/e2e8f0/64748b?text=Blog';
+                      e.currentTarget.src = 'https://placehold.co/1200x800/1e293b/64748b?text=Project+Demo';
                     }}
                   />
+                  {/* Gradient overlays */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-900/80 via-slate-900/80 to-blue-900/80"></div>
+                  <div className="absolute inset-0 bg-slate-950/60 backdrop-blur-[1px]"></div>
                 </div>
-                <div className="p-6">
-                  <div className="flex gap-2 mb-3">
-                    <span className="text-xs font-bold text-purple-600 bg-purple-50 px-2 py-1 rounded-md">
-                      {post.tags.split(',')[0]}
-                    </span>
+
+                {/* Content */}
+                <div className={`relative h-full p-8 flex flex-col justify-between ${idx === 0 ? 'min-h-[600px]' : 'min-h-[400px]'
+                  }`}>
+
+                  {/* Top Section */}
+                  <div>
+                    {/* Meta badges */}
+                    <div className="flex flex-wrap items-center gap-3 mb-4">
+                      <span className="px-3 py-1 bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 rounded-full text-xs font-semibold backdrop-blur-sm">
+                        {project.category}
+                      </span>
+                      {project.highlights && project.highlights.split(',').slice(0, 2).map((tag, i) => (
+                        <span
+                          key={i}
+                          className="px-3 py-1 bg-white/10 text-white border border-white/20 rounded-full text-xs font-medium backdrop-blur-sm"
+                        >
+                          {tag.trim()}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Title & Description */}
+                    <h3 className={`font-bold text-white mb-4 ${idx === 0 ? 'text-4xl lg:text-5xl' : 'text-3xl'
+                      }`}>
+                      {project.title}
+                    </h3>
+
+                    <p className={`text-slate-200 mb-6 ${idx === 0 ? 'text-lg max-w-3xl' : 'text-base'
+                      }`}>
+                      {project.description}
+                    </p>
+
+                    {/* Tech Stack */}
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {project.tech_stack.split(',').map((tech) => (
+                        <span
+                          key={tech}
+                          className="px-3 py-1 bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-lg text-sm text-slate-200 font-medium hover:border-cyan-500 hover:text-cyan-400 transition-colors"
+                        >
+                          {tech.trim()}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Stats (if available) */}
+                    {project.duration && (
+                      <div className="flex gap-4 text-sm text-slate-300">
+                        <span>⏱️ {project.duration}</span>
+                        {project.team_size && <span>👥 {project.team_size}</span>}
+                      </div>
+                    )}
                   </div>
-                  <h3 className="font-bold text-lg text-slate-900 mb-3 line-clamp-2 group-hover:text-purple-600 transition-colors">
-                    {post.title}
-                  </h3>
-                  <p className="text-slate-600 text-sm mb-4 line-clamp-2">
-                    {post.summary}
-                  </p>
-                  <Link
-                    href={`/blog/${post.id}`}
-                    className="inline-flex items-center gap-2 text-purple-600 font-semibold text-sm hover:gap-3 transition-all"
-                  >
-                    Đọc tiếp
-                    <ChevronRight size={16} />
-                  </Link>
+
+                  {/* Bottom Section - Action Buttons (Show on hover) */}
+                  <div className="flex flex-wrap gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                    <Link
+                      href={`/projects/${project.id}`}
+                      className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-white text-slate-900 font-semibold rounded-xl hover:bg-slate-100 transition-all hover:scale-105 shadow-lg"
+                    >
+                      Chi tiết →
+                    </Link>
+                    {project.repo_url && (
+                      <a
+                        href={project.repo_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-slate-800/80 backdrop-blur-sm text-white font-semibold rounded-xl border border-slate-700 hover:border-cyan-500 transition-all hover:scale-105"
+                      >
+                        <Github size={20} />
+                        GitHub
+                      </a>
+                    )}
+                    {project.demo_url && (
+                      <a
+                        href={project.demo_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-500 transition-all hover:scale-105"
+                      >
+                        <ExternalLink size={18} />
+                        Demo
+                      </a>
+                    )}
+                  </div>
                 </div>
-              </motion.article>
+
+                {/* Hover glow effect */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 opacity-0 group-hover:opacity-20 blur-2xl transition-opacity -z-10"></div>
+              </motion.div>
             ))}
           </div>
 
+          {/* GitHub CTA */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-center"
           >
-            <Link
-              href="/blog"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-purple-600 text-white font-bold rounded-full hover:bg-purple-700 transition-all hover:scale-105 shadow-xl"
+            <a
+              href={profile.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-3 px-8 py-4 bg-slate-800 border border-slate-700 hover:border-purple-500 rounded-xl font-semibold text-white transition-all hover:scale-105"
             >
-              Đọc {blogPosts.length} bài viết
-              <ArrowRight size={20} />
-            </Link>
+              <Github size={24} className="group-hover:rotate-12 transition-transform" />
+              <span>Xem tất cả projects trên GitHub</span>
+              <motion.span
+                animate={{ x: [0, 4, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              >
+                →
+              </motion.span>
+            </a>
           </motion.div>
+        </div>
+      </section>
+
+
+      {/* SECTION 4: Latest Blog Posts */}
+      <section id="blog" className="py-20 px-6 bg-slate-950">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-2 mb-4 px-4 py-2 bg-blue-500/10 border border-blue-500/30 rounded-full"
+            >
+              <BookOpen className="text-blue-400" size={20} />
+              <span className="text-sm font-semibold text-blue-400">TECHNICAL BLOG</span>
+            </motion.div>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-blue-100 to-cyan-100 bg-clip-text text-transparent"
+            >
+              Blog chia sẻ
+            </motion.h2>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-slate-400 text-lg"
+            >
+              Deep dives vào Java, JavaScript, Backend Architecture và AI/ML
+            </motion.p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {blogPosts.map((post, idx) => (
+              <motion.div
+                key={post.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className="group relative"
+              >
+                {/* Glow Effect on Hover */}
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity"></div>
+
+                {/* Card */}
+                <div className="relative h-full bg-slate-900/50 backdrop-blur-sm border border-slate-800 group-hover:border-slate-700 rounded-2xl overflow-hidden transition-all">
+
+                  {/* Image with Gradient Overlay */}
+                  <div className="relative h-48 overflow-hidden">
+                    <img
+                      src={post.cover_image}
+                      alt={post.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      onError={(e) => {
+                        e.currentTarget.src = 'https://placehold.co/600x400/1e293b/64748b?text=Blog';
+                      }}
+                    />
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent"></div>
+
+                    {/* Tags on image */}
+                    <div className="absolute top-4 left-4 flex gap-2">
+                      {post.tags.split(',').slice(0, 2).map((tag, i) => (
+                        <span
+                          key={i}
+                          className="text-xs font-semibold bg-cyan-500/20 backdrop-blur-sm text-cyan-300 px-3 py-1 rounded-full border border-cyan-500/30"
+                        >
+                          {tag.trim()}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-6">
+                    <h3 className="font-bold text-xl text-white mb-3 line-clamp-2 group-hover:text-cyan-400 transition-colors">
+                      {post.title}
+                    </h3>
+
+                    <p className="text-slate-400 text-sm mb-4 line-clamp-2">
+                      {post.summary}
+                    </p>
+
+                    {/* Meta Info */}
+                    <div className="flex items-center justify-between pt-4 border-t border-slate-800">
+                      <span className="text-xs text-slate-500">{post.date}</span>
+                      <Link
+                        href={`/blog/${post.id}`}
+                        className="group/link flex items-center gap-1 text-sm font-bold text-cyan-400 hover:text-cyan-300 transition-colors"
+                      >
+                        Đọc tiếp
+                        <motion.span
+                          className="inline-block"
+                          animate={{ x: [0, 4, 0] }}
+                          transition={{ duration: 1.5, repeat: Infinity }}
+                        >
+                          →
+                        </motion.span>
+                      </Link>
+                    </div>
+                  </div>
+
+                  {/* Bottom border animation on hover */}
+                  <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 

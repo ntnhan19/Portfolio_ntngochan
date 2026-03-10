@@ -24,12 +24,12 @@ export default function BrightChampsCv() {
                 {/* Header */}
                 <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-8 print:p-6">
                     <h1 className="text-3xl font-bold mb-2">NGUYEN TRAN NGOC HAN</h1>
-                    <p className="text-xl text-blue-100 mb-4">Coding Online Teacher</p>
+                    <p className="text-xl text-blue-100 mb-4">Fullstack Developer</p>
 
                     <div className="grid grid-cols-2 gap-3 text-sm">
                         <div className="flex items-center gap-2">
                             <Mail size={14} />
-                            <span>ngochanpt2018@gmail.com</span>
+                            <span>[EMAIL_ADDRESS]</span>
                         </div>
                         <div className="flex items-center gap-2">
                             <Phone size={14} />
@@ -76,7 +76,7 @@ export default function BrightChampsCv() {
                                 </div>
                                 <span className="text-sm text-gray-600 font-medium">2022 - 2026 (Expected)</span>
                             </div>
-                            <p className="text-gray-700 text-sm">GPA: <span className="font-semibold">3.4/4.0</span></p>
+                            <p className="text-gray-700 text-sm">GPA: <span className="font-semibold">3.30/4.0</span></p>
                             <ul className="list-disc list-inside text-gray-700 text-sm space-y-1 ml-2">
                                 <li>Outstanding Student at Faculty Level (2024)</li>
                                 <li>5-Excellence Student Award at Faculty Level (2024)</li>

@@ -43,7 +43,7 @@ export const profile = {
   email: "ngochanpt2018@gmail.com",
   github: "https://github.com/ntnhan19",
   linkedin: "https://linkedin.com/in/nguyentranngochan",
-  avatar: `${BASE_PATH}/avatar.jpg`
+  avatar: `/images/avatar.jpg`
 };
 
 // CẬP NHẬT blogPosts (Đủ 9 bài theo yêu cầu
@@ -1710,6 +1710,258 @@ name = 123; // OK → name giờ là number
     cover_image: `${BASE_PATH}/images/blog/java-vs-js.jpg`,
     tags: "Java,JavaScript,Comparison",
     date: "27/12/2024"
+  },
+
+  {
+    id: 12,
+    title: "Xử lý Race Condition trong hệ thống đặt vé với Redis",
+    summary: "Case study thực tế: Làm sao đảm bảo chỉ 1 người book được ghế khi 100 users cùng click? Deep dive vào Redis distributed lock.",
+    content: `# Xử lý Race Condition trong Hệ thống Đặt Vé
+  
+  ## 🎯 Bài toán thực tế
+  
+  Trong dự án **DHL Cinema** (hệ thống đặt vé xem phim real-time), tôi gặp một vấn đề kinh điển:
+  
+  > **100 người cùng lúc chọn ghế A1. Làm sao đảm bảo chỉ 1 người book thành công?**
+  
+  Đây là race condition - một trong những bug khó debug nhất trong distributed systems.
+  
+  ## 🔴 Vấn đề: Race Condition là gì?
+  
+  ### Kịch bản lỗi:
+  
+  \`\`\`
+  User A: Check ghế A1 → Trống → Bắt đầu booking
+  User B: Check ghế A1 → Trống → Bắt đầu booking (cùng lúc)
+  ---
+  Kết quả: CẢ HAI đều booking thành công! 💥
+  \`\`\`
+  
+  ### Code lỗi (naive approach):
+  
+  \`\`\`javascript
+  // ❌ BAD: Có race condition
+  async function bookSeat(seatId, userId) {
+    const seat = await db.query('SELECT * FROM seats WHERE id = $1', [seatId]);
+    
+    if (!seat.is_booked) {
+      // 🚨 RACE CONDITION ở đây!
+      // Giữa 2 dòng này, user khác có thể chen vào
+      await db.query('UPDATE seats SET is_booked = true, user_id = $1 WHERE id = $2', 
+        [userId, seatId]);
+      return { success: true };
+    }
+    
+    return { success: false, error: 'Ghế đã được đặt' };
+  }
+  \`\`\`
+  
+  ## ✅ Giải pháp 1: Database Row-Level Locking
+  
+  \`\`\`javascript
+  // ✅ GOOD: Dùng SELECT FOR UPDATE
+  async function bookSeatWithLock(seatId, userId) {
+    const client = await pool.connect();
+    
+    try {
+      await client.query('BEGIN');
+      
+      // Lock row này, các transaction khác phải đợi
+      const result = await client.query(
+        'SELECT * FROM seats WHERE id = $1 FOR UPDATE',
+        [seatId]
+      );
+      
+      const seat = result.rows[0];
+      
+      if (!seat.is_booked) {
+        await client.query(
+          'UPDATE seats SET is_booked = true, user_id = $1 WHERE id = $2',
+          [userId, seatId]
+        );
+        await client.query('COMMIT');
+        return { success: true };
+      } else {
+        await client.query('ROLLBACK');
+        return { success: false, error: 'Ghế đã được đặt' };
+      }
+    } catch (error) {
+      await client.query('ROLLBACK');
+      throw error;
+    } finally {
+      client.release();
+    }
+  }
+  \`\`\`
+  
+  **Ưu điểm:**
+  - Đơn giản, built-in của PostgreSQL
+  - Đảm bảo consistency 100%
+  
+  **Nhược điểm:**
+  - Chỉ hoạt động trong 1 database instance
+  - Không scale với microservices
+  
+  ## 🚀 Giải pháp 2: Redis Distributed Lock (Production-ready)
+  
+  Đây là giải pháp tôi dùng trong DHL Cinema:
+  
+  \`\`\`javascript
+  const Redis = require('ioredis');
+  const redis = new Redis();
+  
+  // ✅ BEST: Redis distributed lock
+  async function bookSeatWithRedis(seatId, userId) {
+    const lockKey = \`seat:lock:\${seatId}\`;
+    const lockValue = userId; // Để verify owner
+    const lockTTL = 30; // 30 giây auto-expire
+    
+    try {
+      // Bước 1: Acquire lock (atomic operation)
+      const acquired = await redis.set(
+        lockKey,
+        lockValue,
+        'EX', lockTTL,  // Expire sau 30s
+        'NX'            // Chỉ set nếu key chưa tồn tại
+      );
+      
+      if (!acquired) {
+        return { 
+          success: false, 
+          error: 'Ghế đang được xử lý bởi người khác' 
+        };
+      }
+      
+      // Bước 2: Check & Update database
+      const seat = await db.query('SELECT * FROM seats WHERE id = $1', [seatId]);
+      
+      if (seat.is_booked) {
+        await redis.del(lockKey); // Release lock
+        return { success: false, error: 'Ghế đã được đặt' };
+      }
+      
+      await db.query(
+        'UPDATE seats SET is_booked = true, user_id = $1 WHERE id = $2',
+        [userId, seatId]
+      );
+      
+      // Bước 3: Release lock
+      await redis.del(lockKey);
+      
+      // Bước 4: Broadcast real-time update
+      io.to(\`movie:\${movieId}\`).emit('seat:updated', {
+        seatId,
+        status: 'booked',
+        userId
+      });
+      
+      return { success: true };
+      
+    } catch (error) {
+      // Ensure lock được release kể cả khi lỗi
+      await redis.del(lockKey);
+      throw error;
+    }
+  }
+  \`\`\`
+  
+  ### Chi tiết Redis SET command:
+  
+  \`\`\`javascript
+  redis.set(key, value, 'EX', seconds, 'NX')
+  //       │    │      │     │        │
+  //       │    │      │     │        └─ NX = "Set if Not eXists"
+  //       │    │      │     └────────── TTL (Time To Live)
+  //       │    │      └──────────────── EX = Expire (giây)
+  //       │    └─────────────────────── Value để verify owner
+  //       └──────────────────────────── Lock key
+  \`\`\`
+  
+  ## ⚡ Real-time Update Flow
+  
+  \`\`\`
+  User A click ghế A1
+    ↓
+  Redis lock acquired ✅
+    ↓
+  Database updated
+    ↓
+  Socket.io broadcast → ALL users nhận update
+    ↓
+  User B's UI disabled ghế A1 ngay lập tức
+    ↓
+  Redis lock released
+  \`\`\`
+  
+  ## 🧪 Testing Race Condition
+  
+  ### Load test với Artillery:
+  
+  \`\`\`yaml
+  # artillery.yml
+  config:
+    target: "http://localhost:3000"
+    phases:
+      - duration: 10
+        arrivalRate: 10  # 10 users/giây
+  
+  scenarios:
+    - name: "Concurrent seat booking"
+      flow:
+        - post:
+            url: "/api/seats/book"
+            json:
+              seatId: "A1"
+              userId: "{{ $randomString() }}"
+  \`\`\`
+  
+  ### Kết quả test:
+  
+  | Approach | Requests | Success | Failed | Double Booking |
+  |----------|----------|---------|--------|----------------|
+  | Naive (no lock) | 100 | 100 ❌ | 0 | 99 ghế |
+  | DB Row Lock | 100 | 1 ✅ | 99 ✅ | 0 |
+  | Redis Lock | 100 | 1 ✅ | 99 ✅ | 0 |
+  
+  ## 💡 Lessons Learned
+  
+  ### 1. **Auto-expiring locks là MUST**
+  Không có TTL → user đóng trình duyệt → lock mãi mãi → deadlock
+  
+  ### 2. **Idempotency matters**
+  User spam click → Multiple requests → Cần check trước khi update
+  
+  ### 3. **Error handling**
+  \`\`\`javascript
+  // ✅ ALWAYS release lock trong finally block
+  try {
+    await acquireLock();
+    await processBooking();
+  } finally {
+    await releaseLock(); // Đảm bảo chạy dù có lỗi
+  }
+  \`\`\`
+  
+  ## 🎓 Kết luận
+  
+  **Khi nào dùng cái nào?**
+  
+  - **Small app, single server**: Database row locking
+  - **Production, distributed**: Redis distributed lock
+  - **Ultra high-scale**: Thêm queue (RabbitMQ, Kafka)
+  
+  **Key takeaways:**
+  - Race condition xảy ra khi có concurrent writes
+  - Lock mechanism là giải pháp chuẩn
+  - Testing với load là BẮT BUỘC
+  - Redis lock pattern dễ implement và scale tốt
+  
+  ---
+  
+  *Code đầy đủ có trong repo: [DHL Cinema GitHub](https://github.com/ntnhan19/Project_MovieTicketBooking_NodeJS)*`,
+    cover_image: `${BASE_PATH}/images/blog/race-condition.jpg`,
+    tags: "Backend,Distributed Systems,Redis",
+    date: "28/12/2024"
   }
 ];
 
