@@ -43,7 +43,7 @@ export const profile = {
   email: "ngochanpt2018@gmail.com",
   github: "https://github.com/ntnhan19",
   linkedin: "https://linkedin.com/in/nguyentranngochan",
-  avatar: `/images/avatar.jpg`
+  avatar: `${BASE_PATH}/images/avatar.jpg`
 };
 
 // CẬP NHẬT blogPosts (Đủ 9 bài theo yêu cầu
@@ -1362,7 +1362,7 @@ public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
   **Nhược điểm:**
   - Có thể gây memory leaks nếu không cẩn thận
   - Khó debug hơn`,
-    cover_image: `${BASE_PATH}/images/blog/js-closures.jpg`,
+    cover_image: `${BASE_PATH}/images/blog/js-patterns.jpg`,
     tags: "JavaScript,Fundamentals",
     date: "18/12/2024"
   },
@@ -1959,7 +1959,7 @@ name = 123; // OK → name giờ là number
   ---
   
   *Code đầy đủ có trong repo: [DHL Cinema GitHub](https://github.com/ntnhan19/Project_MovieTicketBooking_NodeJS)*`,
-    cover_image: `${BASE_PATH}/images/blog/race-condition.jpg`,
+    cover_image: `${BASE_PATH}/images/blog/js-async.png`,
     tags: "Backend,Distributed Systems,Redis",
     date: "28/12/2024"
   }
