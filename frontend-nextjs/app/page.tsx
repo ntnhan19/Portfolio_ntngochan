@@ -170,7 +170,15 @@ export default function OptimizedHome() {
             <div className="relative inline-block mb-6">
               <div className="absolute inset-0 bg-cyan-500/20 blur-3xl rounded-full animate-pulse"></div>
               <div className="relative w-32 h-32 rounded-full border-4 border-cyan-400/30 overflow-hidden bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center shadow-2xl">
-                <span className="text-5xl font-bold text-cyan-400">{profile.avatar.split('/').pop()?.split('.').shift()}</span>
+                <img
+                  src={profile.avatar}
+                  alt={profile.full_name}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                    e.currentTarget.parentElement!.innerHTML = `<span class="text-5xl font-bold text-cyan-400">H</span>`;
+                  }}
+                />
               </div>
             </div>
 
@@ -180,13 +188,13 @@ export default function OptimizedHome() {
             </h1>
 
             <p className="text-xl text-slate-300 mb-6">
-              Backend Developer • AI Enthusiast
+              Fullstack Developer Intern • AI Enthusiast
             </p>
 
             <p className="text-slate-400 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-              Đam mê xây dựng <span className="text-cyan-400 font-semibold">scalable backend systems</span> và{' '}
-              <span className="text-cyan-400 font-semibold">AI-powered applications</span>.
-              Hiện đang tìm kiếm vị trí Backend Developer Intern.
+              Đam mê xây dựng <span className="text-cyan-400 font-semibold">full-stack web applications</span> và{' '}
+              <span className="text-cyan-400 font-semibold">AI-powered solutions</span>.
+              Hiện đang tìm kiếm vị trí Fullstack Developer Intern.
             </p>
 
             {/* Status & Location */}
@@ -258,8 +266,8 @@ export default function OptimizedHome() {
                 <div className="text-slate-300 space-y-1">
                   <div><span className="text-purple-400">const</span> <span className="text-cyan-400">developer</span> = {'{'}</div>
                   <div className="pl-4"><span className="text-green-400">name</span>: <span className="text-orange-300">"{profile.full_name}"</span>,</div>
-                  <div className="pl-4"><span className="text-green-400">role</span>: <span className="text-orange-300">"Backend Developer"</span>,</div>
-                  <div className="pl-4"><span className="text-green-400">skills</span>: [<span className="text-orange-300">"Go", "Node.js", "AI/LLM"</span>],</div>
+                  <div className="pl-4"><span className="text-green-400">role</span>: <span className="text-orange-300">"Fullstack Developer Intern"</span>,</div>
+                  <div className="pl-4"><span className="text-green-400">skills</span>: [<span className="text-orange-300">"React", "Node.js", "Python", "AI/LLM"</span>],</div>
                   <div className="pl-4"><span className="text-green-400">passion</span>: <span className="text-orange-300">"Building scalable systems ⚡"</span></div>
                   <div>{'};'}</div>
                   <div className="mt-4 text-cyan-400">
@@ -271,7 +279,7 @@ export default function OptimizedHome() {
 
             {/* Tech Stack Pills */}
             <div className="mt-6 flex flex-wrap gap-2 justify-center lg:justify-start">
-              {['Go', 'Node.js', 'PostgreSQL', 'Redis', 'Docker'].map((tech) => (
+              {['React.js', 'Node.js', 'Python', 'PostgreSQL', 'TypeScript'].map((tech) => (
                 <motion.span
                   key={tech}
                   whileHover={{ scale: 1.1, y: -2 }}
@@ -342,19 +350,19 @@ export default function OptimizedHome() {
                 <ul className="space-y-2 text-slate-700 mb-6 list-none">
                   <li className="flex items-start gap-2">
                     <span className="text-cyan-500 mt-1">▸</span>
-                    <span>Xây dựng RESTful API với Go (Gin) và Node.js (Express)</span>
+                    <span>Xây dựng RESTful API với Node.js (Express) và React/Next.js frontend</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-cyan-500 mt-1">▸</span>
-                    <span>Thiết kế database schema và tối ưu query với PostgreSQL</span>
+                    <span>Thiết kế database schema với PostgreSQL và Prisma ORM</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-cyan-500 mt-1">▸</span>
-                    <span>Xử lý real-time communication với WebSocket/Socket.io</span>
+                    <span>Xử lý real-time communication với Socket.io</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-cyan-500 mt-1">▸</span>
-                    <span>Làm việc với AI/LLM: RAG pipeline, Vector Database (Pinecone)</span>
+                    <span>Xây dựng AI chatbot với RAG Pipeline, LangChain và Pinecone</span>
                   </li>
                 </ul>
 
@@ -362,7 +370,7 @@ export default function OptimizedHome() {
                   <span className="text-purple-500">🎯</span> Mục tiêu
                 </h3>
                 <p className="text-slate-700 leading-relaxed">
-                  Tìm kiếm vị trí <span className="text-cyan-600 font-semibold">Backend Developer Intern</span> tại các công ty công nghệ để học hỏi kinh nghiệm thực tế về hệ thống quy mô lớn, microservices architecture và best practices từ các senior developers.
+                  Tìm kiếm vị trí <span className="text-cyan-600 font-semibold">Fullstack Developer Intern</span> tại các công ty công nghệ để xây dựng hệ thống thực tế, học hỏi best practices và phát triển kỹ năng full-stack từ các senior developers.
                 </p>
               </div>
             </motion.div>
@@ -423,7 +431,7 @@ export default function OptimizedHome() {
                 name: 'Backend',
                 icon: '⚙️',
                 level: 85,
-                skills: ['Go (Gin)', 'Node.js (Express)', 'RESTful API', 'gRPC'],
+                skills: ['Node.js', 'Express.js', 'RESTful APIs', 'Python'],
                 color: 'cyan',
                 bg: 'bg-cyan-50',
                 border: 'border-cyan-200',
@@ -433,27 +441,27 @@ export default function OptimizedHome() {
                 name: 'Database',
                 icon: '🗄️',
                 level: 80,
-                skills: ['PostgreSQL', 'Redis', 'MongoDB', 'Pinecone'],
+                skills: ['PostgreSQL', 'Prisma ORM', 'SQL Server'],
                 color: 'green',
                 bg: 'bg-green-50',
                 border: 'border-green-200',
                 text: 'text-green-600'
               },
               {
-                name: 'AI/ML',
+                name: 'AI & LLM',
                 icon: '🤖',
                 level: 70,
-                skills: ['LangChain', 'RAG Pipeline', 'Vector DB', 'Gemini API'],
+                skills: ['LangChain', 'RAG Pipeline', 'Pinecone', 'Google Gemini'],
                 color: 'purple',
                 bg: 'bg-purple-50',
                 border: 'border-purple-200',
                 text: 'text-purple-600'
               },
               {
-                name: 'DevOps',
+                name: 'DevOps & Tools',
                 icon: '🐳',
                 level: 65,
-                skills: ['Docker', 'GitHub Actions', 'Linux', 'Nginx'],
+                skills: ['Docker', 'Git', 'GitHub', 'Postman'],
                 color: 'orange',
                 bg: 'bg-orange-50',
                 border: 'border-orange-200',
@@ -463,7 +471,7 @@ export default function OptimizedHome() {
                 name: 'Frontend',
                 icon: '🎨',
                 level: 75,
-                skills: ['React.js', 'Next.js', 'Tailwind CSS', 'TypeScript'],
+                skills: ['React.js', 'Next.js (App Router)', 'Tailwind CSS', 'Framer Motion'],
                 color: 'blue',
                 bg: 'bg-blue-50',
                 border: 'border-blue-200',
@@ -473,7 +481,7 @@ export default function OptimizedHome() {
                 name: 'Real-time',
                 icon: '⚡',
                 level: 80,
-                skills: ['WebSocket', 'Socket.io', 'SSE'],
+                skills: ['Socket.io', 'Real-time Updates'],
                 color: 'yellow',
                 bg: 'bg-yellow-50',
                 border: 'border-yellow-200',
@@ -542,7 +550,7 @@ export default function OptimizedHome() {
             className="mt-12 bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-2xl p-8 text-center"
           >
             <p className="text-slate-700 mb-4">
-              🚀 <span className="font-semibold">Đang học thêm:</span> <span className="text-cyan-600 font-semibold">Kubernetes, AWS, Microservices Architecture</span>
+              🚀 <span className="font-semibold">Đang học thêm:</span> <span className="text-cyan-600 font-semibold">NestJS, Microservices Architecture</span>
             </p>
             <p className="text-slate-500 text-sm">
               Cập nhật liên tục qua side projects và online courses
