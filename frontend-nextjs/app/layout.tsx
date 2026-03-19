@@ -41,8 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        {/* Fonts are loaded via @import in globals.css */}
-        <meta name="theme-color" content="#0a0a0f" />
+        <meta name="theme-color" content="#faf7f2" />
         <link rel="icon" type="image/png" sizes="32x32" href="/Portfolio_ntngochan/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/Portfolio_ntngochan/favicon-16x16.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/Portfolio_ntngochan/apple-touch-icon.png" />
