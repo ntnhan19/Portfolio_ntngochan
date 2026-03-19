@@ -47,7 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" type="image/png" sizes="16x16" href="/Portfolio_ntngochan/favicon-16x16.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/Portfolio_ntngochan/apple-touch-icon.png" />
       </head>
-      <body style={{ fontFamily: "'DM Sans', sans-serif" }}>
+      <body className="antialiased">
         {children}
       </body>
     </html>

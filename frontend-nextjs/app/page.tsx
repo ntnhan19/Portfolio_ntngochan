@@ -261,7 +261,13 @@ export default function Portfolio() {
               </motion.div>
 
               {/* Name */}
-              <motion.div variants={fadeUp} custom={0.05}>
+              <motion.div variants={fadeUp} custom={0.05} className="flex flex-col md:flex-row md:items-center gap-4 sm:gap-6">
+                <img 
+                  src={profile.avatar} 
+                  alt={profile.full_name} 
+                  className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full border-[3px] object-cover shrink-0"
+                  style={{ borderColor: 'var(--accent-primary)', boxShadow: '0 0 25px rgba(110,231,183,0.35)' }}
+                />
                 <h1 className="text-hero" style={{ fontFamily: 'var(--font-display)' }}>
                   {profile.full_name.split(' ').slice(0, -1).join(' ')}{' '}
                   <span
