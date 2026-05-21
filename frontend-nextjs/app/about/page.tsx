@@ -217,7 +217,7 @@ export default function AboutPage() {
                                 </p>
                                 <div className="flex flex-wrap gap-6 justify-center md:justify-start text-slate-600 text-base">
                                     <span className="flex items-center gap-2"><Calendar size={18} /> Năm 4 (Dự kiến tốt nghiệp 2026)</span>
-                                    <span className="flex items-center gap-2"><Award size={18} /> GPA: 3.30/4.0</span>
+                                    <span className="flex items-center gap-2"><Award size={18} /> GPA: 3.34/4.0</span>
                                 </div>
                             </div>
                         </div>

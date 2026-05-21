@@ -1,6 +1,6 @@
 'use client';
 
-import { profile, blogPosts, projects, certificates } from '../src/data/staticData';
+import { profile, projects, certificates } from '@/data';
 import {
   Mail, Github, Linkedin, ArrowUp, Menu, X,
   ExternalLink, ChevronRight, ArrowRight,
@@ -35,7 +35,6 @@ const navLinks = [
   { label: 'Home', href: '#home' },
   { label: 'Projects', href: '#projects' },
   { label: 'Skills', href: '#skills' },
-  { label: 'Blog', href: '#blog' },
   { label: 'About', href: '#about' },
   { label: 'Contact', href: '#contact' },
 ];
@@ -45,25 +44,25 @@ const skillGroups = [
   {
     icon: Globe,
     title: 'Frontend',
-    colorHex: '#a4b8cc',
+    colorHex: '#2563a8',
     skills: ['React.js', 'Next.js (App Router)', 'TypeScript', 'TailwindCSS', 'Framer Motion'],
   },
   {
     icon: Server,
     title: 'Backend',
-    colorHex: '#9db4a0',
+    colorHex: '#16a34a',
     skills: ['Node.js', 'Express.js', 'RESTful APIs', 'Socket.io', 'Python / FastAPI'],
   },
   {
     icon: Database,
     title: 'Database',
-    colorHex: '#c4a882',
+    colorHex: '#d97706',
     skills: ['PostgreSQL', 'Prisma ORM', 'SQL Server', 'Redis'],
   },
   {
     icon: Zap,
     title: 'AI & Tools',
-    colorHex: '#b8aec8',
+    colorHex: '#7c3aed',
     skills: ['LangChain', 'RAG Pipeline', 'Pinecone', 'Google Gemini', 'Docker', 'Git'],
   },
 ];
@@ -90,7 +89,7 @@ export default function Portfolio() {
   };
 
   return (
-    <main style={{ background: 'var(--cream)', color: 'var(--ink)', minHeight: '100vh' }}>
+    <main style={{ background: 'var(--bg-base)', color: 'var(--text-primary)', minHeight: '100vh' }}>
 
       {/* ── SCROLL PROGRESS ── */}
       <motion.div
@@ -98,7 +97,7 @@ export default function Portfolio() {
         style={{
           scaleX,
           transformOrigin: '0%',
-          background: 'linear-gradient(90deg, var(--rose), var(--clay))',
+          background: 'linear-gradient(90deg, var(--progress-from), var(--progress-to))',
         }}
       />
 
@@ -108,19 +107,19 @@ export default function Portfolio() {
       <header
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{
-          background: isScrolled ? 'rgba(250,247,242,0.9)' : 'transparent',
+          background: isScrolled ? 'var(--bg-overlay)' : 'transparent',
           backdropFilter: isScrolled ? 'blur(16px)' : 'none',
-          borderBottom: isScrolled ? '1px solid var(--parchment)' : 'none',
+          borderBottom: isScrolled ? '1px solid var(--border)' : 'none',
         }}
       >
         <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
           <button
             onClick={() => scrollTo('#home')}
-            style={{ fontFamily: 'var(--font-display)', fontWeight: 700, color: 'var(--ink)', fontSize: '1rem' }}
+            style={{ fontFamily: 'var(--font-display)', fontWeight: 700, color: 'var(--text-primary)', fontSize: '1rem' }}
           >
-            <span style={{ color: 'var(--rose)' }}>{'<'}</span>
+            <span style={{ color: 'var(--accent)' }}>{'<'}</span>
             {profile.full_name.split(' ').slice(-1)[0]}
-            <span style={{ color: 'var(--rose)' }}>{' />'}</span>
+            <span style={{ color: 'var(--accent)' }}>{' />'}</span>
           </button>
 
           {/* Desktop nav */}
@@ -130,13 +129,13 @@ export default function Portfolio() {
                 key={link.label}
                 onClick={() => scrollTo(link.href)}
                 className="px-3 py-1.5 rounded-full text-sm font-semibold transition-all duration-150"
-                style={{ color: 'var(--ink-soft)', fontFamily: 'var(--font-body)' }}
+                style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-body)' }}
                 onMouseEnter={e => {
-                  (e.target as HTMLElement).style.color = 'var(--ink)';
-                  (e.target as HTMLElement).style.background = 'var(--parchment)';
+                  (e.target as HTMLElement).style.color = 'var(--text-primary)';
+                  (e.target as HTMLElement).style.background = 'var(--bg-muted)';
                 }}
                 onMouseLeave={e => {
-                  (e.target as HTMLElement).style.color = 'var(--ink-soft)';
+                  (e.target as HTMLElement).style.color = 'var(--text-secondary)';
                   (e.target as HTMLElement).style.background = 'transparent';
                 }}
               >
@@ -149,7 +148,7 @@ export default function Portfolio() {
             <a href={`mailto:${profile.email}`} className="hidden md:inline-flex btn btn-primary text-sm">
               Hire me
             </a>
-            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden p-2 rounded-md" style={{ color: 'var(--ink-soft)' }}>
+            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden p-2 rounded-md" style={{ color: 'var(--text-secondary)' }}>
               {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
@@ -163,13 +162,13 @@ export default function Portfolio() {
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.25 }}
               className="md:hidden overflow-hidden"
-              style={{ background: 'rgba(250,247,242,0.97)', borderTop: '1px solid var(--parchment)' }}
+              style={{ background: 'var(--bg-overlay)', borderTop: '1px solid var(--border)' }}
             >
               <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-1">
                 {navLinks.map(link => (
                   <button key={link.label} onClick={() => scrollTo(link.href)}
                     className="text-left py-2.5 px-3 rounded-lg text-sm font-semibold transition-colors"
-                    style={{ color: 'var(--ink-soft)' }}>
+                    style={{ color: 'var(--text-secondary)' }}>
                     {link.label}
                   </button>
                 ))}
@@ -189,11 +188,11 @@ export default function Portfolio() {
         {/* Decorative rings */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="absolute w-[480px] h-[480px] rounded-full top-[-100px] right-[-80px]"
-            style={{ border: '1.5px solid var(--parchment)' }} />
+            style={{ border: '1.5px solid var(--border)' }} />
           <div className="absolute w-[220px] h-[220px] rounded-full bottom-[10%] left-[-50px]"
-            style={{ border: '1.5px solid var(--stone)' }} />
+            style={{ border: '1.5px solid var(--border-strong)' }} />
           <div className="absolute w-[180px] h-[180px] rounded-full top-[15%] right-[8%]"
-            style={{ background: 'var(--accent-bg)', borderRadius: '50%', opacity: 0.6 }} />
+            style={{ background: 'var(--accent-light)', borderRadius: '50%', opacity: 0.5 }} />
         </div>
 
         <div className="relative z-10 max-w-6xl mx-auto px-6 w-full">
@@ -205,8 +204,8 @@ export default function Portfolio() {
               {/* Status badge */}
               <motion.div variants={fadeUp} custom={0}>
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full"
-                  style={{ background: 'var(--accent-bg)', border: '1px solid var(--rose)', fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--rose)' }}>
-                  <span style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--sage)', display: 'inline-block', animation: 'blink 1.5s ease infinite' }} />
+                  style={{ background: 'var(--accent-light)', border: '1px solid var(--accent-border)', fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--accent)' }}>
+                  <span style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--success)', display: 'inline-block', animation: 'blink 1.5s ease infinite' }} />
                   Open to internship opportunities
                 </div>
               </motion.div>
@@ -217,15 +216,15 @@ export default function Portfolio() {
                   src={profile.avatar}
                   alt={profile.full_name}
                   className="w-20 h-20 md:w-24 md:h-24 rounded-full border-[3px] object-cover shrink-0"
-                  style={{ borderColor: 'var(--rose)', boxShadow: '0 0 0 6px var(--accent-bg)' }}
+                  style={{ borderColor: 'var(--accent)', boxShadow: '0 0 0 6px var(--accent-light)' }}
                 />
                 <div>
-                  <p style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', color: 'var(--ink-faint)', fontSize: '1rem', marginBottom: '0.2rem' }}>
+                  <p style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '1rem', marginBottom: '0.2rem' }}>
                     Hello, I'm
                   </p>
-                  <h1 className="text-hero" style={{ fontFamily: 'var(--font-display)', color: 'var(--ink)' }}>
+                  <h1 className="text-hero" style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)', fontWeight: 700 }}>
                     {profile.full_name.split(' ').slice(0, -1).join(' ')}{' '}
-                    <span style={{ color: 'var(--rose)' }}>
+                    <span style={{ color: 'var(--accent)' }}>
                       {profile.full_name.split(' ').slice(-1)[0]}
                     </span>
                   </h1>
@@ -234,16 +233,16 @@ export default function Portfolio() {
 
               {/* Subtitle */}
               <motion.div variants={fadeUp} custom={0.1}>
-                <p className="text-xl font-semibold" style={{ color: 'var(--ink-soft)', fontFamily: 'var(--font-body)' }}>
+                <p className="text-xl font-semibold" style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-body)' }}>
                   Full-Stack Developer
-                  <span style={{ color: 'var(--stone)', margin: '0 0.5rem' }}>·</span>
-                  <span style={{ color: 'var(--clay)', fontFamily: 'var(--font-mono)', fontSize: '0.95rem' }}>PERN Stack</span>
+                  <span style={{ color: 'var(--border-strong)', margin: '0 0.5rem' }}>·</span>
+                  <span style={{ color: 'var(--accent-mid)', fontFamily: 'var(--font-mono)', fontSize: '0.95rem' }}>PERN Stack</span>
                 </p>
               </motion.div>
 
               {/* Description */}
               <motion.div variants={fadeUp} custom={0.15}>
-                <p className="text-base leading-relaxed max-w-xl" style={{ color: 'var(--ink-soft)' }}>
+                <p className="text-base leading-relaxed max-w-xl" style={{ color: 'var(--text-secondary)' }}>
                   4th-year Software Engineering student at HUTECH, building real-world web applications with PostgreSQL, Express.js, React.js & Node.js. Passionate about clean APIs, real-time systems, and AI-powered tools.
                 </p>
               </motion.div>
@@ -273,7 +272,7 @@ export default function Portfolio() {
 
               {/* Meta row */}
               <motion.div variants={fadeUp} custom={0.3} className="flex flex-wrap items-center gap-5 text-sm pt-2"
-                style={{ color: 'var(--ink-faint)' }}>
+                style={{ color: 'var(--text-muted)' }}>
                 <span className="flex items-center gap-1.5">
                   <MapPin size={13} /> Bình Thạnh, Hồ Chí Minh
                 </span>
@@ -291,79 +290,79 @@ export default function Portfolio() {
               className="hidden lg:block"
             >
               <div className="rounded-2xl overflow-hidden"
-                style={{ background: 'var(--warm-white)', border: '1px solid var(--parchment)', boxShadow: '0 20px 60px rgba(44,40,37,0.1)' }}>
+                style={{ background: 'var(--terminal-bg)', border: '1px solid var(--terminal-border)', boxShadow: '0 20px 60px rgba(26,58,92,0.1)' }}>
 
                 {/* "Terminal" bar */}
                 <div className="flex items-center gap-1.5 px-4 py-3"
-                  style={{ background: 'var(--parchment)', borderBottom: '1px solid var(--stone)' }}>
-                  <div style={{ width: 11, height: 11, borderRadius: '50%', background: '#d4a0a0' }} />
-                  <div style={{ width: 11, height: 11, borderRadius: '50%', background: '#c4a882' }} />
-                  <div style={{ width: 11, height: 11, borderRadius: '50%', background: '#9db4a0' }} />
-                  <span className="ml-3 text-xs" style={{ color: 'var(--ink-faint)', fontFamily: 'var(--font-mono)' }}>
+                  style={{ background: 'var(--terminal-bar)', borderBottom: '1px solid var(--terminal-border)' }}>
+                  <div style={{ width: 11, height: 11, borderRadius: '50%', background: 'var(--terminal-dot-r)' }} />
+                  <div style={{ width: 11, height: 11, borderRadius: '50%', background: 'var(--terminal-dot-y)' }} />
+                  <div style={{ width: 11, height: 11, borderRadius: '50%', background: 'var(--terminal-dot-g)' }} />
+                  <span className="ml-3 text-xs" style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
                     ~/portfolio
                   </span>
                 </div>
 
                 {/* Code content */}
                 <div className="p-6" style={{ fontFamily: 'var(--font-mono)', fontSize: '0.82rem', lineHeight: '1.9' }}>
-                  <div style={{ color: 'var(--ink-faint)' }}>{'// about.ts'}</div>
+                  <div style={{ color: 'var(--syn-comment)' }}>{'// about.ts'}</div>
                   <div className="mt-2">
-                    <span style={{ color: 'var(--lavender)' }}>const </span>
-                    <span style={{ color: 'var(--sky)' }}>developer</span>
-                    <span style={{ color: 'var(--ink)' }}> = {'{'}</span>
+                    <span style={{ color: 'var(--syn-keyword)' }}>const </span>
+                    <span style={{ color: 'var(--syn-var)' }}>developer</span>
+                    <span style={{ color: 'var(--text-primary)' }}> = {'{'}</span>
                   </div>
                   <div className="pl-4">
-                    <span style={{ color: 'var(--sage)' }}>name</span>
-                    <span style={{ color: 'var(--ink-soft)' }}>: </span>
-                    <span style={{ color: 'var(--clay)' }}>"{profile.full_name}"</span>
-                    <span style={{ color: 'var(--ink-soft)' }}>,</span>
+                    <span style={{ color: 'var(--syn-prop)' }}>name</span>
+                    <span style={{ color: 'var(--text-secondary)' }}>: </span>
+                    <span style={{ color: 'var(--syn-string)' }}>"{profile.full_name}"</span>
+                    <span style={{ color: 'var(--text-secondary)' }}>,</span>
                   </div>
                   <div className="pl-4">
-                    <span style={{ color: 'var(--sage)' }}>role</span>
-                    <span style={{ color: 'var(--ink-soft)' }}>: </span>
-                    <span style={{ color: 'var(--clay)' }}>"Full-Stack Intern"</span>
-                    <span style={{ color: 'var(--ink-soft)' }}>,</span>
+                    <span style={{ color: 'var(--syn-prop)' }}>role</span>
+                    <span style={{ color: 'var(--text-secondary)' }}>: </span>
+                    <span style={{ color: 'var(--syn-string)' }}>"Full-Stack Intern"</span>
+                    <span style={{ color: 'var(--text-secondary)' }}>,</span>
                   </div>
                   <div className="pl-4">
-                    <span style={{ color: 'var(--sage)' }}>stack</span>
-                    <span style={{ color: 'var(--ink-soft)' }}>: [</span>
-                    <span style={{ color: 'var(--clay)' }}>"React", "Node.js", "Postgres"</span>
-                    <span style={{ color: 'var(--ink-soft)' }}>],</span>
+                    <span style={{ color: 'var(--syn-prop)' }}>stack</span>
+                    <span style={{ color: 'var(--text-secondary)' }}>: [</span>
+                    <span style={{ color: 'var(--syn-string)' }}>"React", "Node.js", "Postgres"</span>
+                    <span style={{ color: 'var(--text-secondary)' }}>],</span>
                   </div>
                   <div className="pl-4">
-                    <span style={{ color: 'var(--sage)' }}>ai</span>
-                    <span style={{ color: 'var(--ink-soft)' }}>: [</span>
-                    <span style={{ color: 'var(--clay)' }}>"RAG", "LangChain"</span>
-                    <span style={{ color: 'var(--ink-soft)' }}>],</span>
+                    <span style={{ color: 'var(--syn-prop)' }}>ai</span>
+                    <span style={{ color: 'var(--text-secondary)' }}>: [</span>
+                    <span style={{ color: 'var(--syn-string)' }}>"RAG", "LangChain"</span>
+                    <span style={{ color: 'var(--text-secondary)' }}>],</span>
                   </div>
                   <div className="pl-4">
-                    <span style={{ color: 'var(--sage)' }}>status</span>
-                    <span style={{ color: 'var(--ink-soft)' }}>: </span>
-                    <span style={{ color: 'var(--rose)' }}>"open_to_work"</span>
+                    <span style={{ color: 'var(--syn-prop)' }}>status</span>
+                    <span style={{ color: 'var(--text-secondary)' }}>: </span>
+                    <span style={{ color: 'var(--syn-string)' }}>"open_to_work"</span>
                   </div>
-                  <div style={{ color: 'var(--ink)' }}>{'}'};</div>
-                  <div className="mt-3" style={{ color: 'var(--ink-faint)' }}>
+                  <div style={{ color: 'var(--text-primary)' }}>{'}'};</div>
+                  <div className="mt-3" style={{ color: 'var(--syn-comment)' }}>
                     {'> '}
-                    <span style={{ color: 'var(--sage)' }}>
+                    <span style={{ color: 'var(--success)' }}>
                       Ready to ship production code 🚀
                     </span>
-                    <span className="animate-blink" style={{ color: 'var(--rose)' }}>▋</span>
+                    <span className="animate-blink" style={{ color: 'var(--syn-cursor)' }}>▋</span>
                   </div>
                 </div>
 
                 {/* Stats footer */}
-                <div style={{ borderTop: '1px solid var(--parchment)' }} className="grid grid-cols-3">
+                <div style={{ borderTop: '1px solid var(--terminal-border)' }} className="grid grid-cols-3">
                   {[
                     { label: 'Projects', value: projects.length + '+' },
-                    { label: 'Blog posts', value: blogPosts.length },
                     { label: 'Certs', value: certificates.length },
+                    { label: 'GPA', value: '3.30' },
                   ].map(stat => (
                     <div key={stat.label} className="flex flex-col items-center py-4 gap-0.5"
-                      style={{ borderRight: '1px solid var(--parchment)' }}>
-                      <span style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', fontWeight: 700, color: 'var(--rose)' }}>
+                      style={{ borderRight: '1px solid var(--terminal-border)' }}>
+                      <span style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', fontWeight: 700, color: 'var(--accent)' }}>
                         {stat.value}
                       </span>
-                      <span style={{ fontSize: '0.68rem', color: 'var(--ink-faint)', fontFamily: 'var(--font-mono)' }}>
+                      <span style={{ fontSize: '0.68rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
                         {stat.label}
                       </span>
                     </div>
@@ -376,9 +375,9 @@ export default function Portfolio() {
           {/* Scroll hint */}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }}
             className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5"
-            style={{ color: 'var(--ink-faint)' }}>
+            style={{ color: 'var(--text-muted)' }}>
             <span style={{ fontSize: '0.68rem', fontFamily: 'var(--font-mono)', letterSpacing: '0.1em' }}>SCROLL</span>
-            <div style={{ width: 1, height: 40, background: 'linear-gradient(to bottom, var(--stone), transparent)', animation: 'scrollPulse 2s ease-in-out infinite' }} />
+            <div style={{ width: 1, height: 40, background: 'linear-gradient(to bottom, var(--border-strong), transparent)', animation: 'scrollPulse 2s ease-in-out infinite' }} />
           </motion.div>
         </div>
       </section>
@@ -386,11 +385,11 @@ export default function Portfolio() {
       {/* ═══════════════════════════════════════
           PROJECTS SECTION
       ═══════════════════════════════════════ */}
-      <section id="projects" className="section-gap" style={{ borderTop: '1px solid var(--parchment)', background: 'var(--warm-white)' }}>
+      <section id="projects" className="section-gap" style={{ borderTop: '1px solid var(--border)', background: 'var(--bg-subtle)' }}>
         <div className="max-w-6xl mx-auto px-6">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }} variants={stagger} className="mb-12">
             <motion.span variants={fadeUp} className="section-label block mb-3">02. Selected Work</motion.span>
-            <motion.h2 variants={fadeUp} className="text-section-heading" style={{ fontFamily: 'var(--font-display)', color: 'var(--ink)' }}>
+            <motion.h2 variants={fadeUp} className="text-section-heading" style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}>
               Projects
             </motion.h2>
           </motion.div>
@@ -403,22 +402,22 @@ export default function Portfolio() {
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.55, delay: idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
               >
-                <Link href={`/projects/${project.id}`}>
-                  <div className="group grid grid-cols-[3rem_1fr_auto] gap-6 items-start py-7 px-2 rounded-xl transition-all cursor-pointer"
-                    style={{ borderTop: '1px solid var(--parchment)' }}
-                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'var(--cream)'; }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'transparent'; }}>
+                <div className="group grid grid-cols-[3rem_1fr_auto] gap-6 items-start py-7 px-2 rounded-xl transition-all"
+                  style={{ borderTop: '1px solid var(--border)' }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'var(--surface-hover)'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'transparent'; }}>
 
-                    <span style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', color: 'var(--stone)', fontSize: '1.1rem', paddingTop: '0.1rem' }}>
+                  <Link href={`/projects/${project.id}`} className="contents">
+                    <span style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '1.1rem', paddingTop: '0.1rem' }}>
                       {String(idx + 1).padStart(2, '0')}
                     </span>
 
-                    <div>
-                      <h3 className="font-bold text-xl mb-2 transition-colors group-hover:text-[var(--rose)]"
-                        style={{ fontFamily: 'var(--font-display)', color: 'var(--ink)' }}>
+                    <div className="cursor-pointer">
+                      <h3 className="font-bold text-xl mb-2 transition-colors group-hover:text-[var(--accent-mid)]"
+                        style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}>
                         {project.title}
                       </h3>
-                      <p className="text-sm leading-relaxed mb-3" style={{ color: 'var(--ink-soft)' }}>
+                      <p className="text-sm leading-relaxed mb-3" style={{ color: 'var(--text-secondary)' }}>
                         {project.description}
                       </p>
                       <div className="flex flex-wrap gap-1.5">
@@ -430,31 +429,29 @@ export default function Portfolio() {
                         )}
                       </div>
                     </div>
+                  </Link>
 
-                    <div className="flex flex-col gap-2 pt-1 items-end">
-                      {project.repo_url && (
-                        <a href={project.repo_url} target="_blank" rel="noopener noreferrer"
-                          className="link-hover text-sm flex items-center gap-1"
-                          onClick={e => e.stopPropagation()}>
-                          <Github size={14} /> GitHub
-                        </a>
-                      )}
-                      {project.demo_url && (
-                        <a href={project.demo_url} target="_blank" rel="noopener noreferrer"
-                          className="link-hover text-sm flex items-center gap-1"
-                          onClick={e => e.stopPropagation()}>
-                          <ExternalLink size={14} /> Demo
-                        </a>
-                      )}
-                      <span className="text-sm flex items-center gap-1 mt-1"
-                        style={{ color: 'var(--rose)', fontFamily: 'var(--font-mono)', fontSize: '0.78rem' }}>
-                        Details <ChevronRight size={13} />
-                      </span>
-                    </div>
+                  <div className="flex flex-col gap-2 pt-1 items-end">
+                    {project.repo_url && (
+                      <a href={project.repo_url} target="_blank" rel="noopener noreferrer"
+                        className="link-hover text-sm flex items-center gap-1">
+                        <Github size={14} /> GitHub
+                      </a>
+                    )}
+                    {project.demo_url && (
+                      <a href={project.demo_url} target="_blank" rel="noopener noreferrer"
+                        className="link-hover text-sm flex items-center gap-1">
+                        <ExternalLink size={14} /> Demo
+                      </a>
+                    )}
+                    <Link href={`/projects/${project.id}`} className="text-sm flex items-center gap-1 mt-1"
+                      style={{ color: 'var(--accent-mid)', fontFamily: 'var(--font-mono)', fontSize: '0.78rem' }}>
+                      Details <ChevronRight size={13} />
+                    </Link>
                   </div>
-                </Link>
+                </div>
                 {idx === projects.length - 1 && (
-                  <div style={{ borderTop: '1px solid var(--parchment)' }} />
+                  <div style={{ borderTop: '1px solid var(--border)' }} />
                 )}
               </motion.div>
             ))}
@@ -471,11 +468,11 @@ export default function Portfolio() {
       {/* ═══════════════════════════════════════
           SKILLS SECTION
       ═══════════════════════════════════════ */}
-      <section id="skills" className="section-gap" style={{ background: 'var(--cream)', borderTop: '1px solid var(--parchment)' }}>
+      <section id="skills" className="section-gap" style={{ background: 'var(--bg-base)', borderTop: '1px solid var(--border)' }}>
         <div className="max-w-6xl mx-auto px-6">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }} variants={stagger} className="mb-12">
             <motion.span variants={fadeUp} className="section-label block mb-3">03. Expertise</motion.span>
-            <motion.h2 variants={fadeUp} className="text-section-heading" style={{ fontFamily: 'var(--font-display)', color: 'var(--ink)' }}>
+            <motion.h2 variants={fadeUp} className="text-section-heading" style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}>
               Technical Skills
             </motion.h2>
           </motion.div>
@@ -494,13 +491,13 @@ export default function Portfolio() {
                     <div className="p-2 rounded-lg" style={{ background: `${group.colorHex}18`, border: `1px solid ${group.colorHex}30` }}>
                       <Icon size={18} style={{ color: group.colorHex }} />
                     </div>
-                    <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.95rem', color: 'var(--ink)' }}>
+                    <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.95rem', color: 'var(--text-primary)' }}>
                       {group.title}
                     </span>
                   </div>
                   <div className="flex flex-col gap-2">
                     {group.skills.map(skill => (
-                      <div key={skill} className="flex items-center gap-2 text-sm" style={{ color: 'var(--ink-soft)' }}>
+                      <div key={skill} className="flex items-center gap-2 text-sm" style={{ color: 'var(--text-secondary)' }}>
                         <span style={{ width: 4, height: 4, borderRadius: '50%', background: group.colorHex, flexShrink: 0 }} />
                         {skill}
                       </div>
@@ -514,12 +511,12 @@ export default function Portfolio() {
           {/* Currently learning */}
           <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
             className="mt-8 p-5 rounded-xl flex flex-wrap items-center gap-3"
-            style={{ background: 'var(--accent-bg)', border: '1px solid var(--rose)' }}>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', color: 'var(--rose)' }}>
+            style={{ background: 'var(--accent-light)', border: '1px solid var(--accent-border)' }}>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', color: 'var(--accent)' }}>
               // currently_learning
             </span>
             {['NestJS', 'Microservices Architecture', 'Docker Compose', 'System Design'].map(item => (
-              <span key={item} className="badge" style={{ color: 'var(--rose)', borderColor: 'var(--rose)', background: 'transparent' }}>
+              <span key={item} className="badge" style={{ color: 'var(--accent)', borderColor: 'var(--accent-border)', background: 'transparent' }}>
                 {item}
               </span>
             ))}
@@ -528,85 +525,26 @@ export default function Portfolio() {
       </section>
 
       {/* ═══════════════════════════════════════
-          BLOG SECTION
-      ═══════════════════════════════════════ */}
-      <section id="blog" className="section-gap" style={{ background: 'var(--warm-white)', borderTop: '1px solid var(--parchment)' }}>
-        <div className="max-w-6xl mx-auto px-6">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }} variants={stagger}
-            className="flex items-end justify-between mb-12 flex-wrap gap-4">
-            <div>
-              <motion.span variants={fadeUp} className="section-label block mb-3">04. Writing</motion.span>
-              <motion.h2 variants={fadeUp} className="text-section-heading" style={{ fontFamily: 'var(--font-display)', color: 'var(--ink)' }}>
-                Blog
-              </motion.h2>
-            </div>
-            <motion.div variants={fadeUp}>
-              <Link href="/blog" className="btn btn-secondary text-sm">
-                All posts <ArrowRight size={14} />
-              </Link>
-            </motion.div>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {blogPosts.slice(0, 6).map((post, idx) => (
-              <motion.div key={post.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: idx * 0.08 }}>
-                <Link href={`/blog/${post.id}`} className="card group flex flex-col h-full overflow-hidden block">
-                  <div className="h-40 overflow-hidden" style={{ background: 'var(--parchment)' }}>
-                    <img src={post.cover_image} alt={post.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      onError={e => { (e.target as HTMLImageElement).src = 'https://placehold.co/600x300/ede8df/9a9089?text=Blog'; }} />
-                  </div>
-                  <div className="p-5 flex flex-col gap-2 flex-1">
-                    <div className="flex flex-wrap gap-1">
-                      {post.tags.split(',').slice(0, 2).map(tag => (
-                        <span key={tag} className="badge" style={{ fontSize: '0.68rem' }}>{tag.trim()}</span>
-                      ))}
-                    </div>
-                    <h3 className="font-bold line-clamp-2 leading-snug transition-colors group-hover:text-[var(--rose)]"
-                      style={{ fontFamily: 'var(--font-display)', fontSize: '0.95rem', color: 'var(--ink)' }}>
-                      {post.title}
-                    </h3>
-                    <p className="text-sm line-clamp-2 flex-1" style={{ color: 'var(--ink-soft)', lineHeight: 1.6 }}>
-                      {post.summary}
-                    </p>
-                    <div className="flex items-center justify-between pt-3 text-xs"
-                      style={{ color: 'var(--ink-faint)', borderTop: '1px solid var(--parchment)', fontFamily: 'var(--font-mono)' }}>
-                      <span>{post.date}</span>
-                      <span style={{ color: 'var(--rose)' }}>Read →</span>
-                    </div>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════
           ABOUT SECTION
       ═══════════════════════════════════════ */}
-      <section id="about" className="section-gap" style={{ background: 'var(--cream)', borderTop: '1px solid var(--parchment)' }}>
+      <section id="about" className="section-gap" style={{ background: 'var(--bg-subtle)', borderTop: '1px solid var(--border)' }}>
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-              <motion.span variants={fadeUp} className="section-label block mb-3">05. About</motion.span>
-              <motion.h2 variants={fadeUp} className="text-section-heading mb-6" style={{ fontFamily: 'var(--font-display)', color: 'var(--ink)' }}>
+              <motion.span variants={fadeUp} className="section-label block mb-3">04. About</motion.span>
+              <motion.h2 variants={fadeUp} className="text-section-heading mb-6" style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}>
                 About Me
               </motion.h2>
-              <motion.p variants={fadeUp} className="text-base leading-relaxed mb-4" style={{ color: 'var(--ink-soft)' }}>
+              <motion.p variants={fadeUp} className="text-base leading-relaxed mb-4" style={{ color: 'var(--text-secondary)' }}>
                 I'm a 4th-year Software Engineering student at{' '}
-                <strong style={{ color: 'var(--ink)' }}>HUTECH</strong>{' '}
+                <strong style={{ color: 'var(--text-primary)' }}>HUTECH</strong>{' '}
                 with a GPA of 3.30/4.0, building full-stack web applications using the PERN stack.
               </motion.p>
-              <motion.p variants={fadeUp} className="text-base leading-relaxed mb-6" style={{ color: 'var(--ink-soft)' }}>
+              <motion.p variants={fadeUp} className="text-base leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>
                 My recent work includes a{' '}
-                <strong style={{ color: 'var(--ink)' }}>real-time cinema booking system</strong>{' '}
+                <strong style={{ color: 'var(--text-primary)' }}>real-time cinema booking system</strong>{' '}
                 with Redis distributed locking, and an{' '}
-                <strong style={{ color: 'var(--ink)' }}>AI-powered document assistant</strong>{' '}
+                <strong style={{ color: 'var(--text-primary)' }}>AI-powered document assistant</strong>{' '}
                 using RAG pipeline with LangChain & Pinecone.
               </motion.p>
               <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
@@ -624,16 +562,16 @@ export default function Portfolio() {
               transition={{ duration: 0.55 }} className="grid grid-cols-2 gap-4">
               {[
                 { label: 'Projects Built', value: projects.length + '+', sub: 'Full-stack applications' },
-                { label: 'Blog Posts', value: blogPosts.length, sub: 'Technical deep-dives' },
                 { label: 'Certificates', value: certificates.length, sub: 'Professional & academic' },
                 { label: 'GPA', value: '3.30', sub: 'Out of 4.0' },
+                { label: 'Stack', value: 'PERN', sub: 'PostgreSQL · Express · React · Node' },
               ].map(stat => (
                 <div key={stat.label} className="card p-6 flex flex-col gap-1">
-                  <span style={{ fontFamily: 'var(--font-display)', fontSize: '2rem', fontWeight: 700, color: 'var(--rose)', lineHeight: 1 }}>
+                  <span style={{ fontFamily: 'var(--font-display)', fontSize: '2rem', fontWeight: 700, color: 'var(--accent)', lineHeight: 1 }}>
                     {stat.value}
                   </span>
-                  <span style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--ink)' }}>{stat.label}</span>
-                  <span style={{ color: 'var(--ink-faint)', fontSize: '0.78rem' }}>{stat.sub}</span>
+                  <span style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-primary)' }}>{stat.label}</span>
+                  <span style={{ color: 'var(--text-muted)', fontSize: '0.78rem' }}>{stat.sub}</span>
                 </div>
               ))}
             </motion.div>
@@ -644,17 +582,17 @@ export default function Portfolio() {
       {/* ═══════════════════════════════════════
           CONTACT SECTION
       ═══════════════════════════════════════ */}
-      <section id="contact" className="section-gap" style={{ background: 'var(--parchment)', borderTop: '1px solid var(--stone)' }}>
+      <section id="contact" className="section-gap" style={{ background: 'var(--bg-subtle)', borderTop: '1px solid var(--border)' }}>
         <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-2xl mx-auto text-center">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-              <motion.span variants={fadeUp} className="section-label block mb-3">06. Contact</motion.span>
-              <motion.h2 variants={fadeUp} className="text-section-heading mb-4" style={{ fontFamily: 'var(--font-display)', color: 'var(--ink)' }}>
+              <motion.span variants={fadeUp} className="section-label block mb-3">05. Contact</motion.span>
+              <motion.h2 variants={fadeUp} className="text-section-heading mb-4" style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}>
                 Let's work together
               </motion.h2>
-              <motion.p variants={fadeUp} className="text-base leading-relaxed mb-8" style={{ color: 'var(--ink-soft)' }}>
+              <motion.p variants={fadeUp} className="text-base leading-relaxed mb-8" style={{ color: 'var(--text-secondary)' }}>
                 I'm actively looking for a{' '}
-                <strong style={{ color: 'var(--ink)' }}>Full-Stack / Backend Developer Internship</strong>.
+                <strong style={{ color: 'var(--text-primary)' }}>Full-Stack / Backend Developer Internship</strong>.
                 Have an opportunity? I'd love to hear from you.
               </motion.p>
               <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -667,7 +605,7 @@ export default function Portfolio() {
               </motion.div>
 
               <motion.div variants={fadeUp} className="flex items-center justify-center gap-5 mt-10 pt-8"
-                style={{ borderTop: '1px solid var(--stone)' }}>
+                style={{ borderTop: '1px solid var(--border)' }}>
                 {[
                   { icon: Github, href: profile.github, label: 'GitHub' },
                   { icon: Linkedin, href: profile.linkedin, label: 'LinkedIn' },
@@ -676,16 +614,16 @@ export default function Portfolio() {
                   const Icon = social.icon;
                   return (
                     <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer"
-                      className="flex flex-col items-center gap-1.5 group" style={{ color: 'var(--ink-faint)' }}>
+                      className="flex flex-col items-center gap-1.5 group" style={{ color: 'var(--text-muted)' }}>
                       <div className="p-3 rounded-xl transition-all"
-                        style={{ border: '1px solid var(--stone)', background: 'var(--warm-white)' }}
+                        style={{ border: '1px solid var(--border)', background: 'var(--surface)' }}
                         onMouseEnter={e => {
-                          (e.currentTarget as HTMLElement).style.borderColor = 'var(--rose)';
-                          (e.currentTarget as HTMLElement).style.color = 'var(--rose)';
+                          (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-mid)';
+                          (e.currentTarget as HTMLElement).style.color = 'var(--accent-mid)';
                         }}
                         onMouseLeave={e => {
-                          (e.currentTarget as HTMLElement).style.borderColor = 'var(--stone)';
-                          (e.currentTarget as HTMLElement).style.color = 'var(--ink-faint)';
+                          (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)';
+                          (e.currentTarget as HTMLElement).style.color = 'var(--text-muted)';
                         }}>
                         <Icon size={18} />
                       </div>
@@ -702,11 +640,11 @@ export default function Portfolio() {
       {/* ═══════════════════════════════════════
           FOOTER
       ═══════════════════════════════════════ */}
-      <footer className="py-8" style={{ borderTop: '1px solid var(--parchment)', background: 'var(--ink)' }}>
+      <footer className="py-8" style={{ borderTop: '1px solid var(--border)', background: 'var(--accent)' }}>
         <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p style={{ fontSize: '0.8rem', color: 'rgba(250,247,242,0.5)', fontFamily: 'var(--font-mono)' }}>
+          <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)', fontFamily: 'var(--font-mono)' }}>
             © 2025{' '}
-            <em style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', color: 'rgba(250,247,242,0.8)' }}>
+            <em style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', color: 'rgba(255,255,255,0.8)' }}>
               {profile.full_name}
             </em>
             . Built with Next.js & Tailwind.
@@ -714,12 +652,11 @@ export default function Portfolio() {
           <div className="flex items-center gap-5">
             {[
               { label: 'Projects', href: '/projects' },
-              { label: 'Blog', href: '/blog' },
               { label: 'About', href: '/about' },
               { label: 'Resume', href: '/resume' },
             ].map(link => (
               <Link key={link.label} href={link.href} className="link-hover"
-                style={{ fontSize: '0.78rem', fontFamily: 'var(--font-mono)', color: 'rgba(250,247,242,0.4)' }}>
+                style={{ fontSize: '0.78rem', fontFamily: 'var(--font-mono)', color: 'rgba(255,255,255,0.45)' }}>
                 {link.label}
               </Link>
             ))}
@@ -736,7 +673,7 @@ export default function Portfolio() {
             exit={{ opacity: 0, scale: 0.8 }}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="fixed bottom-6 right-6 p-3 rounded-xl z-40"
-            style={{ background: 'var(--warm-white)', border: '1px solid var(--stone)', color: 'var(--ink-soft)' }}
+            style={{ background: 'var(--surface)', border: '1px solid var(--border)', color: 'var(--text-secondary)' }}
           >
             <ArrowUp size={18} />
           </motion.button>

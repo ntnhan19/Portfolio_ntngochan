@@ -1,0 +1,71 @@
+{
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "skills": "Skills",
+    "blog": "Blog",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "hero": {
+    "status": "Open to internship opportunities",
+    "greeting": "Hello, I'm",
+    "role": "Full-Stack Developer",
+    "stack": "PERN Stack",
+    "description": "4th-year Software Engineering student at HUTECH, building real-world web applications with PostgreSQL, Express.js, React.js & Node.js. Passionate about clean APIs, real-time systems, and AI-powered tools.",
+    "viewProjects": "View Projects",
+    "contactMe": "Contact Me"
+  },
+  "sections": {
+    "skills": {
+      "title": "Skills",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "databases": "Databases",
+      "tools": "Tools & Platforms",
+      "ai": "AI & ML",
+      "blockchain": "Blockchain"
+    },
+    "projects": {
+      "title": "Projects",
+      "description": "A selection of my recent projects, showcasing my skills in full-stack development and real-world problem-solving."
+    },
+    "experience": {
+      "title": "Experience",
+      "description": "Professional experience and internships where I've applied my technical skills to deliver real-world solutions."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Get in touch",
+      "form": {
+        "name": "Name",
+        "email": "Email",
+        "subject": "Subject",
+        "message": "Message",
+        "send": "Send Message"
+      }
+    }
+  },
+  "common": {
+    "viewMore": "View More",
+    "viewDemo": "View Demo",
+    "viewCode": "View Code",
+    "visitSite": "Visit Site",
+    "loading": "Loading...",
+    "seeAll": "See All"
+  },
+  "footer": {
+    "copyright": "© {year} [EMAIL_ADDRESS]. All rights reserved.",
+    "builtWith": "Built with ❤️ using Next.js",
+    "madeBy": "Made by [Your Name]"
+  },
+  "notifications": {
+    "messageSent": "Message sent successfully! I'll get back to you soon.",
+    "error": "Something went wrong. Please try again later."
+  },
+  "error": {
+    "404": "404 - Page Not Found",
+    "404Desc": "Sorry, the page you are looking for does not exist.",
+    "goBack": "Go Back to Home"
+  }
+}

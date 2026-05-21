@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "home": "Trang chủ",
+    "projects": "Dự án",
+    "skills": "Kỹ năng",
+    "blog": "Blog",
+    "about": "Giới thiệu",
+    "contact": "Liên hệ"
+  },
+  "hero": {
+    "status": "Đang tìm kiếm cơ hội thực tập",
+    "greeting": "Xin chào, mình là",
+    "role": "Lập trình viên Full-Stack",
+    "stack": "PERN Stack",
+    "description": "Sinh viên năm 4 chuyên ngành Kỹ thuật Phần mềm tại HUTECH, xây dựng các ứng dụng web thực tế với PostgreSQL, Express.js, React.js & Node.js. Đam mê thiết kế API sạch, hệ thống thời gian thực và các công cụ hỗ trợ bởi AI.",
+    "viewProjects": "Xem dự án",
+    "contactMe": "Liên hệ với mình"
+  }
+}
