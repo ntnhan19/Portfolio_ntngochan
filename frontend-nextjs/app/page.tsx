@@ -4,7 +4,7 @@ import { profile, projects, certificates } from '@/data';
 import {
   Mail, Github, Linkedin, ArrowUp, Menu, X,
   ExternalLink, ChevronRight, ArrowRight,
-  Database, Server, Zap, Globe, MapPin
+  Database, Server, Zap, Globe
 } from 'lucide-react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
@@ -216,11 +216,12 @@ export default function Portfolio() {
               {/* Role + location */}
               <motion.div variants={fadeUp} custom={0.1} className="flex flex-col gap-1.5">
                 <p style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--text-secondary)', letterSpacing: '-0.01em' }}>
-                  Full-Stack Developer
+                  Fullstack Developer — PERN · Next.js · FastAPI
                 </p>
-                <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  <MapPin size={13} />
-                  HUTECH University · Binh Thanh Distric, Ho Chi Minh City
+                <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', display: 'flex', alignItems: 'center', gap: '0.45rem', flexWrap: 'wrap' }}>
+                  <span>GPA 3.30 / 4.0</span>
+                  <span style={{ opacity: 0.3 }}>·</span>
+                  <span>HUTECH · Software Engineering · Year 4</span>
                 </p>
               </motion.div>
 
@@ -232,18 +233,22 @@ export default function Portfolio() {
               </motion.div>
 
               {/* CTAs */}
-              <motion.div variants={fadeUp} custom={0.2} className="flex flex-wrap gap-3 pt-1">
+              <motion.div variants={fadeUp} custom={0.2} className="flex flex-wrap items-center gap-3 pt-1">
+                {/* Primary group */}
                 <button onClick={() => scrollTo('#projects')} className="btn btn-primary" style={{ padding: '0.7rem 1.5rem', fontSize: '0.9rem' }}>
                   View Projects <ArrowRight size={15} />
                 </button>
                 <a href={`mailto:${profile.email}`} className="btn btn-secondary" style={{ padding: '0.7rem 1.5rem', fontSize: '0.9rem' }}>
                   <Mail size={15} /> Get in touch
                 </a>
-                <a href={profile.github} target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ padding: '0.7rem 0.9rem' }}>
-                  <Github size={16} />
+                {/* Separator */}
+                <span style={{ width: 1, height: 28, background: 'var(--border)', display: 'inline-block', margin: '0 0.25rem' }} />
+                {/* Icon group */}
+                <a href={profile.github} target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ padding: '0.55rem 0.75rem' }}>
+                  <Github size={15} />
                 </a>
-                <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ padding: '0.7rem 0.9rem' }}>
-                  <Linkedin size={16} />
+                <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ padding: '0.55rem 0.75rem' }}>
+                  <Linkedin size={15} />
                 </a>
               </motion.div>
             </motion.div>
