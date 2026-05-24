@@ -4,7 +4,7 @@ import { profile, projects, certificates } from '@/data';
 import {
   Mail, Github, Linkedin, ArrowUp, Menu, X,
   ExternalLink, ChevronRight, ArrowRight,
-  Code2, Database, Server, Zap, Globe, MapPin
+  Database, Server, Zap, Globe, MapPin
 } from 'lucide-react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
@@ -23,13 +23,6 @@ const stagger = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.1 } }
 };
-
-/* ─── TECH STACK ──────────────────────────────────────── */
-const techStack = [
-  { label: 'React.js' }, { label: 'Next.js' }, { label: 'Node.js' },
-  { label: 'Express.js' }, { label: 'PostgreSQL' }, { label: 'TypeScript' },
-  { label: 'Socket.io' }, { label: 'Prisma' }, { label: 'TailwindCSS' }, { label: 'Python' },
-];
 
 const navLinks = [
   { label: 'Home', href: '#home' },
@@ -182,202 +175,125 @@ export default function Portfolio() {
       {/* ═══════════════════════════════════════
           HERO SECTION
       ═══════════════════════════════════════ */}
-      <section id="home" className="relative min-h-screen flex flex-col justify-center grid-pattern"
-        style={{ paddingTop: '6rem', paddingBottom: '4rem' }}>
+      <section id="home" className="relative min-h-screen flex items-center"
+        style={{ paddingTop: '5rem', paddingBottom: '4rem' }}>
 
-        {/* Decorative rings */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute w-[480px] h-[480px] rounded-full top-[-100px] right-[-80px]"
-            style={{ border: '1.5px solid var(--border)' }} />
-          <div className="absolute w-[220px] h-[220px] rounded-full bottom-[10%] left-[-50px]"
-            style={{ border: '1.5px solid var(--border-strong)' }} />
-          <div className="absolute w-[180px] h-[180px] rounded-full top-[15%] right-[8%]"
-            style={{ background: 'var(--accent-light)', borderRadius: '50%', opacity: 0.5 }} />
-        </div>
+        {/* Subtle grid pattern */}
+        <div className="absolute inset-0 grid-pattern pointer-events-none" style={{ opacity: 0.6 }} />
+
+        {/* Decorative accent blob */}
+        <div className="absolute top-1/4 right-0 w-[500px] h-[500px] pointer-events-none"
+          style={{ background: 'radial-gradient(circle at 70% 50%, var(--accent-light) 0%, transparent 65%)', opacity: 0.7 }} />
 
         <div className="relative z-10 max-w-6xl mx-auto px-6 w-full">
-          <div className="grid lg:grid-cols-[1fr_360px] gap-16 items-center">
+          <div className="grid lg:grid-cols-[1fr_420px] gap-12 xl:gap-20 items-center">
 
-            {/* LEFT COLUMN */}
-            <motion.div variants={stagger} initial="hidden" animate="visible" className="flex flex-col gap-6">
+            {/* ── LEFT: Text content ── */}
+            <motion.div variants={stagger} initial="hidden" animate="visible" className="flex flex-col gap-7">
 
               {/* Status badge */}
               <motion.div variants={fadeUp} custom={0}>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full"
-                  style={{ background: 'var(--accent-light)', border: '1px solid var(--accent-border)', fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--accent)' }}>
-                  <span style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--success)', display: 'inline-block', animation: 'blink 1.5s ease infinite' }} />
-                  Open to internship opportunities
-                </div>
+                <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold"
+                  style={{ background: 'var(--accent-light)', border: '1px solid var(--accent-border)', color: 'var(--accent)', fontFamily: 'var(--font-mono)', letterSpacing: '0.04em' }}>
+                  <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--success)', display: 'inline-block', animation: 'blink 1.5s ease infinite' }} />
+                  Available for internship
+                </span>
               </motion.div>
 
-              {/* Name */}
-              <motion.div variants={fadeUp} custom={0.05} className="flex flex-col md:flex-row md:items-center gap-5">
-                <img
-                  src={profile.avatar}
-                  alt={profile.full_name}
-                  className="w-20 h-20 md:w-24 md:h-24 rounded-full border-[3px] object-cover shrink-0"
-                  style={{ borderColor: 'var(--accent)', boxShadow: '0 0 0 6px var(--accent-light)' }}
-                />
-                <div>
-                  <p style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '1rem', marginBottom: '0.2rem' }}>
-                    Hello, I'm
-                  </p>
-                  <h1 className="text-hero" style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)', fontWeight: 700 }}>
-                    {profile.full_name.split(' ').slice(0, -1).join(' ')}{' '}
-                    <span style={{ color: 'var(--accent)' }}>
-                      {profile.full_name.split(' ').slice(-1)[0]}
-                    </span>
-                  </h1>
-                </div>
+              {/* Greeting + Name */}
+              <motion.div variants={fadeUp} custom={0.05} className="flex flex-col gap-2">
+                <p style={{ fontSize: '1.05rem', color: 'var(--text-muted)', fontWeight: 500 }}>
+                  Hi, I'm
+                </p>
+                <h1 className="text-hero">
+                  {profile.full_name.split(' ').slice(0, -1).join(' ')}{' '}
+                  <span style={{ color: 'var(--accent)' }}>
+                    {profile.full_name.split(' ').slice(-1)[0]}
+                  </span>
+                </h1>
               </motion.div>
 
-              {/* Subtitle */}
-              <motion.div variants={fadeUp} custom={0.1}>
-                <p className="text-xl font-semibold" style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-body)' }}>
+              {/* Role + location */}
+              <motion.div variants={fadeUp} custom={0.1} className="flex flex-col gap-1.5">
+                <p style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--text-secondary)', letterSpacing: '-0.01em' }}>
                   Full-Stack Developer
-                  <span style={{ color: 'var(--border-strong)', margin: '0 0.5rem' }}>·</span>
-                  <span style={{ color: 'var(--accent-mid)', fontFamily: 'var(--font-mono)', fontSize: '0.95rem' }}>PERN Stack</span>
+                </p>
+                <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <MapPin size={13} />
+                  HUTECH University · Binh Thanh Distric, Ho Chi Minh City
                 </p>
               </motion.div>
 
               {/* Description */}
               <motion.div variants={fadeUp} custom={0.15}>
-                <p className="text-base leading-relaxed max-w-xl" style={{ color: 'var(--text-secondary)' }}>
-                  4th-year Software Engineering student at HUTECH, building real-world web applications with PostgreSQL, Express.js, React.js & Node.js. Passionate about clean APIs, real-time systems, and AI-powered tools.
+                <p style={{ fontSize: '1rem', lineHeight: 1.75, color: 'var(--text-secondary)', maxWidth: '520px' }}>
+                  4th-year Software Engineering student building production-grade web apps — real-time systems, AI-powered tools, and clean REST APIs.
                 </p>
               </motion.div>
 
-              {/* Tech pills */}
-              <motion.div variants={fadeUp} custom={0.2} className="flex flex-wrap gap-2">
-                {techStack.map(tech => (
-                  <span key={tech.label} className="badge">{tech.label}</span>
-                ))}
-              </motion.div>
-
               {/* CTAs */}
-              <motion.div variants={fadeUp} custom={0.25} className="flex flex-wrap gap-3 pt-2">
-                <button onClick={() => scrollTo('#projects')} className="btn btn-primary">
+              <motion.div variants={fadeUp} custom={0.2} className="flex flex-wrap gap-3 pt-1">
+                <button onClick={() => scrollTo('#projects')} className="btn btn-primary" style={{ padding: '0.7rem 1.5rem', fontSize: '0.9rem' }}>
                   View Projects <ArrowRight size={15} />
                 </button>
-                <button onClick={() => scrollTo('#contact')} className="btn btn-secondary">
-                  Contact Me <Mail size={15} />
-                </button>
-                <a href={profile.github} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
+                <a href={`mailto:${profile.email}`} className="btn btn-secondary" style={{ padding: '0.7rem 1.5rem', fontSize: '0.9rem' }}>
+                  <Mail size={15} /> Get in touch
+                </a>
+                <a href={profile.github} target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ padding: '0.7rem 0.9rem' }}>
                   <Github size={16} />
                 </a>
-                <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
+                <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ padding: '0.7rem 0.9rem' }}>
                   <Linkedin size={16} />
                 </a>
               </motion.div>
-
-              {/* Meta row */}
-              <motion.div variants={fadeUp} custom={0.3} className="flex flex-wrap items-center gap-5 text-sm pt-2"
-                style={{ color: 'var(--text-muted)' }}>
-                <span className="flex items-center gap-1.5">
-                  <MapPin size={13} /> Bình Thạnh, Hồ Chí Minh
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Code2 size={13} /> GPA 3.30 / 4.0
-                </span>
-              </motion.div>
             </motion.div>
 
-            {/* RIGHT COLUMN: Warm terminal card */}
+            {/* ── RIGHT: Photo ── */}
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.65, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
               className="hidden lg:block"
             >
-              <div className="rounded-2xl overflow-hidden"
-                style={{ background: 'var(--terminal-bg)', border: '1px solid var(--terminal-border)', boxShadow: '0 20px 60px rgba(26,58,92,0.1)' }}>
-
-                {/* "Terminal" bar */}
-                <div className="flex items-center gap-1.5 px-4 py-3"
-                  style={{ background: 'var(--terminal-bar)', borderBottom: '1px solid var(--terminal-border)' }}>
-                  <div style={{ width: 11, height: 11, borderRadius: '50%', background: 'var(--terminal-dot-r)' }} />
-                  <div style={{ width: 11, height: 11, borderRadius: '50%', background: 'var(--terminal-dot-y)' }} />
-                  <div style={{ width: 11, height: 11, borderRadius: '50%', background: 'var(--terminal-dot-g)' }} />
-                  <span className="ml-3 text-xs" style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
-                    ~/portfolio
+              <div className="relative">
+                <div className="rounded-2xl overflow-hidden aspect-square w-full"
+                  style={{ boxShadow: '0 24px 64px rgba(26,58,92,0.14)', border: '1px solid var(--border)' }}>
+                  <img
+                    src={profile.avatar}
+                    alt={profile.full_name}
+                    className="w-full h-full object-cover object-center"
+                  />
+                </div>
+                {/* Floating status badge */}
+                <div className="absolute -bottom-3 -left-3 px-3 py-2 rounded-xl flex items-center gap-2"
+                  style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: '0 4px 16px rgba(26,58,92,0.1)' }}>
+                  <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--success)', display: 'inline-block', animation: 'blink 1.5s ease infinite' }} />
+                  <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-primary)', fontFamily: 'var(--font-mono)' }}>
+                    open_to_work
                   </span>
-                </div>
-
-                {/* Code content */}
-                <div className="p-6" style={{ fontFamily: 'var(--font-mono)', fontSize: '0.82rem', lineHeight: '1.9' }}>
-                  <div style={{ color: 'var(--syn-comment)' }}>{'// about.ts'}</div>
-                  <div className="mt-2">
-                    <span style={{ color: 'var(--syn-keyword)' }}>const </span>
-                    <span style={{ color: 'var(--syn-var)' }}>developer</span>
-                    <span style={{ color: 'var(--text-primary)' }}> = {'{'}</span>
-                  </div>
-                  <div className="pl-4">
-                    <span style={{ color: 'var(--syn-prop)' }}>name</span>
-                    <span style={{ color: 'var(--text-secondary)' }}>: </span>
-                    <span style={{ color: 'var(--syn-string)' }}>"{profile.full_name}"</span>
-                    <span style={{ color: 'var(--text-secondary)' }}>,</span>
-                  </div>
-                  <div className="pl-4">
-                    <span style={{ color: 'var(--syn-prop)' }}>role</span>
-                    <span style={{ color: 'var(--text-secondary)' }}>: </span>
-                    <span style={{ color: 'var(--syn-string)' }}>"Full-Stack Intern"</span>
-                    <span style={{ color: 'var(--text-secondary)' }}>,</span>
-                  </div>
-                  <div className="pl-4">
-                    <span style={{ color: 'var(--syn-prop)' }}>stack</span>
-                    <span style={{ color: 'var(--text-secondary)' }}>: [</span>
-                    <span style={{ color: 'var(--syn-string)' }}>"React", "Node.js", "Postgres"</span>
-                    <span style={{ color: 'var(--text-secondary)' }}>],</span>
-                  </div>
-                  <div className="pl-4">
-                    <span style={{ color: 'var(--syn-prop)' }}>ai</span>
-                    <span style={{ color: 'var(--text-secondary)' }}>: [</span>
-                    <span style={{ color: 'var(--syn-string)' }}>"RAG", "LangChain"</span>
-                    <span style={{ color: 'var(--text-secondary)' }}>],</span>
-                  </div>
-                  <div className="pl-4">
-                    <span style={{ color: 'var(--syn-prop)' }}>status</span>
-                    <span style={{ color: 'var(--text-secondary)' }}>: </span>
-                    <span style={{ color: 'var(--syn-string)' }}>"open_to_work"</span>
-                  </div>
-                  <div style={{ color: 'var(--text-primary)' }}>{'}'};</div>
-                  <div className="mt-3" style={{ color: 'var(--syn-comment)' }}>
-                    {'> '}
-                    <span style={{ color: 'var(--success)' }}>
-                      Ready to ship production code 🚀
-                    </span>
-                    <span className="animate-blink" style={{ color: 'var(--syn-cursor)' }}>▋</span>
-                  </div>
-                </div>
-
-                {/* Stats footer */}
-                <div style={{ borderTop: '1px solid var(--terminal-border)' }} className="grid grid-cols-3">
-                  {[
-                    { label: 'Projects', value: projects.length + '+' },
-                    { label: 'Certs', value: certificates.length },
-                    { label: 'GPA', value: '3.30' },
-                  ].map(stat => (
-                    <div key={stat.label} className="flex flex-col items-center py-4 gap-0.5"
-                      style={{ borderRight: '1px solid var(--terminal-border)' }}>
-                      <span style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', fontWeight: 700, color: 'var(--accent)' }}>
-                        {stat.value}
-                      </span>
-                      <span style={{ fontSize: '0.68rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
-                        {stat.label}
-                      </span>
-                    </div>
-                  ))}
                 </div>
               </div>
             </motion.div>
+
           </div>
 
-          {/* Scroll hint */}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }}
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5"
-            style={{ color: 'var(--text-muted)' }}>
-            <span style={{ fontSize: '0.68rem', fontFamily: 'var(--font-mono)', letterSpacing: '0.1em' }}>SCROLL</span>
-            <div style={{ width: 1, height: 40, background: 'linear-gradient(to bottom, var(--border-strong), transparent)', animation: 'scrollPulse 2s ease-in-out infinite' }} />
+          {/* Scroll hint — animated chevron, fades on scroll */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: isScrolled ? 0 : 1 }}
+            transition={{ duration: 0.4 }}
+            className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center"
+            style={{ pointerEvents: 'none' }}
+          >
+            <motion.div
+              animate={{ y: [0, 6, 0] }}
+              transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+              style={{ color: 'var(--border-strong)' }}
+            >
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </motion.div>
           </motion.div>
         </div>
       </section>
