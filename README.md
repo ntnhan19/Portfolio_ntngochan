@@ -4,7 +4,7 @@ Welcome to my personal portfolio website! This is a showcase of my projects, ski
 
 ## 🌐 Live Demo
 
-[**Visit Portfolio**](your-portfolio-url-here) *(Update with your deployed link)*
+[**Visit Portfolio**]([your-portfolio-url-here](https://ntnhan19.github.io/Portfolio_ntngochan/))
 
 ## 📋 About This Project
 
@@ -131,10 +131,10 @@ frontend-nextjs/
 
 I'd love to hear from you! Feel free to reach out:
 
-- 📧 **Email**: [your-email@example.com](mailto:your-email@example.com)
-- 💼 **LinkedIn**: [Your LinkedIn Profile](https://linkedin.com/in/your-profile)
+- 📧 **Email**: [ngochanpt2018@gmail.com](mailto:ngochanpt2018@gmail.com)
+- 💼 **LinkedIn**: [Nguyen Tran Ngoc Han]([https://linkedin.com/in/your-profile](https://www.linkedin.com/in/nguyentranngochan/))
 - 🐙 **GitHub**: [@ntnhan19](https://github.com/ntnhan19)
-- 🌐 **Personal Website**: [your-website.com](https://your-website.com)
+- 🌐 **Personal Website**: [Portfolio_ntngochan.com]([https://your-website.com](https://ntnhan19.github.io/Portfolio_ntngochan/))
 
 ## 📄 License
 
@@ -151,6 +151,6 @@ If you find any bugs or have suggestions for improvement, feel free to:
 
 ---
 
-**Made with ❤️ by [Your Name]**
+**Made with ❤️ by Nguyen Tran Ngoc Han**
 
 *Last updated: May 2026*
