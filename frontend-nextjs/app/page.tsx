@@ -432,9 +432,6 @@ export default function Portfolio() {
                 <Link href="/about" className="btn btn-secondary text-sm">
                   Full profile <ArrowRight size={14} />
                 </Link>
-                <Link href="/resume" className="btn btn-primary text-sm">
-                  View Resume
-                </Link>
               </motion.div>
             </motion.div>
 
@@ -534,7 +531,6 @@ export default function Portfolio() {
             {[
               { label: 'Projects', href: '/projects' },
               { label: 'About', href: '/about' },
-              { label: 'Resume', href: '/resume' },
             ].map(link => (
               <Link key={link.label} href={link.href} className="link-hover"
                 style={{ fontSize: '0.78rem', fontFamily: 'var(--font-mono)', color: 'rgba(255,255,255,0.45)' }}>
