@@ -13,7 +13,7 @@ export default function ProjectsPage() {
 
     // Get unique categories and technologies
     const categories = Array.from(new Set(projects.map(p => p.category)));
-    const allTechs = Array.from(new Set(projects.flatMap(p => p.tech_stack.split(',').map(t => t.trim()))));
+    const allTechs = Array.from(new Set(projects.flatMap(p => p.tech_stack)));
 
     // Filter projects
     const filteredProjects = useMemo(() => {
@@ -41,7 +41,7 @@ export default function ProjectsPage() {
                 <div className="max-w-7xl mx-auto px-6 relative z-10">
                     <Link href="/" className="inline-flex items-center text-white/80 hover:text-white mb-8 transition-colors group">
                         <ArrowLeft size={20} className="mr-2 group-hover:-translate-x-1 transition-transform" />
-                        Quay lại trang chủ
+                        Back to home
                     </Link>
 
                     <motion.div
@@ -54,10 +54,10 @@ export default function ProjectsPage() {
                         </div>
                         <div>
                             <h1 className="text-5xl md:text-6xl font-bold mb-4">
-                                Dự án <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Nổi bật</span>
+                                Selected <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Projects</span>
                             </h1>
                             <p className="text-xl text-blue-100 max-w-2xl">
-                                {projects.length} dự án thực tế về Backend Development, AI và Lập trình mạng
+                                {projects.length} real-world projects covering Backend Development, AI, and Network Programming
                             </p>
                         </div>
                     </motion.div>
@@ -73,7 +73,7 @@ export default function ProjectsPage() {
                             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
                             <input
                                 type="text"
-                                placeholder="Tìm kiếm dự án..."
+                                placeholder="Search projects..."
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
                                 className="w-full pl-12 pr-4 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
@@ -93,10 +93,10 @@ export default function ProjectsPage() {
                     >
                         <div className="flex items-center gap-2 mb-6">
                             <Zap className="text-yellow-500" size={24} />
-                            <h2 className="text-2xl font-bold text-slate-900">Dự án nổi bật</h2>
+                            <h2 className="text-2xl font-bold text-slate-900">Featured Project</h2>
                         </div>
 
-                        <Link href={`/projects/${featuredProject.id}`}>
+                        <Link href={`/projects/${featuredProject.slug}`}>
                             <div className="relative group bg-white rounded-3xl overflow-hidden border border-slate-200 hover:shadow-2xl transition-all duration-500">
                                 <div className="grid md:grid-cols-2 gap-0">
                                     {/* Image */}
@@ -113,7 +113,7 @@ export default function ProjectsPage() {
                                         <div className="absolute top-4 left-4">
                                             <span className="bg-yellow-500 text-slate-900 px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2">
                                                 <Zap size={14} />
-                                                Mới nhất
+                                                Latest
                                             </span>
                                         </div>
                                     </div>
@@ -135,12 +135,12 @@ export default function ProjectsPage() {
                                         </p>
 
                                         <div className="flex flex-wrap gap-2 mb-6">
-                                            {featuredProject.tech_stack.split(',').slice(0, 5).map((tech, i) => (
+                                            {featuredProject.tech_stack.slice(0, 5).map((tech, i) => (
                                                 <span
                                                     key={i}
                                                     className="text-xs font-medium text-slate-500 bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-lg"
                                                 >
-                                                    {tech.trim()}
+                                                    {tech}
                                                 </span>
                                             ))}
                                         </div>
@@ -172,7 +172,7 @@ export default function ProjectsPage() {
                     <div>
                         <div className="flex items-center gap-2 mb-4">
                             <Filter size={18} className="text-slate-500" />
-                            <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wider">Danh mục</h3>
+                            <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wider">Category</h3>
                         </div>
                         <div className="flex flex-wrap gap-2">
                             <button
@@ -182,7 +182,7 @@ export default function ProjectsPage() {
                                     : 'bg-white text-slate-700 hover:bg-slate-50 border border-slate-200'
                                     }`}
                             >
-                                Tất cả ({projects.length})
+                                All ({projects.length})
                             </button>
                             {categories.map(cat => {
                                 const count = projects.filter(p => p.category === cat).length;
@@ -206,7 +206,7 @@ export default function ProjectsPage() {
                     <div>
                         <div className="flex items-center gap-2 mb-4">
                             <Tag size={18} className="text-slate-500" />
-                            <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wider">Công nghệ</h3>
+                            <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wider">Technology</h3>
                         </div>
                         <div className="flex flex-wrap gap-2">
                             {selectedTech && (
@@ -236,10 +236,10 @@ export default function ProjectsPage() {
                 {/* Results Count */}
                 {(searchTerm || selectedCategory || selectedTech) && (
                     <div className="mb-6 text-slate-600">
-                        Tìm thấy <span className="font-bold text-blue-600">{filteredProjects.length}</span> dự án
-                        {selectedCategory && <span> trong danh mục <span className="font-bold">"{selectedCategory}"</span></span>}
-                        {selectedTech && <span> sử dụng <span className="font-bold">"{selectedTech}"</span></span>}
-                        {searchTerm && <span> cho từ khóa <span className="font-bold">"{searchTerm}"</span></span>}
+                        Found <span className="font-bold text-blue-600">{filteredProjects.length}</span> project{filteredProjects.length !== 1 ? 's' : ''}
+                        {selectedCategory && <span> in category <span className="font-bold">"{selectedCategory}"</span></span>}
+                        {selectedTech && <span> using <span className="font-bold">"{selectedTech}"</span></span>}
+                        {searchTerm && <span> for <span className="font-bold">"{searchTerm}"</span></span>}
                     </div>
                 )}
 
@@ -311,17 +311,17 @@ export default function ProjectsPage() {
 
                                 {/* Tech Stack */}
                                 <div className="flex flex-wrap gap-2 mb-4">
-                                    {project.tech_stack.split(',').slice(0, 3).map((tech, i) => (
+                                    {project.tech_stack.slice(0, 3).map((tech, i) => (
                                         <span
                                             key={i}
                                             className="text-xs font-medium text-slate-500 bg-slate-50 border border-slate-200 px-2 py-1 rounded-md"
                                         >
-                                            {tech.trim()}
+                                            {tech}
                                         </span>
                                     ))}
-                                    {project.tech_stack.split(',').length > 3 && (
+                                    {project.tech_stack.length > 3 && (
                                         <span className="text-xs font-medium text-slate-400 px-2 py-1">
-                                            +{project.tech_stack.split(',').length - 3}
+                                            +{project.tech_stack.length - 3}
                                         </span>
                                     )}
                                 </div>
@@ -330,13 +330,13 @@ export default function ProjectsPage() {
                                 <div className="flex items-center justify-between pt-4 border-t border-slate-100 mt-auto">
                                     <span className="flex items-center text-xs text-slate-500 gap-1">
                                         <Calendar size={12} />
-                                        {project.duration || '2024'}
+                                        {project.duration}
                                     </span>
                                     <Link
-                                        href={`/projects/${project.id}`}
+                                        href={`/projects/${project.slug}`}
                                         className="text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors flex items-center gap-1 hover:gap-2"
                                     >
-                                        Chi tiết
+                                        Details
                                         <ChevronRight size={16} />
                                     </Link>
                                 </div>
@@ -349,8 +349,8 @@ export default function ProjectsPage() {
                 {filteredProjects.length === 0 && (
                     <div className="text-center py-16">
                         <div className="text-6xl mb-4">🔍</div>
-                        <h3 className="text-2xl font-bold text-slate-900 mb-2">Không tìm thấy dự án</h3>
-                        <p className="text-slate-600 mb-6">Thử thay đổi bộ lọc hoặc từ khóa tìm kiếm</p>
+                        <h3 className="text-2xl font-bold text-slate-900 mb-2">No projects found</h3>
+                        <p className="text-slate-600 mb-6">Try adjusting the filters or search term</p>
                         <button
                             onClick={() => {
                                 setSearchTerm('');
@@ -359,7 +359,7 @@ export default function ProjectsPage() {
                             }}
                             className="px-6 py-3 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 transition-colors"
                         >
-                            Xóa bộ lọc
+                            Clear filters
                         </button>
                     </div>
                 )}
@@ -373,15 +373,15 @@ export default function ProjectsPage() {
                 >
                     <div className="bg-gradient-to-br from-blue-500 to-blue-600 p-8 rounded-2xl text-white text-center shadow-lg">
                         <div className="text-4xl font-bold mb-2">{projects.length}</div>
-                        <div className="text-blue-100">Tổng số dự án</div>
+                        <div className="text-blue-100">Total Projects</div>
                     </div>
                     <div className="bg-gradient-to-br from-purple-500 to-purple-600 p-8 rounded-2xl text-white text-center shadow-lg">
                         <div className="text-4xl font-bold mb-2">{categories.length}</div>
-                        <div className="text-purple-100">Danh mục</div>
+                        <div className="text-purple-100">Categories</div>
                     </div>
                     <div className="bg-gradient-to-br from-green-500 to-green-600 p-8 rounded-2xl text-white text-center shadow-lg">
                         <div className="text-4xl font-bold mb-2">{allTechs.length}</div>
-                        <div className="text-green-100">Công nghệ</div>
+                        <div className="text-green-100">Technologies</div>
                     </div>
                 </motion.div>
             </div>
