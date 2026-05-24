@@ -1,22 +1,25 @@
+// app/projects/[id]/page.tsx
 import { projects } from '../../../src/data/staticData';
 import { notFound } from 'next/navigation';
 import ProjectDetailClient from './ProjectDetailClient';
 
-// Server Component - generateStaticParams phải ở đây
 export async function generateStaticParams() {
+    // Dùng slug thay vì id — URL đẹp hơn: /projects/docmentor
     return projects.map((project) => ({
-        id: project.id.toString(),
+        id: project.slug,
     }));
 }
 
-// Server Component để handle params
-export default async function ProjectDetail({ params }: { params: Promise<{ id: string }> }) {
+export default async function ProjectDetail({
+    params,
+}: {
+    params: Promise<{ id: string }>;
+}) {
     const { id } = await params;
-    const project = projects.find(p => p.id.toString() === id);
-
-    if (!project) {
-        notFound();
-    }
-
-    return <ProjectDetailClient id={id} />;
+    // Tìm theo slug, fallback id (backward compat)
+    const project = projects.find(
+        (p) => p.slug === id || p.id.toString() === id
+    );
+    if (!project) notFound();
+    return <ProjectDetailClient slug={id} />;
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import { profile, projects, certificates } from '@/data';
+import { ProjectCard } from '@/src/components/projects/ProjectCard';
 import {
   Mail, Github, Linkedin, ArrowUp, Menu, X,
   ExternalLink, ChevronRight, ArrowRight,
@@ -216,7 +217,7 @@ export default function Portfolio() {
               {/* Role + location */}
               <motion.div variants={fadeUp} custom={0.1} className="flex flex-col gap-1.5">
                 <p style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--text-secondary)', letterSpacing: '-0.01em' }}>
-                  Fullstack Developer — PERN · Next.js · FastAPI
+                  Fullstack Developer — PERN · React.js · FastAPI
                 </p>
                 <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', display: 'flex', alignItems: 'center', gap: '0.45rem', flexWrap: 'wrap' }}>
                   <span>GPA 3.30 / 4.0</span>
@@ -296,7 +297,7 @@ export default function Portfolio() {
               style={{ color: 'var(--border-strong)' }}
             >
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </motion.div>
           </motion.div>
@@ -308,79 +309,38 @@ export default function Portfolio() {
       ═══════════════════════════════════════ */}
       <section id="projects" className="section-gap" style={{ borderTop: '1px solid var(--border)', background: 'var(--bg-subtle)' }}>
         <div className="max-w-6xl mx-auto px-6">
+
+          {/* Header */}
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }} variants={stagger} className="mb-12">
             <motion.span variants={fadeUp} className="section-label block mb-3">02. Selected Work</motion.span>
-            <motion.h2 variants={fadeUp} className="text-section-heading" style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}>
+            <motion.h2 variants={fadeUp} className="text-section-heading" style={{ color: 'var(--text-primary)' }}>
               Projects
             </motion.h2>
           </motion.div>
 
-          <div className="flex flex-col gap-0">
+          {/* Card grid — 2 columns, auto-wraps as more projects are added */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gap: '1.25rem',
+          }}>
             {projects.map((project, idx) => (
-              <motion.div key={project.id}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.55, delay: idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <div className="group grid grid-cols-[3rem_1fr_auto] gap-6 items-start py-7 px-2 rounded-xl transition-all"
-                  style={{ borderTop: '1px solid var(--border)' }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'var(--surface-hover)'; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'transparent'; }}>
-
-                  <Link href={`/projects/${project.id}`} className="contents">
-                    <span style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '1.1rem', paddingTop: '0.1rem' }}>
-                      {String(idx + 1).padStart(2, '0')}
-                    </span>
-
-                    <div className="cursor-pointer">
-                      <h3 className="font-bold text-xl mb-2 transition-colors group-hover:text-[var(--accent-mid)]"
-                        style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}>
-                        {project.title}
-                      </h3>
-                      <p className="text-sm leading-relaxed mb-3" style={{ color: 'var(--text-secondary)' }}>
-                        {project.description}
-                      </p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {project.tech_stack.split(',').slice(0, 5).map(t => (
-                          <span key={t} className="badge">{t.trim()}</span>
-                        ))}
-                        {project.tech_stack.split(',').length > 5 && (
-                          <span className="badge">+{project.tech_stack.split(',').length - 5}</span>
-                        )}
-                      </div>
-                    </div>
-                  </Link>
-
-                  <div className="flex flex-col gap-2 pt-1 items-end">
-                    {project.repo_url && (
-                      <a href={project.repo_url} target="_blank" rel="noopener noreferrer"
-                        className="link-hover text-sm flex items-center gap-1">
-                        <Github size={14} /> GitHub
-                      </a>
-                    )}
-                    {project.demo_url && (
-                      <a href={project.demo_url} target="_blank" rel="noopener noreferrer"
-                        className="link-hover text-sm flex items-center gap-1">
-                        <ExternalLink size={14} /> Demo
-                      </a>
-                    )}
-                    <Link href={`/projects/${project.id}`} className="text-sm flex items-center gap-1 mt-1"
-                      style={{ color: 'var(--accent-mid)', fontFamily: 'var(--font-mono)', fontSize: '0.78rem' }}>
-                      Details <ChevronRight size={13} />
-                    </Link>
-                  </div>
-                </div>
-                {idx === projects.length - 1 && (
-                  <div style={{ borderTop: '1px solid var(--border)' }} />
-                )}
-              </motion.div>
+              <ProjectCard
+                key={project.id}
+                project={project}
+                index={idx}
+                variant="featured"
+              />
             ))}
           </div>
 
-          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="mt-10 text-center">
+          {/* CTA */}
+          <motion.div
+            initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+            className="mt-10 text-center"
+          >
             <a href={profile.github} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
-              <Github size={16} /> View all on GitHub <ExternalLink size={14} />
+              <Github size={16} /> View more on GitHub <ExternalLink size={14} />
             </a>
           </motion.div>
         </div>
