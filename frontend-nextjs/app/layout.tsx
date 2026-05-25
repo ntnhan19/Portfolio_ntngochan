@@ -1,6 +1,7 @@
 // src/app/layout.tsx
 import type { Metadata } from "next";
 import "./globals.css";
+import { LocaleProvider } from '@/src/context/LocaleContext';
 
 const basePath =
   process.env.NODE_ENV === "production" ? "/Portfolio_ntngochan" : "";
@@ -201,7 +202,9 @@ export default function RootLayout({
           />
         </div>
 
-        {children}
+        <LocaleProvider>
+          {children}
+        </LocaleProvider>
       </body>
     </html>
   );

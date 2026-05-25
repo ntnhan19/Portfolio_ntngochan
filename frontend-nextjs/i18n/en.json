@@ -3,69 +3,176 @@
     "home": "Home",
     "projects": "Projects",
     "skills": "Skills",
-    "blog": "Blog",
     "about": "About",
-    "contact": "Contact"
+    "contact": "Contact",
+    "hireMe": "Hire me",
+    "backHome": "Back to home"
   },
   "hero": {
-    "status": "Open to internship opportunities",
-    "greeting": "Hello, I'm",
-    "role": "Full-Stack Developer",
-    "stack": "PERN Stack",
-    "description": "4th-year Software Engineering student at HUTECH, building real-world web applications with PostgreSQL, Express.js, React.js & Node.js. Passionate about clean APIs, real-time systems, and AI-powered tools.",
+    "status": "Available for internship",
+    "greeting": "Hi, I'm",
+    "role": "Fullstack Developer — PERN · React.js · FastAPI",
+    "gpa": "GPA 3.33 / 4.0",
+    "university": "HUTECH · Software Engineering · Year 4",
+    "description": "4th-year Software Engineering student building production-grade web apps — real-time systems, AI-powered tools, and clean REST APIs.",
     "viewProjects": "View Projects",
-    "contactMe": "Contact Me"
+    "getInTouch": "Get in touch",
+    "openToWork": "open_to_work"
   },
-  "sections": {
-    "skills": {
-      "title": "Skills",
-      "frontend": "Frontend",
-      "backend": "Backend",
-      "databases": "Databases",
-      "tools": "Tools & Platforms",
-      "ai": "AI & ML",
-      "blockchain": "Blockchain"
-    },
-    "projects": {
-      "title": "Projects",
-      "description": "A selection of my recent projects, showcasing my skills in full-stack development and real-world problem-solving."
-    },
-    "experience": {
-      "title": "Experience",
-      "description": "Professional experience and internships where I've applied my technical skills to deliver real-world solutions."
-    },
-    "contact": {
-      "title": "Contact",
-      "description": "Get in touch",
-      "form": {
-        "name": "Name",
-        "email": "Email",
-        "subject": "Subject",
-        "message": "Message",
-        "send": "Send Message"
-      }
+  "projects": {
+    "sectionLabel": "02. Selected Work",
+    "title": "Projects",
+    "viewMore": "View more on GitHub"
+  },
+  "skills": {
+    "sectionLabel": "03. Expertise",
+    "title": "Technical Skills",
+    "currentlyLearning": "// currently_learning"
+  },
+  "about": {
+    "sectionLabel": "04. About",
+    "title": "About Me",
+    "bio1": "I'm a 4th-year Software Engineering student at {university} with a GPA of 3.33/4.0, building full-stack web applications using the PERN stack.",
+    "bio2": "My recent work includes a {cinema} with Redis distributed locking, and an {ai} using RAG pipeline with LangChain & Pinecone.",
+    "cinema": "real-time cinema booking system",
+    "ai": "AI-powered document assistant",
+    "fullProfile": "Full profile",
+    "stats": {
+      "projects": "Projects Built",
+      "projectsSub": "Full-stack applications",
+      "certificates": "Certificates",
+      "certificatesSub": "Professional & academic",
+      "gpa": "GPA",
+      "gpaSub": "Out of 4.0",
+      "stack": "Stack",
+      "stackSub": "PostgreSQL · Express · React · Node"
     }
   },
-  "common": {
-    "viewMore": "View More",
-    "viewDemo": "View Demo",
-    "viewCode": "View Code",
-    "visitSite": "Visit Site",
-    "loading": "Loading...",
-    "seeAll": "See All"
+  "contact": {
+    "sectionLabel": "05. Contact",
+    "title": "Let's work together",
+    "description": "I'm actively looking for a {role}. Have an opportunity? I'd love to hear from you.",
+    "role": "Full-Stack / Backend Developer Internship",
+    "sendEmail": "Send me an email",
+    "contactForm": "Contact form",
+    "backHome": "Back to home",
+    "pageTitle": "Contact",
+    "pageTitleHighlight": "me",
+    "pageDesc": "Interesting project? Internship opportunity? Or just want to chat about tech? Get in touch!",
+    "formTitle": "Send a message",
+    "formSubtitle": "I'll reply within 24 hours",
+    "successTitle": "Message sent!",
+    "successDesc": "Thanks for reaching out. I'll get back to you as soon as possible.",
+    "sending": "Sending...",
+    "send": "Send message",
+    "chars": "characters",
+    "fields": {
+      "name": "Full name",
+      "namePlaceholder": "John Doe",
+      "email": "Email",
+      "emailPlaceholder": "email@example.com",
+      "subject": "Subject",
+      "subjectPlaceholder": "Choose a subject",
+      "subjectInternship": "Internship opportunity",
+      "subjectProject": "Project collaboration",
+      "subjectQuestion": "Technical question",
+      "subjectOther": "Other",
+      "message": "Message",
+      "messagePlaceholder": "Write your message..."
+    },
+    "info": {
+      "title": "Contact info",
+      "address": "Address",
+      "addressValue": "Ho Chi Minh City, Vietnam",
+      "phone": "Phone",
+      "phoneValue": "+84 845 065 676",
+      "hours": "Hours",
+      "hoursValue": "Mon - Fri, 9:00 - 18:00"
+    },
+    "social": {
+      "title": "Connect with me",
+      "emailDesc": "Send a direct email",
+      "githubDesc": "View source code",
+      "linkedinDesc": "Professional network"
+    },
+    "cv": {
+      "title": "Download my CV",
+      "desc": "View details about my experience and skills",
+      "link": "View Resume →"
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "items": [
+        {
+          "q": "Are you open to remote work?",
+          "a": "Yes, I'm fully open to remote or hybrid arrangements."
+        },
+        {
+          "q": "What's your response time?",
+          "a": "I usually reply within 24 hours on weekdays."
+        },
+        {
+          "q": "What position are you looking for?",
+          "a": "Backend Developer Intern or Junior Backend Developer."
+        },
+        {
+          "q": "What are your main skills?",
+          "a": "Node.js, Next.js, PostgreSQL, Redis, FastAPI, Docker, and AI/ML tools."
+        }
+      ]
+    }
+  },
+  "aboutPage": {
+    "backHome": "Back to home",
+    "statusBadge": "Online • Ready to collaborate",
+    "stats": {
+      "projects": "Featured Projects",
+      "certificates": "Certificates",
+      "awards": "Awards",
+      "blog": "Blog posts"
+    },
+    "skills": {
+      "title": "Technologies & Skills",
+      "subtitle": "Technologies I've mastered and continue to work with"
+    },
+    "education": {
+      "university": "Ho Chi Minh City University of Technology (HUTECH)",
+      "degree": "Bachelor of Software Engineering • 2022 – 2026",
+      "year": "Year 4 (Expected graduation 2026)",
+      "gpa": "GPA: 3.33/4.0"
+    },
+    "certificates": {
+      "title": "Certificates & Awards",
+      "subtitle": "Official achievements and certifications I have earned",
+      "viewCert": "View certificate"
+    },
+    "hobbies": {
+      "title": "Hobbies & Extracurricular Activities",
+      "subtitle": "I believe a healthy work-life balance is key to long-term success",
+      "items": [
+        {
+          "title": "Women's Football",
+          "desc": "Member of the HUTECH IT Faculty women's football team — 2nd place at HUTECH Sports Festival 2024"
+        },
+        {
+          "title": "Volunteering",
+          "desc": "Participating in Tet gift-giving and community activities"
+        },
+        {
+          "title": "Reading",
+          "desc": "Interested in books on technology, psychology, and self-development"
+        }
+      ]
+    },
+    "cta": {
+      "title": "Ready to start the intern journey with your team!",
+      "desc": "I'm looking for a {role} at tech companies, especially in AI/ML, real-time systems, and microservices.",
+      "role": "Fullstack Developer Intern",
+      "contact": "Contact now",
+      "cv": "Download CV"
+    }
   },
   "footer": {
-    "copyright": "© {year} [EMAIL_ADDRESS]. All rights reserved.",
-    "builtWith": "Built with ❤️ using Next.js",
-    "madeBy": "Made by [Your Name]"
-  },
-  "notifications": {
-    "messageSent": "Message sent successfully! I'll get back to you soon.",
-    "error": "Something went wrong. Please try again later."
-  },
-  "error": {
-    "404": "404 - Page Not Found",
-    "404Desc": "Sorry, the page you are looking for does not exist.",
-    "goBack": "Go Back to Home"
+    "builtWith": "Built with Next.js & Tailwind."
   }
 }

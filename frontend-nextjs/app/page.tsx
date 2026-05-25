@@ -2,9 +2,12 @@
 
 import { profile, projects, certificates } from '@/data';
 import { ProjectCard } from '@/src/components/projects/ProjectCard';
+import { ThemeToggle } from '@/src/components/ui/ThemeToggle';
+import { LanguageToggle } from '@/src/components/ui/LanguageToggle';
+import { useLocale } from '@/src/context/LocaleContext';
 import {
   Mail, Github, Linkedin, ArrowUp, Menu, X,
-  ExternalLink, ChevronRight, ArrowRight,
+  ExternalLink, ArrowRight,
   Database, Server, Zap, Globe
 } from 'lucide-react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
@@ -25,13 +28,7 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.1 } }
 };
 
-const navLinks = [
-  { label: 'Home', href: '#home' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'About', href: '#about' },
-  { label: 'Contact', href: '#contact' },
-];
+/* navLinks built inside component so labels can be translated */
 
 /* ─── SKILLS ──────────────────────────────────────────── */
 const skillGroups = [
@@ -65,8 +62,35 @@ export default function Portfolio() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const { t } = useLocale();
   const { scrollYProgress } = useScroll();
   const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
+
+  /* ── Theme: read from localStorage or system preference ── */
+  useEffect(() => {
+    const saved = localStorage.getItem('portfolio-theme') as 'light' | 'dark' | null;
+    const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const initial = saved ?? preferred;
+    setTheme(initial);
+    document.documentElement.setAttribute('data-theme', initial);
+  }, []);
+
+  const toggleTheme = () => {
+    const next = theme === 'light' ? 'dark' : 'light';
+    setTheme(next);
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('portfolio-theme', next);
+  };
+
+  /* ── Nav links (built here so labels are translated) ── */
+  const navLinks = [
+    { label: t('nav.home'), href: '#home' },
+    { label: t('nav.projects'), href: '#projects' },
+    { label: t('nav.skills'), href: '#skills' },
+    { label: t('nav.about'), href: '#about' },
+    { label: t('nav.contact'), href: '#contact' },
+  ];
 
   useEffect(() => {
     const onScroll = () => {
@@ -138,11 +162,16 @@ export default function Portfolio() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-3">
-            <a href={`mailto:${profile.email}`} className="hidden md:inline-flex btn btn-primary text-sm">
-              Hire me
-            </a>
-            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden p-2 rounded-md" style={{ color: 'var(--text-secondary)' }}>
+          <div className="flex items-center gap-2">
+            <div className="hidden md:flex">
+              <LanguageToggle />
+            </div>
+            <ThemeToggle theme={theme} onToggle={toggleTheme} />
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 rounded-md"
+              style={{ color: 'var(--text-secondary)' }}
+            >
               {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
@@ -166,7 +195,9 @@ export default function Portfolio() {
                     {link.label}
                   </button>
                 ))}
-                <a href={`mailto:${profile.email}`} className="btn btn-primary mt-3 justify-center">Hire me</a>
+                <div className="mt-3 flex items-center gap-2">
+                  <LanguageToggle />
+                </div>
               </div>
             </motion.div>
           )}
@@ -197,14 +228,14 @@ export default function Portfolio() {
                 <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold"
                   style={{ background: 'var(--accent-light)', border: '1px solid var(--accent-border)', color: 'var(--accent)', fontFamily: 'var(--font-mono)', letterSpacing: '0.04em' }}>
                   <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--success)', display: 'inline-block', animation: 'blink 1.5s ease infinite' }} />
-                  Available for internship
+                  {t('hero.status')}
                 </span>
               </motion.div>
 
               {/* Greeting + Name */}
               <motion.div variants={fadeUp} custom={0.05} className="flex flex-col gap-2">
                 <p style={{ fontSize: '1.05rem', color: 'var(--text-muted)', fontWeight: 500 }}>
-                  Hi, I'm
+                  {t('hero.greeting')}
                 </p>
                 <h1 className="text-hero">
                   {profile.full_name.split(' ').slice(0, -1).join(' ')}{' '}
@@ -217,30 +248,29 @@ export default function Portfolio() {
               {/* Role + location */}
               <motion.div variants={fadeUp} custom={0.1} className="flex flex-col gap-1.5">
                 <p style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--text-secondary)', letterSpacing: '-0.01em' }}>
-                  Fullstack Developer — PERN · React.js · FastAPI
+                  {t('hero.role')}
                 </p>
                 <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', display: 'flex', alignItems: 'center', gap: '0.45rem', flexWrap: 'wrap' }}>
-                  <span>GPA 3.30 / 4.0</span>
+                  <span>{t('hero.gpa')}</span>
                   <span style={{ opacity: 0.3 }}>·</span>
-                  <span>HUTECH · Software Engineering · Year 4</span>
+                  <span>{t('hero.university')}</span>
                 </p>
               </motion.div>
 
               {/* Description */}
               <motion.div variants={fadeUp} custom={0.15}>
                 <p style={{ fontSize: '1rem', lineHeight: 1.75, color: 'var(--text-secondary)', maxWidth: '520px' }}>
-                  4th-year Software Engineering student building production-grade web apps — real-time systems, AI-powered tools, and clean REST APIs.
+                  {t('hero.description')}
                 </p>
               </motion.div>
 
               {/* CTAs */}
               <motion.div variants={fadeUp} custom={0.2} className="flex flex-wrap items-center gap-3 pt-1">
-                {/* Primary group */}
                 <button onClick={() => scrollTo('#projects')} className="btn btn-primary" style={{ padding: '0.7rem 1.5rem', fontSize: '0.9rem' }}>
-                  View Projects <ArrowRight size={15} />
+                  {t('hero.viewProjects')} <ArrowRight size={15} />
                 </button>
                 <a href={`mailto:${profile.email}`} className="btn btn-secondary" style={{ padding: '0.7rem 1.5rem', fontSize: '0.9rem' }}>
-                  <Mail size={15} /> Get in touch
+                  <Mail size={15} /> {t('hero.getInTouch')}
                 </a>
                 {/* Separator */}
                 <span style={{ width: 1, height: 28, background: 'var(--border)', display: 'inline-block', margin: '0 0.25rem' }} />
@@ -275,7 +305,7 @@ export default function Portfolio() {
                   style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: '0 4px 16px rgba(26,58,92,0.1)' }}>
                   <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--success)', display: 'inline-block', animation: 'blink 1.5s ease infinite' }} />
                   <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-primary)', fontFamily: 'var(--font-mono)' }}>
-                    open_to_work
+                    {t('hero.openToWork')}
                   </span>
                 </div>
               </div>
@@ -312,9 +342,9 @@ export default function Portfolio() {
 
           {/* Header */}
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }} variants={stagger} className="mb-12">
-            <motion.span variants={fadeUp} className="section-label block mb-3">02. Selected Work</motion.span>
+            <motion.span variants={fadeUp} className="section-label block mb-3">{t('projects.sectionLabel')}</motion.span>
             <motion.h2 variants={fadeUp} className="text-section-heading" style={{ color: 'var(--text-primary)' }}>
-              Projects
+              {t('projects.title')}
             </motion.h2>
           </motion.div>
 
@@ -340,7 +370,7 @@ export default function Portfolio() {
             className="mt-10 text-center"
           >
             <a href={profile.github} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
-              <Github size={16} /> View more on GitHub <ExternalLink size={14} />
+              <Github size={16} /> {t('projects.viewMore')} <ExternalLink size={14} />
             </a>
           </motion.div>
         </div>
@@ -352,9 +382,9 @@ export default function Portfolio() {
       <section id="skills" className="section-gap" style={{ background: 'var(--bg-base)', borderTop: '1px solid var(--border)' }}>
         <div className="max-w-6xl mx-auto px-6">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }} variants={stagger} className="mb-12">
-            <motion.span variants={fadeUp} className="section-label block mb-3">03. Expertise</motion.span>
+            <motion.span variants={fadeUp} className="section-label block mb-3">{t('skills.sectionLabel')}</motion.span>
             <motion.h2 variants={fadeUp} className="text-section-heading" style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}>
-              Technical Skills
+              {t('skills.title')}
             </motion.h2>
           </motion.div>
 
@@ -394,7 +424,7 @@ export default function Portfolio() {
             className="mt-8 p-5 rounded-xl flex flex-wrap items-center gap-3"
             style={{ background: 'var(--accent-light)', border: '1px solid var(--accent-border)' }}>
             <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', color: 'var(--accent)' }}>
-              // currently_learning
+              {t('skills.currentlyLearning')}
             </span>
             {['NestJS', 'Microservices Architecture', 'Docker Compose', 'System Design'].map(item => (
               <span key={item} className="badge" style={{ color: 'var(--accent)', borderColor: 'var(--accent-border)', background: 'transparent' }}>
@@ -412,25 +442,22 @@ export default function Portfolio() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-              <motion.span variants={fadeUp} className="section-label block mb-3">04. About</motion.span>
+              <motion.span variants={fadeUp} className="section-label block mb-3">{t('about.sectionLabel')}</motion.span>
               <motion.h2 variants={fadeUp} className="text-section-heading mb-6" style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}>
-                About Me
+                {t('about.title')}
               </motion.h2>
               <motion.p variants={fadeUp} className="text-base leading-relaxed mb-4" style={{ color: 'var(--text-secondary)' }}>
-                I'm a 4th-year Software Engineering student at{' '}
-                <strong style={{ color: 'var(--text-primary)' }}>HUTECH</strong>{' '}
-                with a GPA of 3.30/4.0, building full-stack web applications using the PERN stack.
+                {t('about.bio1', { university: 'HUTECH' })}
               </motion.p>
               <motion.p variants={fadeUp} className="text-base leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>
-                My recent work includes a{' '}
-                <strong style={{ color: 'var(--text-primary)' }}>real-time cinema booking system</strong>{' '}
-                with Redis distributed locking, and an{' '}
-                <strong style={{ color: 'var(--text-primary)' }}>AI-powered document assistant</strong>{' '}
-                using RAG pipeline with LangChain & Pinecone.
+                {t('about.bio2', {
+                  cinema: t('about.cinema'),
+                  ai: t('about.ai'),
+                })}
               </motion.p>
               <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
                 <Link href="/about" className="btn btn-secondary text-sm">
-                  Full profile <ArrowRight size={14} />
+                  {t('about.fullProfile')} <ArrowRight size={14} />
                 </Link>
               </motion.div>
             </motion.div>
@@ -439,10 +466,10 @@ export default function Portfolio() {
             <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
               transition={{ duration: 0.55 }} className="grid grid-cols-2 gap-4">
               {[
-                { label: 'Projects Built', value: projects.length + '+', sub: 'Full-stack applications' },
-                { label: 'Certificates', value: certificates.length, sub: 'Professional & academic' },
-                { label: 'GPA', value: '3.30', sub: 'Out of 4.0' },
-                { label: 'Stack', value: 'PERN', sub: 'PostgreSQL · Express · React · Node' },
+                { label: t('about.stats.projects'), value: projects.length + '+', sub: t('about.stats.projectsSub') },
+                { label: t('about.stats.certificates'), value: certificates.length, sub: t('about.stats.certificatesSub') },
+                { label: t('about.stats.gpa'), value: '3.30', sub: t('about.stats.gpaSub') },
+                { label: t('about.stats.stack'), value: 'PERN', sub: t('about.stats.stackSub') },
               ].map(stat => (
                 <div key={stat.label} className="card p-6 flex flex-col gap-1">
                   <span style={{ fontFamily: 'var(--font-display)', fontSize: '2rem', fontWeight: 700, color: 'var(--accent)', lineHeight: 1 }}>
@@ -464,21 +491,19 @@ export default function Portfolio() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-2xl mx-auto text-center">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-              <motion.span variants={fadeUp} className="section-label block mb-3">05. Contact</motion.span>
+              <motion.span variants={fadeUp} className="section-label block mb-3">{t('contact.sectionLabel')}</motion.span>
               <motion.h2 variants={fadeUp} className="text-section-heading mb-4" style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}>
-                Let's work together
+                {t('contact.title')}
               </motion.h2>
               <motion.p variants={fadeUp} className="text-base leading-relaxed mb-8" style={{ color: 'var(--text-secondary)' }}>
-                I'm actively looking for a{' '}
-                <strong style={{ color: 'var(--text-primary)' }}>Full-Stack / Backend Developer Internship</strong>.
-                Have an opportunity? I'd love to hear from you.
+                {t('contact.description', { role: t('contact.role') })}
               </motion.p>
               <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a href={`mailto:${profile.email}`} className="btn btn-primary" style={{ fontSize: '0.95rem', padding: '0.75rem 1.75rem' }}>
-                  <Mail size={17} /> Send me an email
+                  <Mail size={17} /> {t('contact.sendEmail')}
                 </a>
                 <Link href="/contact" className="btn btn-secondary" style={{ fontSize: '0.95rem', padding: '0.75rem 1.75rem' }}>
-                  Contact form
+                  {t('contact.contactForm')}
                 </Link>
               </motion.div>
 
@@ -525,12 +550,12 @@ export default function Portfolio() {
             <em style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', color: 'rgba(255,255,255,0.8)' }}>
               {profile.full_name}
             </em>
-            . Built with Next.js & Tailwind.
+            {'. '}{t('footer.builtWith')}
           </p>
           <div className="flex items-center gap-5">
             {[
-              { label: 'Projects', href: '/projects' },
-              { label: 'About', href: '/about' },
+              { label: t('nav.projects'), href: '/projects' },
+              { label: t('nav.about'), href: '/about' },
             ].map(link => (
               <Link key={link.label} href={link.href} className="link-hover"
                 style={{ fontSize: '0.78rem', fontFamily: 'var(--font-mono)', color: 'rgba(255,255,255,0.45)' }}>

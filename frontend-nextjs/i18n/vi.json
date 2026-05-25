@@ -3,17 +3,176 @@
     "home": "Trang chủ",
     "projects": "Dự án",
     "skills": "Kỹ năng",
-    "blog": "Blog",
     "about": "Giới thiệu",
-    "contact": "Liên hệ"
+    "contact": "Liên hệ",
+    "hireMe": "Thuê tôi",
+    "backHome": "Quay lại trang chủ"
   },
   "hero": {
-    "status": "Đang tìm kiếm cơ hội thực tập",
+    "status": "Sẵn sàng thực tập",
     "greeting": "Xin chào, mình là",
-    "role": "Lập trình viên Full-Stack",
-    "stack": "PERN Stack",
-    "description": "Sinh viên năm 4 chuyên ngành Kỹ thuật Phần mềm tại HUTECH, xây dựng các ứng dụng web thực tế với PostgreSQL, Express.js, React.js & Node.js. Đam mê thiết kế API sạch, hệ thống thời gian thực và các công cụ hỗ trợ bởi AI.",
+    "role": "Lập trình viên Fullstack — PERN · React.js · FastAPI",
+    "gpa": "GPA 3.33 / 4.0",
+    "university": "HUTECH · Kỹ thuật Phần mềm · Năm 4",
+    "description": "Sinh viên năm 4 Kỹ thuật Phần mềm xây dựng ứng dụng web thực tế — hệ thống real-time, công cụ AI và REST API sạch.",
     "viewProjects": "Xem dự án",
-    "contactMe": "Liên hệ với mình"
+    "getInTouch": "Liên hệ",
+    "openToWork": "open_to_work"
+  },
+  "projects": {
+    "sectionLabel": "02. Dự án nổi bật",
+    "title": "Dự án",
+    "viewMore": "Xem thêm trên GitHub"
+  },
+  "skills": {
+    "sectionLabel": "03. Kỹ năng",
+    "title": "Kỹ năng kỹ thuật",
+    "currentlyLearning": "// đang_học"
+  },
+  "about": {
+    "sectionLabel": "04. Giới thiệu",
+    "title": "Về mình",
+    "bio1": "Mình là sinh viên năm 4 chuyên ngành Kỹ thuật Phần mềm tại {university}, GPA 3.33/4.0, xây dựng ứng dụng web fullstack với PERN stack.",
+    "bio2": "Công việc gần đây bao gồm {cinema} với Redis distributed locking, và {ai} sử dụng RAG pipeline với LangChain & Pinecone.",
+    "cinema": "hệ thống đặt vé rạp chiếu phim real-time",
+    "ai": "trợ lý tài liệu AI",
+    "fullProfile": "Hồ sơ đầy đủ",
+    "stats": {
+      "projects": "Dự án đã làm",
+      "projectsSub": "Ứng dụng fullstack",
+      "certificates": "Chứng chỉ",
+      "certificatesSub": "Chuyên môn & học thuật",
+      "gpa": "GPA",
+      "gpaSub": "Trên thang 4.0",
+      "stack": "Stack",
+      "stackSub": "PostgreSQL · Express · React · Node"
+    }
+  },
+  "contact": {
+    "sectionLabel": "05. Liên hệ",
+    "title": "Hãy cùng hợp tác",
+    "description": "Mình đang tìm kiếm {role}. Có cơ hội? Rất mong được nghe từ bạn.",
+    "role": "vị trí Intern Fullstack / Backend Developer",
+    "sendEmail": "Gửi email cho mình",
+    "contactForm": "Form liên hệ",
+    "backHome": "Quay lại trang chủ",
+    "pageTitle": "Liên hệ",
+    "pageTitleHighlight": "với tôi",
+    "pageDesc": "Có dự án thú vị? Cơ hội thực tập? Hoặc chỉ muốn chat về công nghệ? Hãy liên hệ!",
+    "formTitle": "Gửi tin nhắn",
+    "formSubtitle": "Tôi sẽ phản hồi trong vòng 24 giờ",
+    "successTitle": "Gửi thành công!",
+    "successDesc": "Cảm ơn bạn đã liên hệ. Tôi sẽ phản hồi sớm nhất có thể.",
+    "sending": "Đang gửi...",
+    "send": "Gửi tin nhắn",
+    "chars": "ký tự",
+    "fields": {
+      "name": "Họ tên",
+      "namePlaceholder": "Nguyễn Văn A",
+      "email": "Email",
+      "emailPlaceholder": "email@example.com",
+      "subject": "Chủ đề",
+      "subjectPlaceholder": "Chọn chủ đề",
+      "subjectInternship": "Cơ hội thực tập",
+      "subjectProject": "Hợp tác dự án",
+      "subjectQuestion": "Câu hỏi kỹ thuật",
+      "subjectOther": "Khác",
+      "message": "Nội dung",
+      "messagePlaceholder": "Viết tin nhắn của bạn..."
+    },
+    "info": {
+      "title": "Thông tin liên hệ",
+      "address": "Địa chỉ",
+      "addressValue": "TP. Hồ Chí Minh, Việt Nam",
+      "phone": "Điện thoại",
+      "phoneValue": "+84 845 065 676",
+      "hours": "Thời gian",
+      "hoursValue": "T2 - T6, 9:00 - 18:00"
+    },
+    "social": {
+      "title": "Kết nối với tôi",
+      "emailDesc": "Gửi email trực tiếp",
+      "githubDesc": "Xem source code",
+      "linkedinDesc": "Kết nối chuyên nghiệp"
+    },
+    "cv": {
+      "title": "Tải CV của tôi",
+      "desc": "Xem chi tiết về kinh nghiệm và kỹ năng của tôi",
+      "link": "Xem Resume →"
+    },
+    "faq": {
+      "title": "Câu hỏi thường gặp",
+      "items": [
+        {
+          "q": "Bạn có sẵn sàng làm việc remote không?",
+          "a": "Có, tôi hoàn toàn sẵn sàng làm việc remote hoặc hybrid."
+        },
+        {
+          "q": "Thời gian phản hồi là bao lâu?",
+          "a": "Tôi thường phản hồi trong vòng 24 giờ vào các ngày làm việc."
+        },
+        {
+          "q": "Bạn đang tìm kiếm vị trí gì?",
+          "a": "Backend Developer Intern hoặc Junior Backend Developer."
+        },
+        {
+          "q": "Kỹ năng chính của bạn là gì?",
+          "a": "Node.js, Next.js, PostgreSQL, Redis, FastAPI, Docker và các công cụ AI/ML."
+        }
+      ]
+    }
+  },
+  "aboutPage": {
+    "backHome": "Quay lại trang chủ",
+    "statusBadge": "Online • Sẵn sàng hợp tác",
+    "stats": {
+      "projects": "Dự án nổi bật",
+      "certificates": "Chứng chỉ",
+      "awards": "Giải thưởng",
+      "blog": "Blog posts"
+    },
+    "skills": {
+      "title": "Công nghệ & Kỹ năng",
+      "subtitle": "Những công nghệ tôi đã và đang thành thạo"
+    },
+    "education": {
+      "university": "Đại học Công nghệ TP.HCM (HUTECH)",
+      "degree": "Cử nhân Kỹ thuật Phần mềm • 2022 – 2026",
+      "year": "Năm 4 (Dự kiến tốt nghiệp 2026)",
+      "gpa": "GPA: 3.34/4.0"
+    },
+    "certificates": {
+      "title": "Chứng chỉ & Giải thưởng",
+      "subtitle": "Những thành tựu và chứng nhận chính thức tôi đã đạt được",
+      "viewCert": "Xem chứng chỉ"
+    },
+    "hobbies": {
+      "title": "Sở thích & Hoạt động ngoại khóa",
+      "subtitle": "Tôi tin rằng sự cân bằng giữa công việc và cuộc sống là rất quan trọng",
+      "items": [
+        {
+          "title": "Bóng đá nữ",
+          "desc": "Thành viên đội bóng đá nữ Khoa CNTT – Giải Nhì Hội thao HUTECH 2024"
+        },
+        {
+          "title": "Tình nguyện",
+          "desc": "Tham gia gói quà Tết, hoạt động cộng đồng"
+        },
+        {
+          "title": "Đọc sách",
+          "desc": "Thích sách về công nghệ, tâm lý và phát triển bản thân"
+        }
+      ]
+    },
+    "cta": {
+      "title": "Sẵn sàng bắt đầu hành trình Intern cùng team!",
+      "desc": "Tôi đang tìm kiếm cơ hội {role} tại các công ty công nghệ, đặc biệt trong lĩnh vực AI/ML, hệ thống real-time và microservices.",
+      "role": "Fullstack Developer Intern",
+      "contact": "Liên hệ ngay",
+      "cv": "Tải CV"
+    }
+  },
+  "footer": {
+    "builtWith": "Xây dựng với Next.js & Tailwind."
   }
 }

@@ -2,11 +2,14 @@
 
 import { profile } from '../../src/data/staticData';
 import Link from 'next/link';
-import { ArrowLeft, Mail, Github, Linkedin, MapPin, Send, Phone, Clock, MessageSquare, User, CheckCircle, AlertCircle } from 'lucide-react';
+import { ArrowLeft, Mail, Github, Linkedin, MapPin, Send, Phone, Clock, MessageSquare, User, CheckCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { useLocale } from '@/src/context/LocaleContext';
 
 export default function ContactPage() {
+    const { t } = useLocale();
+
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -19,23 +22,16 @@ export default function ContactPage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
-
-        // Simulate API call
         setTimeout(() => {
             setIsSubmitting(false);
             setSubmitStatus('success');
             setFormData({ name: '', email: '', subject: '', message: '' });
-
-            // Reset status after 5 seconds
             setTimeout(() => setSubmitStatus('idle'), 5000);
         }, 1500);
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
+        setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     const socialLinks = [
@@ -45,15 +41,15 @@ export default function ContactPage() {
             value: profile.email,
             href: `mailto:${profile.email}`,
             color: 'from-red-500 to-pink-500',
-            description: 'Gửi email trực tiếp'
+            description: t('contact.social.emailDesc'),
         },
         {
             name: 'GitHub',
             icon: Github,
-            value: 'github.com/yourusername',
+            value: 'github.com/ntnhan19',
             href: profile.github,
             color: 'from-slate-700 to-slate-900',
-            description: 'Xem source code'
+            description: t('contact.social.githubDesc'),
         },
         {
             name: 'LinkedIn',
@@ -61,44 +57,35 @@ export default function ContactPage() {
             value: 'LinkedIn Profile',
             href: profile.linkedin,
             color: 'from-blue-600 to-blue-700',
-            description: 'Kết nối chuyên nghiệp'
-        }
+            description: t('contact.social.linkedinDesc'),
+        },
     ];
 
     const contactInfo = [
-        {
-            icon: MapPin,
-            title: 'Địa chỉ',
-            value: 'TP. Hồ Chí Minh, Việt Nam',
-            color: 'text-red-600'
-        },
-        {
-            icon: Phone,
-            title: 'Điện thoại',
-            value: '+84 xxx xxx xxx',
-            color: 'text-green-600'
-        },
-        {
-            icon: Clock,
-            title: 'Thời gian',
-            value: 'T2 - T6, 9:00 - 18:00',
-            color: 'text-blue-600'
-        }
+        { icon: MapPin, title: t('contact.info.address'), value: t('contact.info.addressValue'), color: 'text-red-600' },
+        { icon: Phone,  title: t('contact.info.phone'),   value: t('contact.info.phoneValue'),   color: 'text-green-600' },
+        { icon: Clock,  title: t('contact.info.hours'),   value: t('contact.info.hoursValue'),   color: 'text-blue-600' },
+    ];
+
+    const faqs: { q: string; a: string }[] = [
+        { q: t('contact.faq.items.0.q'), a: t('contact.faq.items.0.a') },
+        { q: t('contact.faq.items.1.q'), a: t('contact.faq.items.1.a') },
+        { q: t('contact.faq.items.2.q'), a: t('contact.faq.items.2.a') },
+        { q: t('contact.faq.items.3.q'), a: t('contact.faq.items.3.a') },
     ];
 
     return (
         <div className="min-h-screen bg-slate-50">
             {/* Hero Section */}
             <div className="relative bg-gradient-to-br from-slate-900 via-purple-900 to-blue-900 text-white py-24 overflow-hidden">
-                {/* Animated background */}
-                <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-                <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-                <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+                <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob" />
+                <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000" />
+                <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000" />
 
                 <div className="max-w-6xl mx-auto px-6 relative z-10">
                     <Link href="/" className="inline-flex items-center text-white/80 hover:text-white mb-8 transition-colors group">
                         <ArrowLeft size={20} className="mr-2 group-hover:-translate-x-1 transition-transform" />
-                        Quay lại trang chủ
+                        {t('contact.backHome')}
                     </Link>
 
                     <motion.div
@@ -110,10 +97,13 @@ export default function ContactPage() {
                             <MessageSquare size={40} className="text-blue-300" />
                         </div>
                         <h1 className="text-5xl md:text-6xl font-bold mb-4">
-                            Liên hệ <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">với tôi</span>
+                            {t('contact.pageTitle')}{' '}
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+                                {t('contact.pageTitleHighlight')}
+                            </span>
                         </h1>
                         <p className="text-xl text-blue-100 max-w-2xl mx-auto">
-                            Có dự án thú vị? Cơ hội thực tập? Hoặc chỉ muốn chat về công nghệ? Hãy liên hệ!
+                            {t('contact.pageDesc')}
                         </p>
                     </motion.div>
                 </div>
@@ -121,17 +111,16 @@ export default function ContactPage() {
 
             <div className="max-w-6xl mx-auto px-6 py-16">
                 <div className="grid lg:grid-cols-5 gap-8">
-                    {/* Contact Form - 3 columns */}
+                    {/* Contact Form — 3 columns */}
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         className="lg:col-span-3"
                     >
                         <div className="bg-white rounded-3xl shadow-xl border border-slate-200 p-8 md:p-10">
-                            <h2 className="text-3xl font-bold text-slate-900 mb-2">Gửi tin nhắn</h2>
-                            <p className="text-slate-600 mb-8">Tôi sẽ phản hồi trong vòng 24 giờ</p>
+                            <h2 className="text-3xl font-bold text-slate-900 mb-2">{t('contact.formTitle')}</h2>
+                            <p className="text-slate-600 mb-8">{t('contact.formSubtitle')}</p>
 
-                            {/* Success Message */}
                             {submitStatus === 'success' && (
                                 <motion.div
                                     initial={{ opacity: 0, y: -10 }}
@@ -140,8 +129,8 @@ export default function ContactPage() {
                                 >
                                     <CheckCircle className="text-green-600 flex-shrink-0 mt-0.5" size={20} />
                                     <div>
-                                        <h3 className="font-semibold text-green-900">Gửi thành công!</h3>
-                                        <p className="text-sm text-green-700">Cảm ơn bạn đã liên hệ. Tôi sẽ phản hồi sớm nhất có thể.</p>
+                                        <h3 className="font-semibold text-green-900">{t('contact.successTitle')}</h3>
+                                        <p className="text-sm text-green-700">{t('contact.successDesc')}</p>
                                     </div>
                                 </motion.div>
                             )}
@@ -151,7 +140,7 @@ export default function ContactPage() {
                                 <div className="grid md:grid-cols-2 gap-6">
                                     <div>
                                         <label className="block text-sm font-semibold text-slate-700 mb-2">
-                                            Họ tên <span className="text-red-500">*</span>
+                                            {t('contact.fields.name')} <span className="text-red-500">*</span>
                                         </label>
                                         <div className="relative">
                                             <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
@@ -162,14 +151,14 @@ export default function ContactPage() {
                                                 onChange={handleChange}
                                                 required
                                                 className="w-full pl-12 pr-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                                                placeholder="Nguyễn Văn A"
+                                                placeholder={t('contact.fields.namePlaceholder')}
                                             />
                                         </div>
                                     </div>
 
                                     <div>
                                         <label className="block text-sm font-semibold text-slate-700 mb-2">
-                                            Email <span className="text-red-500">*</span>
+                                            {t('contact.fields.email')} <span className="text-red-500">*</span>
                                         </label>
                                         <div className="relative">
                                             <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
@@ -180,7 +169,7 @@ export default function ContactPage() {
                                                 onChange={handleChange}
                                                 required
                                                 className="w-full pl-12 pr-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                                                placeholder="email@example.com"
+                                                placeholder={t('contact.fields.emailPlaceholder')}
                                             />
                                         </div>
                                     </div>
@@ -189,7 +178,7 @@ export default function ContactPage() {
                                 {/* Subject */}
                                 <div>
                                     <label className="block text-sm font-semibold text-slate-700 mb-2">
-                                        Chủ đề <span className="text-red-500">*</span>
+                                        {t('contact.fields.subject')} <span className="text-red-500">*</span>
                                     </label>
                                     <select
                                         name="subject"
@@ -198,18 +187,18 @@ export default function ContactPage() {
                                         required
                                         className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                                     >
-                                        <option value="">Chọn chủ đề</option>
-                                        <option value="internship">Cơ hội thực tập</option>
-                                        <option value="project">Hợp tác dự án</option>
-                                        <option value="question">Câu hỏi kỹ thuật</option>
-                                        <option value="other">Khác</option>
+                                        <option value="">{t('contact.fields.subjectPlaceholder')}</option>
+                                        <option value="internship">{t('contact.fields.subjectInternship')}</option>
+                                        <option value="project">{t('contact.fields.subjectProject')}</option>
+                                        <option value="question">{t('contact.fields.subjectQuestion')}</option>
+                                        <option value="other">{t('contact.fields.subjectOther')}</option>
                                     </select>
                                 </div>
 
                                 {/* Message */}
                                 <div>
                                     <label className="block text-sm font-semibold text-slate-700 mb-2">
-                                        Nội dung <span className="text-red-500">*</span>
+                                        {t('contact.fields.message')} <span className="text-red-500">*</span>
                                     </label>
                                     <textarea
                                         name="message"
@@ -218,14 +207,14 @@ export default function ContactPage() {
                                         required
                                         rows={6}
                                         className="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
-                                        placeholder="Viết tin nhắn của bạn..."
+                                        placeholder={t('contact.fields.messagePlaceholder')}
                                     />
                                     <p className="text-xs text-slate-500 mt-2">
-                                        {formData.message.length}/500 ký tự
+                                        {formData.message.length}/500 {t('contact.chars')}
                                     </p>
                                 </div>
 
-                                {/* Submit Button */}
+                                {/* Submit */}
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
@@ -234,12 +223,12 @@ export default function ContactPage() {
                                     {isSubmitting ? (
                                         <>
                                             <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                            Đang gửi...
+                                            {t('contact.sending')}
                                         </>
                                     ) : (
                                         <>
                                             <Send size={20} />
-                                            Gửi tin nhắn
+                                            {t('contact.send')}
                                         </>
                                     )}
                                 </button>
@@ -247,15 +236,15 @@ export default function ContactPage() {
                         </div>
                     </motion.div>
 
-                    {/* Contact Info Sidebar - 2 columns */}
+                    {/* Sidebar — 2 columns */}
                     <motion.div
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         className="lg:col-span-2 space-y-6"
                     >
-                        {/* Quick Contact Info */}
+                        {/* Contact Info */}
                         <div className="bg-white rounded-3xl shadow-lg border border-slate-200 p-8">
-                            <h3 className="text-xl font-bold text-slate-900 mb-6">Thông tin liên hệ</h3>
+                            <h3 className="text-xl font-bold text-slate-900 mb-6">{t('contact.info.title')}</h3>
                             <div className="space-y-4">
                                 {contactInfo.map((info, i) => {
                                     const Icon = info.icon;
@@ -276,7 +265,7 @@ export default function ContactPage() {
 
                         {/* Social Links */}
                         <div className="bg-white rounded-3xl shadow-lg border border-slate-200 p-8">
-                            <h3 className="text-xl font-bold text-slate-900 mb-6">Kết nối với tôi</h3>
+                            <h3 className="text-xl font-bold text-slate-900 mb-6">{t('contact.social.title')}</h3>
                             <div className="space-y-3">
                                 {socialLinks.map((link, i) => {
                                     const Icon = link.icon;
@@ -303,23 +292,21 @@ export default function ContactPage() {
                             </div>
                         </div>
 
-                        {/* Quick Actions */}
+                        {/* CV Download */}
                         <div className="bg-gradient-to-br from-blue-600 to-purple-600 rounded-3xl shadow-lg p-8 text-white">
-                            <h3 className="text-xl font-bold mb-3">Tải CV của tôi</h3>
-                            <p className="text-blue-100 mb-6 text-sm">
-                                Xem chi tiết về kinh nghiệm và kỹ năng của tôi
-                            </p>
+                            <h3 className="text-xl font-bold mb-3">{t('contact.cv.title')}</h3>
+                            <p className="text-blue-100 mb-6 text-sm">{t('contact.cv.desc')}</p>
                             <Link
                                 href="/resume"
                                 className="block w-full bg-white text-slate-900 font-bold py-3 rounded-xl hover:bg-blue-50 transition-all text-center"
                             >
-                                Xem Resume →
+                                {t('contact.cv.link')}
                             </Link>
                         </div>
                     </motion.div>
                 </div>
 
-                {/* FAQ Section */}
+                {/* FAQ */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -327,26 +314,9 @@ export default function ContactPage() {
                     className="mt-16"
                 >
                     <div className="bg-white rounded-3xl shadow-lg border border-slate-200 p-8 md:p-10">
-                        <h2 className="text-2xl font-bold text-slate-900 mb-6 text-center">Câu hỏi thường gặp</h2>
+                        <h2 className="text-2xl font-bold text-slate-900 mb-6 text-center">{t('contact.faq.title')}</h2>
                         <div className="grid md:grid-cols-2 gap-6">
-                            {[
-                                {
-                                    q: "Bạn có sẵn sàng làm việc remote không?",
-                                    a: "Có, tôi hoàn toàn sẵn sàng làm việc remote hoặc hybrid."
-                                },
-                                {
-                                    q: "Thời gian phản hồi là bao lâu?",
-                                    a: "Tôi thường phản hồi trong vòng 24 giờ vào các ngày làm việc."
-                                },
-                                {
-                                    q: "Bạn đang tìm kiếm vị trí gì?",
-                                    a: "Backend Developer Intern hoặc Junior Backend Developer."
-                                },
-                                {
-                                    q: "Kỹ năng chính của bạn là gì?",
-                                    a: "Go, Node.js, Java Spring Boot, PostgreSQL, Redis và AI/ML."
-                                }
-                            ].map((faq, i) => (
+                            {faqs.map((faq, i) => (
                                 <div key={i} className="p-4 bg-slate-50 rounded-xl border border-slate-200">
                                     <h3 className="font-bold text-slate-900 mb-2 text-sm">{faq.q}</h3>
                                     <p className="text-slate-600 text-sm">{faq.a}</p>

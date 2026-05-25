@@ -23,6 +23,7 @@ import {
     Heart
 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useLocale } from '@/src/context/LocaleContext';
 
 const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
@@ -66,16 +67,18 @@ const skillCategories = [
     }
 ];
 
-const hobbies = [
-    { icon: Gamepad2, title: "Bóng đá nữ", desc: "Thành viên đội bóng đá nữ Khoa CNTT – Giải Nhì Hội thao HUTECH 2024" },
-    { icon: Heart, title: "Tình nguyện", desc: "Tham gia gói quà Tết, hoạt động cộng đồng" },
-    { icon: BookOpen, title: "Đọc sách", desc: "Thích sách về công nghệ, tâm lý và phát triển bản thân" }
-];
-
 export default function AboutPage() {
+    const { t } = useLocale();
+
+    const hobbies = [
+        { icon: Gamepad2, title: t('aboutPage.hobbies.items.0.title'), desc: t('aboutPage.hobbies.items.0.desc') },
+        { icon: Heart,    title: t('aboutPage.hobbies.items.1.title'), desc: t('aboutPage.hobbies.items.1.desc') },
+        { icon: BookOpen, title: t('aboutPage.hobbies.items.2.title'), desc: t('aboutPage.hobbies.items.2.desc') },
+    ];
+
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/30">
-            {/* Hero Section - 2 cột cân đối */}
+            {/* Hero Section */}
             <section className="relative py-20 px-6 overflow-hidden lg:py-28">
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-purple-600/5 to-pink-600/5" />
 
@@ -83,10 +86,10 @@ export default function AboutPage() {
                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
                         <Link href="/" className="inline-flex items-center text-slate-600 hover:text-blue-600 mb-10 font-medium group text-base">
                             <ArrowLeft size={18} className="mr-2 group-hover:-translate-x-1 transition" />
-                            Quay lại trang chủ
+                            {t('aboutPage.backHome')}
                         </Link>
 
-                        {/* 2 cột: Avatar trái - Nội dung phải */}
+                        {/* 2 columns: Avatar left - Content right */}
                         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
                             <div className="relative flex justify-center lg:justify-end">
                                 <div className="relative">
@@ -101,7 +104,7 @@ export default function AboutPage() {
                                         <div className="w-8 h-8 bg-white rounded-full" />
                                     </div>
                                     <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-md px-5 py-2.5 rounded-2xl shadow-xl">
-                                        <span className="text-base font-bold text-green-600">Online • Ready to collaborate</span>
+                                        <span className="text-base font-bold text-green-600">{t('aboutPage.statusBadge')}</span>
                                     </div>
                                 </div>
                             </div>
@@ -128,10 +131,10 @@ export default function AboutPage() {
                             className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mt-16"
                         >
                             {[
-                                { label: "Dự án nổi bật", value: projects.length + "+", icon: Code2 },
-                                { label: "Chứng chỉ", value: certificates.length, icon: Award },
-                                { label: "Giải thưởng", value: "3", icon: Trophy },
-                                { label: "Blog posts", value: "11", icon: Zap }
+                                { label: t('aboutPage.stats.projects'),     value: projects.length + "+", icon: Code2 },
+                                { label: t('aboutPage.stats.certificates'), value: certificates.length,   icon: Award },
+                                { label: t('aboutPage.stats.awards'),       value: "3",                   icon: Trophy },
+                                { label: t('aboutPage.stats.blog'),         value: "11",                  icon: Zap },
                             ].map((stat, i) => (
                                 <motion.div
                                     key={i}
@@ -157,8 +160,8 @@ export default function AboutPage() {
                         viewport={{ once: true }}
                         className="text-center mb-14"
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Công nghệ & Kỹ năng</h2>
-                        <p className="text-lg text-slate-600 max-w-2xl mx-auto">Những công nghệ tôi đã và đang thành thạo</p>
+                        <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">{t('aboutPage.skills.title')}</h2>
+                        <p className="text-lg text-slate-600 max-w-2xl mx-auto">{t('aboutPage.skills.subtitle')}</p>
                     </motion.div>
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -210,14 +213,14 @@ export default function AboutPage() {
                             </div>
                             <div className="text-center md:text-left">
                                 <h3 className="text-3xl font-bold text-slate-900 mb-2">
-                                    Đại học Công nghệ TP.HCM (HUTECH)
+                                    {t('aboutPage.education.university')}
                                 </h3>
                                 <p className="text-xl text-slate-700 mb-4">
-                                    Cử nhân Kỹ thuật Phần mềm • 2022 – 2026
+                                    {t('aboutPage.education.degree')}
                                 </p>
                                 <div className="flex flex-wrap gap-6 justify-center md:justify-start text-slate-600 text-base">
-                                    <span className="flex items-center gap-2"><Calendar size={18} /> Năm 4 (Dự kiến tốt nghiệp 2026)</span>
-                                    <span className="flex items-center gap-2"><Award size={18} /> GPA: 3.34/4.0</span>
+                                    <span className="flex items-center gap-2"><Calendar size={18} /> {t('aboutPage.education.year')}</span>
+                                    <span className="flex items-center gap-2"><Award size={18} /> {t('aboutPage.education.gpa')}</span>
                                 </div>
                             </div>
                         </div>
@@ -234,9 +237,9 @@ export default function AboutPage() {
                         viewport={{ once: true }}
                         className="text-center mb-14"
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Chứng chỉ & Giải thưởng</h2>
+                        <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">{t('aboutPage.certificates.title')}</h2>
                         <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                            Những thành tựu và chứng nhận chính thức tôi đã đạt được
+                            {t('aboutPage.certificates.subtitle')}
                         </p>
                     </motion.div>
 
@@ -279,7 +282,7 @@ export default function AboutPage() {
                                             rel="noopener noreferrer"
                                             className="inline-flex items-center gap-2 text-blue-600 font-semibold text-base hover:gap-3 transition-all"
                                         >
-                                            Xem chứng chỉ <ExternalLink size={18} />
+                                            {t('aboutPage.certificates.viewCert')} <ExternalLink size={18} />
                                         </a>
                                     )}
                                 </div>
@@ -298,13 +301,13 @@ export default function AboutPage() {
                         viewport={{ once: true }}
                         className="text-center mb-14"
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Sở thích & Hoạt động ngoại khóa</h2>
+                        <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">{t('aboutPage.hobbies.title')}</h2>
                         <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                            Tôi tin rằng sự cân bằng giữa công việc và cuộc sống là rất quan trọng
+                            {t('aboutPage.hobbies.subtitle')}
                         </p>
                     </motion.div>
 
-                    {/* Hoạt động ngoại khóa (có ảnh) */}
+                    {/* Activities (with images) */}
                     <div className="grid md:grid-cols-2 gap-10 mb-16">
                         {activities.map((act: any, i: number) => (
                             <motion.div
@@ -334,7 +337,7 @@ export default function AboutPage() {
                         ))}
                     </div>
 
-                    {/* Sở thích cá nhân - dạng card nhỏ */}
+                    {/* Personal hobbies */}
                     <div className="grid md:grid-cols-3 gap-8">
                         {hobbies.map((hobby, i) => {
                             const Icon = hobby.icon;
@@ -374,10 +377,10 @@ export default function AboutPage() {
                         className="space-y-8"
                     >
                         <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                            Sẵn sàng bắt đầu hành trình Intern cùng team!
+                            {t('aboutPage.cta.title')}
                         </h2>
                         <p className="text-lg md:text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
-                            Tôi đang tìm kiếm cơ hội <strong>Fullstack Developer Intern</strong> tại các công ty công nghệ, đặc biệt trong lĩnh vực AI/ML, hệ thống real-time và microservices.
+                            {t('aboutPage.cta.desc', { role: t('aboutPage.cta.role') })}
                         </p>
 
                         <div className="flex flex-wrap justify-center gap-6 mt-10">
@@ -385,13 +388,13 @@ export default function AboutPage() {
                                 href={`mailto:${profile.email}`}
                                 className="px-8 py-4 bg-white text-slate-900 font-bold text-lg rounded-2xl hover:bg-blue-50 transition-all shadow-2xl hover:scale-105 flex items-center gap-3"
                             >
-                                <Mail size={24} /> Liên hệ ngay
+                                <Mail size={24} /> {t('aboutPage.cta.contact')}
                             </a>
                             <Link
                                 href="/resume"
                                 className="px-8 py-4 bg-white/20 backdrop-blur-md border-2 border-white text-white font-bold text-lg rounded-2xl hover:bg-white/30 transition-all shadow-2xl hover:scale-105 flex items-center gap-3"
                             >
-                                <Download size={24} /> Tải CV
+                                <Download size={24} /> {t('aboutPage.cta.cv')}
                             </Link>
                         </div>
 
