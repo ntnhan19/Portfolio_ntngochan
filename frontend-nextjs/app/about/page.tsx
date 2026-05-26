@@ -5,7 +5,7 @@ import Link from 'next/link';
 import {
     ArrowLeft, Mail, Github, Linkedin,
     Award, Trophy, Calendar, ExternalLink,
-    Download, GraduationCap, Code2, Database,
+    Download, Code2, Database,
     Cpu, Globe, Zap, BookOpen, Gamepad2, Heart
 } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -129,7 +129,7 @@ export default function AboutPage() {
             </section>
 
             {/* ── SKILLS ───────────────────────────────────── */}
-            <section style={{ background: 'var(--bg-subtle)', borderBottom: '1px solid var(--border)', paddingTop: '5rem', paddingBottom: '5rem' }}>
+            <section id="skills" style={{ background: 'var(--bg-subtle)', borderBottom: '1px solid var(--border)', paddingTop: '5rem', paddingBottom: '5rem' }}>
                 <div className="max-w-6xl mx-auto px-6">
                     <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="mb-10">
                         <motion.span variants={fadeInUp}
@@ -164,10 +164,16 @@ export default function AboutPage() {
                                             {t(`aboutPage.skills.categories.${cat.i18nKey}`)}
                                         </span>
                                     </div>
-                                    <div className="flex flex-col gap-1.5">
-                                        {cat.skills.map(skill => (
-                                            <div key={skill} className="flex items-center gap-2" style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>
-                                                <span style={{ width: 3, height: 3, borderRadius: '50%', background: `var(${cat.colorVar})`, opacity: 0.7, flexShrink: 0 }} />
+                                    <div className="flex flex-col gap-2.5">
+                                        {cat.core.map(skill => (
+                                            <div key={skill} className="flex items-center gap-2" style={{ fontSize: '0.82rem' }}>
+                                                <span style={{ width: 4, height: 4, borderRadius: '50%', background: `var(${cat.colorVar})`, flexShrink: 0 }} />
+                                                <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{skill}</span>
+                                            </div>
+                                        ))}
+                                        {cat.secondary.map(skill => (
+                                            <div key={skill} className="flex items-center gap-2 pl-1" style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                                                <span style={{ width: 2, height: 2, borderRadius: '50%', background: 'var(--text-muted)', opacity: 0.45, flexShrink: 0 }} />
                                                 {skill}
                                             </div>
                                         ))}
@@ -188,9 +194,13 @@ export default function AboutPage() {
                         viewport={{ once: true }}
                         className="card p-8 flex flex-col md:flex-row items-center gap-8"
                     >
-                        <div className="p-5 rounded-2xl flex-shrink-0"
-                            style={{ background: 'var(--accent-light)', border: '1px solid var(--accent-border)' }}>
-                            <GraduationCap size={36} style={{ color: 'var(--accent)' }} />
+                        <div className="p-4 rounded-2xl flex-shrink-0 flex items-center justify-center"
+                            style={{ background: 'var(--surface)', border: '1px solid var(--border)', width: '7.5rem', height: '7.5rem' }}>
+                            <img
+                                src="/images/logo_hutech.webp"
+                                alt="HUTECH logo"
+                                style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                            />
                         </div>
                         <div className="text-center md:text-left">
                             <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1.25rem', color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
@@ -221,7 +231,7 @@ export default function AboutPage() {
                     </motion.div>
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-                        {certificates.map((cert: any, i: number) => (
+                        {certificates.map((cert, i: number) => (
                             <motion.div key={cert.id}
                                 initial={{ opacity: 0, y: 24 }}
                                 whileInView={{ opacity: 1, y: 0 }}
@@ -231,11 +241,11 @@ export default function AboutPage() {
                                 style={{ cursor: cert.url ? 'pointer' : 'default' }}
                             >
                                 {/* Image area */}
-                                <div style={{ height: '11rem', background: 'var(--bg-muted)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1.25rem', borderBottom: '1px solid var(--border)' }}>
+                                <div style={{ height: '14rem', background: 'var(--surface-raised)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0.75rem', borderBottom: '1px solid var(--border)' }}>
                                     <img
                                         src={cert.image_url}
                                         alt={cert.name}
-                                        style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain', borderRadius: '8px', transition: 'transform 0.3s ease' }}
+                                        style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '10px', transition: 'transform 0.3s ease' }}
                                         className="group-hover:scale-105"
                                     />
                                 </div>
@@ -289,7 +299,7 @@ export default function AboutPage() {
 
                     {/* Activities with images */}
                     <div className="grid md:grid-cols-2 gap-6 mb-8">
-                        {activities.map((act: any, i: number) => (
+                        {activities.map((act, i: number) => (
                             <motion.div key={act.id}
                                 initial={{ opacity: 0, x: i % 2 === 0 ? -24 : 24 }}
                                 whileInView={{ opacity: 1, x: 0 }}

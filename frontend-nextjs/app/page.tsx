@@ -1,6 +1,6 @@
 'use client';
 
-import { profile, projects, skillCategories } from '@/data';
+import { profile, projects, certificates, coreStackSkills, homepageSkillGroups, devopsSkillGroup } from '@/data';
 import { ProjectCard } from '@/src/components/projects/ProjectCard';
 import { ThemeToggle } from '@/src/components/ui/ThemeToggle';
 import { LanguageToggle } from '@/src/components/ui/LanguageToggle';
@@ -8,18 +8,22 @@ import { useLocale } from '@/src/context/LocaleContext';
 import {
   Mail, Github, Linkedin, ArrowUp, Menu, X,
   ExternalLink, ArrowRight,
-  Database, Server, Zap, Globe
+  Database, Server, Zap, Globe, GitBranch, Check,
+  Award, GraduationCap, Heart
 } from 'lucide-react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { usePortfolioTheme } from '@/src/hooks/usePortfolioTheme';
+
+const homepageAboutAvatar = '/images/avatar1.jpg';
 
 /* ─── ANIMATION VARIANTS ──────────────────────────────── */
 const fadeUp = {
   hidden: { opacity: 0, y: 22 },
   visible: (delay = 0) => ({
     opacity: 1, y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as any, delay }
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number], delay }
   })
 };
 
@@ -37,33 +41,17 @@ const skillIcons = {
   backend: Server,
   database: Database,
   'ai-tools': Zap,
-  devops: Zap,
+  devops: GitBranch,
 } as const;
 
 export default function Portfolio() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const { theme, toggleTheme } = usePortfolioTheme();
   const { t } = useLocale();
   const { scrollYProgress } = useScroll();
   const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
-
-  /* ── Theme: read from localStorage or system preference ── */
-  useEffect(() => {
-    const saved = localStorage.getItem('portfolio-theme') as 'light' | 'dark' | null;
-    const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    const initial = saved ?? preferred;
-    setTheme(initial);
-    document.documentElement.setAttribute('data-theme', initial);
-  }, []);
-
-  const toggleTheme = () => {
-    const next = theme === 'light' ? 'dark' : 'light';
-    setTheme(next);
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('portfolio-theme', next);
-  };
 
   /* ── Nav links (built here so labels are translated) ── */
   const navLinks = [
@@ -351,9 +339,14 @@ export default function Portfolio() {
             initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
             className="mt-10 text-center"
           >
-            <a href={profile.github} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
-              <Github size={16} /> {t('projects.viewMore')} <ExternalLink size={14} />
-            </a>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+              <Link href="/projects" className="btn btn-primary">
+                {t('projects.viewAll')} <ArrowRight size={16} />
+              </Link>
+              <a href={profile.github} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
+                <Github size={16} /> {t('projects.viewMore')} <ExternalLink size={14} />
+              </a>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -363,46 +356,149 @@ export default function Portfolio() {
       ═══════════════════════════════════════ */}
       <section id="skills" className="section-gap" style={{ background: 'var(--bg-base)', borderTop: '1px solid var(--border)' }}>
         <div className="max-w-6xl mx-auto px-6">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }} variants={stagger} className="mb-12">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }} variants={stagger} className="mb-10">
             <motion.span variants={fadeUp} className="section-label block mb-3">{t('skills.sectionLabel')}</motion.span>
-            <motion.h2 variants={fadeUp} className="text-section-heading" style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}>
+            <motion.h2 variants={fadeUp} className="text-section-heading mb-2" style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}>
               {t('skills.title')}
             </motion.h2>
+            <motion.p variants={fadeUp} className="text-sm max-w-2xl" style={{ color: 'var(--text-secondary)', lineHeight: 1.65 }}>
+              {t('skills.subtitle')}
+            </motion.p>
           </motion.div>
 
+          {/* Core stack — what I use in projects (intern scan target) */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-8 p-6 rounded-2xl"
+            style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: '0 8px 32px rgba(26,58,92,0.06)' }}
+          >
+            <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--accent-mid)', marginBottom: '0.75rem' }}>
+              {t('skills.coreStackLabel')}
+            </p>
+            <div className="flex flex-wrap gap-2.5">
+              {coreStackSkills.map((skill) => (
+                <span
+                  key={skill}
+                  className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-sm font-semibold"
+                  style={{
+                    background: 'var(--accent-light)',
+                    border: '1px solid var(--accent-border)',
+                    color: 'var(--accent)',
+                    fontFamily: 'var(--font-display)',
+                  }}
+                >
+                  <Check size={14} strokeWidth={2.5} />
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* 4 domain groups with core vs familiar hierarchy */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {skillCategories.slice(0, 4).map((group, idx) => {
+            {homepageSkillGroups.map((group, idx) => {
               const Icon = skillIcons[group.key as keyof typeof skillIcons];
               return (
-                <motion.div key={group.key}
+                <motion.div
+                  key={group.key}
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  className="card p-6 flex flex-col gap-4">
+                  transition={{ duration: 0.5, delay: idx * 0.08 }}
+                  className="card p-5 flex flex-col gap-4"
+                >
                   <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-lg" style={{
-                      background: `color-mix(in srgb, var(${group.colorVar}) 12%, transparent)`,
-                      border: `1px solid color-mix(in srgb, var(${group.colorVar}) 25%, transparent)`,
-                    }}>
+                    <div
+                      className="p-2 rounded-lg"
+                      style={{
+                        background: `color-mix(in srgb, var(${group.colorVar}) 12%, transparent)`,
+                        border: `1px solid color-mix(in srgb, var(${group.colorVar}) 25%, transparent)`,
+                      }}
+                    >
                       <Icon size={18} style={{ color: `var(${group.colorVar})` }} />
                     </div>
-                    <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.95rem', color: 'var(--text-primary)' }}>
+                    <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-primary)' }}>
                       {group.title}
                     </span>
                   </div>
-                  <div className="flex flex-col gap-2">
-                    {group.skills.map(skill => (
-                      <div key={skill} className="flex items-center gap-2 text-sm" style={{ color: 'var(--text-secondary)' }}>
-                        <span style={{ width: 4, height: 4, borderRadius: '50%', background: `var(${group.colorVar})`, flexShrink: 0, opacity: 0.7 }} />
-                        {skill}
+
+                  <div className="flex flex-col gap-3">
+                    <div>
+                      <p style={{ fontSize: '0.65rem', fontFamily: 'var(--font-mono)', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>
+                        {t('skills.coreLabel')}
+                      </p>
+                      <ul className="flex flex-col gap-2 list-none m-0 p-0">
+                        {group.core.map((skill) => (
+                          <li key={skill} className="flex items-center gap-2">
+                            <Check size={14} strokeWidth={2.5} style={{ color: `var(${group.colorVar})`, flexShrink: 0 }} />
+                            <span style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)', lineHeight: 1.35 }}>
+                              {skill}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {group.secondary.length > 0 && (
+                      <div style={{ borderTop: '1px solid var(--border)', paddingTop: '0.75rem' }}>
+                        <p style={{ fontSize: '0.65rem', fontFamily: 'var(--font-mono)', fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '0.4rem' }}>
+                          {t('skills.familiarLabel')}
+                        </p>
+                        <ul className="flex flex-col gap-1.5 list-none m-0 p-0">
+                          {group.secondary.map((skill) => (
+                            <li key={skill} className="flex items-center gap-2">
+                              <span style={{ width: 3, height: 3, borderRadius: '50%', background: 'var(--text-muted)', flexShrink: 0, opacity: 0.5 }} />
+                              <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: 1.35 }}>
+                                {skill}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
-                    ))}
+                    )}
                   </div>
                 </motion.div>
               );
             })}
           </div>
+
+          {/* DevOps — visible on homepage + link to full breakdown on /about */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-5 p-5 rounded-xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+            style={{ background: 'var(--bg-subtle)', border: '1px solid var(--border)' }}
+          >
+            <div className="flex flex-col sm:flex-row sm:items-start gap-4 flex-1 min-w-0">
+              <div className="flex items-center gap-3 shrink-0">
+                <div className="p-2 rounded-lg" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
+                  <GitBranch size={18} style={{ color: 'var(--text-secondary)' }} />
+                </div>
+                <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-primary)' }}>
+                  {devopsSkillGroup.title}
+                </span>
+              </div>
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+                {devopsSkillGroup.core.map((skill) => (
+                  <span key={skill} className="inline-flex items-center gap-1.5 text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
+                    <Check size={13} strokeWidth={2.5} style={{ color: 'var(--success)' }} />
+                    {skill}
+                  </span>
+                ))}
+                {devopsSkillGroup.secondary.map((skill) => (
+                  <span key={skill} className="text-sm" style={{ color: 'var(--text-muted)' }}>
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <Link href="/about#skills" className="btn btn-secondary text-sm shrink-0 self-start sm:self-center">
+              {t('skills.viewFullBreakdown')} <ArrowRight size={14} />
+            </Link>
+          </motion.div>
 
           {/* Currently learning */}
           <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
@@ -425,13 +521,17 @@ export default function Portfolio() {
       ═══════════════════════════════════════ */}
       <section id="about" className="section-gap" style={{ background: 'var(--bg-subtle)', borderTop: '1px solid var(--border)' }}>
         <div className="max-w-6xl mx-auto px-6">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="max-w-3xl">
-              <motion.span variants={fadeUp} className="section-label block mb-3">{t('about.sectionLabel')}</motion.span>
-              <motion.h2 variants={fadeUp} className="text-section-heading mb-6" style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}>
-                {t('about.title')}
-              </motion.h2>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="mb-10">
+            <motion.span variants={fadeUp} className="section-label block mb-3">{t('about.sectionLabel')}</motion.span>
+            <motion.h2 variants={fadeUp} className="text-section-heading" style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}>
+              {t('about.title')}
+            </motion.h2>
+          </motion.div>
+
+          <div className="grid lg:grid-cols-[1fr_minmax(280px,360px)] gap-10 lg:gap-14 items-start">
+            {/* Left: bio + social proof stats */}
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
               <motion.p variants={fadeUp} className="text-base leading-relaxed mb-4" style={{ color: 'var(--text-secondary)' }}>
-                {/* bio1: keeps bold on HUTECH regardless of locale */}
                 {t('about.bio1').split('{university}').map((part, i) =>
                   i === 0 ? part : (
                     <span key={i}><strong style={{ color: 'var(--text-primary)' }}>HUTECH</strong>{part}</span>
@@ -439,7 +539,6 @@ export default function Portfolio() {
                 )}
               </motion.p>
               <motion.p variants={fadeUp} className="text-base leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>
-                {/* bio2: split on {cinema} and {ai} to keep bold styling */}
                 {t('about.bio2')
                   .split(/\{cinema\}|\{ai\}/)
                   .map((part, i) => {
@@ -449,12 +548,130 @@ export default function Portfolio() {
                   })
                 }
               </motion.p>
-              <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
-                <Link href="/about" className="btn btn-secondary text-sm">
+
+              {/* Mini stats — social proof */}
+              <motion.div variants={fadeUp} className="grid grid-cols-3 gap-3 mb-6">
+                {[
+                  { value: '3.33', label: t('about.stats.gpa'), sub: t('about.stats.gpaSub') },
+                  { value: String(projects.length), label: t('about.stats.projects'), sub: t('about.stats.projectsSub') },
+                  { value: String(certificates.length), label: t('about.stats.certificates'), sub: t('about.stats.certificatesSub') },
+                ].map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="rounded-xl px-3 py-3 text-center"
+                    style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
+                  >
+                    <p style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '1.35rem', color: 'var(--accent)', lineHeight: 1.1 }}>
+                      {stat.value}
+                    </p>
+                    <p style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--text-primary)', marginTop: '0.25rem' }}>
+                      {stat.label}
+                    </p>
+                    <p style={{ fontSize: '0.65rem', color: 'var(--text-muted)', marginTop: '0.15rem', lineHeight: 1.3 }}>
+                      {stat.sub}
+                    </p>
+                  </div>
+                ))}
+              </motion.div>
+
+              {/* Project anchors — visual tie to bio mentions */}
+              <motion.div variants={fadeUp} className="flex flex-wrap gap-2">
+                {projects.filter((p) => p.featured).map((p) => (
+                  <Link
+                    key={p.id}
+                    href={`/projects/${p.slug}`}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-colors"
+                    style={{ background: 'var(--bg-base)', border: '1px solid var(--border)', color: 'var(--text-secondary)' }}
+                  >
+                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--success)' }} />
+                    {p.title}
+                  </Link>
+                ))}
+              </motion.div>
+            </motion.div>
+
+            {/* Right: avatar + cert preview + compelling CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+              className="flex flex-col gap-4"
+            >
+              {/* Visual anchor */}
+              <div
+                className="rounded-2xl overflow-hidden relative"
+                style={{ border: '1px solid var(--border)', boxShadow: '0 16px 48px rgba(26,58,92,0.1)' }}
+              >
+                <div className="aspect-[4/3] relative">
+                  <img
+                    src={homepageAboutAvatar}
+                    alt={profile.full_name}
+                    className="w-full h-full object-cover object-center"
+                  />
+                  <div
+                    className="absolute inset-0"
+                    style={{ background: 'linear-gradient(to top, rgba(15,28,46,0.55) 0%, transparent 50%)' }}
+                  />
+                </div>
+                {/* Certificate thumb strip */}
+                <div
+                  className="absolute bottom-3 left-3 right-3 flex items-center gap-2"
+                >
+                  {certificates.slice(0, 3).map((cert, i) => (
+                    <div
+                      key={cert.id}
+                      className="flex-1 rounded-lg overflow-hidden"
+                      style={{
+                        border: '2px solid var(--surface)',
+                        boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+                        transform: `rotate(${(i - 1) * 4}deg)`,
+                        aspectRatio: '4/3',
+                        background: 'var(--surface)',
+                      }}
+                    >
+                      <img src={cert.image_url} alt="" className="w-full h-full object-cover" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Full profile CTA with preview */}
+              <div
+                className="card p-5 flex flex-col gap-4"
+                style={{ background: 'var(--surface)' }}
+              >
+                <div>
+                  <p style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1rem', color: 'var(--text-primary)', marginBottom: '0.35rem' }}>
+                    {t('about.profilePreviewTitle')}
+                  </p>
+                  <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
+                    {t('about.profilePreviewDesc')}
+                  </p>
+                </div>
+                <ul className="flex flex-col gap-2.5 list-none m-0 p-0">
+                  {[
+                    { icon: Award, text: t('about.profilePreviewCerts', { count: String(certificates.length) }) },
+                    { icon: Heart, text: t('about.profilePreviewActivities') },
+                    { icon: GraduationCap, text: t('about.profilePreviewEducation') },
+                  ].map(({ icon: Icon, text }) => (
+                    <li key={text} className="flex items-center gap-2.5 text-sm" style={{ color: 'var(--text-secondary)' }}>
+                      <span
+                        className="flex items-center justify-center shrink-0 rounded-lg"
+                        style={{ width: 28, height: 28, background: 'var(--accent-light)', border: '1px solid var(--accent-border)' }}
+                      >
+                        <Icon size={14} style={{ color: 'var(--accent)' }} />
+                      </span>
+                      {text}
+                    </li>
+                  ))}
+                </ul>
+                <Link href="/about" className="btn btn-primary w-full justify-center text-sm">
                   {t('about.fullProfile')} <ArrowRight size={14} />
                 </Link>
-              </motion.div>
-          </motion.div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -476,9 +693,9 @@ export default function Portfolio() {
                 <a href={`mailto:${profile.email}`} className="btn btn-primary" style={{ fontSize: '0.95rem', padding: '0.75rem 1.75rem' }}>
                   <Mail size={17} /> {t('contact.sendEmail')}
                 </a>
-                <Link href="/contact" className="btn btn-secondary" style={{ fontSize: '0.95rem', padding: '0.75rem 1.75rem' }}>
-                  {t('contact.contactForm')}
-                </Link>
+                <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ fontSize: '0.95rem', padding: '0.75rem 1.75rem' }}>
+                  <Linkedin size={17} /> {t('contact.messageLinkedIn')}
+                </a>
               </motion.div>
 
               <motion.div variants={fadeUp} className="flex items-center justify-center gap-5 mt-10 pt-8"

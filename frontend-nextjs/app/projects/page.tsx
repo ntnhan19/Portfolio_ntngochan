@@ -224,7 +224,7 @@ export default function ProjectsPage() {
                         {searchTerm && (
                             <span>
                                 {' '}
-                                for <strong>"{searchTerm}"</strong>
+                                for <strong>&quot;{searchTerm}&quot;</strong>
                             </span>
                         )}
                     </div>

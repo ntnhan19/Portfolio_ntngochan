@@ -49,8 +49,21 @@ export interface SkillCategory {
   title: string;
   i18nKey: string;
   colorVar: string;
-  skills: string[];
+  /** Day-to-day, project-proven skills */
+  core: string[];
+  /** Used in projects or actively learning — shown with lower emphasis */
+  secondary: string[];
 }
+
+/** Top stack for homepage — intern recruiters scan these first */
+export const coreStackSkills = [
+  "React.js",
+  "Node.js",
+  "PostgreSQL",
+  "TypeScript",
+  "Next.js",
+  "FastAPI",
+] as const;
 
 // ─── PROFILE ──────────────────────────────────────────────
 
@@ -263,34 +276,44 @@ export const skillCategories: SkillCategory[] = [
     title: "Frontend",
     i18nKey: "frontend",
     colorVar: "--info",
-    skills: ["React.js", "Next.js (App Router)", "TypeScript", "TailwindCSS", "Framer Motion"],
+    core: ["React.js", "Next.js (App Router)", "TypeScript"],
+    secondary: ["TailwindCSS", "Framer Motion"],
   },
   {
     key: "backend",
     title: "Backend",
     i18nKey: "backend",
     colorVar: "--success",
-    skills: ["Node.js", "Express.js", "RESTful APIs", "Socket.io", "Python / FastAPI"],
+    core: ["Node.js", "Express.js", "RESTful APIs", "Python / FastAPI"],
+    secondary: ["Socket.io"],
   },
   {
     key: "database",
     title: "Database",
     i18nKey: "database",
     colorVar: "--warning",
-    skills: ["PostgreSQL", "Prisma ORM", "SQL Server", "Redis"],
+    core: ["PostgreSQL", "Redis"],
+    secondary: ["Prisma ORM", "SQL Server"],
   },
   {
     key: "ai-tools",
     title: "AI & Tools",
     i18nKey: "ai",
     colorVar: "--syn-prop",
-    skills: ["LangChain", "RAG Pipeline", "Pinecone", "Google Gemini"],
+    core: ["LangChain", "RAG Pipeline"],
+    secondary: ["Pinecone", "Google Gemini"],
   },
   {
     key: "devops",
     title: "DevOps",
     i18nKey: "devops",
-    colorVar: "--success",
-    skills: ["Docker & Compose", "Git", "GitHub", "Postman"],
+    colorVar: "--text-muted",
+    core: ["Docker & Compose", "Git"],
+    secondary: ["GitHub", "Postman"],
   },
 ];
+
+/** Main skill groups shown on homepage (4 cards) */
+export const homepageSkillGroups = skillCategories.filter((c) => c.key !== "devops");
+
+export const devopsSkillGroup = skillCategories.find((c) => c.key === "devops")!;

@@ -14,7 +14,7 @@
     "role": "Fullstack Developer — PERN · React.js · FastAPI",
     "gpa": "GPA 3.33 / 4.0",
     "university": "HUTECH · Software Engineering · Year 4",
-    "description": "4th-year Software Engineering student building production-grade web apps — real-time systems, AI-powered tools, and clean REST APIs.",
+    "description": "4th-year Software Engineering student at HUTECH. I build fullstack web apps with a backend focus — real-time seat locking with Redis & Socket.io, RAG pipelines with LangChain & Pinecone, and clean REST APIs on Node.js + PostgreSQL.",
     "viewProjects": "View Projects",
     "getInTouch": "Get in touch",
     "openToWork": "open_to_work"
@@ -22,11 +22,17 @@
   "projects": {
     "sectionLabel": "02. Selected Work",
     "title": "Projects",
+    "viewAll": "View all projects",
     "viewMore": "View more on GitHub"
   },
   "skills": {
     "sectionLabel": "03. Expertise",
     "title": "Technical Skills",
+    "subtitle": "Core tools I ship with in projects — depth over a long list.",
+    "coreStackLabel": "Core stack · used in production projects",
+    "coreLabel": "Core",
+    "familiarLabel": "Also familiar",
+    "viewFullBreakdown": "Full skill breakdown",
     "currentlyLearning": "// currently_learning"
   },
   "about": {
@@ -37,6 +43,11 @@
     "cinema": "real-time cinema booking system",
     "ai": "AI-powered document assistant",
     "fullProfile": "Full profile",
+    "profilePreviewTitle": "More on the full profile",
+    "profilePreviewDesc": "Beyond the project highlights — credentials, campus life, and the full skill breakdown.",
+    "profilePreviewCerts": "Certificates & awards ({count})",
+    "profilePreviewActivities": "Volunteering & campus activities",
+    "profilePreviewEducation": "Education, skills & hobbies",
     "stats": {
       "projects": "Projects Built",
       "projectsSub": "Full-stack applications",
@@ -54,7 +65,7 @@
     "description": "I'm actively looking for a {role}. Have an opportunity? I'd love to hear from you.",
     "role": "Full-Stack / Backend Developer Internship",
     "sendEmail": "Send me an email",
-    "contactForm": "Contact form",
+    "messageLinkedIn": "Message on LinkedIn",
     "backHome": "Back to home",
     "pageTitle": "Contact",
     "pageTitleHighlight": "me",

@@ -14,7 +14,7 @@
     "role": "Lập trình viên Fullstack — PERN · React.js · FastAPI",
     "gpa": "GPA 3.33 / 4.0",
     "university": "HUTECH · Kỹ thuật Phần mềm · Năm 4",
-    "description": "Sinh viên năm 4 Kỹ thuật Phần mềm xây dựng ứng dụng web thực tế — hệ thống real-time, công cụ AI và REST API sạch.",
+    "description": "Sinh viên năm 4 Kỹ thuật Phần mềm tại HUTECH. Mình xây dựng ứng dụng fullstack với trọng tâm backend — xử lý đặt chỗ real-time với Redis & Socket.io, RAG pipeline với LangChain & Pinecone, và REST API với Node.js + PostgreSQL.",
     "viewProjects": "Xem dự án",
     "getInTouch": "Liên hệ",
     "openToWork": "open_to_work"
@@ -22,11 +22,17 @@
   "projects": {
     "sectionLabel": "02. Dự án nổi bật",
     "title": "Dự án",
+    "viewAll": "Xem tất cả dự án",
     "viewMore": "Xem thêm trên GitHub"
   },
   "skills": {
     "sectionLabel": "03. Kỹ năng",
     "title": "Kỹ năng kỹ thuật",
+    "subtitle": "Công cụ mình dùng thực tế trong dự án — ưu tiên độ sâu hơn là liệt kê dài.",
+    "coreStackLabel": "Stack chính · đã dùng trong dự án thực tế",
+    "coreLabel": "Thành thạo",
+    "familiarLabel": "Đã làm qua",
+    "viewFullBreakdown": "Xem đầy đủ kỹ năng",
     "currentlyLearning": "// đang_học"
   },
   "about": {
@@ -37,6 +43,11 @@
     "cinema": "hệ thống đặt vé rạp chiếu phim real-time",
     "ai": "trợ lý tài liệu AI",
     "fullProfile": "Hồ sơ đầy đủ",
+    "profilePreviewTitle": "Xem thêm trên hồ sơ đầy đủ",
+    "profilePreviewDesc": "Ngoài dự án nổi bật — chứng chỉ, hoạt động ngoại khóa và toàn bộ kỹ năng.",
+    "profilePreviewCerts": "Chứng chỉ & giải thưởng ({count})",
+    "profilePreviewActivities": "Tình nguyện & hoạt động sinh viên",
+    "profilePreviewEducation": "Học vấn, kỹ năng & sở thích",
     "stats": {
       "projects": "Dự án đã làm",
       "projectsSub": "Ứng dụng fullstack",
@@ -54,7 +65,7 @@
     "description": "Mình đang tìm kiếm {role}. Có cơ hội? Rất mong được nghe từ bạn.",
     "role": "vị trí Intern Fullstack / Backend Developer",
     "sendEmail": "Gửi email cho mình",
-    "contactForm": "Form liên hệ",
+    "messageLinkedIn": "Nhắn tin LinkedIn",
     "backHome": "Quay lại trang chủ",
     "pageTitle": "Liên hệ",
     "pageTitleHighlight": "với tôi",
