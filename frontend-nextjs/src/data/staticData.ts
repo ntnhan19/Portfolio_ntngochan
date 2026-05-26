@@ -44,6 +44,14 @@ export interface Activity {
   image_url: string;
 }
 
+export interface SkillCategory {
+  key: string;
+  title: string;
+  i18nKey: string;
+  colorVar: string;
+  skills: string[];
+}
+
 // ─── PROFILE ──────────────────────────────────────────────
 
 export const profile = {
@@ -249,4 +257,40 @@ export const activities: Activity[] = [
 ];
 
 // ─── DERIVED ──────────────────────────────────────────────
-export const featuredProjects = projects.filter((p) => p.featured);
+export const skillCategories: SkillCategory[] = [
+  {
+    key: "frontend",
+    title: "Frontend",
+    i18nKey: "frontend",
+    colorVar: "--info",
+    skills: ["React.js", "Next.js (App Router)", "TypeScript", "TailwindCSS", "Framer Motion"],
+  },
+  {
+    key: "backend",
+    title: "Backend",
+    i18nKey: "backend",
+    colorVar: "--success",
+    skills: ["Node.js", "Express.js", "RESTful APIs", "Socket.io", "Python / FastAPI"],
+  },
+  {
+    key: "database",
+    title: "Database",
+    i18nKey: "database",
+    colorVar: "--warning",
+    skills: ["PostgreSQL", "Prisma ORM", "SQL Server", "Redis"],
+  },
+  {
+    key: "ai-tools",
+    title: "AI & Tools",
+    i18nKey: "ai",
+    colorVar: "--syn-prop",
+    skills: ["LangChain", "RAG Pipeline", "Pinecone", "Google Gemini"],
+  },
+  {
+    key: "devops",
+    title: "DevOps",
+    i18nKey: "devops",
+    colorVar: "--success",
+    skills: ["Docker & Compose", "Git", "GitHub", "Postman"],
+  },
+];

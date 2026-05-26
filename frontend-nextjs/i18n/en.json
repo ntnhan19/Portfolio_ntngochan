@@ -133,7 +133,14 @@
     },
     "skills": {
       "title": "Technologies & Skills",
-      "subtitle": "Technologies I've mastered and continue to work with"
+      "subtitle": "Technologies I've mastered and continue to work with",
+      "categories": {
+        "backend": "Backend Development",
+        "frontend": "Frontend Development",
+        "database": "Database",
+        "ai": "AI & LLM",
+        "devops": "DevOps & Tools"
+      }
     },
     "education": {
       "university": "Ho Chi Minh City University of Technology (HUTECH)",

@@ -1,6 +1,6 @@
 'use client';
 
-import { profile, projects, certificates } from '@/data';
+import { profile, projects, skillCategories } from '@/data';
 import { ProjectCard } from '@/src/components/projects/ProjectCard';
 import { ThemeToggle } from '@/src/components/ui/ThemeToggle';
 import { LanguageToggle } from '@/src/components/ui/LanguageToggle';
@@ -31,32 +31,14 @@ const stagger = {
 /* navLinks built inside component so labels can be translated */
 
 /* ─── SKILLS ──────────────────────────────────────────── */
-const skillGroups = [
-  {
-    icon: Globe,
-    title: 'Frontend',
-    colorHex: '#2563a8',
-    skills: ['React.js', 'Next.js (App Router)', 'TypeScript', 'TailwindCSS', 'Framer Motion'],
-  },
-  {
-    icon: Server,
-    title: 'Backend',
-    colorHex: '#16a34a',
-    skills: ['Node.js', 'Express.js', 'RESTful APIs', 'Socket.io', 'Python / FastAPI'],
-  },
-  {
-    icon: Database,
-    title: 'Database',
-    colorHex: '#d97706',
-    skills: ['PostgreSQL', 'Prisma ORM', 'SQL Server', 'Redis'],
-  },
-  {
-    icon: Zap,
-    title: 'AI & Tools',
-    colorHex: '#7c3aed',
-    skills: ['LangChain', 'RAG Pipeline', 'Pinecone', 'Google Gemini', 'Docker', 'Git'],
-  },
-];
+/* colorVar = CSS variable name; works in both light & dark mode */
+const skillIcons = {
+  frontend: Globe,
+  backend: Server,
+  database: Database,
+  'ai-tools': Zap,
+  devops: Zap,
+} as const;
 
 export default function Portfolio() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -389,18 +371,21 @@ export default function Portfolio() {
           </motion.div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {skillGroups.map((group, idx) => {
-              const Icon = group.icon;
+            {skillCategories.slice(0, 4).map((group, idx) => {
+              const Icon = skillIcons[group.key as keyof typeof skillIcons];
               return (
-                <motion.div key={group.title}
+                <motion.div key={group.key}
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
                   className="card p-6 flex flex-col gap-4">
                   <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-lg" style={{ background: `${group.colorHex}18`, border: `1px solid ${group.colorHex}30` }}>
-                      <Icon size={18} style={{ color: group.colorHex }} />
+                    <div className="p-2 rounded-lg" style={{
+                      background: `color-mix(in srgb, var(${group.colorVar}) 12%, transparent)`,
+                      border: `1px solid color-mix(in srgb, var(${group.colorVar}) 25%, transparent)`,
+                    }}>
+                      <Icon size={18} style={{ color: `var(${group.colorVar})` }} />
                     </div>
                     <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.95rem', color: 'var(--text-primary)' }}>
                       {group.title}
@@ -409,7 +394,7 @@ export default function Portfolio() {
                   <div className="flex flex-col gap-2">
                     {group.skills.map(skill => (
                       <div key={skill} className="flex items-center gap-2 text-sm" style={{ color: 'var(--text-secondary)' }}>
-                        <span style={{ width: 4, height: 4, borderRadius: '50%', background: group.colorHex, flexShrink: 0 }} />
+                        <span style={{ width: 4, height: 4, borderRadius: '50%', background: `var(${group.colorVar})`, flexShrink: 0, opacity: 0.7 }} />
                         {skill}
                       </div>
                     ))}
@@ -440,47 +425,36 @@ export default function Portfolio() {
       ═══════════════════════════════════════ */}
       <section id="about" className="section-gap" style={{ background: 'var(--bg-subtle)', borderTop: '1px solid var(--border)' }}>
         <div className="max-w-6xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="max-w-3xl">
               <motion.span variants={fadeUp} className="section-label block mb-3">{t('about.sectionLabel')}</motion.span>
               <motion.h2 variants={fadeUp} className="text-section-heading mb-6" style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}>
                 {t('about.title')}
               </motion.h2>
               <motion.p variants={fadeUp} className="text-base leading-relaxed mb-4" style={{ color: 'var(--text-secondary)' }}>
-                {t('about.bio1', { university: 'HUTECH' })}
+                {/* bio1: keeps bold on HUTECH regardless of locale */}
+                {t('about.bio1').split('{university}').map((part, i) =>
+                  i === 0 ? part : (
+                    <span key={i}><strong style={{ color: 'var(--text-primary)' }}>HUTECH</strong>{part}</span>
+                  )
+                )}
               </motion.p>
               <motion.p variants={fadeUp} className="text-base leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>
-                {t('about.bio2', {
-                  cinema: t('about.cinema'),
-                  ai: t('about.ai'),
-                })}
+                {/* bio2: split on {cinema} and {ai} to keep bold styling */}
+                {t('about.bio2')
+                  .split(/\{cinema\}|\{ai\}/)
+                  .map((part, i) => {
+                    if (i === 1) return <span key={i}><strong style={{ color: 'var(--text-primary)' }}>{t('about.cinema')}</strong>{part}</span>;
+                    if (i === 2) return <span key={i}><strong style={{ color: 'var(--text-primary)' }}>{t('about.ai')}</strong>{part}</span>;
+                    return part;
+                  })
+                }
               </motion.p>
               <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
                 <Link href="/about" className="btn btn-secondary text-sm">
                   {t('about.fullProfile')} <ArrowRight size={14} />
                 </Link>
               </motion.div>
-            </motion.div>
-
-            {/* Stats grid */}
-            <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-              transition={{ duration: 0.55 }} className="grid grid-cols-2 gap-4">
-              {[
-                { label: t('about.stats.projects'), value: projects.length + '+', sub: t('about.stats.projectsSub') },
-                { label: t('about.stats.certificates'), value: certificates.length, sub: t('about.stats.certificatesSub') },
-                { label: t('about.stats.gpa'), value: '3.30', sub: t('about.stats.gpaSub') },
-                { label: t('about.stats.stack'), value: 'PERN', sub: t('about.stats.stackSub') },
-              ].map(stat => (
-                <div key={stat.label} className="card p-6 flex flex-col gap-1">
-                  <span style={{ fontFamily: 'var(--font-display)', fontSize: '2rem', fontWeight: 700, color: 'var(--accent)', lineHeight: 1 }}>
-                    {stat.value}
-                  </span>
-                  <span style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-primary)' }}>{stat.label}</span>
-                  <span style={{ color: 'var(--text-muted)', fontSize: '0.78rem' }}>{stat.sub}</span>
-                </div>
-              ))}
-            </motion.div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -543,11 +517,11 @@ export default function Portfolio() {
       {/* ═══════════════════════════════════════
           FOOTER
       ═══════════════════════════════════════ */}
-      <footer className="py-8" style={{ borderTop: '1px solid var(--border)', background: 'var(--accent)' }}>
+      <footer className="py-8" style={{ borderTop: '1px solid var(--border)', background: 'var(--bg-subtle)' }}>
         <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)', fontFamily: 'var(--font-mono)' }}>
+          <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
             © 2025{' '}
-            <em style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', color: 'rgba(255,255,255,0.8)' }}>
+            <em style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', color: 'var(--text-secondary)' }}>
               {profile.full_name}
             </em>
             {'. '}{t('footer.builtWith')}
@@ -558,7 +532,7 @@ export default function Portfolio() {
               { label: t('nav.about'), href: '/about' },
             ].map(link => (
               <Link key={link.label} href={link.href} className="link-hover"
-                style={{ fontSize: '0.78rem', fontFamily: 'var(--font-mono)', color: 'rgba(255,255,255,0.45)' }}>
+                style={{ fontSize: '0.78rem', fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>
                 {link.label}
               </Link>
             ))}

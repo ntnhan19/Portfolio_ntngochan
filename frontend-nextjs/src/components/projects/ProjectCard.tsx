@@ -44,7 +44,7 @@ export function ProjectCard({
                     display: "block",
                     position: "relative",
                     height: isFeatured ? "220px" : "180px",
-                    background: "var(--gray-900)",
+                    background: "var(--surface-raised)",
                     overflow: "hidden",
                     flexShrink: 0,
                 }}
@@ -61,7 +61,7 @@ export function ProjectCard({
                 <div style={{
                     position: "absolute", top: "0.75rem", right: "0.75rem",
                     background: "rgba(0,0,0,0.55)", backdropFilter: "blur(8px)",
-                    border: "0.5px solid var(--border-subtle)", borderRadius: "var(--radius-pill)",
+                    border: "1px solid var(--border)", borderRadius: "var(--radius-pill)",
                     padding: "3px 10px", fontFamily: "var(--font-mono)",
                     fontSize: "0.65rem", color: "rgba(255,255,255,0.85)", letterSpacing: "0.06em",
                 }}>
@@ -81,7 +81,7 @@ export function ProjectCard({
                         <><Users size={10} /> {project.team_size} members</>,
                         project.role,
                     ].map((item, i) => (
-                        <span key={i} style={{ display: "flex", alignItems: "center", gap: "3px", fontFamily: "var(--font-mono)", fontSize: "0.67rem", color: "var(--text-tertiary)", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+                        <span key={i} style={{ display: "flex", alignItems: "center", gap: "3px", fontFamily: "var(--font-mono)", fontSize: "0.67rem", color: "var(--text-muted)", letterSpacing: "0.08em", textTransform: "uppercase" }}>
                             {i > 0 && <span style={{ opacity: 0.3, marginRight: "0.4rem" }}>·</span>}
                             {item}
                         </span>
@@ -105,7 +105,7 @@ export function ProjectCard({
                     </Link>
                     <p style={{
                         fontFamily: "var(--font-mono)", fontSize: "0.7rem",
-                        color: "var(--text-tertiary)", letterSpacing: "0.02em", lineHeight: 1.4,
+                        color: "var(--text-muted)", letterSpacing: "0.02em", lineHeight: 1.4,
                     }}>
                         {project.tagline}
                     </p>
@@ -137,7 +137,7 @@ export function ProjectCard({
                 <div style={{
                     display: "flex", alignItems: "center", justifyContent: "space-between",
                     marginTop: "auto", paddingTop: "0.75rem",
-                    borderTop: "0.5px solid var(--border-subtle)",
+                    borderTop: "1px solid var(--border)",
                 }}>
                     <div style={{ display: "flex", gap: "0.75rem" }}>
                         {project.repo_url && (

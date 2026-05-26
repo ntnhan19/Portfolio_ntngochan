@@ -3,7 +3,7 @@ export {
   projects,
   certificates,
   activities,
-  featuredProjects,
+  skillCategories,
 } from "@/src/data/staticData";
 
-export type { Project, Certificate, Activity } from "@/src/data/staticData";
+export type { Project, Certificate, Activity, SkillCategory } from "@/src/data/staticData";

@@ -40,7 +40,6 @@ export default function ContactPage() {
             icon: Mail,
             value: profile.email,
             href: `mailto:${profile.email}`,
-            color: 'from-red-500 to-pink-500',
             description: t('contact.social.emailDesc'),
         },
         {
@@ -48,7 +47,6 @@ export default function ContactPage() {
             icon: Github,
             value: 'github.com/ntnhan19',
             href: profile.github,
-            color: 'from-slate-700 to-slate-900',
             description: t('contact.social.githubDesc'),
         },
         {
@@ -56,7 +54,6 @@ export default function ContactPage() {
             icon: Linkedin,
             value: 'LinkedIn Profile',
             href: profile.linkedin,
-            color: 'from-blue-600 to-blue-700',
             description: t('contact.social.linkedinDesc'),
         },
     ];
@@ -69,21 +66,25 @@ export default function ContactPage() {
 
     const faqs: { q: string; a: string }[] = [
         { q: t('contact.faq.items.0.q'), a: t('contact.faq.items.0.a') },
-        { q: t('contact.faq.items.1.q'), a: t('contact.faq.items.1.a') },
         { q: t('contact.faq.items.2.q'), a: t('contact.faq.items.2.a') },
-        { q: t('contact.faq.items.3.q'), a: t('contact.faq.items.3.a') },
     ];
 
     return (
-        <div className="min-h-screen bg-slate-50">
-            {/* Hero Section */}
-            <div className="relative bg-gradient-to-br from-slate-900 via-purple-900 to-blue-900 text-white py-24 overflow-hidden">
-                <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob" />
-                <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000" />
-                <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000" />
-
-                <div className="max-w-6xl mx-auto px-6 relative z-10">
-                    <Link href="/" className="inline-flex items-center text-white/80 hover:text-white mb-8 transition-colors group">
+        <div className="min-h-screen" style={{ background: 'var(--bg-base)' }}>
+            <section
+                style={{
+                    background: 'var(--bg-subtle)',
+                    borderBottom: '1px solid var(--border)',
+                    paddingTop: '5rem',
+                    paddingBottom: '5rem',
+                }}
+            >
+                <div className="max-w-6xl mx-auto px-6">
+                    <Link
+                        href="/"
+                        className="inline-flex items-center mb-8 transition-colors group"
+                        style={{ color: 'var(--text-secondary)' }}
+                    >
                         <ArrowLeft size={20} className="mr-2 group-hover:-translate-x-1 transition-transform" />
                         {t('contact.backHome')}
                     </Link>
@@ -91,23 +92,31 @@ export default function ContactPage() {
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-center"
+                        className="max-w-3xl"
                     >
-                        <div className="inline-flex items-center justify-center w-20 h-20 bg-white/10 backdrop-blur-sm rounded-2xl mb-6">
-                            <MessageSquare size={40} className="text-blue-300" />
+                        <div
+                            className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-6"
+                            style={{
+                                background: 'var(--surface)',
+                                border: '1px solid var(--border)',
+                                color: 'var(--accent-mid)',
+                            }}
+                        >
+                            <MessageSquare size={30} />
                         </div>
-                        <h1 className="text-5xl md:text-6xl font-bold mb-4">
-                            {t('contact.pageTitle')}{' '}
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
-                                {t('contact.pageTitleHighlight')}
-                            </span>
+                        <span className="section-label block mb-3">{t('contact.pageTitle')}</span>
+                        <h1
+                            className="text-5xl md:text-6xl mb-4"
+                            style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}
+                        >
+                            {t('contact.pageTitleHighlight')}
                         </h1>
-                        <p className="text-xl text-blue-100 max-w-2xl mx-auto">
+                        <p className="text-lg max-w-2xl" style={{ color: 'var(--text-secondary)', lineHeight: 1.7 }}>
                             {t('contact.pageDesc')}
                         </p>
                     </motion.div>
                 </div>
-            </div>
+            </section>
 
             <div className="max-w-6xl mx-auto px-6 py-16">
                 <div className="grid lg:grid-cols-5 gap-8">
@@ -117,7 +126,14 @@ export default function ContactPage() {
                         animate={{ opacity: 1, x: 0 }}
                         className="lg:col-span-3"
                     >
-                        <div className="bg-white rounded-3xl shadow-xl border border-slate-200 p-8 md:p-10">
+                        <div
+                            className="rounded-3xl p-8 md:p-10"
+                            style={{
+                                background: 'var(--surface)',
+                                border: '1px solid var(--border)',
+                                boxShadow: '0 24px 60px rgba(15, 28, 46, 0.08)',
+                            }}
+                        >
                             <h2 className="text-3xl font-bold text-slate-900 mb-2">{t('contact.formTitle')}</h2>
                             <p className="text-slate-600 mb-8">{t('contact.formSubtitle')}</p>
 
@@ -218,7 +234,11 @@ export default function ContactPage() {
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
-                                    className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold py-4 rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
+                                    className="w-full text-white font-bold py-4 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
+                                    style={{
+                                        background: 'var(--accent)',
+                                        boxShadow: '0 16px 36px rgba(37, 99, 168, 0.18)',
+                                    }}
                                 >
                                     {isSubmitting ? (
                                         <>
@@ -243,7 +263,14 @@ export default function ContactPage() {
                         className="lg:col-span-2 space-y-6"
                     >
                         {/* Contact Info */}
-                        <div className="bg-white rounded-3xl shadow-lg border border-slate-200 p-8">
+                        <div
+                            className="rounded-3xl p-8"
+                            style={{
+                                background: 'var(--surface)',
+                                border: '1px solid var(--border)',
+                                boxShadow: '0 18px 40px rgba(15, 28, 46, 0.06)',
+                            }}
+                        >
                             <h3 className="text-xl font-bold text-slate-900 mb-6">{t('contact.info.title')}</h3>
                             <div className="space-y-4">
                                 {contactInfo.map((info, i) => {
@@ -264,7 +291,14 @@ export default function ContactPage() {
                         </div>
 
                         {/* Social Links */}
-                        <div className="bg-white rounded-3xl shadow-lg border border-slate-200 p-8">
+                        <div
+                            className="rounded-3xl p-8"
+                            style={{
+                                background: 'var(--surface)',
+                                border: '1px solid var(--border)',
+                                boxShadow: '0 18px 40px rgba(15, 28, 46, 0.06)',
+                            }}
+                        >
                             <h3 className="text-xl font-bold text-slate-900 mb-6">{t('contact.social.title')}</h3>
                             <div className="space-y-3">
                                 {socialLinks.map((link, i) => {
@@ -277,8 +311,15 @@ export default function ContactPage() {
                                             rel="noopener noreferrer"
                                             className="flex items-center gap-4 p-4 bg-slate-50 rounded-xl hover:bg-slate-100 transition-all group border border-slate-200 hover:border-slate-300"
                                         >
-                                            <div className={`p-3 bg-gradient-to-br ${link.color} rounded-xl`}>
-                                                <Icon className="text-white" size={20} />
+                                            <div
+                                                className="p-3 rounded-xl"
+                                                style={{
+                                                    background: 'var(--bg-subtle)',
+                                                    border: '1px solid var(--border)',
+                                                    color: 'var(--accent-mid)',
+                                                }}
+                                            >
+                                                <Icon size={20} />
                                             </div>
                                             <div className="flex-1">
                                                 <h4 className="font-semibold text-slate-900 text-sm group-hover:text-blue-600 transition-colors">
@@ -293,12 +334,26 @@ export default function ContactPage() {
                         </div>
 
                         {/* CV Download */}
-                        <div className="bg-gradient-to-br from-blue-600 to-purple-600 rounded-3xl shadow-lg p-8 text-white">
-                            <h3 className="text-xl font-bold mb-3">{t('contact.cv.title')}</h3>
-                            <p className="text-blue-100 mb-6 text-sm">{t('contact.cv.desc')}</p>
+                        <div
+                            className="rounded-3xl p-8"
+                            style={{
+                                background: 'rgba(255,255,255,0.72)',
+                                border: '1px solid rgba(221,227,236,0.9)',
+                                backdropFilter: 'blur(18px)',
+                                WebkitBackdropFilter: 'blur(18px)',
+                                boxShadow: '0 22px 48px rgba(15, 28, 46, 0.08)',
+                            }}
+                        >
+                            <h3 className="text-xl font-bold mb-3 text-slate-900">{t('contact.cv.title')}</h3>
+                            <p className="mb-6 text-sm text-slate-600">{t('contact.cv.desc')}</p>
                             <Link
                                 href="/resume"
-                                className="block w-full bg-white text-slate-900 font-bold py-3 rounded-xl hover:bg-blue-50 transition-all text-center"
+                                className="block w-full font-bold py-3 rounded-xl transition-all text-center"
+                                style={{
+                                    background: 'var(--surface)',
+                                    color: 'var(--text-primary)',
+                                    border: '1px solid var(--border)',
+                                }}
                             >
                                 {t('contact.cv.link')}
                             </Link>
@@ -313,7 +368,14 @@ export default function ContactPage() {
                     viewport={{ once: true }}
                     className="mt-16"
                 >
-                    <div className="bg-white rounded-3xl shadow-lg border border-slate-200 p-8 md:p-10">
+                    <div
+                        className="rounded-3xl p-8 md:p-10"
+                        style={{
+                            background: 'var(--surface)',
+                            border: '1px solid var(--border)',
+                            boxShadow: '0 18px 40px rgba(15, 28, 46, 0.06)',
+                        }}
+                    >
                         <h2 className="text-2xl font-bold text-slate-900 mb-6 text-center">{t('contact.faq.title')}</h2>
                         <div className="grid md:grid-cols-2 gap-6">
                             {faqs.map((faq, i) => (

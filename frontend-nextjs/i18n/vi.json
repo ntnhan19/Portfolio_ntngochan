@@ -133,7 +133,14 @@
     },
     "skills": {
       "title": "Công nghệ & Kỹ năng",
-      "subtitle": "Những công nghệ tôi đã và đang thành thạo"
+      "subtitle": "Những công nghệ tôi đã và đang thành thạo",
+      "categories": {
+        "backend": "Lập trình Backend",
+        "frontend": "Lập trình Frontend",
+        "database": "Cơ sở dữ liệu",
+        "ai": "AI & LLM",
+        "devops": "DevOps & Công cụ"
+      }
     },
     "education": {
       "university": "Đại học Công nghệ TP.HCM (HUTECH)",

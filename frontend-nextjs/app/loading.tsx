@@ -1,9 +1,15 @@
 export default function Loading() {
     return (
-        <div className="min-h-screen flex items-center justify-center bg-slate-50">
+        <div
+            className="min-h-screen flex items-center justify-center"
+            style={{ background: 'var(--bg-subtle)' }}
+        >
             <div className="text-center">
-                <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                <p className="text-slate-600 font-medium">Đang tải...</p>
+                <div
+                    className="w-16 h-16 border-4 rounded-full animate-spin mx-auto mb-4"
+                    style={{ borderColor: 'var(--accent)', borderTopColor: 'transparent' }}
+                />
+                <p style={{ color: 'var(--text-secondary)', fontWeight: 500 }}>Dang tai...</p>
             </div>
         </div>
     );

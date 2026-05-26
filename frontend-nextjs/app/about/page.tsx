@@ -1,74 +1,36 @@
 'use client';
 
-import { profile, certificates, activities, projects } from '../../src/data/staticData';
+import { profile, certificates, activities, skillCategories } from '@/data';
 import Link from 'next/link';
 import {
-    ArrowLeft,
-    Mail,
-    Github,
-    Linkedin,
-    Award,
-    Trophy,
-    Calendar,
-    ExternalLink,
-    Download,
-    GraduationCap,
-    Code2,
-    Database,
-    Cpu,
-    Globe,
-    Zap,
-    BookOpen,
-    Gamepad2,
-    Heart
+    ArrowLeft, Mail, Github, Linkedin,
+    Award, Trophy, Calendar, ExternalLink,
+    Download, GraduationCap, Code2, Database,
+    Cpu, Globe, Zap, BookOpen, Gamepad2, Heart
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLocale } from '@/src/context/LocaleContext';
 
 const fadeInUp = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.7 } }
+    hidden: { opacity: 0, y: 24 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const } }
 };
 
 const stagger = {
-    visible: { transition: { staggerChildren: 0.12 } }
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.1 } }
 };
 
-const skillCategories = [
-    {
-        title: "Backend Development",
-        icon: Code2,
-        color: "from-blue-500 to-cyan-500",
-        skills: ["Node.js", "Express.js", "RESTful APIs", "Socket.io"]
-    },
-    {
-        title: "Frontend Development",
-        icon: Code2,
-        color: "from-blue-500 to-cyan-500",
-        skills: ["React.js", "Next.js (App Router)", "HTML", "CSS", "TailwindCSS"]
-    },
-    {
-        title: "Database",
-        icon: Database,
-        color: "from-green-500 to-emerald-500",
-        skills: ["PostgreSQL", "Prisma ORM", "SQL Server"]
-    },
-    {
-        title: "AI & LLM",
-        icon: Cpu,
-        color: "from-purple-500 to-pink-500",
-        skills: ["LangChain & LlamaIndex", "RAG Pipeline", "Vector DB (Pinecone)", "Gemini", "WebSocket & Real-time Systems"]
-    },
-    {
-        title: "DevOps & Tools",
-        icon: Globe,
-        color: "from-orange-500 to-red-500",
-        skills: ["Docker & Docker Compose", "Git", "GitHub", "Postman"]
-    }
-];
+const skillIcons = {
+    backend: Code2,
+    frontend: Globe,
+    database: Database,
+    'ai-tools': Cpu,
+    devops: Zap,
+} as const;
 
 export default function AboutPage() {
-    const { t } = useLocale();
+    const { t, locale } = useLocale();
 
     const hobbies = [
         { icon: Gamepad2, title: t('aboutPage.hobbies.items.0.title'), desc: t('aboutPage.hobbies.items.0.desc') },
@@ -77,119 +39,139 @@ export default function AboutPage() {
     ];
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/30">
-            {/* Hero Section */}
-            <section className="relative py-20 px-6 overflow-hidden lg:py-28">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-purple-600/5 to-pink-600/5" />
+        <div style={{ background: 'var(--bg-base)', color: 'var(--text-primary)', minHeight: '100vh' }}>
 
-                <div className="max-w-7xl mx-auto relative z-10">
-                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-                        <Link href="/" className="inline-flex items-center text-slate-600 hover:text-blue-600 mb-10 font-medium group text-base">
-                            <ArrowLeft size={18} className="mr-2 group-hover:-translate-x-1 transition" />
-                            {t('aboutPage.backHome')}
+            {/* ── HERO ─────────────────────────────────────── */}
+            <section style={{ borderBottom: '1px solid var(--border)', paddingTop: '5rem', paddingBottom: '4rem' }}>
+                <div className="max-w-6xl mx-auto px-6">
+                    <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+
+                        <Link href="/"
+                            className="inline-flex items-center gap-2 mb-10 text-sm font-semibold transition-colors"
+                            style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-body)' }}
+                            onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)'}
+                            onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-muted)'}
+                        >
+                            <ArrowLeft size={16} /> {t('aboutPage.backHome')}
                         </Link>
 
-                        {/* 2 columns: Avatar left - Content right */}
-                        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-                            <div className="relative flex justify-center lg:justify-end">
+                        {/* 2-col: Avatar | Bio */}
+                        <div className="grid lg:grid-cols-[380px_1fr] gap-12 lg:gap-20 items-center">
+
+                            {/* Avatar */}
+                            <motion.div
+                                initial={{ opacity: 0, x: -24 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.6, delay: 0.1 }}
+                                className="flex justify-center lg:justify-start"
+                            >
                                 <div className="relative">
-                                    <div className="w-80 h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-12 border-white shadow-3xl ring-8 ring-blue-200/60">
+                                    {/* Photo */}
+                                    <div className="w-72 h-72 lg:w-80 lg:h-80 rounded-2xl overflow-hidden"
+                                        style={{ border: '1px solid var(--border)', boxShadow: '0 20px 60px rgba(26,58,92,0.12)' }}>
                                         <img
                                             src={profile.avatar || '/placeholder-avatar.png'}
                                             alt={profile.full_name}
-                                            className="w-full h-full object-cover"
+                                            className="w-full h-full object-cover object-center"
                                         />
                                     </div>
-                                    <div className="absolute -bottom-6 -right-6 w-20 h-20 bg-green-500 rounded-full border-8 border-white flex items-center justify-center shadow-2xl animate-pulse">
-                                        <div className="w-8 h-8 bg-white rounded-full" />
-                                    </div>
-                                    <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-md px-5 py-2.5 rounded-2xl shadow-xl">
-                                        <span className="text-base font-bold text-green-600">{t('aboutPage.statusBadge')}</span>
+                                    {/* Status badge — minimal */}
+                                    <div className="absolute -bottom-3 left-4 px-3 py-1.5 rounded-full flex items-center gap-2"
+                                        style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: '0 4px 16px rgba(26,58,92,0.1)' }}>
+                                        <span style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--success)', display: 'inline-block', animation: 'blink 1.5s ease infinite' }} />
+                                        <span style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--text-primary)', fontFamily: 'var(--font-mono)' }}>
+                                            {t('aboutPage.statusBadge')}
+                                        </span>
                                     </div>
                                 </div>
-                            </div>
+                            </motion.div>
 
-                            <div className="text-center lg:text-left">
-                                <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 leading-tight">
-                                    {profile.full_name}
-                                </h1>
-                                <p className="text-xl md:text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 mb-8">
-                                    {profile.title}
-                                </p>
-
-                                <div className="text-base md:text-lg text-slate-700 leading-relaxed space-y-4 prose prose-slate max-w-none">
-                                    <div dangerouslySetInnerHTML={{ __html: profile.bio.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') }} />
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Quick Stats */}
-                        <motion.div
-                            variants={stagger}
-                            initial="hidden"
-                            animate="visible"
-                            className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mt-16"
-                        >
-                            {[
-                                { label: t('aboutPage.stats.projects'),     value: projects.length + "+", icon: Code2 },
-                                { label: t('aboutPage.stats.certificates'), value: certificates.length,   icon: Award },
-                                { label: t('aboutPage.stats.awards'),       value: "3",                   icon: Trophy },
-                                { label: t('aboutPage.stats.blog'),         value: "11",                  icon: Zap },
-                            ].map((stat, i) => (
-                                <motion.div
-                                    key={i}
-                                    variants={fadeInUp}
-                                    className="bg-white/80 backdrop-blur-md rounded-2xl py-8 px-6 shadow-xl border border-slate-200 hover:shadow-2xl hover:-translate-y-2 transition-all text-center"
-                                >
-                                    <stat.icon className="w-10 h-10 mx-auto mb-3 text-blue-600" />
-                                    <div className="text-3xl font-bold text-slate-900 mb-1">{stat.value}</div>
-                                    <div className="text-base font-medium text-slate-600">{stat.label}</div>
+                            {/* Bio text */}
+                            <motion.div
+                                variants={stagger} initial="hidden" animate="visible"
+                                className="flex flex-col gap-5"
+                            >
+                                <motion.div variants={fadeInUp}>
+                                    <p style={{ fontSize: '0.72rem', fontFamily: 'var(--font-mono)', color: 'var(--accent-mid)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
+                                        {locale === 'vi' ? '01. Giới thiệu' : '01. About me'}
+                                    </p>
+                                    <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-0.03em', color: 'var(--text-primary)' }}>
+                                        {profile.full_name}
+                                    </h1>
                                 </motion.div>
-                            ))}
-                        </motion.div>
+
+                                <motion.p variants={fadeInUp}
+                                    style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--accent)', fontFamily: 'var(--font-display)' }}>
+                                    {profile.title}
+                                </motion.p>
+
+                                <motion.div variants={fadeInUp}
+                                    style={{ fontSize: '0.95rem', lineHeight: 1.75, color: 'var(--text-secondary)' }}
+                                    dangerouslySetInnerHTML={{ __html: profile.bio.replace(/\*\*(.*?)\*\*/g, `<strong style="color:var(--text-primary)">$1</strong>`) }}
+                                />
+
+                                {/* Social actions */}
+                                <motion.div variants={fadeInUp} className="flex flex-wrap gap-3 pt-1">
+                                    <a href={`mailto:${profile.email}`} className="btn btn-primary" style={{ fontSize: '0.875rem' }}>
+                                        <Mail size={15} /> {t('aboutPage.cta.contact')}
+                                    </a>
+                                    <a href={profile.github} target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ fontSize: '0.875rem' }}>
+                                        <Github size={15} /> GitHub
+                                    </a>
+                                    <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ fontSize: '0.875rem' }}>
+                                        <Linkedin size={15} /> LinkedIn
+                                    </a>
+                                </motion.div>
+                            </motion.div>
+                        </div>
                     </motion.div>
                 </div>
             </section>
 
-            {/* Technologies / Skills */}
-            <section className="py-20 px-6 bg-white">
-                <div className="max-w-7xl mx-auto">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-center mb-14"
-                    >
-                        <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">{t('aboutPage.skills.title')}</h2>
-                        <p className="text-lg text-slate-600 max-w-2xl mx-auto">{t('aboutPage.skills.subtitle')}</p>
+            {/* ── SKILLS ───────────────────────────────────── */}
+            <section style={{ background: 'var(--bg-subtle)', borderBottom: '1px solid var(--border)', paddingTop: '5rem', paddingBottom: '5rem' }}>
+                <div className="max-w-6xl mx-auto px-6">
+                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="mb-10">
+                        <motion.span variants={fadeInUp}
+                            style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--accent-mid)', display: 'block', marginBottom: '0.5rem' }}>
+                            02. {t('aboutPage.skills.title')}
+                        </motion.span>
+                        <motion.h2 variants={fadeInUp}
+                            style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>
+                            {t('aboutPage.skills.subtitle')}
+                        </motion.h2>
                     </motion.div>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {skillCategories.map((category, i) => {
-                            const Icon = category.icon;
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+                        {skillCategories.map((cat, i) => {
+                            const Icon = skillIcons[cat.key as keyof typeof skillIcons];
                             return (
-                                <motion.div
-                                    key={i}
-                                    initial={{ opacity: 0, y: 30 }}
+                                <motion.div key={cat.key}
+                                    initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: i * 0.1 }}
                                     viewport={{ once: true }}
-                                    className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-3xl p-8 shadow-xl border border-slate-200 hover:shadow-2xl hover:scale-105 transition-all"
+                                    transition={{ duration: 0.45, delay: i * 0.07 }}
+                                    className="card p-5 flex flex-col gap-4"
                                 >
-                                    <div className="flex items-center gap-4 mb-6">
-                                        <div className={`p-4 bg-gradient-to-br ${category.color} rounded-2xl shadow-lg`}>
-                                            <Icon className="w-8 h-8 text-white" />
+                                    <div className="flex items-center gap-3">
+                                        <div className="p-2 rounded-lg" style={{
+                                            background: `color-mix(in srgb, var(${cat.colorVar}) 12%, transparent)`,
+                                            border: `1px solid color-mix(in srgb, var(${cat.colorVar}) 22%, transparent)`,
+                                        }}>
+                                            <Icon size={16} style={{ color: `var(${cat.colorVar})` }} />
                                         </div>
-                                        <h3 className="text-xl font-bold text-slate-900">{category.title}</h3>
+                                        <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.85rem', color: 'var(--text-primary)' }}>
+                                            {t(`aboutPage.skills.categories.${cat.i18nKey}`)}
+                                        </span>
                                     </div>
-                                    <ul className="space-y-3">
-                                        {category.skills.map((skill, j) => (
-                                            <li key={j} className="flex items-center gap-3 text-slate-700">
-                                                <Zap size={16} className="text-blue-500 flex-shrink-0" />
-                                                <span className="text-base">{skill}</span>
-                                            </li>
+                                    <div className="flex flex-col gap-1.5">
+                                        {cat.skills.map(skill => (
+                                            <div key={skill} className="flex items-center gap-2" style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>
+                                                <span style={{ width: 3, height: 3, borderRadius: '50%', background: `var(${cat.colorVar})`, opacity: 0.7, flexShrink: 0 }} />
+                                                {skill}
+                                            </div>
                                         ))}
-                                    </ul>
+                                    </div>
                                 </motion.div>
                             );
                         })}
@@ -197,94 +179,95 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            {/* Education */}
-            <section className="py-20 px-6 bg-slate-50">
-                <div className="max-w-5xl mx-auto">
+            {/* ── EDUCATION ────────────────────────────────── */}
+            <section style={{ background: 'var(--bg-base)', borderBottom: '1px solid var(--border)', paddingTop: '5rem', paddingBottom: '5rem' }}>
+                <div className="max-w-6xl mx-auto px-6">
                     <motion.div
-                        initial="hidden"
-                        whileInView="visible"
-                        variants={fadeInUp}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="bg-white rounded-3xl shadow-2xl p-10 border border-slate-200"
+                        className="card p-8 flex flex-col md:flex-row items-center gap-8"
                     >
-                        <div className="flex flex-col md:flex-row items-center gap-8">
-                            <div className="p-5 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl shadow-xl">
-                                <GraduationCap className="w-12 h-12 text-white" />
-                            </div>
-                            <div className="text-center md:text-left">
-                                <h3 className="text-3xl font-bold text-slate-900 mb-2">
-                                    {t('aboutPage.education.university')}
-                                </h3>
-                                <p className="text-xl text-slate-700 mb-4">
-                                    {t('aboutPage.education.degree')}
-                                </p>
-                                <div className="flex flex-wrap gap-6 justify-center md:justify-start text-slate-600 text-base">
-                                    <span className="flex items-center gap-2"><Calendar size={18} /> {t('aboutPage.education.year')}</span>
-                                    <span className="flex items-center gap-2"><Award size={18} /> {t('aboutPage.education.gpa')}</span>
-                                </div>
+                        <div className="p-5 rounded-2xl flex-shrink-0"
+                            style={{ background: 'var(--accent-light)', border: '1px solid var(--accent-border)' }}>
+                            <GraduationCap size={36} style={{ color: 'var(--accent)' }} />
+                        </div>
+                        <div className="text-center md:text-left">
+                            <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1.25rem', color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
+                                {t('aboutPage.education.university')}
+                            </h3>
+                            <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginBottom: '0.75rem' }}>
+                                {t('aboutPage.education.degree')}
+                            </p>
+                            <div className="flex flex-wrap gap-5 justify-center md:justify-start" style={{ color: 'var(--text-muted)', fontSize: '0.82rem', fontFamily: 'var(--font-mono)' }}>
+                                <span className="flex items-center gap-1.5"><Calendar size={14} /> {t('aboutPage.education.year')}</span>
+                                <span className="flex items-center gap-1.5"><Award size={14} /> {t('aboutPage.education.gpa')}</span>
                             </div>
                         </div>
                     </motion.div>
                 </div>
             </section>
 
-            {/* Certificates & Awards */}
-            <section className="py-20 px-6 bg-white">
-                <div className="max-w-7xl mx-auto">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-center mb-14"
-                    >
-                        <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">{t('aboutPage.certificates.title')}</h2>
-                        <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            {/* ── CERTIFICATES & AWARDS ────────────────────── */}
+            <section style={{ background: 'var(--bg-subtle)', borderBottom: '1px solid var(--border)', paddingTop: '5rem', paddingBottom: '5rem' }}>
+                <div className="max-w-6xl mx-auto px-6">
+                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="mb-10">
+                        <motion.span variants={fadeInUp} style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--accent-mid)', display: 'block', marginBottom: '0.5rem' }}>
+                            03. {t('aboutPage.certificates.title')}
+                        </motion.span>
+                        <motion.h2 variants={fadeInUp} style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>
                             {t('aboutPage.certificates.subtitle')}
-                        </p>
+                        </motion.h2>
                     </motion.div>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
                         {certificates.map((cert: any, i: number) => (
-                            <motion.div
-                                key={cert.id}
-                                initial={{ opacity: 0, y: 40 }}
+                            <motion.div key={cert.id}
+                                initial={{ opacity: 0, y: 24 }}
                                 whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: i * 0.1 }}
                                 viewport={{ once: true }}
-                                className="group bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-200 hover:shadow-2xl hover:-translate-y-3 transition-all"
+                                transition={{ delay: i * 0.08 }}
+                                className="card overflow-hidden group"
+                                style={{ cursor: cert.url ? 'pointer' : 'default' }}
                             >
-                                <div className="h-56 bg-gradient-to-br from-blue-50 to-purple-50 p-6 flex items-center justify-center">
+                                {/* Image area */}
+                                <div style={{ height: '11rem', background: 'var(--bg-muted)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1.25rem', borderBottom: '1px solid var(--border)' }}>
                                     <img
                                         src={cert.image_url}
                                         alt={cert.name}
-                                        className="max-h-full max-w-full object-contain rounded-2xl shadow-lg group-hover:scale-105 transition-transform"
+                                        style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain', borderRadius: '8px', transition: 'transform 0.3s ease' }}
+                                        className="group-hover:scale-105"
                                     />
                                 </div>
-                                <div className="p-7">
-                                    <div className="flex items-center gap-3 mb-3">
-                                        {cert.type === "Award" ? (
-                                            <Trophy className="w-7 h-7 text-yellow-500" />
-                                        ) : (
-                                            <Award className="w-7 h-7 text-blue-600" />
+                                {/* Content */}
+                                <div style={{ padding: '1.25rem' }}>
+                                    <div className="flex items-center gap-2 mb-2">
+                                        {cert.type === 'Award'
+                                            ? <Trophy size={15} style={{ color: 'var(--warning)' }} />
+                                            : <Award size={15} style={{ color: 'var(--accent-mid)' }} />}
+                                        <span style={{ fontSize: '0.65rem', fontFamily: 'var(--font-mono)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)' }}>
+                                            {cert.type}
+                                        </span>
+                                    </div>
+                                    <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-primary)', lineHeight: 1.35, marginBottom: '0.3rem' }}>
+                                        {cert.name}
+                                    </h3>
+                                    <p style={{ color: 'var(--text-muted)', fontSize: '0.78rem', marginBottom: '0.5rem' }}>{cert.issuer}</p>
+                                    <div className="flex items-center justify-between">
+                                        <span className="flex items-center gap-1.5" style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
+                                            <Calendar size={12} /> {cert.date}
+                                        </span>
+                                        {cert.url && (
+                                            <a href={cert.url} target="_blank" rel="noopener noreferrer"
+                                                className="flex items-center gap-1 transition-colors"
+                                                style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--accent-mid)', fontFamily: 'var(--font-body)' }}
+                                                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--accent)'}
+                                                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--accent-mid)'}
+                                            >
+                                                {t('aboutPage.certificates.viewCert')} <ExternalLink size={12} />
+                                            </a>
                                         )}
-                                        <span className="text-sm font-bold text-slate-500 uppercase tracking-wider">{cert.type}</span>
                                     </div>
-                                    <h3 className="text-xl font-bold text-slate-900 mb-2 leading-tight">{cert.name}</h3>
-                                    <p className="text-slate-600 mb-3 text-base">{cert.issuer}</p>
-                                    <div className="flex items-center gap-2 text-slate-500 mb-5">
-                                        <Calendar size={16} />
-                                        <span className="text-sm">{cert.date}</span>
-                                    </div>
-                                    {cert.url && (
-                                        <a
-                                            href={cert.url}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="inline-flex items-center gap-2 text-blue-600 font-semibold text-base hover:gap-3 transition-all"
-                                        >
-                                            {t('aboutPage.certificates.viewCert')} <ExternalLink size={18} />
-                                        </a>
-                                    )}
                                 </div>
                             </motion.div>
                         ))}
@@ -292,69 +275,71 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            {/* Activities & Hobbies */}
-            <section className="py-20 px-6 bg-slate-50">
-                <div className="max-w-7xl mx-auto">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-center mb-14"
-                    >
-                        <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">{t('aboutPage.hobbies.title')}</h2>
-                        <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            {/* ── HOBBIES & ACTIVITIES ─────────────────────── */}
+            <section style={{ background: 'var(--bg-base)', borderBottom: '1px solid var(--border)', paddingTop: '5rem', paddingBottom: '5rem' }}>
+                <div className="max-w-6xl mx-auto px-6">
+                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="mb-10">
+                        <motion.span variants={fadeInUp} style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--accent-mid)', display: 'block', marginBottom: '0.5rem' }}>
+                            04. {t('aboutPage.hobbies.title')}
+                        </motion.span>
+                        <motion.h2 variants={fadeInUp} style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>
                             {t('aboutPage.hobbies.subtitle')}
-                        </p>
+                        </motion.h2>
                     </motion.div>
 
-                    {/* Activities (with images) */}
-                    <div className="grid md:grid-cols-2 gap-10 mb-16">
+                    {/* Activities with images */}
+                    <div className="grid md:grid-cols-2 gap-6 mb-8">
                         {activities.map((act: any, i: number) => (
-                            <motion.div
-                                key={act.id}
-                                initial={{ opacity: 0, x: i % 2 === 0 ? -40 : 40 }}
+                            <motion.div key={act.id}
+                                initial={{ opacity: 0, x: i % 2 === 0 ? -24 : 24 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
-                                className="group bg-gradient-to-br from-slate-50 to-blue-50 rounded-3xl shadow-xl overflow-hidden border border-slate-200 hover:shadow-2xl transition-all"
+                                className="card overflow-hidden group"
                             >
-                                <div className="h-72 overflow-hidden">
-                                    <img
-                                        src={act.image_url}
-                                        alt={act.name}
-                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                                    />
+                                <div style={{ height: '14rem', overflow: 'hidden' }}>
+                                    <img src={act.image_url} alt={act.name}
+                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                                 </div>
-                                <div className="p-8">
-                                    <h3 className="text-2xl font-bold text-slate-900 mb-3">{act.name}</h3>
-                                    <p className="text-base font-semibold text-blue-600 mb-3">{act.role}</p>
-                                    <p className="text-slate-700 leading-relaxed text-base mb-4">{act.description}</p>
-                                    <div className="flex items-center gap-2 text-slate-500 text-sm">
-                                        <Calendar size={16} />
-                                        <span>{act.date}</span>
-                                    </div>
+                                <div style={{ padding: '1.5rem' }}>
+                                    <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1.05rem', color: 'var(--text-primary)', marginBottom: '0.35rem' }}>
+                                        {act.name}
+                                    </h3>
+                                    <p style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--accent-mid)', marginBottom: '0.6rem', fontFamily: 'var(--font-body)' }}>
+                                        {act.role}
+                                    </p>
+                                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', lineHeight: 1.65, marginBottom: '0.75rem' }}>
+                                        {act.description}
+                                    </p>
+                                    <span className="flex items-center gap-1.5" style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
+                                        <Calendar size={12} /> {act.date}
+                                    </span>
                                 </div>
                             </motion.div>
                         ))}
                     </div>
 
                     {/* Personal hobbies */}
-                    <div className="grid md:grid-cols-3 gap-8">
+                    <div className="grid md:grid-cols-3 gap-4">
                         {hobbies.map((hobby, i) => {
                             const Icon = hobby.icon;
                             return (
-                                <motion.div
-                                    key={i}
-                                    initial={{ opacity: 0, y: 30 }}
+                                <motion.div key={i}
+                                    initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: i * 0.1 }}
                                     viewport={{ once: true }}
-                                    className="bg-white rounded-3xl p-8 shadow-xl border border-slate-200 text-center hover:shadow-2xl hover:-translate-y-2 transition-all"
+                                    transition={{ delay: i * 0.08 }}
+                                    className="card p-6 text-center"
                                 >
-                                    <div className="w-16 h-16 bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-5">
-                                        <Icon className="w-8 h-8 text-blue-600" />
+                                    <div className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4"
+                                        style={{ background: 'var(--accent-light)', border: '1px solid var(--accent-border)' }}>
+                                        <Icon size={22} style={{ color: 'var(--accent)' }} />
                                     </div>
-                                    <h3 className="text-xl font-bold text-slate-900 mb-3">{hobby.title}</h3>
-                                    <p className="text-slate-600 text-base">{hobby.desc}</p>
+                                    <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.95rem', color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
+                                        {hobby.title}
+                                    </h3>
+                                    <p style={{ color: 'var(--text-muted)', fontSize: '0.82rem', lineHeight: 1.6 }}>
+                                        {hobby.desc}
+                                    </p>
                                 </motion.div>
                             );
                         })}
@@ -362,53 +347,62 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            {/* CTA Final */}
-            <section className="py-28 px-6 bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900 text-white relative overflow-hidden">
-                <div className="absolute inset-0">
-                    <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500 rounded-full mix-blend-overlay filter blur-3xl opacity-20" />
-                    <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500 rounded-full mix-blend-overlay filter blur-3xl opacity-20" />
-                </div>
-
-                <div className="max-w-5xl mx-auto text-center relative z-10">
+            {/* ── CTA ──────────────────────────────────────── */}
+            <section style={{ background: 'var(--bg-subtle)', paddingTop: '5rem', paddingBottom: '5rem' }}>
+                <div className="max-w-3xl mx-auto px-6 text-center">
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
+                        initial={{ opacity: 0, y: 24 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="space-y-8"
+                        transition={{ duration: 0.6 }}
+                        className="card p-10 flex flex-col items-center gap-6"
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                        {/* Accent dot */}
+                        <div className="flex items-center gap-2 mb-2">
+                            <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--success)', display: 'inline-block', animation: 'blink 1.5s ease infinite' }} />
+                            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--text-muted)', letterSpacing: '0.08em' }}>
+                                {t('hero.status')}
+                            </span>
+                        </div>
+
+                        <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 800, letterSpacing: '-0.025em', color: 'var(--text-primary)', lineHeight: 1.2 }}>
                             {t('aboutPage.cta.title')}
                         </h2>
-                        <p className="text-lg md:text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
+                        <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.75, maxWidth: '38rem' }}>
                             {t('aboutPage.cta.desc', { role: t('aboutPage.cta.role') })}
                         </p>
 
-                        <div className="flex flex-wrap justify-center gap-6 mt-10">
-                            <a
-                                href={`mailto:${profile.email}`}
-                                className="px-8 py-4 bg-white text-slate-900 font-bold text-lg rounded-2xl hover:bg-blue-50 transition-all shadow-2xl hover:scale-105 flex items-center gap-3"
-                            >
-                                <Mail size={24} /> {t('aboutPage.cta.contact')}
+                        <div className="flex flex-wrap justify-center gap-3 pt-2">
+                            <a href={`mailto:${profile.email}`} className="btn btn-primary" style={{ padding: '0.75rem 1.75rem', fontSize: '0.9rem' }}>
+                                <Mail size={16} /> {t('aboutPage.cta.contact')}
                             </a>
-                            <Link
-                                href="/resume"
-                                className="px-8 py-4 bg-white/20 backdrop-blur-md border-2 border-white text-white font-bold text-lg rounded-2xl hover:bg-white/30 transition-all shadow-2xl hover:scale-105 flex items-center gap-3"
-                            >
-                                <Download size={24} /> {t('aboutPage.cta.cv')}
+                            <Link href="/resume" className="btn btn-secondary" style={{ padding: '0.75rem 1.75rem', fontSize: '0.9rem' }}>
+                                <Download size={16} /> {t('aboutPage.cta.cv')}
                             </Link>
                         </div>
 
-                        <div className="flex justify-center gap-8 mt-12">
-                            <a href={profile.github} target="_blank" rel="noopener noreferrer" className="p-4 bg-white/10 rounded-2xl hover:bg-white/20 transition backdrop-blur-sm">
-                                <Github size={32} />
-                            </a>
-                            <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="p-4 bg-white/10 rounded-2xl hover:bg-white/20 transition backdrop-blur-sm">
-                                <Linkedin size={32} />
-                            </a>
+                        <div className="flex items-center gap-4 pt-2" style={{ borderTop: '1px solid var(--border)', width: '100%', justifyContent: 'center', paddingTop: '1.5rem' }}>
+                            {[
+                                { icon: Github, href: profile.github, label: 'GitHub' },
+                                { icon: Linkedin, href: profile.linkedin, label: 'LinkedIn' },
+                                { icon: Mail, href: `mailto:${profile.email}`, label: 'Email' },
+                            ].map(social => {
+                                const Icon = social.icon;
+                                return (
+                                    <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer"
+                                        className="btn btn-secondary"
+                                        style={{ padding: '0.55rem 0.75rem' }}
+                                        aria-label={social.label}
+                                    >
+                                        <Icon size={16} />
+                                    </a>
+                                );
+                            })}
                         </div>
                     </motion.div>
                 </div>
             </section>
+
         </div>
     );
 }
