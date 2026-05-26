@@ -44,6 +44,18 @@ export interface Activity {
   image_url: string;
 }
 
+export interface TimelineItem {
+  id: number;
+  date: string;
+  year: number;
+  type: "project" | "award" | "activity" | "cert";
+  title: string;
+  subtitle: string;
+  description: string;
+  tags?: string[];
+  link?: string;
+}
+
 export interface SkillCategory {
   key: string;
   title: string;
@@ -270,6 +282,114 @@ export const activities: Activity[] = [
 ];
 
 // ─── DERIVED ──────────────────────────────────────────────
+export const timelineData = ([
+  {
+    id: 1,
+    date: "Semester 1 / 2025",
+    year: 2025,
+    type: "project",
+    title: projects[0].title,
+    subtitle: projects[0].role,
+    description: projects[0].description,
+    tags: projects[0].tech_stack.slice(0, 4),
+    link: `/projects/${projects[0].slug}`,
+  },
+  {
+    id: 2,
+    date: "Jan 2025",
+    year: 2025,
+    type: "activity",
+    title: activities[1].name,
+    subtitle: activities[1].role,
+    description: activities[1].description,
+    tags: ["Community", "Volunteer", "Teamwork"],
+  },
+  {
+    id: 3,
+    date: "2024",
+    year: 2024,
+    type: "award",
+    title: certificates[0].name,
+    subtitle: certificates[0].issuer,
+    description: "Recognised for academic performance, leadership, volunteering, and all-round student contribution at faculty level.",
+    tags: ["Academic", "Leadership", "Volunteer"],
+  },
+  {
+    id: 4,
+    date: "2024",
+    year: 2024,
+    type: "award",
+    title: certificates[1].name,
+    subtitle: certificates[1].issuer,
+    description: "Faculty-level distinction awarded for strong study results and active participation in student and departmental activities.",
+    tags: ["Faculty", "Achievement", "Campus"],
+  },
+  {
+    id: 5,
+    date: "Dec 2024",
+    year: 2024,
+    type: "cert",
+    title: certificates[4].name,
+    subtitle: certificates[4].issuer,
+    description: "Completed the advanced JavaScript Essentials track, strengthening ES6+, DOM, asynchronous flows, and problem-solving skills.",
+    tags: ["JavaScript", "ES6+", "Frontend"],
+    link: certificates[4].url,
+  },
+  {
+    id: 6,
+    date: "Dec 2024",
+    year: 2024,
+    type: "cert",
+    title: certificates[3].name,
+    subtitle: certificates[3].issuer,
+    description: "Built a solid foundation in modern JavaScript syntax, functions, objects, and browser-based programming concepts.",
+    tags: ["JavaScript", "Programming"],
+    link: certificates[3].url,
+  },
+  {
+    id: 7,
+    date: "Dec 2024",
+    year: 2024,
+    type: "cert",
+    title: certificates[2].name,
+    subtitle: certificates[2].issuer,
+    description: "Studied networking fundamentals including IP, switching, routing, and communication concepts useful for backend systems.",
+    tags: ["Networking", "Infrastructure"],
+    link: certificates[2].url,
+  },
+  {
+    id: 8,
+    date: "Oct 2024",
+    year: 2024,
+    type: "award",
+    title: certificates[5].name,
+    subtitle: certificates[5].issuer,
+    description: "Won 3rd place in an innovation competition by contributing ideas, product direction, and collaborative execution.",
+    tags: ["Competition", "Innovation", "Teamwork"],
+  },
+  {
+    id: 9,
+    date: "Semester 1 / 2024",
+    year: 2024,
+    type: "project",
+    title: projects[1].title,
+    subtitle: projects[1].role,
+    description: projects[1].description,
+    tags: projects[1].tech_stack.slice(0, 4),
+    link: `/projects/${projects[1].slug}`,
+  },
+  {
+    id: 10,
+    date: "Mar 2024",
+    year: 2024,
+    type: "activity",
+    title: activities[0].name,
+    subtitle: activities[0].role,
+    description: activities[0].description,
+    tags: ["Sports", "Teamwork", "Discipline"],
+  },
+] satisfies TimelineItem[]).sort((a, b) => b.year - a.year);
+
 export const skillCategories: SkillCategory[] = [
   {
     key: "frontend",

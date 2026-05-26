@@ -164,6 +164,11 @@
       "subtitle": "Official achievements and certifications I have earned",
       "viewCert": "View certificate"
     },
+    "timeline": {
+      "title": "Career timeline",
+      "subtitle": "A single view of projects, certificates, awards, and activities in reverse chronological order",
+      "cta": "View details →"
+    },
     "hobbies": {
       "title": "Hobbies & Extracurricular Activities",
       "subtitle": "I believe a healthy work-life balance is key to long-term success",

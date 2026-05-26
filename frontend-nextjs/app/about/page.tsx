@@ -1,6 +1,6 @@
 'use client';
 
-import { profile, certificates, activities, skillCategories } from '@/data';
+import { profile, certificates, skillCategories } from '@/data';
 import Link from 'next/link';
 import {
     ArrowLeft, Mail, Github, Linkedin,
@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLocale } from '@/src/context/LocaleContext';
+import CareerTimeline from '@/src/components/about/CareerTimeline';
 
 const fadeInUp = {
     hidden: { opacity: 0, y: 24 },
@@ -290,43 +291,23 @@ export default function AboutPage() {
                 <div className="max-w-6xl mx-auto px-6">
                     <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="mb-10">
                         <motion.span variants={fadeInUp} style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--accent-mid)', display: 'block', marginBottom: '0.5rem' }}>
-                            04. {t('aboutPage.hobbies.title')}
+                            04. {t('aboutPage.timeline.title')}
                         </motion.span>
                         <motion.h2 variants={fadeInUp} style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>
-                            {t('aboutPage.hobbies.subtitle')}
+                            {t('aboutPage.timeline.subtitle')}
                         </motion.h2>
                     </motion.div>
 
-                    {/* Activities with images */}
-                    <div className="grid md:grid-cols-2 gap-6 mb-8">
-                        {activities.map((act, i: number) => (
-                            <motion.div key={act.id}
-                                initial={{ opacity: 0, x: i % 2 === 0 ? -24 : 24 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                className="card overflow-hidden group"
-                            >
-                                <div style={{ height: '14rem', overflow: 'hidden' }}>
-                                    <img src={act.image_url} alt={act.name}
-                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                                </div>
-                                <div style={{ padding: '1.5rem' }}>
-                                    <h3 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1.05rem', color: 'var(--text-primary)', marginBottom: '0.35rem' }}>
-                                        {act.name}
-                                    </h3>
-                                    <p style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--accent-mid)', marginBottom: '0.6rem', fontFamily: 'var(--font-body)' }}>
-                                        {act.role}
-                                    </p>
-                                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', lineHeight: 1.65, marginBottom: '0.75rem' }}>
-                                        {act.description}
-                                    </p>
-                                    <span className="flex items-center gap-1.5" style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
-                                        <Calendar size={12} /> {act.date}
-                                    </span>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
+                    <CareerTimeline ctaLabel={t('aboutPage.timeline.cta')} />
+
+                    <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="mt-16 mb-8">
+                        <motion.span variants={fadeInUp} style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--accent-mid)', display: 'block', marginBottom: '0.5rem' }}>
+                            05. {t('aboutPage.hobbies.title')}
+                        </motion.span>
+                        <motion.h3 variants={fadeInUp} style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.35rem, 2.4vw, 1.8rem)', fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>
+                            {t('aboutPage.hobbies.subtitle')}
+                        </motion.h3>
+                    </motion.div>
 
                     {/* Personal hobbies */}
                     <div className="grid md:grid-cols-3 gap-4">
