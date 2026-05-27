@@ -71,7 +71,7 @@ export default function AboutPage() {
                                     <div className="w-72 h-72 lg:w-80 lg:h-80 rounded-2xl overflow-hidden"
                                         style={{ border: '1px solid var(--border)', boxShadow: '0 20px 60px rgba(26,58,92,0.12)' }}>
                                         <img
-                                            src={profile.avatar || '/placeholder-avatar.png'}
+                                            src={profile.avatar_hero || '/placeholder-avatar.png'}
                                             alt={profile.full_name}
                                             className="w-full h-full object-cover object-center"
                                         />

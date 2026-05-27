@@ -95,6 +95,8 @@ export const profile = {
   github: "https://github.com/ntnhan19",
   linkedin: "https://linkedin.com/in/nguyentranngochan",
   avatar: `${BASE_PATH}/images/avatar.jpg`,
+  avatar_hero: `${BASE_PATH}/images/ava_hero.jpg`,
+  avatar_about: `${BASE_PATH}/images/ava_about.jpg`,
 };
 
 // ─── PROJECTS ─────────────────────────────────────────────

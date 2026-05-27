@@ -16,8 +16,6 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { usePortfolioTheme } from '@/src/hooks/usePortfolioTheme';
 
-const homepageAboutAvatar = '/images/avatar1.jpg';
-
 /* ─── ANIMATION VARIANTS ──────────────────────────────── */
 const fadeUp = {
   hidden: { opacity: 0, y: 22 },
@@ -265,7 +263,7 @@ export default function Portfolio() {
                 <div className="rounded-2xl overflow-hidden aspect-square w-full"
                   style={{ boxShadow: '0 24px 64px rgba(26,58,92,0.14)', border: '1px solid var(--border)' }}>
                   <img
-                    src={profile.avatar}
+                    src={profile.avatar_hero}
                     alt={profile.full_name}
                     className="w-full h-full object-cover object-center"
                   />
@@ -605,7 +603,7 @@ export default function Portfolio() {
               >
                 <div className="aspect-[4/3] relative">
                   <img
-                    src={homepageAboutAvatar}
+                    src={profile.avatar_about}
                     alt={profile.full_name}
                     className="w-full h-full object-cover object-center"
                   />
