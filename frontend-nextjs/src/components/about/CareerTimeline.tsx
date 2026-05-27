@@ -32,7 +32,7 @@ const typeConfig = {
     },
 } as const;
 
-function TimelineCard({ item, ctaLabel }: { item: TimelineItem; ctaLabel: string }) {
+function TimelineCard({ item, ctaLabel }: { item: TimelineItem; ctaLabel?: string }) {
     return (
         <div
             className="rounded-2xl p-5 md:p-6"
@@ -102,7 +102,7 @@ function TimelineCard({ item, ctaLabel }: { item: TimelineItem; ctaLabel: string
                 </div>
             )}
 
-            {item.link && (
+            {item.link && ctaLabel && (
                 <div className="pt-2" style={{ borderTop: "1px solid var(--border)" }}>
                     {item.link.startsWith("/") ? (
                         <Link
