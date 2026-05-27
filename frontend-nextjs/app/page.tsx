@@ -598,9 +598,10 @@ export default function Portfolio() {
             >
               {/* Visual anchor */}
               <div
-                className="rounded-2xl overflow-hidden relative"
+                className="rounded-2xl overflow-hidden"
                 style={{ border: '1px solid var(--border)', boxShadow: '0 16px 48px rgba(26,58,92,0.1)' }}
               >
+                {/* Image container */}
                 <div className="aspect-[4/3] relative">
                   <img
                     src={profile.avatar_about}
@@ -612,23 +613,21 @@ export default function Portfolio() {
                     style={{ background: 'linear-gradient(to top, rgba(15,28,46,0.55) 0%, transparent 50%)' }}
                   />
                 </div>
-                {/* Certificate thumb strip */}
-                <div
-                  className="absolute bottom-3 left-3 right-3 flex items-center gap-2"
-                >
-                  {certificates.slice(0, 3).map((cert, i) => (
+                
+                {/* Certificate thumb strip — below image */}
+                <div className="px-4 py-3 flex items-center gap-2" style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)' }}>
+                  {certificates.slice(0, 3).map((cert) => (
                     <div
                       key={cert.id}
-                      className="flex-1 rounded-lg overflow-hidden"
+                      className="rounded-md overflow-hidden flex-1"
                       style={{
-                        border: '2px solid var(--surface)',
-                        boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-                        transform: `rotate(${(i - 1) * 4}deg)`,
+                        border: '1px solid var(--border)',
+                        boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
                         aspectRatio: '4/3',
                         background: 'var(--surface)',
                       }}
                     >
-                      <img src={cert.image_url} alt="" className="w-full h-full object-cover" />
+                      <img src={cert.image_url} alt={cert.name} title={cert.name} className="w-full h-full object-cover" />
                     </div>
                   ))}
                 </div>
