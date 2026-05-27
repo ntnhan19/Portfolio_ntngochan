@@ -467,10 +467,10 @@ export default function Portfolio() {
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mt-5 p-5 rounded-xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+            className="mt-5 p-5 rounded-xl flex flex-col md:flex-row md:items-center md:justify-between gap-4"
             style={{ background: 'var(--bg-subtle)', border: '1px solid var(--border)' }}
           >
-            <div className="flex flex-col sm:flex-row sm:items-start gap-4 flex-1 min-w-0">
+            <div className="flex flex-col md:flex-row md:items-start gap-4 flex-1 min-w-0">
               <div className="flex items-center gap-3 shrink-0">
                 <div className="p-2 rounded-lg" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
                   <GitBranch size={18} style={{ color: 'var(--text-secondary)' }} />
@@ -493,7 +493,7 @@ export default function Portfolio() {
                 ))}
               </div>
             </div>
-            <Link href="/about#skills" className="btn btn-secondary text-sm shrink-0 self-start sm:self-center">
+            <Link href="/about#skills" className="btn btn-secondary text-sm shrink-0 self-start md:self-center">
               {t('skills.viewFullBreakdown')} <ArrowRight size={14} />
             </Link>
           </motion.div>

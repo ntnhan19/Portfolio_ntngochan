@@ -135,7 +135,7 @@ export default function CareerTimeline({
     return (
         <div className="relative">
             <div
-                className="absolute top-0 bottom-0 left-8 md:left-1/2 w-px -translate-x-1/2"
+                className="absolute top-0 bottom-0 left-6 lg:left-1/2 w-px -translate-x-1/2"
                 style={{ background: "var(--border)" }}
             />
 
@@ -152,10 +152,10 @@ export default function CareerTimeline({
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-60px" }}
                             transition={{ duration: 0.55, delay: index * 0.04, ease: [0.22, 1, 0.36, 1] }}
-                            className="relative md:grid md:grid-cols-2 md:gap-12"
+                            className="relative lg:grid lg:grid-cols-2 lg:gap-12"
                         >
                             <div
-                                className="absolute left-8 md:left-1/2 top-6 -translate-x-1/2 w-11 h-11 rounded-full flex items-center justify-center z-10"
+                                className="absolute left-6 lg:left-1/2 top-6 -translate-x-1/2 w-11 h-11 rounded-full flex items-center justify-center z-10"
                                 style={{
                                     background: `color-mix(in srgb, var(${config.colorVar}) 12%, transparent)`,
                                     border: `1px solid color-mix(in srgb, var(${config.colorVar}) 24%, transparent)`,
@@ -167,15 +167,15 @@ export default function CareerTimeline({
 
                             {isEven ? (
                                 <>
-                                    <div className="pl-20 md:pl-0 md:pr-12">
+                                    <div className="pl-16 lg:pl-0 lg:pr-12">
                                         <TimelineCard item={item} ctaLabel={ctaLabel} />
                                     </div>
-                                    <div className="hidden md:block" />
+                                    <div className="hidden lg:block" />
                                 </>
                             ) : (
                                 <>
-                                    <div className="hidden md:block" />
-                                    <div className="pl-20 md:pl-12">
+                                    <div className="hidden lg:block" />
+                                    <div className="pl-16 lg:pl-12">
                                         <TimelineCard item={item} ctaLabel={ctaLabel} />
                                     </div>
                                 </>
