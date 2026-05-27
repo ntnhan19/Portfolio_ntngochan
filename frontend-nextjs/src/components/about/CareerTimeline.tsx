@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Award, Briefcase, Heart, Trophy } from "lucide-react";
+import { Award, Briefcase, Heart, Trophy, ChevronDown } from "lucide-react";
+import { useState } from "react";
 
 import { timelineData } from "@/data";
 import type { TimelineItem } from "@/data";
@@ -130,8 +131,11 @@ function TimelineCard({ item, ctaLabel }: { item: TimelineItem; ctaLabel: string
 
 export default function CareerTimeline({
     items = timelineData,
-    ctaLabel = "Xem chi tiet →",
+    ctaLabel,
 }: CareerTimelineProps) {
+    const [showAll, setShowAll] = useState(false);
+    const displayItems = showAll ? items : items.slice(-5);
+    const hasMore = items.length > 5;
     return (
         <div className="relative">
             <div
@@ -140,7 +144,7 @@ export default function CareerTimeline({
             />
 
             <div className="flex flex-col gap-8 md:gap-10">
-                {items.map((item, index) => {
+                {displayItems.map((item, index) => {
                     const isEven = index % 2 === 0;
                     const config = typeConfig[item.type];
                     const Icon = config.icon;
@@ -184,6 +188,41 @@ export default function CareerTimeline({
                     );
                 })}
             </div>
+
+            {/* Show all / Collapse button */}
+            {hasMore && (
+                <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="mt-10 flex justify-center"
+                >
+                    <button
+                        onClick={() => setShowAll(!showAll)}
+                        className="px-6 py-2.5 rounded-lg flex items-center gap-2 font-semibold text-sm transition-all"
+                        style={{
+                            background: "var(--surface)",
+                            border: "1px solid var(--border)",
+                            color: "var(--text-primary)",
+                        }}
+                        onMouseEnter={e => {
+                            (e.currentTarget as HTMLElement).style.background = "var(--bg-subtle)";
+                        }}
+                        onMouseLeave={e => {
+                            (e.currentTarget as HTMLElement).style.background = "var(--surface)";
+                        }}
+                    >
+                        {showAll ? "Show less" : `Show all (${items.length})`}
+                        <ChevronDown
+                            size={16}
+                            style={{
+                                transform: showAll ? "rotate(180deg)" : "rotate(0deg)",
+                                transition: "transform 0.3s ease",
+                            }}
+                        />
+                    </button>
+                </motion.div>
+            )}
         </div>
     );
 }

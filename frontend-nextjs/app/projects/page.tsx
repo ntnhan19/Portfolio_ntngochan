@@ -35,10 +35,10 @@ export default function ProjectsPage() {
     };
 
     return (
-        <div className="min-h-screen" style={{ background: 'var(--cream)', color: 'var(--ink)' }}>
+        <div className="min-h-screen" style={{ background: 'var(--bg-base)', color: 'var(--text-primary)' }}>
             <section
                 className="relative overflow-hidden"
-                style={{ borderBottom: '1px solid var(--parchment)', background: 'var(--warm-white)' }}
+                style={{ borderBottom: '1px solid var(--border)', background: 'var(--surface-raised)' }}
             >
                 <div
                     className="absolute inset-0 pointer-events-none"
@@ -52,7 +52,7 @@ export default function ProjectsPage() {
                     <Link
                         href="/"
                         className="inline-flex items-center gap-2 mb-8 text-sm font-semibold transition-colors"
-                        style={{ color: 'var(--ink-soft)' }}
+                        style={{ color: 'var(--text-muted)' }}
                     >
                         <ArrowLeft size={18} />
                         Back to home
@@ -66,11 +66,11 @@ export default function ProjectsPage() {
                         <span className="section-label block mb-3">Projects Archive</span>
                         <h1
                             className="text-5xl md:text-6xl mb-5"
-                            style={{ fontFamily: 'var(--font-display)', color: 'var(--ink)' }}
+                            style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}
                         >
                             Work that reflects how I build.
                         </h1>
-                        <p className="text-lg leading-relaxed max-w-2xl" style={{ color: 'var(--ink-soft)' }}>
+                        <p className="text-lg leading-relaxed max-w-2xl" style={{ color: 'var(--text-secondary)' }}>
                             Browse projects by keyword, category, or tech stack. The filtering stays as the
                             collection grows, but the presentation now stays aligned with the rest of the site.
                         </p>
@@ -86,7 +86,7 @@ export default function ProjectsPage() {
                             <Search
                                 className="absolute left-4 top-1/2 -translate-y-1/2"
                                 size={18}
-                                style={{ color: 'var(--ink-faint)' }}
+                                style={{ color: 'var(--text-muted)' }}
                             />
                             <input
                                 type="text"
@@ -95,10 +95,10 @@ export default function ProjectsPage() {
                                 onChange={(e) => setSearchTerm(e.target.value)}
                                 className="w-full pl-12 pr-4 py-4 rounded-2xl transition-all focus:outline-none"
                                 style={{
-                                    background: 'var(--cream)',
-                                    border: '1px solid var(--parchment)',
-                                    color: 'var(--ink)',
-                                    boxShadow: '0 10px 30px rgba(44,40,37,0.05)',
+                                    background: 'var(--bg-base)',
+                                    border: '1px solid var(--border)',
+                                    color: 'var(--text-primary)',
+                                    boxShadow: '0 10px 30px rgba(15,28,46,0.05)',
                                 }}
                             />
                         </div>
@@ -110,10 +110,10 @@ export default function ProjectsPage() {
                 <div className="mb-12 space-y-6">
                     <div>
                         <div className="flex items-center gap-2 mb-4">
-                            <Filter size={18} style={{ color: 'var(--ink-faint)' }} />
+                            <Filter size={18} style={{ color: 'var(--text-muted)' }} />
                             <h2
                                 className="text-sm font-semibold uppercase tracking-wider"
-                                style={{ color: 'var(--ink-faint)' }}
+                                style={{ color: 'var(--text-muted)' }}
                             >
                                 Category
                             </h2>
@@ -123,9 +123,9 @@ export default function ProjectsPage() {
                                 onClick={() => setSelectedCategory(null)}
                                 className="px-4 py-2 rounded-full text-sm font-medium transition-all"
                                 style={{
-                                    background: !selectedCategory ? 'var(--rose)' : 'var(--warm-white)',
-                                    color: !selectedCategory ? 'var(--warm-white)' : 'var(--ink-soft)',
-                                    border: !selectedCategory ? '1px solid var(--rose)' : '1px solid var(--parchment)',
+                                    background: !selectedCategory ? 'var(--warning)' : 'var(--surface-raised)',
+                                    color: !selectedCategory ? 'var(--bg-base)' : 'var(--text-secondary)',
+                                    border: !selectedCategory ? '1px solid var(--warning)' : '1px solid var(--border)',
                                 }}
                             >
                                 All ({projects.length})
@@ -142,15 +142,15 @@ export default function ProjectsPage() {
                                         className="px-4 py-2 rounded-full text-sm font-medium transition-all"
                                         style={{
                                             background:
-                                                selectedCategory === category ? 'var(--ink)' : 'var(--warm-white)',
+                                                selectedCategory === category ? 'var(--text-primary)' : 'var(--surface-raised)',
                                             color:
                                                 selectedCategory === category
-                                                    ? 'var(--warm-white)'
-                                                    : 'var(--ink-soft)',
+                                                    ? 'var(--bg-base)'
+                                                    : 'var(--text-secondary)',
                                             border:
                                                 selectedCategory === category
-                                                    ? '1px solid var(--ink)'
-                                                    : '1px solid var(--parchment)',
+                                                    ? '1px solid var(--text-primary)'
+                                                    : '1px solid var(--border)',
                                         }}
                                     >
                                         {category} ({count})
@@ -162,10 +162,10 @@ export default function ProjectsPage() {
 
                     <div>
                         <div className="flex items-center gap-2 mb-4">
-                            <Tag size={18} style={{ color: 'var(--ink-faint)' }} />
+                            <Tag size={18} style={{ color: 'var(--text-muted)' }} />
                             <h2
                                 className="text-sm font-semibold uppercase tracking-wider"
-                                style={{ color: 'var(--ink-faint)' }}
+                                style={{ color: 'var(--text-muted)' }}
                             >
                                 Technology
                             </h2>
@@ -176,9 +176,9 @@ export default function ProjectsPage() {
                                     onClick={() => setSelectedTech(null)}
                                     className="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors"
                                     style={{
-                                        background: 'var(--accent-bg)',
-                                        color: 'var(--rose)',
-                                        border: '1px solid var(--rose)',
+                                        background: 'var(--accent-light)',
+                                        color: 'var(--warning)',
+                                        border: '1px solid var(--warning)',
                                     }}
                                 >
                                     Clear {selectedTech}
@@ -190,12 +190,12 @@ export default function ProjectsPage() {
                                     onClick={() => setSelectedTech(tech === selectedTech ? null : tech)}
                                     className="px-3 py-1.5 rounded-lg text-sm font-medium transition-all"
                                     style={{
-                                        background: selectedTech === tech ? 'var(--sage)' : 'var(--warm-white)',
-                                        color: selectedTech === tech ? 'var(--warm-white)' : 'var(--ink-soft)',
+                                        background: selectedTech === tech ? 'var(--success)' : 'var(--surface-raised)',
+                                        color: selectedTech === tech ? 'var(--bg-base)' : 'var(--text-secondary)',
                                         border:
                                             selectedTech === tech
-                                                ? '1px solid var(--sage)'
-                                                : '1px solid var(--parchment)',
+                                                ? '1px solid var(--success)'
+                                                : '1px solid var(--border)',
                                     }}
                                 >
                                     {tech}
@@ -206,8 +206,8 @@ export default function ProjectsPage() {
                 </div>
 
                 {(searchTerm || selectedCategory || selectedTech) && (
-                    <div className="mb-6 text-sm" style={{ color: 'var(--ink-soft)' }}>
-                        Found <span style={{ color: 'var(--rose)', fontWeight: 700 }}>{filteredProjects.length}</span>{' '}
+                    <div className="mb-6 text-sm" style={{ color: 'var(--text-secondary)' }}>
+                        Found <span style={{ color: 'var(--warning)', fontWeight: 700 }}>{filteredProjects.length}</span>{' '}
                         project{filteredProjects.length !== 1 ? 's' : ''}
                         {selectedCategory && (
                             <span>
@@ -244,15 +244,15 @@ export default function ProjectsPage() {
                 ) : (
                     <div
                         className="text-center py-16 px-6 rounded-3xl"
-                        style={{ background: 'var(--warm-white)', border: '1px solid var(--parchment)' }}
+                        style={{ background: 'var(--surface-raised)', border: '1px solid var(--border)' }}
                     >
                         <h3
                             className="text-2xl mb-2"
-                            style={{ fontFamily: 'var(--font-display)', color: 'var(--ink)' }}
+                            style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}
                         >
                             No projects found
                         </h3>
-                        <p className="mb-6" style={{ color: 'var(--ink-soft)' }}>
+                        <p className="mb-6" style={{ color: 'var(--text-secondary)' }}>
                             Try adjusting the filters or search term.
                         </p>
                         <button
