@@ -1,6 +1,11 @@
 // src/data/staticData.ts
+
+const isVercel = process.env.NEXT_PUBLIC_VERCEL_ENV !== undefined;
+
 const BASE_PATH =
-  process.env.NODE_ENV === "production" ? "/Portfolio_ntngochan" : "";
+  process.env.NODE_ENV === "production" && !isVercel
+    ? "/Portfolio_ntngochan"
+    : "";
 
 // ─── TYPES ────────────────────────────────────────────────
 
