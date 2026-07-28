@@ -1,0 +1,62 @@
+{
+    "backHome":  "Back to home",
+    "statusBadge":  "Online • Ready to collaborate",
+    "stats":  {
+                  "projects":  "Featured Projects",
+                  "certificates":  "Certificates",
+                  "awards":  "Awards",
+                  "blog":  "Blog posts"
+              },
+    "skills":  {
+                   "title":  "Technologies \u0026 Skills",
+                   "subtitle":  "Technologies I\u0027ve mastered and continue to work with",
+                   "categories":  {
+                                      "backend":  "Backend Development",
+                                      "frontend":  "Frontend Development",
+                                      "database":  "Database",
+                                      "ai":  "AI \u0026 LLM",
+                                      "devops":  "DevOps \u0026 Tools"
+                                  }
+               },
+    "education":  {
+                      "university":  "Ho Chi Minh City University of Technology (HUTECH)",
+                      "degree":  "Bachelor of Software Engineering • 2022 – 2026",
+                      "year":  "Year 4 (Expected graduation 2026)",
+                      "gpa":  "GPA: 3.33/4.0"
+                  },
+    "certificates":  {
+                         "title":  "Certificates \u0026 Awards",
+                         "subtitle":  "Official achievements and certifications I have earned",
+                         "viewCert":  "View certificate"
+                     },
+    "timeline":  {
+                     "title":  "Career timeline",
+                     "subtitle":  "A single view of projects, certificates, awards, and activities in reverse chronological order",
+                     "cta":  "View details →"
+                 },
+    "hobbies":  {
+                    "title":  "Hobbies \u0026 Extracurricular Activities",
+                    "subtitle":  "I believe a healthy work-life balance is key to long-term success",
+                    "items":  [
+                                  {
+                                      "title":  "Women\u0027s Football",
+                                      "desc":  "Member of the HUTECH IT Faculty women\u0027s football team — 2nd place at HUTECH Sports Festival 2024"
+                                  },
+                                  {
+                                      "title":  "Volunteering",
+                                      "desc":  "Participating in Tet gift-giving and community activities"
+                                  },
+                                  {
+                                      "title":  "Reading",
+                                      "desc":  "Interested in books on technology, psychology, and self-development"
+                                  }
+                              ]
+                },
+    "cta":  {
+                "title":  "Ready to start the intern journey with your team!",
+                "desc":  "I\u0027m looking for a {role} at tech companies, especially in AI/ML, real-time systems, and microservices.",
+                "role":  "Fullstack Developer Intern",
+                "contact":  "Contact now",
+                "cv":  "Download CV"
+            }
+}

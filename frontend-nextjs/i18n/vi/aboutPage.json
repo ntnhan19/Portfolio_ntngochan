@@ -1,0 +1,62 @@
+{
+    "backHome":  "Quay lại trang chủ",
+    "statusBadge":  "Online • Sẵn sàng hợp tác",
+    "stats":  {
+                  "projects":  "Dự án nổi bật",
+                  "certificates":  "Chứng chỉ",
+                  "awards":  "Giải thưởng",
+                  "blog":  "Blog posts"
+              },
+    "skills":  {
+                   "title":  "Công nghệ \u0026 Kỹ năng",
+                   "subtitle":  "Những công nghệ tôi đã và đang thành thạo",
+                   "categories":  {
+                                      "backend":  "Lập trình Backend",
+                                      "frontend":  "Lập trình Frontend",
+                                      "database":  "Cơ sở dữ liệu",
+                                      "ai":  "AI \u0026 LLM",
+                                      "devops":  "DevOps \u0026 Công cụ"
+                                  }
+               },
+    "education":  {
+                      "university":  "Đại học Công nghệ TP.HCM (HUTECH)",
+                      "degree":  "Cử nhân Kỹ thuật Phần mềm • 2022 – 2026",
+                      "year":  "Năm 4 (Dự kiến tốt nghiệp 2026)",
+                      "gpa":  "GPA: 3.34/4.0"
+                  },
+    "certificates":  {
+                         "title":  "Chứng chỉ \u0026 Giải thưởng",
+                         "subtitle":  "Những thành tựu và chứng nhận chính thức tôi đã đạt được",
+                         "viewCert":  "Xem chứng chỉ"
+                     },
+    "timeline":  {
+                     "title":  "Hành trình phát triển",
+                     "subtitle":  "Tổng hợp dự án, chứng chỉ, giải thưởng và hoạt động nổi bật theo dòng thời gian",
+                     "cta":  "Xem chi tiết →"
+                 },
+    "hobbies":  {
+                    "title":  "Sở thích \u0026 Hoạt động ngoại khóa",
+                    "subtitle":  "Tôi tin rằng sự cân bằng giữa công việc và cuộc sống là rất quan trọng",
+                    "items":  [
+                                  {
+                                      "title":  "Bóng đá nữ",
+                                      "desc":  "Thành viên đội bóng đá nữ Khoa CNTT – Giải Nhì Hội thao HUTECH 2024"
+                                  },
+                                  {
+                                      "title":  "Tình nguyện",
+                                      "desc":  "Tham gia gói quà Tết, hoạt động cộng đồng"
+                                  },
+                                  {
+                                      "title":  "Đọc sách",
+                                      "desc":  "Thích sách về công nghệ, tâm lý và phát triển bản thân"
+                                  }
+                              ]
+                },
+    "cta":  {
+                "title":  "Sẵn sàng bắt đầu hành trình Intern cùng team!",
+                "desc":  "Tôi đang tìm kiếm cơ hội {role} tại các công ty công nghệ, đặc biệt trong lĩnh vực AI/ML, hệ thống real-time và microservices.",
+                "role":  "Fullstack Developer Intern",
+                "contact":  "Liên hệ ngay",
+                "cv":  "Tải CV"
+            }
+}

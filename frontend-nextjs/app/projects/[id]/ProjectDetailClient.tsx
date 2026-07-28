@@ -5,8 +5,10 @@ import { projects } from '../../../src/data/staticData';
 import Link from 'next/link';
 import { ArrowLeft, Github, ExternalLink, Users, Clock, Code2 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
+import { useLocale } from '../../../src/context/LocaleContext';
 
-export default function ProjectDetailClient({ slug }: { slug: string }) {
+export default function ProjectDetailClient({ slug, contentEn, contentVi }: { slug: string, contentEn: string, contentVi: string }) {
+    const { t, locale } = useLocale();
     const project = projects.find(
         (p) => p.slug === slug || p.id.toString() === slug
     );
@@ -23,15 +25,15 @@ export default function ProjectDetailClient({ slug }: { slug: string }) {
         <main style={{ background: 'var(--bg-base)', color: 'var(--text-primary)', minHeight: '100vh' }}>
 
             {/* ── HERO ── */}
-            <section style={{ position: 'relative', height: '420px', overflow: 'hidden', background: 'var(--surface-raised)' }}>
+            <section style={{ position: 'relative', minHeight: '420px', overflow: 'hidden', background: 'var(--surface-raised)' }}>
                 <img
                     src={project.image_url}
                     alt={project.title}
                     style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.3 }}
                     onError={e => { e.currentTarget.style.display = 'none'; }}
                 />
-                {/* Gradient overlay */}
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(15,28,46,0.95) 0%, rgba(15,28,46,0.72) 50%, rgba(15,28,46,0.28) 100%)' }} />
+                {/* Gradient overlay — theme-aware */}
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--surface-overlay-0), var(--surface-overlay-1), var(--surface-overlay-2))' }} />
 
                 {/* Hero content */}
                 <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '2.5rem 1.5rem' }}>
@@ -93,7 +95,7 @@ export default function ProjectDetailClient({ slug }: { slug: string }) {
                     style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--font-body)', fontSize: '0.82rem', color: 'var(--text-muted)', textDecoration: 'none', marginBottom: '2.5rem', transition: 'color 0.15s' }}
                     onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-primary)')}
                     onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-muted)')}>
-                    <ArrowLeft size={14} /> Quay lại
+                    <ArrowLeft size={14} /> {t('projectDetail.back')}
                 </Link>
 
                 {/* Meta strip — thay 3 gradient cards */}
@@ -104,9 +106,9 @@ export default function ProjectDetailClient({ slug }: { slug: string }) {
                     borderRadius: 'var(--radius-lg)',
                 }}>
                     {[
-                        { icon: <Clock size={13} />, label: 'Thời gian', value: project.duration },
-                        { icon: <Users size={13} />, label: 'Team', value: `${project.team_size} members` },
-                        { icon: <Code2 size={13} />, label: 'Stack', value: `${project.tech_stack.length} công nghệ` },
+                        { icon: <Clock size={13} />, label: t('projectDetail.meta.duration'), value: project.duration },
+                        { icon: <Users size={13} />, label: t('projectDetail.meta.team'), value: `${project.team_size} members` },
+                        { icon: <Code2 size={13} />, label: t('projectDetail.meta.stack'), value: `${project.tech_stack.length} công nghệ` },
                     ].map(item => (
                         <div key={item.label} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                             <span style={{ color: 'var(--text-muted)' }}>{item.icon}</span>
@@ -129,7 +131,7 @@ export default function ProjectDetailClient({ slug }: { slug: string }) {
                 {/* Highlights */}
                 {project.highlights.length > 0 && (
                     <div style={{ marginBottom: '2.5rem', padding: '1.25rem', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius-lg)' }}>
-                        <p className="section-label" style={{ marginBottom: '0.75rem' }}>Điểm nổi bật</p>
+                        <p className="section-label" style={{ marginBottom: '0.75rem' }}>{t('projectDetail.highlights')}</p>
                         <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                             {project.highlights.map(h => (
                                 <li key={h} style={{ display: 'flex', gap: '0.6rem', alignItems: 'flex-start', fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
@@ -143,7 +145,7 @@ export default function ProjectDetailClient({ slug }: { slug: string }) {
 
                 {/* Markdown content */}
                 <article className="prose">
-                    <ReactMarkdown>{project.content}</ReactMarkdown>
+                    <ReactMarkdown>{locale === 'vi' ? contentVi : contentEn}</ReactMarkdown>
                 </article>
             </div>
         </main>

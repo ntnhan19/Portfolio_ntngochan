@@ -15,7 +15,6 @@ export interface Project {
   title: string;
   tagline: string;
   description: string;
-  content: string;
   tech_stack: string[];
   highlights: string[];
   category: "AI/ML" | "Fullstack" | "Backend" | "Frontend";
@@ -108,47 +107,46 @@ export const profile = {
 
 export const projects: Project[] = [
   {
+    id: 3,
+    slug: "sma",
+    title: "Smart Media Analytics (SMA)",
+    tagline: "AI-Powered Media Asset Management & Semantic Search System",
+    description:
+      "Architected a cloud-ready AI system enabling natural-language semantic search across video and image libraries with timestamp-level scene retrieval. Separated a dedicated AI Worker from the Backend API to isolate heavy tasks (Whisper transcription, OpenCV scene detection).",
+    tech_stack: [
+      "Python",
+      "FastAPI",
+      "React",
+      "PostgreSQL/pgvector",
+      "ChromaDB",
+      "Docker",
+      "GitHub Actions",
+      "AWS (ECS Fargate, RDS, S3, Bedrock)",
+    ],
+    highlights: [
+      "Separated AI Worker from Backend API",
+      "AWS ECS Fargate on-demand invocation",
+      "Vector search with pgvector on RDS",
+      "CI/CD auto-deploy with GitHub Actions",
+    ],
+    category: "Backend",
+    role: "Team Lead & DevOps",
+    team_size: 4,
+    duration: "4 months",
+    year: 2026,
+    repo_url: "https://github.com/ntnhan19/smart_media_analytics_cloudforge",
+    demo_url: "",
+    image_url: `${BASE_PATH}/images/projects/sma.png`,
+    featured: true,
+    status: "completed",
+  },
+  {
     id: 1,
     slug: "docmentor",
     title: "DocMentor",
     tagline: "AI document Q&A — upload PDF, ask anything",
     description:
       "Built a RAG pipeline that lets users upload PDF/DOCX and ask natural-language questions. Chunks with RecursiveCharacterTextSplitter (512 tokens, overlap 50), embeds via Sentence Transformers, stores in Pinecone, retrieves top-5 chunks as context for Gemini Pro. Streaming response via FastAPI SSE.",
-    content: `## Background
-
-Students and lecturers often have to read hundreds of pages of documents to find one specific piece of information. DocMentor solves this with a RAG pipeline — upload a document once, ask in natural language, receive answers with source citations.
-
-This was the capstone project for the **Specialised Project** module (Semester 1 / 2025), built by a team of 3.
-
-## System Architecture
-
-\`\`\`
-PDF/DOCX Upload
-    → Text Extraction (PyMuPDF)
-    → Chunking (RecursiveCharacterTextSplitter, 512 tokens, overlap 50)
-    → Embedding (Sentence Transformers: all-MiniLM-L6-v2)
-    → Store → Pinecone Vector DB
-
-User Query
-    → Embed query
-    → Similarity Search (top-k=5)
-    → Build prompt (chunks + question)
-    → Gemini Pro → Streaming SSE response
-\`\`\`
-
-## Key Technical Decisions
-
-**Chunking strategy:** Started with fixed-size chunking — results were poor because sentences got cut mid-way. Switched to RecursiveCharacterTextSplitter with overlap 50 tokens; accuracy improved significantly.
-
-**Hallucination control:** Gemini occasionally fabricated information outside the document. Fixed with a hard system prompt: *"Answer ONLY based on the provided context. If the answer is not in the context, say 'I don't have enough information.'"*
-
-**Cost optimisation:** Cache embeddings by file hash (MD5) — avoids re-embedding when a user uploads a duplicate file.
-
-## Results
-
-- Successfully processed 95% of 50 test documents
-- Response time: 3–5 seconds (including streaming)
-- Project grade: 9/10`,
     tech_stack: [
       "Python",
       "FastAPI",
@@ -182,65 +180,6 @@ User Query
     tagline: "Real-time seat booking — zero double-booking under concurrent load",
     description:
       "Cinema ticket booking system solving the concurrent seat selection problem. Implemented Redis distributed lock (SET NX EX) for atomic reservation, Socket.io for real-time seat-map sync across all clients, VNPay sandbox for payment. Load tested with Artillery: 100 concurrent requests → 1 success, 0 double bookings.",
-    content: `## Background
-
-This was the capstone project for the **Network Programming** module (Semester 1 / 2024), built by a team of 3. Requirement: build a real-time system capable of handling race conditions.
-
-**Specific problem:** When 100 users simultaneously click the same seat, how do you guarantee that only 1 person books successfully while the other 99 receive an instant notification?
-
-## Technical Solution
-
-### Redis Distributed Lock
-
-\`\`\`javascript
-const lockKey = \`seat:\${movieId}:\${seatId}\`;
-const acquired = await redis.set(lockKey, userId, 'EX', 30, 'NX');
-// EX 30 — auto-expire after 30s (prevents deadlock if server crashes)
-// NX    — only set if key does not exist (atomic check-and-set)
-
-if (!acquired) {
-  socket.emit('seat:error', { message: 'Seat already taken' });
-  return;
-}
-
-await db.query(
-  'UPDATE seats SET status=$1, user_id=$2 WHERE id=$3',
-  ['locked', userId, seatId]
-);
-
-io.to(\`room:\${movieId}\`).emit('seat:updated', { seatId, status: 'locked' });
-\`\`\`
-
-**Why Redis instead of a DB transaction?** PostgreSQL row-locks work, but when scaling horizontally across multiple Node processes, each process has its own connection pool — the lock is not shared. Redis is single-threaded and guarantees atomicity cross-process.
-
-### Socket.io Room Management
-
-Each showtime is a Socket.io room. Clients join the room when they open the seat-selection page and leave when they exit. Seat-map updates are broadcast to the entire room — no polling needed.
-
-## Load Testing
-
-\`\`\`bash
-# 100 virtual users all selecting seat ID 42
-artillery run load-test.yml
-
-# Results:
-# Success (seat booked): 1
-# Failed (seat taken): 99
-# Response time p95: 187ms
-# Double bookings: 0
-\`\`\`
-
-## Bugs & Fixes
-
-**Bug 1 — Redis lock not released on server crash:** TTL was 30s, but if the server crashed mid-flow, the seat stayed locked. Fix: reduced TTL to 10s and added a heartbeat to extend the lock while the user is in the payment flow.
-
-**Bug 2 — Socket reconnect loses seat state:** After reconnecting, the client had no way to know which seats were locked. Fix: when joining a room, the server now emits the full current seat-map from Redis.
-
-## Results
-
-- Zero double bookings across load tests with 100 concurrent users
-- Response time p95: 187ms
-- Project grade: 9/10`,
     tech_stack: [
       "Node.js",
       "Express",
@@ -291,15 +230,26 @@ export const activities: Activity[] = [
 // ─── DERIVED ──────────────────────────────────────────────
 export const timelineData = ([
   {
-    id: 1,
-    date: "Semester 1 / 2025",
-    year: 2025,
+    id: 11,
+    date: "Apr - Jul 2026",
+    year: 2026,
     type: "project",
     title: projects[0].title,
     subtitle: projects[0].role,
     description: projects[0].description,
     tags: projects[0].tech_stack.slice(0, 4),
     link: `/projects/${projects[0].slug}`,
+  },
+  {
+    id: 1,
+    date: "Semester 1 / 2025",
+    year: 2025,
+    type: "project",
+    title: projects[1].title,
+    subtitle: projects[1].role,
+    description: projects[1].description,
+    tags: projects[1].tech_stack.slice(0, 4),
+    link: `/projects/${projects[1].slug}`,
   },
   {
     id: 2,
@@ -379,11 +329,11 @@ export const timelineData = ([
     date: "Semester 1 / 2024",
     year: 2024,
     type: "project",
-    title: projects[1].title,
-    subtitle: projects[1].role,
-    description: projects[1].description,
-    tags: projects[1].tech_stack.slice(0, 4),
-    link: `/projects/${projects[1].slug}`,
+    title: projects[2].title,
+    subtitle: projects[2].role,
+    description: projects[2].description,
+    tags: projects[2].tech_stack.slice(0, 4),
+    link: `/projects/${projects[2].slug}`,
   },
   {
     id: 10,

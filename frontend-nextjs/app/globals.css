@@ -21,6 +21,11 @@
   --surface-1:      var(--surface);
   --surface-2:      var(--surface-raised);
 
+  /* === GRADIENT OVERLAY (hero gradient for dark text on image) === */
+  --surface-overlay-0: rgba(248, 250, 252, 0.95);
+  --surface-overlay-1: rgba(240, 244, 248, 0.85);
+  --surface-overlay-2: rgba(220, 230, 240, 0.40);
+
   /* === BORDERS === */
   --border:         #dde3ec;
   --border-strong:  #b8c4d4;
@@ -82,6 +87,11 @@
   --surface-hover:  #21293a;
   --surface-1:      var(--surface);
   --surface-2:      var(--surface-raised);
+
+  /* === GRADIENT OVERLAY (hero gradient for light text on image in dark mode) === */
+  --surface-overlay-0: rgba(28, 35, 51, 0.95);
+  --surface-overlay-1: rgba(33, 41, 58, 0.75);
+  --surface-overlay-2: rgba(50, 65, 90, 0.35);
 
   /* === BORDERS === */
   --border:         #2d3748;
@@ -428,4 +438,119 @@ body {
 
 .animate-blink {
   animation: blink 1.2s step-end infinite;
+}
+
+/* ─── PROSE (Markdown) ──────────────────────────────────── */
+.prose {
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  color: var(--text-primary);
+  font-weight: 700;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose p {
+  margin-bottom: 1rem;
+}
+
+.prose code {
+  background: var(--bg-muted);
+  color: var(--text-secondary);
+  padding: 0.1em 0.4em;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}
+
+.prose pre {
+  background: var(--bg-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.prose pre code {
+  background: transparent;
+  color: var(--text-secondary);
+  padding: 0;
+}
+
+.prose blockquote {
+  border-left: 4px solid var(--accent);
+  padding-left: 1rem;
+  margin: 1rem 0;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.prose a {
+  color: var(--accent-mid);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.prose a:hover {
+  border-bottom-color: var(--accent-mid);
+}
+
+.prose ul,
+.prose ol {
+  margin: 1rem 0;
+  padding-left: 2rem;
+}
+
+.prose li {
+  margin-bottom: 0.5rem;
+}
+
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  margin: 1rem 0;
+}
+
+/* ─── PROSE DARK MODE ──────────────────────────────────── */
+[data-theme="dark"] .prose h1,
+[data-theme="dark"] .prose h2,
+[data-theme="dark"] .prose h3,
+[data-theme="dark"] .prose h4,
+[data-theme="dark"] .prose h5,
+[data-theme="dark"] .prose h6 {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .prose code {
+  background: var(--bg-muted);
+  color: var(--text-secondary);
+}
+
+[data-theme="dark"] .prose pre {
+  background: var(--bg-muted);
+  border-color: var(--border);
+}
+
+[data-theme="dark"] .prose blockquote {
+  border-left-color: var(--accent);
+  color: var(--text-secondary);
+}
+
+[data-theme="dark"] .prose a {
+  color: var(--accent-mid);
+}
+
+[data-theme="dark"] .prose a:hover {
+  border-bottom-color: var(--accent-mid);
 }

@@ -1,0 +1,74 @@
+{
+    "sectionLabel":  "05. Liên hệ",
+    "title":  "Hãy cùng hợp tác",
+    "description":  "Mình đang tìm kiếm {role}. Có cơ hội? Rất mong được nghe từ bạn.",
+    "role":  "vị trí Intern Fullstack / Backend Developer",
+    "sendEmail":  "Gửi email cho mình",
+    "messageLinkedIn":  "Nhắn tin LinkedIn",
+    "backHome":  "Quay lại trang chủ",
+    "pageTitle":  "Liên hệ",
+    "pageTitleHighlight":  "với tôi",
+    "pageDesc":  "Có dự án thú vị? Cơ hội thực tập? Hoặc chỉ muốn chat về công nghệ? Hãy liên hệ!",
+    "formTitle":  "Gửi tin nhắn",
+    "formSubtitle":  "Tôi sẽ phản hồi trong vòng 24 giờ",
+    "successTitle":  "Gửi thành công!",
+    "successDesc":  "Cảm ơn bạn đã liên hệ. Tôi sẽ phản hồi sớm nhất có thể.",
+    "sending":  "Đang gửi...",
+    "send":  "Gửi tin nhắn",
+    "chars":  "ký tự",
+    "fields":  {
+                   "name":  "Họ tên",
+                   "namePlaceholder":  "Nguyễn Văn A",
+                   "email":  "Email",
+                   "emailPlaceholder":  "email@example.com",
+                   "subject":  "Chủ đề",
+                   "subjectPlaceholder":  "Chọn chủ đề",
+                   "subjectInternship":  "Cơ hội thực tập",
+                   "subjectProject":  "Hợp tác dự án",
+                   "subjectQuestion":  "Câu hỏi kỹ thuật",
+                   "subjectOther":  "Khác",
+                   "message":  "Nội dung",
+                   "messagePlaceholder":  "Viết tin nhắn của bạn..."
+               },
+    "info":  {
+                 "title":  "Thông tin liên hệ",
+                 "address":  "Địa chỉ",
+                 "addressValue":  "TP. Hồ Chí Minh, Việt Nam",
+                 "phone":  "Điện thoại",
+                 "phoneValue":  "+84 845 065 676",
+                 "hours":  "Thời gian",
+                 "hoursValue":  "T2 - T6, 9:00 - 18:00"
+             },
+    "social":  {
+                   "title":  "Kết nối với tôi",
+                   "emailDesc":  "Gửi email trực tiếp",
+                   "githubDesc":  "Xem source code",
+                   "linkedinDesc":  "Kết nối chuyên nghiệp"
+               },
+    "cv":  {
+               "title":  "Tải CV của tôi",
+               "desc":  "Xem chi tiết về kinh nghiệm và kỹ năng của tôi",
+               "link":  "Xem Resume →"
+           },
+    "faq":  {
+                "title":  "Câu hỏi thường gặp",
+                "items":  [
+                              {
+                                  "q":  "Bạn có sẵn sàng làm việc remote không?",
+                                  "a":  "Có, tôi hoàn toàn sẵn sàng làm việc remote hoặc hybrid."
+                              },
+                              {
+                                  "q":  "Thời gian phản hồi là bao lâu?",
+                                  "a":  "Tôi thường phản hồi trong vòng 24 giờ vào các ngày làm việc."
+                              },
+                              {
+                                  "q":  "Bạn đang tìm kiếm vị trí gì?",
+                                  "a":  "Backend Developer Intern hoặc Junior Backend Developer."
+                              },
+                              {
+                                  "q":  "Kỹ năng chính của bạn là gì?",
+                                  "a":  "Node.js, Next.js, PostgreSQL, Redis, FastAPI, Docker và các công cụ AI/ML."
+                              }
+                          ]
+            }
+}

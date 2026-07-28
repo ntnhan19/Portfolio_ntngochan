@@ -1,0 +1,24 @@
+{
+    "sectionLabel":  "04. About",
+    "title":  "About Me",
+    "bio1":  "I\u0027m a 4th-year Software Engineering student at {university} with a GPA of 3.33/4.0, building full-stack web applications using the PERN stack.",
+    "bio2":  "My recent work includes a {cinema} with Redis distributed locking, and an {ai} using RAG pipeline with LangChain \u0026 Pinecone.",
+    "cinema":  "real-time cinema booking system",
+    "ai":  "AI-powered document assistant",
+    "fullProfile":  "Full profile",
+    "profilePreviewTitle":  "More on the full profile",
+    "profilePreviewDesc":  "Beyond the project highlights — credentials, campus life, and the full skill breakdown.",
+    "profilePreviewCerts":  "Certificates \u0026 awards ({count})",
+    "profilePreviewActivities":  "Volunteering \u0026 campus activities",
+    "profilePreviewEducation":  "Education, skills \u0026 hobbies",
+    "stats":  {
+                  "projects":  "Projects Built",
+                  "projectsSub":  "Full-stack applications",
+                  "certificates":  "Certificates",
+                  "certificatesSub":  "Professional \u0026 academic",
+                  "gpa":  "GPA",
+                  "gpaSub":  "Out of 4.0",
+                  "stack":  "Stack",
+                  "stackSub":  "PostgreSQL · Express · React · Node"
+              }
+}

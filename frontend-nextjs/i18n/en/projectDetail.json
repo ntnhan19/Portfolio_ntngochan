@@ -1,0 +1,9 @@
+{
+    "back":  "Back",
+    "meta":  {
+                 "duration":  "Duration",
+                 "team":  "Team",
+                 "stack":  "Stack"
+             },
+    "highlights":  "Highlights"
+}

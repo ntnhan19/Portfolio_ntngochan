@@ -1,0 +1,11 @@
+{
+    "status":  "Available for internship",
+    "greeting":  "Hi, I\u0027m",
+    "role":  "Fullstack Developer — PERN · React.js · FastAPI",
+    "gpa":  "GPA 3.33 / 4.0",
+    "university":  "HUTECH · Software Engineering · Year 4",
+    "description":  "4th-year Software Engineering student at HUTECH. I build fullstack web apps with a backend focus — real-time seat locking with Redis \u0026 Socket.io, RAG pipelines with LangChain \u0026 Pinecone, and clean REST APIs on Node.js + PostgreSQL.",
+    "viewProjects":  "View Projects",
+    "getInTouch":  "Get in touch",
+    "openToWork":  "open_to_work"
+}

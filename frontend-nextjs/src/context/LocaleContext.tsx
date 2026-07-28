@@ -1,8 +1,52 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useCallback, useSyncExternalStore } from 'react';
-import en from '@/i18n/en.json';
-import vi from '@/i18n/vi.json';
+
+// EN Namespaces
+import navEn from '@/i18n/en/nav.json';
+import heroEn from '@/i18n/en/hero.json';
+import projectsEn from '@/i18n/en/projects.json';
+import skillsEn from '@/i18n/en/skills.json';
+import aboutEn from '@/i18n/en/about.json';
+import contactEn from '@/i18n/en/contact.json';
+import aboutPageEn from '@/i18n/en/aboutPage.json';
+import footerEn from '@/i18n/en/footer.json';
+import projectDetailEn from '@/i18n/en/projectDetail.json';
+
+// VI Namespaces
+import navVi from '@/i18n/vi/nav.json';
+import heroVi from '@/i18n/vi/hero.json';
+import projectsVi from '@/i18n/vi/projects.json';
+import skillsVi from '@/i18n/vi/skills.json';
+import aboutVi from '@/i18n/vi/about.json';
+import contactVi from '@/i18n/vi/contact.json';
+import aboutPageVi from '@/i18n/vi/aboutPage.json';
+import footerVi from '@/i18n/vi/footer.json';
+import projectDetailVi from '@/i18n/vi/projectDetail.json';
+
+const en = {
+  nav: navEn,
+  hero: heroEn,
+  projects: projectsEn,
+  skills: skillsEn,
+  about: aboutEn,
+  contact: contactEn,
+  aboutPage: aboutPageEn,
+  footer: footerEn,
+  projectDetail: projectDetailEn,
+};
+
+const vi = {
+  nav: navVi,
+  hero: heroVi,
+  projects: projectsVi,
+  skills: skillsVi,
+  about: aboutVi,
+  contact: contactVi,
+  aboutPage: aboutPageVi,
+  footer: footerVi,
+  projectDetail: projectDetailVi,
+};
 
 /* ─── Types ─────────────────────────────────────────────── */
 export type Locale = 'en' | 'vi';

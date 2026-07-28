@@ -1,0 +1,74 @@
+{
+    "sectionLabel":  "05. Contact",
+    "title":  "Let\u0027s work together",
+    "description":  "I\u0027m actively looking for a {role}. Have an opportunity? I\u0027d love to hear from you.",
+    "role":  "Full-Stack / Backend Developer Internship",
+    "sendEmail":  "Send me an email",
+    "messageLinkedIn":  "Message on LinkedIn",
+    "backHome":  "Back to home",
+    "pageTitle":  "Contact",
+    "pageTitleHighlight":  "me",
+    "pageDesc":  "Interesting project? Internship opportunity? Or just want to chat about tech? Get in touch!",
+    "formTitle":  "Send a message",
+    "formSubtitle":  "I\u0027ll reply within 24 hours",
+    "successTitle":  "Message sent!",
+    "successDesc":  "Thanks for reaching out. I\u0027ll get back to you as soon as possible.",
+    "sending":  "Sending...",
+    "send":  "Send message",
+    "chars":  "characters",
+    "fields":  {
+                   "name":  "Full name",
+                   "namePlaceholder":  "John Doe",
+                   "email":  "Email",
+                   "emailPlaceholder":  "email@example.com",
+                   "subject":  "Subject",
+                   "subjectPlaceholder":  "Choose a subject",
+                   "subjectInternship":  "Internship opportunity",
+                   "subjectProject":  "Project collaboration",
+                   "subjectQuestion":  "Technical question",
+                   "subjectOther":  "Other",
+                   "message":  "Message",
+                   "messagePlaceholder":  "Write your message..."
+               },
+    "info":  {
+                 "title":  "Contact info",
+                 "address":  "Address",
+                 "addressValue":  "Ho Chi Minh City, Vietnam",
+                 "phone":  "Phone",
+                 "phoneValue":  "+84 845 065 676",
+                 "hours":  "Hours",
+                 "hoursValue":  "Mon - Fri, 9:00 - 18:00"
+             },
+    "social":  {
+                   "title":  "Connect with me",
+                   "emailDesc":  "Send a direct email",
+                   "githubDesc":  "View source code",
+                   "linkedinDesc":  "Professional network"
+               },
+    "cv":  {
+               "title":  "Download my CV",
+               "desc":  "View details about my experience and skills",
+               "link":  "View Resume →"
+           },
+    "faq":  {
+                "title":  "Frequently asked questions",
+                "items":  [
+                              {
+                                  "q":  "Are you open to remote work?",
+                                  "a":  "Yes, I\u0027m fully open to remote or hybrid arrangements."
+                              },
+                              {
+                                  "q":  "What\u0027s your response time?",
+                                  "a":  "I usually reply within 24 hours on weekdays."
+                              },
+                              {
+                                  "q":  "What position are you looking for?",
+                                  "a":  "Backend Developer Intern or Junior Backend Developer."
+                              },
+                              {
+                                  "q":  "What are your main skills?",
+                                  "a":  "Node.js, Next.js, PostgreSQL, Redis, FastAPI, Docker, and AI/ML tools."
+                              }
+                          ]
+            }
+}
