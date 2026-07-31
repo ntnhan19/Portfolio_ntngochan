@@ -101,11 +101,9 @@ export default function Portfolio() {
         <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
           <button
             onClick={() => scrollTo('#home')}
-            style={{ fontFamily: 'var(--font-display)', fontWeight: 700, color: 'var(--text-primary)', fontSize: '1rem' }}
+            style={{ fontFamily: 'var(--font-display)', fontWeight: 800, color: 'var(--text-primary)', fontSize: '1.2rem', letterSpacing: '-0.02em' }}
           >
-            <span style={{ color: 'var(--accent)' }}>{'<'}</span>
-            {profile.full_name.split(' ').slice(-1)[0]}
-            <span style={{ color: 'var(--accent)' }}>{' />'}</span>
+            HN<span style={{ color: 'var(--text-muted)' }}>.</span>
           </button>
 
           {/* Desktop nav */}
@@ -205,11 +203,8 @@ export default function Portfolio() {
                 <p style={{ fontSize: '1.05rem', color: 'var(--text-muted)', fontWeight: 500 }}>
                   {t('hero.greeting')}
                 </p>
-                <h1 className="text-hero">
-                  {profile.full_name.split(' ').slice(0, -1).join(' ')}{' '}
-                  <span style={{ color: 'var(--accent)' }}>
-                    {profile.full_name.split(' ').slice(-1)[0]}
-                  </span>
+                <h1 className="text-hero" style={{ color: 'var(--text-primary)' }}>
+                  {profile.full_name}
                 </h1>
               </motion.div>
 
