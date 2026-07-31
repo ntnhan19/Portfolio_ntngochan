@@ -134,12 +134,12 @@ export default function AboutPage() {
 
                                 <motion.p variants={fadeInUp}
                                     style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--accent)', fontFamily: 'var(--font-display)' }}>
-                                    {profile.title}
+                                    {t('aboutPage.profile.title') !== 'aboutPage.profile.title' ? t('aboutPage.profile.title') : profile.title}
                                 </motion.p>
 
                                 <motion.div variants={fadeInUp}
                                     style={{ fontSize: '0.95rem', lineHeight: 1.75, color: 'var(--text-secondary)' }}
-                                    dangerouslySetInnerHTML={{ __html: profile.bio.replace(/\*\*(.*?)\*\*/g, `<strong style="color:var(--text-primary)">$1</strong>`) }}
+                                    dangerouslySetInnerHTML={{ __html: (t('aboutPage.profile.bio') !== 'aboutPage.profile.bio' ? t('aboutPage.profile.bio') : profile.bio).replace(/\*\*(.*?)\*\*/g, `<strong style="color:var(--text-primary)">$1</strong>`).replace(/\n/g, '<br />') }}
                                 />
 
                                 {/* Social actions */}

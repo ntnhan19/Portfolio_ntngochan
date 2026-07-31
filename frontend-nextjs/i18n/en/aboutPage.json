@@ -1,6 +1,10 @@
 {
     "backHome":  "Back to home",
-    "statusBadge":  "Online • Ready to collaborate",
+    "statusBadge":  "Online • Ready to work",
+    "profile": {
+        "title": "Fullstack Developer Intern — PERN · React.js · FastAPI",
+        "bio": "Year 4 Software Engineering student at HUTECH with a solid foundation in Backend Development, built through academic projects and self-study.\n\n**Strengths:**\n- Building RESTful APIs with Node.js (Express)\n- Database schema design and query optimisation with PostgreSQL\n- Real-time communication with WebSocket / Socket.io\n- Working with AI/LLM: RAG pipelines, Vector Databases (Pinecone)\n\n**Goal:** Seeking a Backend Developer Internship at a tech company to gain hands-on experience with large-scale systems, microservices architecture, and best practices from senior engineers."
+    },
     "stats":  {
                   "projects":  "Featured Projects",
                   "certificates":  "Certificates",

@@ -7,12 +7,12 @@
     "messageLinkedIn":  "Nhắn tin LinkedIn",
     "backHome":  "Quay lại trang chủ",
     "pageTitle":  "Liên hệ",
-    "pageTitleHighlight":  "với tôi",
+    "pageTitleHighlight":  "với mình",
     "pageDesc":  "Có dự án thú vị? Cơ hội thực tập? Hoặc chỉ muốn chat về công nghệ? Hãy liên hệ!",
     "formTitle":  "Gửi tin nhắn",
-    "formSubtitle":  "Tôi sẽ phản hồi trong vòng 24 giờ",
+    "formSubtitle":  "Mình sẽ phản hồi trong vòng 24 giờ",
     "successTitle":  "Gửi thành công!",
-    "successDesc":  "Cảm ơn bạn đã liên hệ. Tôi sẽ phản hồi sớm nhất có thể.",
+    "successDesc":  "Cảm ơn bạn đã liên hệ. Mình sẽ phản hồi sớm nhất có thể.",
     "sending":  "Đang gửi...",
     "send":  "Gửi tin nhắn",
     "chars":  "ký tự",
@@ -40,14 +40,14 @@
                  "hoursValue":  "T2 - T6, 9:00 - 18:00"
              },
     "social":  {
-                   "title":  "Kết nối với tôi",
+                   "title":  "Kết nối với mình",
                    "emailDesc":  "Gửi email trực tiếp",
                    "githubDesc":  "Xem source code",
                    "linkedinDesc":  "Kết nối chuyên nghiệp"
                },
     "cv":  {
-               "title":  "Tải CV của tôi",
-               "desc":  "Xem chi tiết về kinh nghiệm và kỹ năng của tôi",
+               "title":  "Tải CV của mình",
+               "desc":  "Xem chi tiết về kinh nghiệm và kỹ năng của mình",
                "link":  "Xem Resume →"
            },
     "faq":  {
@@ -55,11 +55,11 @@
                 "items":  [
                               {
                                   "q":  "Bạn có sẵn sàng làm việc remote không?",
-                                  "a":  "Có, tôi hoàn toàn sẵn sàng làm việc remote hoặc hybrid."
+                                  "a":  "Có, mình hoàn toàn sẵn sàng làm việc remote hoặc hybrid."
                               },
                               {
                                   "q":  "Thời gian phản hồi là bao lâu?",
-                                  "a":  "Tôi thường phản hồi trong vòng 24 giờ vào các ngày làm việc."
+                                  "a":  "Mình thường phản hồi trong vòng 24 giờ vào các ngày làm việc."
                               },
                               {
                                   "q":  "Bạn đang tìm kiếm vị trí gì?",
