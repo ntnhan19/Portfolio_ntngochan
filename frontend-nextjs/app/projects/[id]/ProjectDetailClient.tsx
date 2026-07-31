@@ -6,9 +6,23 @@ import Link from 'next/link';
 import { ArrowLeft, Github, ExternalLink, Users, Clock, Code2 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { useLocale } from '../../../src/context/LocaleContext';
+import { LanguageToggle } from '@/src/components/ui/LanguageToggle';
+import { ThemeToggle } from '@/src/components/ui/ThemeToggle';
+import { usePortfolioTheme } from '@/src/hooks/usePortfolioTheme';
+import { useState, useEffect } from 'react';
 
 export default function ProjectDetailClient({ slug, contentEn, contentVi }: { slug: string, contentEn: string, contentVi: string }) {
     const { t, locale } = useLocale();
+    const { theme, toggleTheme } = usePortfolioTheme();
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const onScroll = () => {
+            setIsScrolled(window.scrollY > 40);
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => window.removeEventListener('scroll', onScroll);
+    }, []);
     const project = projects.find(
         (p) => p.slug === slug || p.id.toString() === slug
     );
@@ -23,6 +37,32 @@ export default function ProjectDetailClient({ slug, contentEn, contentVi }: { sl
 
     return (
         <main style={{ background: 'var(--bg-base)', color: 'var(--text-primary)', minHeight: '100vh' }}>
+            
+            {/* ── NAVBAR ── */}
+            <header
+                style={{
+                    position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
+                    transition: 'all 0.3s ease',
+                    background: isScrolled ? 'var(--bg-overlay)' : 'transparent',
+                    backdropFilter: isScrolled ? 'blur(16px)' : 'none',
+                    borderBottom: isScrolled ? '1px solid var(--border)' : 'none',
+                    height: '64px',
+                    display: 'flex',
+                    alignItems: 'center'
+                }}
+            >
+                <div style={{ maxWidth: '56rem', margin: '0 auto', width: '100%', padding: '0 1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <Link href="/#projects"
+                        style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1rem', color: 'var(--text-primary)', textDecoration: 'none' }}>
+                        <ArrowLeft size={16} /> {t('projectDetail.back')}
+                    </Link>
+                    
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <LanguageToggle />
+                        <ThemeToggle theme={theme} onToggle={toggleTheme} />
+                    </div>
+                </div>
+            </header>
 
             {/* ── HERO ── */}
             <section style={{ position: 'relative', minHeight: '420px', overflow: 'hidden', background: 'var(--surface-raised)' }}>
@@ -89,14 +129,6 @@ export default function ProjectDetailClient({ slug, contentEn, contentVi }: { sl
 
             {/* ── MAIN ── */}
             <div style={{ maxWidth: '56rem', margin: '0 auto', padding: '3rem 1.5rem' }}>
-
-                {/* Back */}
-                <Link href="/#projects"
-                    style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--font-body)', fontSize: '0.82rem', color: 'var(--text-muted)', textDecoration: 'none', marginBottom: '2.5rem', transition: 'color 0.15s' }}
-                    onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-primary)')}
-                    onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-muted)')}>
-                    <ArrowLeft size={14} /> {t('projectDetail.back')}
-                </Link>
 
                 {/* Meta strip — thay 3 gradient cards */}
                 <div style={{
