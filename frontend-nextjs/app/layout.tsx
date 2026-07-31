@@ -8,8 +8,8 @@ const basePath =
 
 export const metadata: Metadata = {
   title: {
-    default: "Nguyễn Trần Ngọc Hân — Fullstack Developer",
-    template: "%s | Ngọc Hân",
+    default: "Han Nguyen — Fullstack Developer",
+    template: "%s | Han Nguyen",
   },
   description:
     "Fullstack Developer (intern) — PERN Stack, Next.js, FastAPI. Building real-world web apps with real-time features and AI integrations. HUTECH Software Engineering, Year 4.",
@@ -27,19 +27,19 @@ export const metadata: Metadata = {
     "Python",
     "Ho Chi Minh City",
     "HUTECH",
-    "Ngọc Hân",
+    "Han Nguyen",
     "portfolio",
   ].join(", "),
   authors: [
-    { name: "Nguyễn Trần Ngọc Hân", url: "https://github.com/ntnhan19" },
+    { name: "Han Nguyen", url: "https://github.com/ntnhan19" },
   ],
-  creator: "Nguyễn Trần Ngọc Hân",
+  creator: "Han Nguyen",
   openGraph: {
     type: "website",
     locale: "vi_VN",
     url: "https://ntnhan19.github.io/Portfolio_ntngochan/",
-    siteName: "Ngọc Hân — Fullstack Developer",
-    title: "Nguyễn Trần Ngọc Hân — Fullstack Developer",
+    siteName: "Han Nguyen — Fullstack Developer",
+    title: "Han Nguyen — Fullstack Developer",
     description:
       "PERN Stack · Next.js · FastAPI · RAG — building scalable web apps and AI-powered tools.",
     images: [
@@ -47,13 +47,13 @@ export const metadata: Metadata = {
         url: "https://ntnhan19.github.io/Portfolio_ntngochan/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Nguyễn Trần Ngọc Hân — Fullstack Developer Portfolio",
+        alt: "Han Nguyen — Fullstack Developer Portfolio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nguyễn Trần Ngọc Hân — Fullstack Developer",
+    title: "Han Nguyen — Fullstack Developer",
     description: "PERN Stack · Next.js · FastAPI · AI/RAG",
   },
   robots: { index: true, follow: true },
@@ -112,8 +112,7 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Person",
-              name: "Nguyễn Trần Ngọc Hân",
-              alternateName: "Ngọc Hân",
+              name: "Han Nguyen",
               url: "https://ntnhan19.github.io/Portfolio_ntngochan/",
               sameAs: [
                 "https://github.com/ntnhan19",
