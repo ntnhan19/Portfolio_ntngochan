@@ -1,0 +1,27 @@
+{
+  "certificates": {
+    "1": { "name": "Outstanding Student — Faculty Level", "issuer": "Ho Chi Minh City University of Technology (HUTECH)", "date": "2024" },
+    "2": { "name": "Distinguished Student — Faculty Level", "issuer": "Faculty of Information Technology — HUTECH", "date": "2024" },
+    "3": { "name": "Networking Basics", "issuer": "Cisco Networking Academy", "date": "Dec 2024" },
+    "4": { "name": "JavaScript Essentials 1", "issuer": "Cisco Networking Academy", "date": "Dec 2024" },
+    "5": { "name": "JavaScript Essentials 2", "issuer": "Cisco Networking Academy", "date": "Dec 2024" },
+    "6": { "name": "3rd Place — Genz's Thinking Competition", "issuer": "HUTECH Innovation & Startup Club", "date": "Oct 2024" }
+  },
+  "activities": {
+    "1": { "name": "HUTECH Student Sports Festival 2024", "role": "Athlete — Women's Football Team, Faculty of IT", "description": "Competed in Women's Football and secured 2nd place university-wide." },
+    "2": { "name": "A Complete Tet — A Whole Spring 2025", "role": "Volunteer — Faculty of IT Student Association", "description": "Packed 500+ Tet gift packages for low-income families in Ho Chi Minh City. 50+ volunteers over 2 consecutive days." }
+  },
+  "timeline": {
+    "1": { "date": "Semester 1 / 2025", "description": "Cinema ticket booking system solving the concurrent seat selection problem. Implemented Redis distributed lock (SET NX EX) for atomic reservation, Socket.io for real-time seat-map sync across all clients, VNPay sandbox for payment. Load tested with Artillery: 100 concurrent requests → 1 success, 0 double bookings." },
+    "2": { "date": "Jan 2025", "description": "Packed 500+ Tet gift packages for low-income families in Ho Chi Minh City. 50+ volunteers over 2 consecutive days." },
+    "3": { "date": "2024", "description": "Recognised for academic performance, leadership, volunteering, and all-round student contribution at faculty level." },
+    "4": { "date": "2024", "description": "Faculty-level distinction awarded for strong study results and active participation in student and departmental activities." },
+    "5": { "date": "Dec 2024", "description": "Completed the advanced JavaScript Essentials track, strengthening ES6+, DOM, asynchronous flows, and problem-solving skills." },
+    "6": { "date": "Dec 2024", "description": "Mastered fundamental JS concepts: variables, data types, control flow, functions, and arrays." },
+    "7": { "date": "Dec 2024", "description": "Learned OSI model, TCP/IP, basic switching, routing, and IPv4/IPv6 addressing." },
+    "8": { "date": "Oct 2024", "description": "Secured 3rd place with a logistics optimization startup idea." },
+    "9": { "date": "Mar 2024", "description": "Competed in Women's Football and secured 2nd place university-wide." },
+    "10": { "date": "Sep 2022", "description": "Started software engineering degree." },
+    "11": { "date": "Apr - Jul 2026", "description": "Architected a cloud-ready AI system enabling natural-language semantic search across video and image libraries with timestamp-level scene retrieval. Separated a dedicated AI Worker from the Backend API to isolate heavy tasks (Whisper transcription, OpenCV scene detection)." }
+  }
+}

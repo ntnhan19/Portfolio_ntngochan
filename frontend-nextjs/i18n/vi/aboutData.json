@@ -1,0 +1,27 @@
+{
+  "certificates": {
+    "1": { "name": "Sinh viên 5 Tốt cấp Khoa", "issuer": "Đại học Công nghệ TP.HCM (HUTECH)", "date": "2024" },
+    "2": { "name": "Sinh viên Tiêu biểu cấp Khoa", "issuer": "Khoa CNTT - HUTECH", "date": "2024" },
+    "3": { "name": "Networking Basics", "issuer": "Cisco Networking Academy", "date": "Tháng 12, 2024" },
+    "4": { "name": "JavaScript Essentials 1", "issuer": "Cisco Networking Academy", "date": "Tháng 12, 2024" },
+    "5": { "name": "JavaScript Essentials 2", "issuer": "Cisco Networking Academy", "date": "Tháng 12, 2024" },
+    "6": { "name": "Giải Ba - Cuộc thi Genz's Thinking", "issuer": "Câu lạc bộ Đổi mới sáng tạo & Khởi nghiệp HUTECH", "date": "Tháng 10, 2024" }
+  },
+  "activities": {
+    "1": { "name": "Hội thao Sinh viên HUTECH 2024", "role": "Vận động viên - Đội tuyển bóng đá nữ Khoa CNTT", "description": "Thi đấu môn bóng đá nữ và đạt Giải Nhì toàn trường." },
+    "2": { "name": "Một cái Tết vẹn toàn - Trọn vẹn một mùa xuân 2025", "role": "Tình nguyện viên - Đoàn Hội Khoa CNTT", "description": "Tham gia đóng gói và phát hơn 500 phần quà Tết cho những gia đình có hoàn cảnh khó khăn tại TP.HCM. Cùng 50+ tình nguyện viên làm việc trong 2 ngày liên tục." }
+  },
+  "timeline": {
+    "1": { "date": "Học kỳ 1 / 2025", "description": "Xây dựng hệ thống đặt vé xem phim giải quyết bài toán tranh chấp ghế đồng thời. Triển khai khóa phân tán với Redis, Socket.io để đồng bộ sơ đồ ghế thời gian thực, tích hợp cổng thanh toán VNPay sandbox. Kiểm thử tải với 100 người dùng đồng thời: 0 lỗi trùng ghế." },
+    "2": { "date": "Tháng 1, 2025", "description": "Tham gia đóng gói và phát hơn 500 phần quà Tết cho những gia đình có hoàn cảnh khó khăn tại TP.HCM cùng 50+ tình nguyện viên làm việc trong 2 ngày liên tục." },
+    "3": { "date": "2024", "description": "Được vinh danh nhờ thành tích học tập xuất sắc, tích cực tham gia các phong trào tình nguyện và cống hiến cho hoạt động Đoàn Hội cấp Khoa." },
+    "4": { "date": "2024", "description": "Giải thưởng cấp khoa dành cho sinh viên có kết quả học tập giỏi và tích cực tham gia các hoạt động phong trào." },
+    "5": { "date": "Tháng 12, 2024", "description": "Hoàn thành khóa học JavaScript nâng cao, nắm vững ES6+, xử lý DOM, lập trình bất đồng bộ và kỹ năng giải quyết vấn đề." },
+    "6": { "date": "Tháng 12, 2024", "description": "Nắm vững các khái niệm cơ bản của JavaScript: biến, kiểu dữ liệu, vòng lặp, hàm và mảng." },
+    "7": { "date": "Tháng 12, 2024", "description": "Nắm vững mô hình OSI, giao thức TCP/IP, định tuyến, chuyển mạch cơ bản và địa chỉ IPv4/IPv6." },
+    "8": { "date": "Tháng 10, 2024", "description": "Đạt Giải Ba với ý tưởng khởi nghiệp về nền tảng tối ưu hóa logistics." },
+    "9": { "date": "Tháng 3, 2024", "description": "Tham gia thi đấu môn bóng đá nữ và đạt Giải Nhì toàn trường HUTECH." },
+    "10": { "date": "Tháng 9, 2022", "description": "Bắt đầu chương trình Cử nhân Kỹ thuật Phần mềm tại HUTECH." },
+    "11": { "date": "Tháng 4 - 7, 2026", "description": "Thiết kế hệ thống AI tối ưu cho cloud, cho phép tìm kiếm ngữ nghĩa bằng ngôn ngữ tự nhiên trên thư viện video và hình ảnh, trả về kết quả chính xác đến từng giây. Tách biệt AI Worker khỏi Backend API để cô lập các tác vụ nặng (nhận dạng giọng nói Whisper, nhận diện phân cảnh OpenCV)." }
+  }
+}

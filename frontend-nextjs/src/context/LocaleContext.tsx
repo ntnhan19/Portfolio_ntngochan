@@ -13,6 +13,7 @@ import aboutPageEn from '@/i18n/en/aboutPage.json';
 import footerEn from '@/i18n/en/footer.json';
 import projectDetailEn from '@/i18n/en/projectDetail.json';
 import projectDataEn from '@/i18n/en/projectData.json';
+import aboutDataEn from '@/i18n/en/aboutData.json';
 
 // VI Namespaces
 import navVi from '@/i18n/vi/nav.json';
@@ -25,6 +26,7 @@ import aboutPageVi from '@/i18n/vi/aboutPage.json';
 import footerVi from '@/i18n/vi/footer.json';
 import projectDetailVi from '@/i18n/vi/projectDetail.json';
 import projectDataVi from '@/i18n/vi/projectData.json';
+import aboutDataVi from '@/i18n/vi/aboutData.json';
 
 const en = {
   nav: navEn,
@@ -37,6 +39,7 @@ const en = {
   footer: footerEn,
   projectDetail: projectDetailEn,
   projectData: projectDataEn,
+  aboutData: aboutDataEn,
 };
 
 const vi = {
@@ -50,6 +53,7 @@ const vi = {
   footer: footerVi,
   projectDetail: projectDetailVi,
   projectData: projectDataVi,
+  aboutData: aboutDataVi,
 };
 
 /* ─── Types ─────────────────────────────────────────────── */

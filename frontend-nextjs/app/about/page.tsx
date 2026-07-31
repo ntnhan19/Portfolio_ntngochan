@@ -11,6 +11,10 @@ import {
 import { motion } from 'framer-motion';
 import { useLocale } from '@/src/context/LocaleContext';
 import CareerTimeline from '@/src/components/about/CareerTimeline';
+import { LanguageToggle } from '@/src/components/ui/LanguageToggle';
+import { ThemeToggle } from '@/src/components/ui/ThemeToggle';
+import { usePortfolioTheme } from '@/src/hooks/usePortfolioTheme';
+import { useState, useEffect } from 'react';
 
 const fadeInUp = {
     hidden: { opacity: 0, y: 24 },
@@ -32,6 +36,16 @@ const skillIcons = {
 
 export default function AboutPage() {
     const { t, locale } = useLocale();
+    const { theme, toggleTheme } = usePortfolioTheme();
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const onScroll = () => {
+            setIsScrolled(window.scrollY > 40);
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => window.removeEventListener('scroll', onScroll);
+    }, []);
 
     const hobbies = [
         { icon: Gamepad2, title: t('aboutPage.hobbies.items.0.title'), desc: t('aboutPage.hobbies.items.0.desc') },
@@ -42,19 +56,36 @@ export default function AboutPage() {
     return (
         <div style={{ background: 'var(--bg-base)', color: 'var(--text-primary)', minHeight: '100vh' }}>
 
+            {/* ── NAVBAR ── */}
+            <header
+                style={{
+                    position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
+                    transition: 'all 0.3s ease',
+                    background: isScrolled ? 'var(--bg-overlay)' : 'transparent',
+                    backdropFilter: isScrolled ? 'blur(16px)' : 'none',
+                    borderBottom: isScrolled ? '1px solid var(--border)' : 'none',
+                    height: '64px',
+                    display: 'flex',
+                    alignItems: 'center'
+                }}
+            >
+                <div style={{ maxWidth: '72rem', margin: '0 auto', width: '100%', padding: '0 1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <Link href="/"
+                        style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1rem', color: 'var(--text-primary)', textDecoration: 'none' }}>
+                        <ArrowLeft size={16} /> {t('aboutPage.backHome')}
+                    </Link>
+                    
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <LanguageToggle />
+                        <ThemeToggle theme={theme} onToggle={toggleTheme} />
+                    </div>
+                </div>
+            </header>
+
             {/* ── HERO ─────────────────────────────────────── */}
             <section style={{ borderBottom: '1px solid var(--border)', paddingTop: '5rem', paddingBottom: '4rem' }}>
                 <div className="max-w-6xl mx-auto px-6">
                     <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-
-                        <Link href="/"
-                            className="inline-flex items-center gap-2 mb-10 text-sm font-semibold transition-colors"
-                            style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-body)' }}
-                            onMouseEnter={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)'}
-                            onMouseLeave={e => (e.currentTarget as HTMLElement).style.color = 'var(--text-muted)'}
-                        >
-                            <ArrowLeft size={16} /> {t('aboutPage.backHome')}
-                        </Link>
 
                         {/* 2-col: Avatar | Bio */}
                         <div className="grid lg:grid-cols-[380px_1fr] gap-12 lg:gap-20 items-center">

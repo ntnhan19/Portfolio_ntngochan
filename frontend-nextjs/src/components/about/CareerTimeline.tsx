@@ -7,6 +7,7 @@ import { useState } from "react";
 
 import { timelineData } from "@/data";
 import type { TimelineItem } from "@/data";
+import { useLocale } from "@/src/context/LocaleContext";
 
 interface CareerTimelineProps {
     items?: TimelineItem[];
@@ -33,6 +34,7 @@ const typeConfig = {
 } as const;
 
 function TimelineCard({ item, ctaLabel }: { item: TimelineItem; ctaLabel?: string }) {
+    const { t } = useLocale();
     return (
         <div
             className="rounded-2xl p-5 md:p-6"
@@ -52,7 +54,7 @@ function TimelineCard({ item, ctaLabel }: { item: TimelineItem; ctaLabel?: strin
                         color: "var(--text-muted)",
                     }}
                 >
-                    {item.date}
+                    {t(`aboutData.timeline.${item.id}.date`) !== `aboutData.timeline.${item.id}.date` ? t(`aboutData.timeline.${item.id}.date`) : item.date}
                 </span>
                 <span className="badge">{item.type}</span>
             </div>
@@ -60,14 +62,13 @@ function TimelineCard({ item, ctaLabel }: { item: TimelineItem; ctaLabel?: strin
             <h3
                 style={{
                     fontFamily: "var(--font-display)",
-                    fontSize: "1.05rem",
                     fontWeight: 700,
+                    fontSize: "1.1rem",
                     color: "var(--text-primary)",
-                    lineHeight: 1.25,
-                    marginBottom: "0.35rem",
+                    marginBottom: "0.3rem",
                 }}
             >
-                {item.title}
+                {t(`aboutData.timeline.${item.id}.title`) !== `aboutData.timeline.${item.id}.title` ? t(`aboutData.timeline.${item.id}.title`) : item.title}
             </h3>
 
             <p
@@ -78,7 +79,7 @@ function TimelineCard({ item, ctaLabel }: { item: TimelineItem; ctaLabel?: strin
                     marginBottom: "0.75rem",
                 }}
             >
-                {item.subtitle}
+                {t(`aboutData.timeline.${item.id}.subtitle`) !== `aboutData.timeline.${item.id}.subtitle` ? t(`aboutData.timeline.${item.id}.subtitle`) : item.subtitle}
             </p>
 
             <p
@@ -89,7 +90,7 @@ function TimelineCard({ item, ctaLabel }: { item: TimelineItem; ctaLabel?: strin
                     marginBottom: item.tags?.length || item.link ? "1rem" : 0,
                 }}
             >
-                {item.description}
+                {t(`aboutData.timeline.${item.id}.description`) !== `aboutData.timeline.${item.id}.description` ? t(`aboutData.timeline.${item.id}.description`) : item.description}
             </p>
 
             {item.tags && item.tags.length > 0 && (
@@ -133,6 +134,7 @@ export default function CareerTimeline({
     items = timelineData,
     ctaLabel,
 }: CareerTimelineProps) {
+    const { t } = useLocale();
     const [showAll, setShowAll] = useState(false);
     const displayItems = showAll ? items : items.slice(-5);
     const hasMore = items.length > 5;
@@ -172,7 +174,7 @@ export default function CareerTimeline({
                             {isEven ? (
                                 <>
                                     <div className="pl-16 lg:pl-0 lg:pr-12">
-                                        <TimelineCard item={item} ctaLabel={ctaLabel} />
+                                        <TimelineCard item={item} ctaLabel={ctaLabel || t('aboutPage.timeline.cta')} />
                                     </div>
                                     <div className="hidden lg:block" />
                                 </>
@@ -180,7 +182,7 @@ export default function CareerTimeline({
                                 <>
                                     <div className="hidden lg:block" />
                                     <div className="pl-16 lg:pl-12">
-                                        <TimelineCard item={item} ctaLabel={ctaLabel} />
+                                        <TimelineCard item={item} ctaLabel={ctaLabel || t('aboutPage.timeline.cta')} />
                                     </div>
                                 </>
                             )}

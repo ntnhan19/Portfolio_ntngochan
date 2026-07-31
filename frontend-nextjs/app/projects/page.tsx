@@ -1,20 +1,35 @@
 'use client';
 
 import Link from 'next/link';
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Filter, Search, Tag } from 'lucide-react';
+import { LanguageToggle } from '@/src/components/ui/LanguageToggle';
+import { ThemeToggle } from '@/src/components/ui/ThemeToggle';
+import { usePortfolioTheme } from '@/src/hooks/usePortfolioTheme';
+import { useLocale } from '@/src/context/LocaleContext';
 
 import { projects } from '../../src/data/staticData';
 import { ProjectCard } from '@/src/components/projects/ProjectCard';
 
 export default function ProjectsPage() {
+    const { t } = useLocale();
+    const { theme, toggleTheme } = usePortfolioTheme();
+    const [isScrolled, setIsScrolled] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [selectedTech, setSelectedTech] = useState<string | null>(null);
 
     const categories = Array.from(new Set(projects.map((project) => project.category)));
     const allTechs = Array.from(new Set(projects.flatMap((project) => project.tech_stack)));
+
+    useEffect(() => {
+        const onScroll = () => {
+            setIsScrolled(window.scrollY > 40);
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => window.removeEventListener('scroll', onScroll);
+    }, []);
 
     const filteredProjects = useMemo(() => {
         return projects.filter((project) => {
@@ -36,6 +51,33 @@ export default function ProjectsPage() {
 
     return (
         <div className="min-h-screen" style={{ background: 'var(--bg-base)', color: 'var(--text-primary)' }}>
+            
+            {/* ── NAVBAR ── */}
+            <header
+                style={{
+                    position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
+                    transition: 'all 0.3s ease',
+                    background: isScrolled ? 'var(--bg-overlay)' : 'transparent',
+                    backdropFilter: isScrolled ? 'blur(16px)' : 'none',
+                    borderBottom: isScrolled ? '1px solid var(--border)' : 'none',
+                    height: '64px',
+                    display: 'flex',
+                    alignItems: 'center'
+                }}
+            >
+                <div style={{ maxWidth: '72rem', margin: '0 auto', width: '100%', padding: '0 1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <Link href="/"
+                        style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1rem', color: 'var(--text-primary)', textDecoration: 'none' }}>
+                        <ArrowLeft size={16} /> {t('projectDetail.backHome')}
+                    </Link>
+                    
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <LanguageToggle />
+                        <ThemeToggle theme={theme} onToggle={toggleTheme} />
+                    </div>
+                </div>
+            </header>
+
             <section
                 className="relative overflow-hidden"
                 style={{ borderBottom: '1px solid var(--border)', background: 'var(--surface-raised)' }}
@@ -48,15 +90,7 @@ export default function ProjectsPage() {
                     }}
                 />
 
-                <div className="max-w-6xl mx-auto px-6 py-20 relative z-10">
-                    <Link
-                        href="/"
-                        className="inline-flex items-center gap-2 mb-8 text-sm font-semibold transition-colors"
-                        style={{ color: 'var(--text-muted)' }}
-                    >
-                        <ArrowLeft size={18} />
-                        Back to home
-                    </Link>
+                <div className="max-w-6xl mx-auto px-6 py-20 relative z-10" style={{ paddingTop: '8rem' }}>
 
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
