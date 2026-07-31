@@ -3,7 +3,9 @@
     "meta":  {
                  "duration":  "Duration",
                  "team":  "Team",
-                 "stack":  "Stack"
+                 "stack":  "Stack",
+                 "membersCount": "{count} members",
+                 "techCount": "{count} technologies"
              },
     "highlights":  "Highlights"
 }

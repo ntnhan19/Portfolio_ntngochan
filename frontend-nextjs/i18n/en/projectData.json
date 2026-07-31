@@ -1,0 +1,41 @@
+{
+  "sma": {
+    "tagline": "AI-Powered Media Asset Management & Semantic Search System",
+    "description": "Architected a cloud-ready AI system enabling natural-language semantic search across video and image libraries with timestamp-level scene retrieval. Separated a dedicated AI Worker from the Backend API to isolate heavy tasks (Whisper transcription, OpenCV scene detection).",
+    "role": "Team Lead & DevOps",
+    "category": "Backend",
+    "duration": "4 months",
+    "highlights": [
+      "Separated AI Worker from Backend API",
+      "AWS ECS Fargate on-demand invocation",
+      "Vector search with pgvector on RDS",
+      "CI/CD auto-deploy with GitHub Actions"
+    ]
+  },
+  "docmentor": {
+    "tagline": "AI document Q&A — upload PDF, ask anything",
+    "description": "Built a RAG pipeline that lets users upload PDF/DOCX and ask natural-language questions. Chunks with RecursiveCharacterTextSplitter (512 tokens, overlap 50), embeds via Sentence Transformers, stores in Pinecone, retrieves top-5 chunks as context for Gemini Pro. Streaming response via FastAPI SSE.",
+    "role": "Fullstack — Backend lead",
+    "category": "AI/ML",
+    "duration": "3 months",
+    "highlights": [
+      "RAG pipeline with custom chunking strategy",
+      "Streaming response via FastAPI SSE",
+      "Hallucination control via system prompt",
+      "Embedding cache by file hash (MD5)"
+    ]
+  },
+  "dhlcinema": {
+    "tagline": "Real-time seat booking — zero double-booking under concurrent load",
+    "description": "Cinema ticket booking system solving the concurrent seat selection problem. Implemented Redis distributed lock (SET NX EX) for atomic reservation, Socket.io for real-time seat-map sync across all clients, VNPay sandbox for payment. Load tested with Artillery: 100 concurrent requests → 1 success, 0 double bookings.",
+    "role": "Fullstack",
+    "category": "Fullstack",
+    "duration": "2 months",
+    "highlights": [
+      "Redis Distributed Lock for atomic booking",
+      "Socket.io for real-time seat-map updates",
+      "Artillery load testing (100 concurrent)",
+      "VNPay Sandbox integration"
+    ]
+  }
+}

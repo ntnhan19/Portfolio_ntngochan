@@ -97,7 +97,7 @@ export default function ProjectDetailClient({ slug, contentEn, contentVi }: { sl
 
                         {/* Category badge */}
                         <span className="badge badge-pill" style={{ marginBottom: '1rem', display: 'inline-block' }}>
-                            {project.category}
+                            {t(`projectData.${project.slug}.category`)}
                         </span>
 
                         {/* Title */}
@@ -107,7 +107,7 @@ export default function ProjectDetailClient({ slug, contentEn, contentVi }: { sl
 
                         {/* Tagline */}
                         <p style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--text-muted)', letterSpacing: '0.03em', marginBottom: '1.5rem' }}>
-                            {project.tagline}
+                            {t(`projectData.${project.slug}.tagline`)}
                         </p>
 
                         {/* Action buttons */}
@@ -138,9 +138,9 @@ export default function ProjectDetailClient({ slug, contentEn, contentVi }: { sl
                     borderRadius: 'var(--radius-lg)',
                 }}>
                     {[
-                        { icon: <Clock size={13} />, label: t('projectDetail.meta.duration'), value: project.duration },
-                        { icon: <Users size={13} />, label: t('projectDetail.meta.team'), value: `${project.team_size} members` },
-                        { icon: <Code2 size={13} />, label: t('projectDetail.meta.stack'), value: `${project.tech_stack.length} công nghệ` },
+                        { icon: <Clock size={13} />, label: t('projectDetail.meta.duration'), value: t(`projectData.${project.slug}.duration`) },
+                        { icon: <Users size={13} />, label: t('projectDetail.meta.team'), value: t('projectDetail.meta.membersCount', { count: String(project.team_size) }) },
+                        { icon: <Code2 size={13} />, label: t('projectDetail.meta.stack'), value: t('projectDetail.meta.techCount', { count: String(project.tech_stack.length) }) },
                     ].map(item => (
                         <div key={item.label} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                             <span style={{ color: 'var(--text-muted)' }}>{item.icon}</span>
@@ -165,10 +165,10 @@ export default function ProjectDetailClient({ slug, contentEn, contentVi }: { sl
                     <div style={{ marginBottom: '2.5rem', padding: '1.25rem', background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius-lg)' }}>
                         <p className="section-label" style={{ marginBottom: '0.75rem' }}>{t('projectDetail.highlights')}</p>
                         <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                            {project.highlights.map(h => (
+                            {project.highlights.map((h, i) => (
                                 <li key={h} style={{ display: 'flex', gap: '0.6rem', alignItems: 'flex-start', fontFamily: 'var(--font-body)', fontSize: '0.85rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
                                     <span style={{ width: 4, height: 4, borderRadius: '50%', background: 'var(--text-muted)', flexShrink: 0, marginTop: '0.45rem' }} />
-                                    {h}
+                                    {t(`projectData.${project.slug}.highlights.${i}`)}
                                 </li>
                             ))}
                         </ul>

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Github, ExternalLink, ArrowRight, Users } from "lucide-react";
 import { motion } from "framer-motion";
 import type { Project } from "@/src/data/staticData";
+import { useLocale } from "@/src/context/LocaleContext";
 
 interface ProjectCardProps {
     project: Project;
@@ -17,6 +18,7 @@ export function ProjectCard({
     index = 0,
     variant = "default",
 }: ProjectCardProps) {
+    const { t } = useLocale();
     const isFeatured = variant === "featured";
     const MAX_TAGS = isFeatured ? 5 : 4;
 
@@ -77,9 +79,9 @@ export function ProjectCard({
                 {/* Meta: category · team · role */}
                 <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", flexWrap: "wrap" }}>
                     {[
-                        project.category,
-                        <><Users size={10} /> {project.team_size} members</>,
-                        project.role,
+                        t(`projectData.${project.slug}.category`),
+                        <><Users size={10} /> {t('projectDetail.meta.membersCount', { count: String(project.team_size) })}</>,
+                        t(`projectData.${project.slug}.role`),
                     ].map((item, i) => (
                         <span key={i} style={{ display: "flex", alignItems: "center", gap: "3px", fontFamily: "var(--font-mono)", fontSize: "0.67rem", color: "var(--text-muted)", letterSpacing: "0.08em", textTransform: "uppercase" }}>
                             {i > 0 && <span style={{ opacity: 0.3, marginRight: "0.4rem" }}>·</span>}
@@ -107,11 +109,10 @@ export function ProjectCard({
                         fontFamily: "var(--font-mono)", fontSize: "0.7rem",
                         color: "var(--text-muted)", letterSpacing: "0.02em", lineHeight: 1.4,
                     }}>
-                        {project.tagline}
+                        {t(`projectData.${project.slug}.tagline`)}
                     </p>
                 </div>
 
-                {/* Description — featured only */}
                 {isFeatured && (
                     <p style={{
                         fontFamily: "var(--font-body)", fontSize: "0.82rem",
@@ -119,7 +120,7 @@ export function ProjectCard({
                         display: "-webkit-box", WebkitLineClamp: 3,
                         WebkitBoxOrient: "vertical", overflow: "hidden",
                     }}>
-                        {project.description}
+                        {t(`projectData.${project.slug}.description`)}
                     </p>
                 )}
 

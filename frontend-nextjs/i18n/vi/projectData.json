@@ -1,0 +1,41 @@
+{
+  "sma": {
+    "tagline": "Hệ thống quản lý và tìm kiếm tài sản truyền thông bằng AI",
+    "description": "Thiết kế hệ thống AI tối ưu cho cloud, cho phép tìm kiếm ngữ nghĩa bằng ngôn ngữ tự nhiên trên thư viện video và hình ảnh, trả về kết quả chính xác đến từng giây. Tách biệt AI Worker khỏi Backend API để cô lập các tác vụ nặng (nhận dạng giọng nói Whisper, nhận diện phân cảnh OpenCV).",
+    "role": "Trưởng nhóm & DevOps",
+    "category": "Backend",
+    "duration": "4 tháng",
+    "highlights": [
+      "Tách biệt AI Worker khỏi Backend API",
+      "Sử dụng AWS ECS Fargate để tối ưu chi phí theo nhu cầu",
+      "Tìm kiếm vector với pgvector trên RDS",
+      "Tự động triển khai CI/CD với GitHub Actions"
+    ]
+  },
+  "docmentor": {
+    "tagline": "Hỏi đáp tài liệu bằng AI — tải lên PDF, hỏi bất cứ điều gì",
+    "description": "Xây dựng hệ thống RAG cho phép người dùng tải lên PDF/DOCX và đặt câu hỏi bằng ngôn ngữ tự nhiên. Phân tách văn bản bằng RecursiveCharacterTextSplitter (512 tokens, overlap 50), tạo vector bằng Sentence Transformers, lưu trữ trong Pinecone, trích xuất 5 đoạn văn bản liên quan nhất làm ngữ cảnh cho Gemini Pro. Trả về kết quả thời gian thực qua FastAPI SSE.",
+    "role": "Fullstack — Backend lead",
+    "category": "AI/ML",
+    "duration": "3 tháng",
+    "highlights": [
+      "Hệ thống RAG với chiến lược phân nhỏ văn bản tùy chỉnh",
+      "Trả về kết quả thời gian thực qua FastAPI SSE",
+      "Kiểm soát ảo giác (hallucination) qua system prompt",
+      "Lưu cache vector theo mã băm file (MD5)"
+    ]
+  },
+  "dhlcinema": {
+    "tagline": "Đặt vé xem phim thời gian thực — không bị trùng ghế khi chịu tải cao",
+    "description": "Hệ thống đặt vé xem phim giải quyết bài toán tranh chấp ghế đồng thời. Triển khai khóa phân tán (Distributed Lock) với Redis (SET NX EX) để giữ chỗ an toàn, Socket.io để đồng bộ sơ đồ ghế thời gian thực trên tất cả thiết bị, tích hợp thanh toán qua VNPay sandbox. Kiểm thử tải với Artillery: 100 request cùng lúc → 1 thành công, 0 trùng ghế.",
+    "role": "Fullstack",
+    "category": "Fullstack",
+    "duration": "2 tháng",
+    "highlights": [
+      "Khóa phân tán Redis để đảm bảo tính nguyên tử khi đặt vé",
+      "Socket.io để đồng bộ sơ đồ ghế thời gian thực",
+      "Kiểm thử tải bằng Artillery (100 người dùng đồng thời)",
+      "Tích hợp cổng thanh toán VNPay Sandbox"
+    ]
+  }
+}

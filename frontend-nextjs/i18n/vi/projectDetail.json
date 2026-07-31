@@ -3,7 +3,9 @@
     "meta":  {
                  "duration":  "Thời gian",
                  "team":  "Team",
-                 "stack":  "Stack"
+                 "stack":  "Stack",
+                 "membersCount": "{count} thành viên",
+                 "techCount": "{count} công nghệ"
              },
     "highlights":  "Điểm nổi bật"
 }
