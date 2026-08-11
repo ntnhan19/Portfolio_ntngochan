@@ -30,21 +30,21 @@ export function ProjectCard({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.55, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className={`group flex flex-col md:flex-row gap-8 md:gap-12 items-center ${isFeatured ? 'md:col-span-2' : 'col-span-1'}`}
+            className={`group flex flex-col gap-8 ${isFeatured ? 'md:flex-row md:gap-12 md:col-span-2 items-center' : 'items-start col-span-1 h-full'}`}
         >
             {/* Thumbnail */}
             <Link
                 href={`/projects/${project.slug}`}
                 tabIndex={-1}
                 aria-hidden="true"
-                className="w-full md:w-[55%] shrink-0 relative overflow-hidden rounded-xl shadow-sm border border-slate-200 dark:border-slate-800"
+                className={`w-full shrink-0 relative overflow-hidden rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 ${isFeatured ? 'md:w-[55%]' : ''}`}
                 style={{ display: "block" }}
             >
                 <img
                     src={project.image_url}
                     alt={project.title}
                     style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", opacity: 0.9 }}
-                    className="aspect-[4/3] md:aspect-video transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                    className={`transition-transform duration-700 ease-out group-hover:scale-[1.02] ${isFeatured ? 'aspect-[4/3] md:aspect-video' : 'aspect-video'}`}
                     onError={e => { e.currentTarget.style.display = "none"; }}
                 />
                 {/* Year badge */}
@@ -60,7 +60,7 @@ export function ProjectCard({
             </Link>
 
             {/* Body */}
-            <div className="w-full md:w-[45%] flex flex-col justify-center h-full min-h-[300px]" style={{ gap: "1rem" }}>
+            <div className={`w-full flex flex-col h-full ${isFeatured ? 'md:w-[45%] justify-center min-h-[300px]' : ''}`} style={{ gap: "1rem" }}>
                 {/* Meta: category · team · role */}
                 <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "wrap" }}>
                     {[
@@ -110,7 +110,7 @@ export function ProjectCard({
                 )}
 
                 {/* Tech badges (Gallery style) */}
-                <div style={{ marginTop: "auto" }}>
+                <div style={{ marginTop: isFeatured ? "0.5rem" : "1rem" }}>
                     <p className="font-serif italic text-slate-500" style={{ fontSize: "0.95rem", lineHeight: 1.5 }}>
                         {project.tech_stack.join(', ')}
                     </p>
@@ -119,7 +119,7 @@ export function ProjectCard({
                 {/* Footer links */}
                 <div style={{
                     display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem",
-                    marginTop: "0", paddingTop: "1.5rem",
+                    marginTop: "auto", paddingTop: "1.5rem",
                     borderTop: "1px solid var(--border)",
                 }}>
                     <div className="flex flex-wrap gap-4">
