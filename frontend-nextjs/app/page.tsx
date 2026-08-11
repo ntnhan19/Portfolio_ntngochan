@@ -271,18 +271,17 @@ export default function Portfolio() {
               transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
               className="hidden lg:block"
             >
-                <div className="relative">
-                  <div className="relative overflow-hidden w-full aspect-square"
-                    style={{ WebkitMaskImage: 'linear-gradient(to bottom, black 65%, transparent 100%)', maskImage: 'linear-gradient(to bottom, black 65%, transparent 100%)' }}>
+                <div className="relative flex flex-col items-center md:items-end">
+                  <div className="relative overflow-hidden w-full aspect-square rounded-2xl border border-slate-200 dark:border-white/10"
+                    style={{ background: 'var(--surface-raised)' }}>
                     <img
                       src={profile.avatar_hero}
                       alt={profile.full_name}
                       className="w-full h-full object-cover object-center"
                     />
                   </div>
-                  {/* Floating status badge */}
-                  <div className="absolute bottom-8 left-0 px-4 py-2 flex items-center gap-2"
-                    style={{ background: 'transparent' }}>
+                  {/* Floating status text below image */}
+                  <div className="mt-4 flex items-center gap-2">
                     <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--success)', display: 'inline-block' }} className="animate-pulse" />
                     <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)', fontFamily: 'var(--font-body)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
                       {t('hero.openToWork')}
@@ -679,7 +678,7 @@ export default function Portfolio() {
       {/* ═══════════════════════════════════════
           CONTACT & FOOTER (MERGED)
       ═══════════════════════════════════════ */}
-      <section id="contact" className="py-20 relative overflow-hidden text-slate-50" style={{ background: 'var(--text-primary)' }}>
+      <section id="contact" className="py-20 relative overflow-hidden text-stone-50 bg-[#1c1917]">
         {/* Subtle decorative circles */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-3xl pointer-events-none translate-x-1/3 -translate-y-1/3" />
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-3xl pointer-events-none -translate-x-1/3 translate-y-1/3" />
@@ -694,7 +693,7 @@ export default function Portfolio() {
             </motion.p>
             
             <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4 mb-16">
-              <a href={`mailto:${profile.email}`} className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold transition-transform hover:-translate-y-1" style={{ background: 'var(--bg-base)', color: 'var(--text-primary)' }}>
+              <a href={`mailto:${profile.email}`} className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold transition-transform hover:-translate-y-1 bg-white text-stone-900">
                 <Mail size={18} /> {t('contact.sendEmail')}
               </a>
             </motion.div>

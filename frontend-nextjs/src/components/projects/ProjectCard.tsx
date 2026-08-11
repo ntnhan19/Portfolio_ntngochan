@@ -114,17 +114,18 @@ export function ProjectCard({
                     </p>
                 )}
 
-                {/* Tech badges (Editorial format) */}
-                <div style={{ marginTop: isFeatured ? "0.5rem" : "auto" }}>
-                    <p style={{
-                        fontFamily: "var(--font-serif)",
-                        fontStyle: "italic",
-                        fontSize: "0.95rem",
-                        color: "var(--text-muted)",
-                        lineHeight: 1.5,
-                    }}>
-                        {project.tech_stack.join(', ')}
-                    </p>
+                {/* Tech badges (Soft Editorial Pills) */}
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginTop: isFeatured ? "0.5rem" : "auto" }}>
+                    {project.tech_stack.slice(0, MAX_TAGS).map(tech => (
+                        <span key={tech} className="px-3 py-1 rounded-full text-[0.8rem] bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300">
+                            {tech}
+                        </span>
+                    ))}
+                    {project.tech_stack.length > MAX_TAGS && (
+                        <span className="px-3 py-1 rounded-full text-[0.8rem] bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300">
+                            +{project.tech_stack.length - MAX_TAGS}
+                        </span>
+                    )}
                 </div>
 
                 {/* Footer links */}
