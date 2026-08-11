@@ -142,7 +142,7 @@
 
 /* ─── FONTS ─────────────────────────────────────────────── */
 :root {
-  --font-display: 'Plus Jakarta Sans', -apple-system, system-ui, sans-serif;
+  --font-display: 'Playfair Display', serif;
   --font-body:    'Plus Jakarta Sans', -apple-system, system-ui, sans-serif;
   --font-mono:    'Fira Code', 'SF Mono', ui-monospace, monospace;
   --font-serif:   'Playfair Display', serif;
