@@ -30,18 +30,15 @@ export function ProjectCard({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.55, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className={`card group flex flex-col md:flex-row gap-0 items-center overflow-hidden ${isFeatured ? 'md:col-span-2' : 'col-span-1'}`}
+            className={`group flex flex-col md:flex-row gap-8 md:gap-12 items-center ${isFeatured ? 'md:col-span-2' : 'col-span-1'}`}
         >
             {/* Thumbnail */}
             <Link
                 href={`/projects/${project.slug}`}
                 tabIndex={-1}
                 aria-hidden="true"
-                className="w-full md:w-[55%] shrink-0 relative overflow-hidden"
-                style={{
-                    display: "block",
-                    borderRight: "1px solid var(--border)",
-                }}
+                className="w-full md:w-[55%] shrink-0 relative overflow-hidden rounded-xl shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-200 dark:border-slate-700"
+                style={{ display: "block" }}
             >
                 <div className="w-full h-full bg-slate-50 dark:bg-slate-900 flex flex-col">
                     {/* Browser Top Bar */}
@@ -74,7 +71,7 @@ export function ProjectCard({
             </Link>
 
             {/* Body */}
-            <div className="w-full md:w-[45%] flex flex-col justify-center p-6 md:p-8 lg:pr-10" style={{ gap: "1rem" }}>
+            <div className="w-full md:w-[45%] flex flex-col justify-center" style={{ gap: "1rem" }}>
                 {/* Meta: category · team · role */}
                 <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "wrap" }}>
                     {[
@@ -123,18 +120,11 @@ export function ProjectCard({
                     </p>
                 )}
 
-                {/* Tech badges (Soft Editorial Pills) */}
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginTop: isFeatured ? "0.5rem" : "auto" }}>
-                    {project.tech_stack.slice(0, MAX_TAGS).map(tech => (
-                        <span key={tech} className="px-3 py-1 rounded-full text-[0.8rem] bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300">
-                            {tech}
-                        </span>
-                    ))}
-                    {project.tech_stack.length > MAX_TAGS && (
-                        <span className="px-3 py-1 rounded-full text-[0.8rem] bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300">
-                            +{project.tech_stack.length - MAX_TAGS}
-                        </span>
-                    )}
+                {/* Tech badges (Gallery style) */}
+                <div style={{ marginTop: isFeatured ? "0.5rem" : "auto" }}>
+                    <p className="font-serif italic text-slate-500" style={{ fontSize: "0.95rem", lineHeight: 1.5 }}>
+                        {project.tech_stack.join(', ')}
+                    </p>
                 </div>
 
                 {/* Footer links */}

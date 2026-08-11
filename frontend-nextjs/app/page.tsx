@@ -235,15 +235,6 @@ export default function Portfolio() {
                 </p>
               </motion.div>
 
-              {/* Description */}
-              {!isRecruiterMode && (
-                <motion.div variants={fadeUp} custom={0.15}>
-                  <p style={{ fontSize: '1rem', lineHeight: 1.75, color: 'var(--text-secondary)', maxWidth: '520px' }}>
-                    {t('hero.description')}
-                  </p>
-                </motion.div>
-              )}
-
               {/* CTAs */}
               <motion.div variants={fadeUp} custom={0.2} className="flex flex-wrap items-center gap-3 pt-1">
                 <button onClick={() => scrollTo('#projects')} className="btn btn-primary" style={{ padding: '0.7rem 1.5rem', fontSize: '0.9rem' }}>
@@ -272,7 +263,7 @@ export default function Portfolio() {
               className="hidden lg:block"
             >
                 <div className="relative flex flex-col items-center md:items-end">
-                  <div className="relative overflow-visible w-full aspect-square rounded-2xl border border-slate-200 dark:border-slate-800"
+                  <div className="relative overflow-visible w-full aspect-[4/5] max-h-[500px] rounded-2xl border border-slate-200 dark:border-slate-800"
                     style={{ background: 'var(--surface-raised)' }}>
                     <img
                       src={profile.avatar_hero}
