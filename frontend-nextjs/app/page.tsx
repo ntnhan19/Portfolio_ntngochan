@@ -553,30 +553,51 @@ export default function Portfolio() {
               </motion.h2>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 lg:gap-6 items-start">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 items-stretch auto-rows-fr">
               {/* Box 1: Bio */}
               <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} 
-                className="col-span-1 md:col-span-2 md:row-span-2 p-6 lg:p-8 rounded-2xl flex flex-col justify-center h-full"
+                className="col-span-1 md:col-span-2 lg:col-span-2 lg:row-span-2 p-6 lg:p-8 rounded-2xl flex flex-col justify-center h-full relative overflow-hidden"
                 style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
-                <motion.p variants={fadeUp} className="text-lg md:text-xl font-medium leading-relaxed mb-6" style={{ color: 'var(--text-primary)' }}>
-                  {t('about.bio1').split('{university}').map((part, i) =>
-                    i === 0 ? part : (
-                      <span key={i}><strong style={{ color: 'var(--accent-mid)' }}>HUTECH</strong>{part}</span>
-                    )
-                  )}
-                </motion.p>
-                <motion.p variants={fadeUp} className="text-base leading-relaxed mb-8" style={{ color: 'var(--text-secondary)' }}>
-                  {t('about.bio2')
-                    .split(/\{cinema\}|\{ai\}/)
-                    .map((part, i) => {
-                      if (i === 1) return <span key={i}><strong style={{ color: 'var(--text-primary)' }}>{t('about.cinema')}</strong>{part}</span>;
-                      if (i === 2) return <span key={i}><strong style={{ color: 'var(--text-primary)' }}>{t('about.ai')}</strong>{part}</span>;
-                      return part;
-                    })
-                  }
-                </motion.p>
+                {/* Subtle watermark background */}
+                <div className="absolute -right-20 -top-20 opacity-[0.03] pointer-events-none">
+                  <span style={{ fontFamily: 'var(--font-display)', fontSize: '20rem', fontWeight: 900 }}>&quot;</span>
+                </div>
+                
+                <motion.div variants={fadeUp} className="text-lg md:text-xl font-medium leading-relaxed mb-6 z-10" style={{ color: 'var(--text-primary)' }}>
+                  {(() => {
+                    const bio1 = t('about.bio1');
+                    const firstLetter = bio1.charAt(0);
+                    const rest = bio1.slice(1);
+                    return (
+                      <>
+                        <span className="float-left text-6xl md:text-7xl font-black leading-[0.8] pr-3 pt-2" style={{ fontFamily: 'var(--font-display)', color: 'var(--accent)' }}>
+                          {firstLetter}
+                        </span>
+                        {rest.split('{university}').map((part, i) =>
+                          i === 0 ? part : (
+                            <span key={i}><strong style={{ color: 'var(--accent-mid)' }}>HUTECH</strong>{part}</span>
+                          )
+                        )}
+                      </>
+                    );
+                  })()}
+                </motion.div>
+
+                <motion.div variants={fadeUp} className="relative pl-5 py-1 mb-8 border-l-4 z-10" style={{ borderColor: 'var(--accent-mid)' }}>
+                  <p className="text-base md:text-[1.05rem] italic leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                    {t('about.bio2')
+                      .split(/\{cinema\}|\{ai\}/)
+                      .map((part, i) => {
+                        if (i === 1) return <span key={i}><strong style={{ color: 'var(--text-primary)', fontStyle: 'normal' }}>{t('about.cinema')}</strong>{part}</span>;
+                        if (i === 2) return <span key={i}><strong style={{ color: 'var(--text-primary)', fontStyle: 'normal' }}>{t('about.ai')}</strong>{part}</span>;
+                        return part;
+                      })
+                    }
+                  </p>
+                </motion.div>
+                
                 {/* Project anchors */}
-                <motion.div variants={fadeUp} className="flex flex-wrap gap-2 mt-auto">
+                <motion.div variants={fadeUp} className="flex flex-wrap gap-2 mt-auto z-10">
                   {projects.filter((p) => p.featured).map((p) => (
                     <Link
                       key={p.id}
@@ -591,19 +612,44 @@ export default function Portfolio() {
                 </motion.div>
               </motion.div>
 
-              {/* Box 5: Image */}
+              {/* Box 2: Stats - GPA */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className="col-span-1 md:col-span-1 md:row-span-2 h-full min-h-[300px] rounded-2xl overflow-hidden relative group"
+                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
+                className="col-span-1 lg:col-span-1 lg:row-span-1 rounded-2xl p-5 flex flex-col justify-center relative overflow-hidden group"
+                style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
+              >
+                <GraduationCap className="absolute -right-4 -bottom-4 w-24 h-24 text-slate-500 opacity-5 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-12" />
+                <div className="relative z-10">
+                  <p style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '2.5rem', color: 'var(--accent)', lineHeight: 1 }}>3.33</p>
+                  <p style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', marginTop: '0.5rem' }}>{t('about.stats.gpa')}</p>
+                  <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>{t('about.stats.gpaSub')}</p>
+                </div>
+              </motion.div>
+
+              {/* Box 3: Stats - Projects */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
+                className="col-span-1 lg:col-span-1 lg:row-span-1 rounded-2xl p-5 flex flex-col justify-center relative overflow-hidden group"
+                style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
+              >
+                <Zap className="absolute -right-4 -bottom-4 w-24 h-24 text-slate-500 opacity-5 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-12" />
+                <div className="relative z-10">
+                  <p style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '2.5rem', color: 'var(--accent)', lineHeight: 1 }}>{projects.length}</p>
+                  <p style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', marginTop: '0.5rem' }}>{t('about.stats.projects')}</p>
+                  <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>{t('about.stats.projectsSub')}</p>
+                </div>
+              </motion.div>
+
+              {/* Box 4: Avatar Image */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }}
+                className="col-span-1 md:col-span-2 lg:col-span-1 lg:row-span-1 h-full min-h-[250px] rounded-2xl overflow-hidden relative group"
                 style={{ border: '1px solid var(--border)' }}
               >
                 <img
                   src={profile.avatar_about}
                   alt={profile.full_name}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-80" />
                 <div className="absolute bottom-4 left-4 right-4">
@@ -613,35 +659,19 @@ export default function Portfolio() {
                 </div>
               </motion.div>
 
-              {/* Stats Boxes 2, 3, 4 */}
-              {[
-                { value: '3.33', label: t('about.stats.gpa'), sub: t('about.stats.gpaSub'), icon: GraduationCap },
-                { value: String(projects.length), label: t('about.stats.projects'), sub: t('about.stats.projectsSub'), icon: Zap },
-                { value: String(certificates.length), label: t('about.stats.certificates'), sub: t('about.stats.certificatesSub'), icon: Award },
-              ].map((stat, i) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.1 * i }}
-                  className="col-span-1 md:col-span-1 md:row-span-1 rounded-2xl p-5 flex flex-col justify-center relative overflow-hidden group"
-                  style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
-                >
-                  <stat.icon className="absolute -right-4 -bottom-4 w-24 h-24 text-slate-500 opacity-5 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-12" />
-                  <div className="relative z-10">
-                    <p style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '2rem', color: 'var(--accent)', lineHeight: 1 }}>
-                      {stat.value}
-                    </p>
-                    <p style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', marginTop: '0.5rem' }}>
-                      {stat.label}
-                    </p>
-                    <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
-                      {stat.sub}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
+              {/* Box 5: Stats - Certificates */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.4 }}
+                className="col-span-1 lg:col-span-1 lg:row-span-1 rounded-2xl p-5 flex flex-col justify-center relative overflow-hidden group"
+                style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
+              >
+                <Award className="absolute -right-4 -bottom-4 w-24 h-24 text-slate-500 opacity-5 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-12" />
+                <div className="relative z-10">
+                  <p style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '2.5rem', color: 'var(--accent)', lineHeight: 1 }}>{certificates.length}</p>
+                  <p style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', marginTop: '0.5rem' }}>{t('about.stats.certificates')}</p>
+                  <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>{t('about.stats.certificatesSub')}</p>
+                </div>
+              </motion.div>
             </div>
           </div>
         </section>
