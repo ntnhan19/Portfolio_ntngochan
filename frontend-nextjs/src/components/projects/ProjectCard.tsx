@@ -30,19 +30,17 @@ export function ProjectCard({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.55, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className={`card group flex flex-col md:flex-row gap-8 md:gap-12 items-center ${isFeatured ? 'md:col-span-2' : 'col-span-1'}`}
+            className={`card group flex flex-col md:flex-row gap-8 md:gap-12 items-center p-6 overflow-hidden ${isFeatured ? 'md:col-span-2' : 'col-span-1'}`}
         >
             {/* Thumbnail */}
             <Link
                 href={`/projects/${project.slug}`}
                 tabIndex={-1}
                 aria-hidden="true"
-                className="w-full md:w-[60%] shrink-0 relative overflow-hidden"
+                className="w-full md:w-[55%] shrink-0 relative overflow-hidden rounded-xl aspect-[4/3] md:aspect-video"
                 style={{
                     display: "block",
-                    height: isFeatured ? "450px" : "320px",
-                    boxShadow: "0 30px 60px rgba(0,0,0,0.05)",
-                    borderRadius: "2px",
+                    boxShadow: "0 20px 40px rgba(0,0,0,0.08)",
                 }}
             >
                 <img
@@ -65,7 +63,7 @@ export function ProjectCard({
             </Link>
 
             {/* Body */}
-            <div className="w-full md:w-[40%] flex flex-col justify-center" style={{ gap: "1rem", padding: "1rem 0" }}>
+            <div className="w-full md:w-[45%] flex flex-col justify-center" style={{ gap: "1rem" }}>
                 {/* Meta: category · team · role */}
                 <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "wrap" }}>
                     {[

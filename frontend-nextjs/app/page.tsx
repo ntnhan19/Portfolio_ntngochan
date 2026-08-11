@@ -272,20 +272,20 @@ export default function Portfolio() {
               className="hidden lg:block"
             >
                 <div className="relative flex flex-col items-center md:items-end">
-                  <div className="relative overflow-hidden w-full aspect-square rounded-2xl border border-slate-200 dark:border-white/10"
+                  <div className="relative overflow-hidden w-full aspect-square rounded-2xl border border-slate-200 dark:border-slate-800"
                     style={{ background: 'var(--surface-raised)' }}>
                     <img
                       src={profile.avatar_hero}
                       alt={profile.full_name}
                       className="w-full h-full object-cover object-center"
                     />
-                  </div>
-                  {/* Floating status text below image */}
-                  <div className="mt-4 flex items-center gap-2">
-                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--success)', display: 'inline-block' }} className="animate-pulse" />
-                    <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)', fontFamily: 'var(--font-body)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-                      {t('hero.openToWork')}
-                    </span>
+                    {/* Floating status text fixed inside the image container */}
+                    <div className="absolute bottom-4 right-4 flex items-center gap-2 bg-white/80 dark:bg-black/50 backdrop-blur-md px-3 py-1.5 rounded-full shadow-sm border border-black/5 dark:border-white/10">
+                      <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--success)', display: 'inline-block' }} className="animate-pulse" />
+                      <span style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-primary)', fontFamily: 'var(--font-body)', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+                        {t('hero.openToWork')}
+                      </span>
+                    </div>
                   </div>
                 </div>
             </motion.div>
@@ -678,10 +678,7 @@ export default function Portfolio() {
       {/* ═══════════════════════════════════════
           CONTACT & FOOTER (MERGED)
       ═══════════════════════════════════════ */}
-      <section id="contact" className="py-20 relative overflow-hidden text-stone-50 bg-[#1c1917]">
-        {/* Subtle decorative circles */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-3xl pointer-events-none translate-x-1/3 -translate-y-1/3" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-3xl pointer-events-none -translate-x-1/3 translate-y-1/3" />
+      <section id="contact" className="py-20 relative overflow-hidden text-stone-50 bg-[#161F28]">
 
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="flex flex-col items-center">

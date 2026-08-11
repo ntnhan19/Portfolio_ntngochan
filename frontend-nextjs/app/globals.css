@@ -9,42 +9,42 @@
 :root,
 [data-theme="light"] {
   /* === BACKGROUNDS === */
-  --bg-base:        #fafaf9; /* Stone 50 (Ivory) */
-  --bg-subtle:      #f5f5f4; /* Stone 100 */
-  --bg-muted:       #e7e5e4; /* Stone 200 */
-  --bg-overlay:     rgba(250, 250, 249, 0.85);
+  --bg-base:        #F0F4F8; 
+  --bg-subtle:      #FFFFFF;
+  --bg-muted:       #e2e8f0; 
+  --bg-overlay:     rgba(240, 244, 248, 0.85);
 
   /* === SURFACES (cards, panels) === */
-  --surface:        #ffffff; /* Cards blend softly with bg */
-  --surface-raised: #f5f5f4;
-  --surface-hover:  #ffffff;
+  --surface:        #FFFFFF;
+  --surface-raised: #f8fafc;
+  --surface-hover:  #FFFFFF;
   --surface-1:      var(--surface);
   --surface-2:      var(--surface-raised);
 
   /* === GRADIENT OVERLAY (hero gradient for dark text on image) === */
-  --surface-overlay-0: rgba(248, 250, 252, 0.95);
-  --surface-overlay-1: rgba(240, 244, 248, 0.85);
-  --surface-overlay-2: rgba(220, 230, 240, 0.40);
+  --surface-overlay-0: rgba(255, 255, 255, 0.95);
+  --surface-overlay-1: rgba(255, 255, 255, 0.85);
+  --surface-overlay-2: rgba(255, 255, 255, 0.40);
 
   /* === BORDERS === */
-  --border:         rgba(226, 232, 240, 0.6); /* border-slate-200/60 */
-  --border-strong:  rgba(203, 213, 225, 0.8);
+  --border:         #D1DCE5;
+  --border-strong:  #94a3b8;
   --border-subtle:  transparent;
 
   /* === TEXT === */
-  --text-primary:   #292524; /* Stone 800 (Deep Espresso) */
-  --text-secondary: #57534e; /* Stone 600 */
-  --text-muted:     #a8a29e; /* Stone 400 */
-  --text-faint:     #d6d3d1; /* Stone 300 */
+  --text-primary:   #2D3740;
+  --text-secondary: #475569;
+  --text-muted:     #5C6B7A;
+  --text-faint:     #94a3b8;
   --text-tertiary:  var(--text-muted);
-  --black:          #1c1917;
-  --gray-900:       #292524;
+  --black:          #161F28;
+  --gray-900:       #2D3740;
 
   /* === ACCENT === */
-  --accent:         #6A89A7;        
-  --accent-mid:     #88BDF2;        
-  --accent-light:   rgba(136, 189, 242, 0.15); /* #88BDF2 opacity 15% */
-  --accent-border:  rgba(106, 137, 167, 0.35);
+  --accent:         #4A7A96;
+  --accent-mid:     #4A7A96;
+  --accent-light:   rgba(74, 122, 150, 0.15);
+  --accent-border:  rgba(74, 122, 150, 0.35);
 
   /* === STATUS === */
   --success:        #6AA7A6;        
@@ -76,42 +76,42 @@
 /* ─── DARK MODE ─────────────────────────────────────────── */
 [data-theme="dark"] {
   /* === BACKGROUNDS === */
-  --bg-base:        #1c1917; /* Stone 900 (Cinematic Charcoal) */
-  --bg-subtle:      #292524; /* Stone 800 */
-  --bg-muted:       #44403c; /* Stone 700 */
-  --bg-overlay:     rgba(28, 25, 23, 0.85);
+  --bg-base:        #161F28;
+  --bg-subtle:      #1E2A35;
+  --bg-muted:       #2D3E4F;
+  --bg-overlay:     rgba(22, 31, 40, 0.85);
 
   /* === SURFACES === */
-  --surface:        rgba(255, 255, 255, 0.05); /* bg-white/5 */
-  --surface-raised: rgba(255, 255, 255, 0.08);
-  --surface-hover:  rgba(255, 255, 255, 0.1);
+  --surface:        #1E2A35;
+  --surface-raised: #2D3E4F;
+  --surface-hover:  #2D3E4F;
   --surface-1:      var(--surface);
   --surface-2:      var(--surface-raised);
 
   /* === GRADIENT OVERLAY (hero gradient for light text on image in dark mode) === */
-  --surface-overlay-0: rgba(11, 17, 32, 0.95);
-  --surface-overlay-1: rgba(15, 23, 42, 0.75);
-  --surface-overlay-2: rgba(30, 41, 59, 0.35);
+  --surface-overlay-0: rgba(22, 31, 40, 0.95);
+  --surface-overlay-1: rgba(22, 31, 40, 0.75);
+  --surface-overlay-2: rgba(22, 31, 40, 0.35);
 
   /* === BORDERS === */
-  --border:         rgba(255, 255, 255, 0.1); /* border-white/10 */
-  --border-strong:  rgba(255, 255, 255, 0.2);
+  --border:         #2D3E4F;
+  --border-strong:  #5C6B7A;
   --border-subtle:  transparent;
 
   /* === TEXT === */
-  --text-primary:   #f5f5f4; /* Stone 100 (Pearl White) */
-  --text-secondary: #d6d3d1; /* Stone 300 */
-  --text-muted:     #a8a29e; /* Stone 400 */
-  --text-faint:     #78716c; /* Stone 500 */
+  --text-primary:   #E1E7EC;
+  --text-secondary: #9AAAB8;
+  --text-muted:     #9AAAB8;
+  --text-faint:     #5C6B7A;
   --text-tertiary:  var(--text-muted);
-  --black:          #1c1917;
-  --gray-900:       #292524;
+  --black:          #161F28;
+  --gray-900:       #161F28;
 
   /* === ACCENT === */
-  --accent:         #88BDF2; /* Nút bấm chính / Glowing CTA */
-  --accent-mid:     #6A89A7; 
-  --accent-light:   rgba(136, 189, 242, 0.15);
-  --accent-border:  rgba(136, 189, 242, 0.4);
+  --accent:         #89B4C4;
+  --accent-mid:     #89B4C4;
+  --accent-light:   rgba(137, 180, 196, 0.15);
+  --accent-border:  rgba(137, 180, 196, 0.4);
 
   /* === STATUS === */
   --success:        #6AA7A6; 
