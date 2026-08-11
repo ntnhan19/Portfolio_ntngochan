@@ -13,7 +13,7 @@ export default function ProjectArchitecture({ architectureText, locale }: Projec
     if (!architectureText) return null;
 
     return (
-        <section className="py-16 md:py-24" style={{ background: 'var(--bg-subtle)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
+        <section className="py-24">
             <div className="max-w-6xl mx-auto px-6">
                 
                 <motion.div 
@@ -42,9 +42,7 @@ export default function ProjectArchitecture({ architectureText, locale }: Projec
                         className="rounded-2xl overflow-hidden mb-10 flex items-center justify-center relative group"
                         style={{ 
                             aspectRatio: '16/9', 
-                            background: 'var(--surface)', 
-                            border: '1px dashed var(--border)',
-                            boxShadow: '0 20px 40px rgba(0,0,0,0.03)'
+                            border: '1px dashed var(--border)'
                         }}
                     >
                         {/* Placeholder Content */}

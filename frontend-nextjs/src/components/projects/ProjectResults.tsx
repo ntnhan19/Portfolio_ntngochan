@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Target } from 'lucide-react';
+import { Target, Check } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 
 interface ProjectResultsProps {
@@ -36,7 +36,7 @@ export default function ProjectResults({ resultsText, locale }: ProjectResultsPr
     if (!resultsText) return null;
 
     return (
-        <section className="py-16 md:py-24" style={{ background: 'var(--bg-subtle)', borderTop: '1px solid var(--border)' }}>
+        <section className="py-24">
             <div className="max-w-4xl mx-auto px-6">
                 
                 <motion.div 
@@ -59,15 +59,14 @@ export default function ProjectResults({ resultsText, locale }: ProjectResultsPr
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.6, delay: 0.2 }}
-                    className="card p-8 md:p-12"
-                    style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: '0 20px 40px rgba(0,0,0,0.04)' }}
+                    className=""
                 >
                     <article className="prose" style={{ fontSize: '1.1rem', lineHeight: 1.8, color: 'var(--text-secondary)' }}>
                         <ReactMarkdown
                             components={{
                                 li: ({ node, ...props }) => (
                                     <li className="mb-4 flex gap-3 items-start" {...props}>
-                                        <span style={{ color: 'var(--accent)', marginTop: '0.4rem', fontSize: '1.2rem' }}>•</span>
+                                        <Check size={20} className="mt-1 flex-shrink-0" style={{ color: 'var(--accent)' }} />
                                         <div>
                                             <CustomTextRenderer>{props.children as string}</CustomTextRenderer>
                                         </div>

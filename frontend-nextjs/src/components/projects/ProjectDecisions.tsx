@@ -26,7 +26,7 @@ export default function ProjectDecisions({ decisions, locale }: ProjectDecisions
     if (!decisions || decisions.length === 0) return null;
 
     return (
-        <section className="py-16 md:py-24">
+        <section className="py-24">
             <div className="max-w-6xl mx-auto px-6">
                 
                 <motion.div 
@@ -51,8 +51,7 @@ export default function ProjectDecisions({ decisions, locale }: ProjectDecisions
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: "-100px" }}
                                 transition={{ duration: 0.5, delay: i * 0.15 }}
-                                className="group p-6 md:p-8 rounded-2xl flex flex-col items-start transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
-                                style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
+                                className="group flex flex-col items-start transition-all duration-300"
                             >
                                 <div 
                                     className="w-12 h-12 rounded-xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110"

@@ -10,21 +10,11 @@ interface ProjectHeroProps {
     t: (key: string, variables?: Record<string, string>) => string;
 }
 
-const getBrandColor = (tech: string) => {
-    const t = tech.toLowerCase();
-    if (t.includes('react') || t.includes('next')) return 'var(--info)'; // Blue
-    if (t.includes('fastapi') || t.includes('vue')) return 'var(--success)'; // Green
-    if (t.includes('aws') || t.includes('amazon')) return '#FF9900'; // Orange
-    if (t.includes('docker')) return '#2496ED'; // Docker Blue
-    if (t.includes('postgres') || t.includes('sql')) return '#336791'; // Postgres Blue
-    if (t.includes('python')) return '#3776AB'; 
-    if (t.includes('node') || t.includes('express')) return '#339933';
-    return 'var(--accent)';
-};
+
 
 export default function ProjectHero({ project, t }: ProjectHeroProps) {
     return (
-        <section style={{ position: 'relative', overflow: 'hidden', background: 'var(--surface-raised)', paddingTop: '6rem', paddingBottom: '4rem' }}>
+        <section style={{ position: 'relative', overflow: 'hidden', paddingTop: '6rem', paddingBottom: '4rem' }}>
             <div className="max-w-6xl mx-auto px-6 relative z-10">
                 
                 {/* Breadcrumb */}
@@ -71,31 +61,22 @@ export default function ProjectHero({ project, t }: ProjectHeroProps) {
                                 {t('projectDetail.stack')}
                             </p>
                             <div className="flex flex-wrap gap-2">
-                                {project.tech_stack.map(tech => {
-                                    const color = getBrandColor(tech);
-                                    return (
-                                        <span key={tech} className="px-3 py-1 rounded-md text-xs font-semibold" style={{ background: `color-mix(in srgb, ${color} 15%, transparent)`, color: color, border: `1px solid color-mix(in srgb, ${color} 30%, transparent)` }}>
-                                            {tech}
-                                        </span>
-                                    );
-                                })}
+                                {project.tech_stack.map((tech, i) => (
+                                    <span key={tech} className="font-serif italic text-slate-500" style={{ fontSize: "1.05rem" }}>
+                                        {tech}{i < project.tech_stack.length - 1 ? ',' : ''}
+                                    </span>
+                                ))}
                             </div>
                         </div>
                     </motion.div>
 
                     {/* Right: Mockup Image */}
                     <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="relative">
-                        <div className="rounded-2xl overflow-hidden shadow-2xl" style={{ border: '1px solid var(--border)', background: 'var(--surface)', padding: '0.5rem' }}>
-                            {/* Fake browser header */}
-                            <div className="flex gap-2 mb-2 px-2 pt-1">
-                                <div className="w-3 h-3 rounded-full bg-red-400" />
-                                <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                                <div className="w-3 h-3 rounded-full bg-green-400" />
-                            </div>
+                        <div className="card w-full" style={{ padding: 0 }}>
                             <img
                                 src={project.image_url}
                                 alt={`${project.title} mockup`}
-                                className="w-full h-auto rounded-xl object-cover"
+                                className="w-full h-auto object-cover"
                                 style={{ aspectRatio: '16/10' }}
                             />
                         </div>
@@ -106,8 +87,8 @@ export default function ProjectHero({ project, t }: ProjectHeroProps) {
             </div>
 
             {/* Stats Bar (Positioned overlapping the bottom) */}
-            <div className="max-w-5xl mx-auto px-6 relative z-20 mt-12">
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }} className="grid grid-cols-3 gap-4 p-5 rounded-2xl shadow-xl" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
+            <div className="max-w-5xl mx-auto px-6 relative z-20 mt-12 mb-8">
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }} className="grid grid-cols-3 gap-4 py-5">
                     <div className="flex items-center gap-4 p-2">
                         <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: 'var(--bg-subtle)' }}>
                             <Clock size={18} style={{ color: 'var(--accent)' }} />

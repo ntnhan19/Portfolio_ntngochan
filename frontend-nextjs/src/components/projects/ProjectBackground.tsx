@@ -15,7 +15,7 @@ export default function ProjectBackground({ project, backgroundText, t }: Projec
     if (!backgroundText && project.highlights.length === 0) return null;
 
     return (
-        <section className="py-16 md:py-24">
+        <section className="py-24">
             <div className="max-w-6xl mx-auto px-6">
                 <div className="grid lg:grid-cols-[1fr_400px] gap-12 lg:gap-16 items-start">
                     
@@ -42,8 +42,7 @@ export default function ProjectBackground({ project, backgroundText, t }: Projec
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
                             transition={{ duration: 0.6, delay: 0.2 }}
-                            className="p-6 md:p-8 rounded-2xl relative overflow-hidden"
-                            style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: '0 12px 40px rgba(0,0,0,0.05)' }}
+                            className="pt-2 md:pt-4 relative"
                         >
                             {/* Gradient border effect via pseudo-element */}
                             <div className="absolute top-0 left-0 w-full h-1" style={{ background: 'linear-gradient(90deg, var(--accent), var(--info))' }} />
