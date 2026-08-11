@@ -272,15 +272,15 @@ export default function Portfolio() {
               className="hidden lg:block"
             >
                 <div className="relative flex flex-col items-center md:items-end">
-                  <div className="relative overflow-hidden w-full aspect-square rounded-2xl border border-slate-200 dark:border-slate-800"
+                  <div className="relative overflow-visible w-full aspect-square rounded-2xl border border-slate-200 dark:border-slate-800"
                     style={{ background: 'var(--surface-raised)' }}>
                     <img
                       src={profile.avatar_hero}
                       alt={profile.full_name}
-                      className="w-full h-full object-cover object-center"
+                      className="w-full h-full object-cover object-center rounded-2xl"
                     />
-                    {/* Floating status text fixed inside the image container */}
-                    <div className="absolute bottom-4 right-4 flex items-center gap-2 bg-white/80 dark:bg-black/50 backdrop-blur-md px-3 py-1.5 rounded-full shadow-sm border border-black/5 dark:border-white/10">
+                    {/* Floating status text overlapping bottom edge */}
+                    <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-white/80 dark:bg-black/50 backdrop-blur-md px-4 py-1.5 rounded-full shadow-md border border-black/5 dark:border-white/10 whitespace-nowrap">
                       <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--success)', display: 'inline-block' }} className="animate-pulse" />
                       <span style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-primary)', fontFamily: 'var(--font-body)', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
                         {t('hero.openToWork')}
@@ -678,7 +678,7 @@ export default function Portfolio() {
       {/* ═══════════════════════════════════════
           CONTACT & FOOTER (MERGED)
       ═══════════════════════════════════════ */}
-      <section id="contact" className="py-20 relative overflow-hidden text-stone-50 bg-[#161F28]">
+      <section id="contact" className="py-20 relative overflow-hidden text-stone-50 bg-[#111827]">
 
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="flex flex-col items-center">

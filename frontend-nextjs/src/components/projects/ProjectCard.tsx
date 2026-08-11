@@ -30,26 +30,33 @@ export function ProjectCard({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.55, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className={`card group flex flex-col md:flex-row gap-8 md:gap-12 items-center p-6 overflow-hidden ${isFeatured ? 'md:col-span-2' : 'col-span-1'}`}
+            className={`card group flex flex-col md:flex-row gap-0 items-center overflow-hidden ${isFeatured ? 'md:col-span-2' : 'col-span-1'}`}
         >
             {/* Thumbnail */}
-            <Link
-                href={`/projects/${project.slug}`}
-                tabIndex={-1}
-                aria-hidden="true"
-                className="w-full md:w-[55%] shrink-0 relative overflow-hidden rounded-xl aspect-[4/3] md:aspect-video"
+                className="w-full md:w-[55%] shrink-0 relative overflow-hidden"
                 style={{
                     display: "block",
-                    boxShadow: "0 20px 40px rgba(0,0,0,0.08)",
+                    borderRight: "1px solid var(--border)",
                 }}
             >
-                <img
-                    src={project.image_url}
-                    alt={project.title}
-                    style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", opacity: 0.9 }}
-                    className="transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-                    onError={e => { e.currentTarget.style.display = "none"; }}
-                />
+                <div className="w-full h-full bg-slate-50 dark:bg-slate-900 flex flex-col">
+                    {/* Browser Top Bar */}
+                    <div className="bg-slate-100 dark:bg-slate-800 px-4 py-3 flex items-center gap-2 border-b border-slate-200 dark:border-slate-700">
+                        <div className="w-3 h-3 rounded-full bg-red-400"></div>
+                        <div className="w-3 h-3 rounded-full bg-amber-400"></div>
+                        <div className="w-3 h-3 rounded-full bg-green-400"></div>
+                    </div>
+                    {/* The actual image */}
+                    <div className="relative w-full aspect-[4/3] md:aspect-video overflow-hidden bg-white dark:bg-black">
+                        <img
+                            src={project.image_url}
+                            alt={project.title}
+                            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", opacity: 0.9 }}
+                            className="transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                            onError={e => { e.currentTarget.style.display = "none"; }}
+                        />
+                    </div>
+                </div>
                 {/* Year badge */}
                 <div style={{
                     position: "absolute", top: "1rem", right: "1rem",
@@ -63,7 +70,7 @@ export function ProjectCard({
             </Link>
 
             {/* Body */}
-            <div className="w-full md:w-[45%] flex flex-col justify-center" style={{ gap: "1rem" }}>
+            <div className="w-full md:w-[45%] flex flex-col justify-center p-6 md:p-8 lg:pr-10" style={{ gap: "1rem" }}>
                 {/* Meta: category · team · role */}
                 <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "wrap" }}>
                     {[
