@@ -76,52 +76,52 @@
 /* ─── DARK MODE ─────────────────────────────────────────── */
 [data-theme="dark"] {
   /* === BACKGROUNDS === */
-  --bg-base:        #141b29; /* Deep misty navy */
-  --bg-subtle:      #1a2333;
-  --bg-muted:       #212c40;
-  --bg-overlay:     rgba(20, 27, 41, 0.85);
+  --bg-base:        #171e26; /* Very dark vintage slate */
+  --bg-subtle:      #1f2936;
+  --bg-muted:       #2b3848;
+  --bg-overlay:     rgba(23, 30, 38, 0.85);
 
   /* === SURFACES === */
-  --surface:        #1c2638;
-  --surface-raised: #243046;
-  --surface-hover:  #2b3a54;
+  --surface:        #232f3e;
+  --surface-raised: #2c3a4a;
+  --surface-hover:  #37485a;
   --surface-1:      var(--surface);
   --surface-2:      var(--surface-raised);
 
   /* === GRADIENT OVERLAY (hero gradient for light text on image in dark mode) === */
-  --surface-overlay-0: rgba(28, 38, 56, 0.95);
-  --surface-overlay-1: rgba(36, 48, 70, 0.75);
-  --surface-overlay-2: rgba(43, 58, 84, 0.35);
+  --surface-overlay-0: rgba(35, 47, 62, 0.95);
+  --surface-overlay-1: rgba(44, 58, 74, 0.75);
+  --surface-overlay-2: rgba(55, 72, 90, 0.35);
 
   /* === BORDERS === */
-  --border:         #33435c;
-  --border-strong:  #4b6080;
+  --border:         #3f5166;
+  --border-strong:  #5a718a;
   --border-subtle:  var(--border);
 
   /* === TEXT === */
-  --text-primary:   #eef2f6; /* Soft cool white */
-  --text-secondary: #a8b8cc; /* Pastel blue-gray */
-  --text-muted:     #7a8b9f;
-  --text-faint:     #52657a;
+  --text-primary:   #dfe7ed; /* Very pale icy blue */
+  --text-secondary: #abc0d1; /* Soft muted blue-gray */
+  --text-muted:     #849bae;
+  --text-faint:     #5a718a;
   --text-tertiary:  var(--text-muted);
   --black:          var(--bg-base);
   --gray-900:       var(--surface-raised);
 
   /* === ACCENT === */
-  --accent:         #93c5fd; /* Soft pastel sky blue */
-  --accent-mid:     #bfdbfe; /* Lighter pastel blue */
-  --accent-light:   rgba(147, 197, 253, 0.1);
-  --accent-border:  rgba(147, 197, 253, 0.3);
+  --accent:         #6c8ca3; /* The primary retro steel blue */
+  --accent-mid:     #8ba9c0; /* A lighter tint of it */
+  --accent-light:   rgba(108, 140, 163, 0.15);
+  --accent-border:  rgba(108, 140, 163, 0.35);
 
   /* === STATUS === */
-  --success:        #6ee7b7; /* Pastel green */
-  --warning:        #fcd34d; /* Pastel yellow */
-  --danger:         #fca5a5; /* Pastel red */
-  --info:           #93c5fd;
+  --success:        #62a39f; /* Vintage teal */
+  --warning:        #d4b271; /* Vintage mustard */
+  --danger:         #c97a7e; /* Dusty rose */
+  --info:           #6c8ca3;
 
   /* === SCROLL PROGRESS === */
-  --progress-from:  #93c5fd;
-  --progress-to:    #bfdbfe;
+  --progress-from:  #6c8ca3;
+  --progress-to:    #8ba9c0;
 
   /* === SYNTAX === */
   --syn-keyword:    #ff7b72;
