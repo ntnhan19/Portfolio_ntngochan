@@ -9,15 +9,15 @@
 :root,
 [data-theme="light"] {
   /* === BACKGROUNDS === */
-  --bg-base:        #ffffff;
-  --bg-subtle:      #f8fafc;
-  --bg-muted:       #f1f5f9;
-  --bg-overlay:     rgba(255, 255, 255, 0.85);
+  --bg-base:        #fafaf9; /* Stone 50 (Ivory) */
+  --bg-subtle:      #f5f5f4; /* Stone 100 */
+  --bg-muted:       #e7e5e4; /* Stone 200 */
+  --bg-overlay:     rgba(250, 250, 249, 0.85);
 
   /* === SURFACES (cards, panels) === */
-  --surface:        #ffffff;
-  --surface-raised: #f8fafc;
-  --surface-hover:  #f1f5f9;
+  --surface:        transparent; /* Cards blend with bg */
+  --surface-raised: #f5f5f4;
+  --surface-hover:  #e7e5e4;
   --surface-1:      var(--surface);
   --surface-2:      var(--surface-raised);
 
@@ -27,18 +27,18 @@
   --surface-overlay-2: rgba(220, 230, 240, 0.40);
 
   /* === BORDERS === */
-  --border:         rgba(123, 129, 132, 0.3); /* #7B8184 at 30% */
-  --border-strong:  #678298;
-  --border-subtle:  var(--border);
+  --border:         rgba(120, 113, 108, 0.15); /* Very faint border if needed */
+  --border-strong:  rgba(120, 113, 108, 0.3);
+  --border-subtle:  transparent;
 
   /* === TEXT === */
-  --text-primary:   #0F172A;        
-  --text-secondary: #475569;
-  --text-muted:     #778188;        
-  --text-faint:     #7B8184;        
+  --text-primary:   #292524; /* Stone 800 (Deep Espresso) */
+  --text-secondary: #57534e; /* Stone 600 */
+  --text-muted:     #a8a29e; /* Stone 400 */
+  --text-faint:     #d6d3d1; /* Stone 300 */
   --text-tertiary:  var(--text-muted);
-  --black:          var(--bg-base);
-  --gray-900:       var(--surface-raised);
+  --black:          #1c1917;
+  --gray-900:       #292524;
 
   /* === ACCENT === */
   --accent:         #6A89A7;        
@@ -76,15 +76,15 @@
 /* ─── DARK MODE ─────────────────────────────────────────── */
 [data-theme="dark"] {
   /* === BACKGROUNDS === */
-  --bg-base:        #0B1120;
-  --bg-subtle:      #0F172A;
-  --bg-muted:       #1E293B;
-  --bg-overlay:     rgba(11, 17, 32, 0.85);
+  --bg-base:        #1c1917; /* Stone 900 (Cinematic Charcoal) */
+  --bg-subtle:      #292524; /* Stone 800 */
+  --bg-muted:       #44403c; /* Stone 700 */
+  --bg-overlay:     rgba(28, 25, 23, 0.85);
 
   /* === SURFACES === */
-  --surface:        rgba(99, 129, 156, 0.1); /* #63819C at 10% */
-  --surface-raised: rgba(99, 129, 156, 0.15);
-  --surface-hover:  rgba(99, 129, 156, 0.2);
+  --surface:        transparent;
+  --surface-raised: #292524;
+  --surface-hover:  #44403c;
   --surface-1:      var(--surface);
   --surface-2:      var(--surface-raised);
 
@@ -94,18 +94,18 @@
   --surface-overlay-2: rgba(30, 41, 59, 0.35);
 
   /* === BORDERS === */
-  --border:         rgba(123, 129, 132, 0.2); /* #7B8184 at 20% */
-  --border-strong:  #678298;
-  --border-subtle:  var(--border);
+  --border:         rgba(168, 162, 158, 0.1); 
+  --border-strong:  rgba(168, 162, 158, 0.25);
+  --border-subtle:  transparent;
 
   /* === TEXT === */
-  --text-primary:   #F8FAFC; 
-  --text-secondary: #94A3B8; 
-  --text-muted:     #73828C; /* User's gray */
-  --text-faint:     #6F8290; /* User's gray */
+  --text-primary:   #f5f5f4; /* Stone 100 (Pearl White) */
+  --text-secondary: #d6d3d1; /* Stone 300 */
+  --text-muted:     #a8a29e; /* Stone 400 */
+  --text-faint:     #78716c; /* Stone 500 */
   --text-tertiary:  var(--text-muted);
-  --black:          var(--bg-base);
-  --gray-900:       var(--surface-raised);
+  --black:          #1c1917;
+  --gray-900:       #292524;
 
   /* === ACCENT === */
   --accent:         #88BDF2; /* Nút bấm chính / Glowing CTA */
@@ -178,13 +178,24 @@ body {
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
+/* Tactile SVG Noise Overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03; /* Very subtle grain */
+}
+
 /* ─── TYPOGRAPHY ─────────────────────────────────────────── */
 .text-hero {
   font-family: var(--font-display);
-  font-size: clamp(2.6rem, 6.5vw, 5rem);
+  font-size: clamp(3.5rem, 8vw + 1rem, 7.5rem);
   font-weight: 800;
-  line-height: 1.08;
-  letter-spacing: -0.035em;
+  line-height: 1.05;
+  letter-spacing: -0.05em;
   color: var(--text-primary);
 }
 
@@ -208,16 +219,14 @@ body {
 
 /* ─── CARD ───────────────────────────────────────────────── */
 .card {
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: transparent;
+  border: none;
   border-radius: var(--radius-lg);
-  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  transition: transform 0.7s ease-out; /* Slower, more graceful transition */
 }
 
+/* Remove hover backgrounds/borders from standard cards in magazine layout */
 .card:hover {
-  background: var(--surface-hover);
-  border-color: var(--border-strong);
-  box-shadow: 0 4px 20px rgba(26, 58, 92, 0.08);
   transform: translateY(-2px);
 }
 
@@ -256,12 +265,11 @@ body {
 
 .btn-primary:hover {
   background: var(--accent-mid);
-  transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(26, 58, 92, 0.3);
 }
 
 .btn-primary:active {
-  transform: scale(0.98);
+  background: var(--accent);
 }
 
 /* Secondary = outlined */
@@ -275,7 +283,6 @@ body {
   background: var(--surface-hover);
   border-color: var(--border-strong);
   color: var(--text-primary);
-  transform: translateY(-1px);
 }
 
 /* Ghost */
@@ -312,11 +319,10 @@ body {
   border-color: var(--accent-border);
 }
 
-/* ─── LINK ───────────────────────────────────────────────── */
 .link-hover {
   position: relative;
   color: var(--text-muted);
-  transition: color 0.18s;
+  transition: color 0.4s ease;
 }
 
 .link-hover::after {
@@ -326,12 +332,12 @@ body {
   left: 0;
   width: 0;
   height: 1px;
-  background: var(--accent-mid);
-  transition: width 0.22s ease;
+  background: var(--text-primary);
+  transition: width 0.5s ease-out;
 }
 
 .link-hover:hover {
-  color: var(--accent-mid);
+  color: var(--text-primary);
 }
 
 .link-hover:hover::after {

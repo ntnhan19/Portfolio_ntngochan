@@ -206,9 +206,9 @@ export default function Portfolio() {
 
               {/* Status badge */}
               <motion.div variants={fadeUp} custom={0}>
-                <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold"
-                  style={{ background: 'var(--accent-light)', border: '1px solid var(--accent-border)', color: 'var(--accent)', fontFamily: 'var(--font-mono)', letterSpacing: '0.04em' }}>
-                  <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--success)', display: 'inline-block', animation: 'blink 1.5s ease infinite' }} />
+                <span className="inline-flex items-center gap-2 px-3 py-1 text-[0.65rem] uppercase font-bold"
+                  style={{ background: 'var(--surface-raised)', color: 'var(--text-secondary)', fontFamily: 'var(--font-body)', letterSpacing: '0.2em' }}>
+                  <span style={{ width: 4, height: 4, borderRadius: '50%', background: 'var(--success)', display: 'inline-block', opacity: 0.8 }} />
                   {t('hero.status')}
                 </span>
               </motion.div>
@@ -272,9 +272,8 @@ export default function Portfolio() {
               className="hidden lg:block"
             >
                 <div className="relative">
-                  <div className="absolute inset-0 bg-blue-500/20 blur-3xl rounded-full translate-y-4" />
-                  <div className="relative rounded-2xl overflow-hidden aspect-square w-full"
-                    style={{ boxShadow: '0 24px 64px rgba(26,58,92,0.14)', border: '1px solid var(--border)' }}>
+                  <div className="relative overflow-hidden w-full aspect-square"
+                    style={{ WebkitMaskImage: 'linear-gradient(to bottom, black 65%, transparent 100%)', maskImage: 'linear-gradient(to bottom, black 65%, transparent 100%)' }}>
                     <img
                       src={profile.avatar_hero}
                       alt={profile.full_name}
@@ -282,10 +281,10 @@ export default function Portfolio() {
                     />
                   </div>
                   {/* Floating status badge */}
-                  <div className="absolute -bottom-3 -left-3 px-4 py-2.5 rounded-xl flex items-center gap-2"
-                    style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: '0 4px 16px rgba(26,58,92,0.1)' }}>
-                    <span style={{ width: 10, height: 10, borderRadius: '50%', background: 'var(--success)', display: 'inline-block' }} className="animate-pulse" />
-                    <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-primary)', fontFamily: 'var(--font-mono)' }}>
+                  <div className="absolute bottom-8 left-0 px-4 py-2 flex items-center gap-2"
+                    style={{ background: 'transparent' }}>
+                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--success)', display: 'inline-block' }} className="animate-pulse" />
+                    <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)', fontFamily: 'var(--font-body)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
                       {t('hero.openToWork')}
                     </span>
                   </div>

@@ -30,36 +30,26 @@ export function ProjectCard({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.55, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className={`card group ${isFeatured ? 'md:col-span-2' : 'col-span-1'}`}
-            style={{
-                display: "flex",
-                flexDirection: "column",
-                overflow: "hidden",
-                borderRadius: "var(--radius-xl)",
-                background: "var(--surface)",
-                border: "1px solid var(--border)",
-            }}
-            whileHover={{ y: -4, transition: { duration: 0.2 }, boxShadow: "0 20px 40px rgba(0,0,0,0.08)" }}
+            className={`card group flex flex-col md:flex-row gap-8 md:gap-12 items-center ${isFeatured ? 'md:col-span-2' : 'col-span-1'}`}
         >
             {/* Thumbnail */}
             <Link
                 href={`/projects/${project.slug}`}
                 tabIndex={-1}
                 aria-hidden="true"
+                className="w-full md:w-[60%] shrink-0 relative overflow-hidden"
                 style={{
                     display: "block",
-                    position: "relative",
-                    height: isFeatured ? "400px" : "240px",
-                    background: "var(--surface-raised)",
-                    overflow: "hidden",
-                    flexShrink: 0,
+                    height: isFeatured ? "450px" : "320px",
+                    boxShadow: "0 30px 60px rgba(0,0,0,0.05)",
+                    borderRadius: "2px",
                 }}
             >
                 <img
                     src={project.image_url}
                     alt={project.title}
-                    style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", opacity: 0.85, transition: "transform 0.5s ease" }}
-                    className="group-hover:scale-105"
+                    style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", opacity: 0.9 }}
+                    className="transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                     onError={e => { e.currentTarget.style.display = "none"; }}
                 />
                 {/* Year badge */}
@@ -75,11 +65,7 @@ export function ProjectCard({
             </Link>
 
             {/* Body */}
-            <div style={{
-                padding: isFeatured ? "2rem" : "1.5rem",
-                display: "flex", flexDirection: "column", gap: "1rem", flex: 1,
-                justifyContent: "center"
-            }}>
+            <div className="w-full md:w-[40%] flex flex-col justify-center" style={{ gap: "1rem", padding: "1rem 0" }}>
                 {/* Meta: category · team · role */}
                 <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "wrap" }}>
                     {[
@@ -128,18 +114,17 @@ export function ProjectCard({
                     </p>
                 )}
 
-                {/* Tech badges */}
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginTop: isFeatured ? "0.5rem" : "auto" }}>
-                    {project.tech_stack.slice(0, MAX_TAGS).map(tech => (
-                        <span key={tech} className="px-2.5 py-1 rounded-md text-xs font-semibold" style={{ background: 'var(--bg-muted)', color: 'var(--text-secondary)' }}>
-                            {tech}
-                        </span>
-                    ))}
-                    {project.tech_stack.length > MAX_TAGS && (
-                        <span className="px-2.5 py-1 rounded-md text-xs font-semibold" style={{ background: 'var(--bg-muted)', color: 'var(--text-secondary)' }}>
-                            +{project.tech_stack.length - MAX_TAGS}
-                        </span>
-                    )}
+                {/* Tech badges (Editorial format) */}
+                <div style={{ marginTop: isFeatured ? "0.5rem" : "auto" }}>
+                    <p style={{
+                        fontFamily: "var(--font-serif)",
+                        fontStyle: "italic",
+                        fontSize: "0.95rem",
+                        color: "var(--text-muted)",
+                        lineHeight: 1.5,
+                    }}>
+                        {project.tech_stack.join(', ')}
+                    </p>
                 </div>
 
                 {/* Footer links */}

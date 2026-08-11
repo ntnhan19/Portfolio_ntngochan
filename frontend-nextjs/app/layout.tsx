@@ -153,60 +153,6 @@ export default function RootLayout({
       </head>
 
       <body className="antialiased">
-        {/* Ambient background orbs — fixed, pointer-events none */}
-        <div
-          aria-hidden="true"
-          className="fixed inset-0 overflow-hidden pointer-events-none -z-10"
-        >
-          {/* Top-right orb — navy tint */}
-          <div
-            style={{
-              position: "absolute",
-              top: "-15vh",
-              right: "-10vw",
-              width: "55vw",
-              height: "55vw",
-              maxWidth: "700px",
-              maxHeight: "700px",
-              borderRadius: "50%",
-              background:
-                "radial-gradient(circle, rgba(106, 117, 167, 0.15) 0%, transparent 70%)", /* #6A75A7 */
-              filter: "blur(80px)",
-            }}
-          />
-          {/* Bottom-left orb — lighter navy */}
-          <div
-            style={{
-              position: "absolute",
-              bottom: "-8vh",
-              left: "-8vw",
-              width: "45vw",
-              height: "45vw",
-              maxWidth: "560px",
-              maxHeight: "560px",
-              borderRadius: "50%",
-              background:
-                "radial-gradient(circle, rgba(106, 167, 166, 0.12) 0%, transparent 70%)", /* #6AA7A6 */
-              filter: "blur(80px)",
-            }}
-          />
-          {/* Center wash */}
-          <div
-            style={{
-              position: "absolute",
-              top: "40%",
-              left: "30%",
-              width: "40vw",
-              height: "40vw",
-              maxWidth: "480px",
-              maxHeight: "480px",
-              borderRadius: "50%",
-              background:
-                "radial-gradient(circle, rgba(136, 189, 242, 0.08) 0%, transparent 70%)", /* #88BDF2 */
-              filter: "blur(100px)",
-            }}
-          />
-        </div>
 
         <LocaleProvider>
           <RecruiterModeProvider>
