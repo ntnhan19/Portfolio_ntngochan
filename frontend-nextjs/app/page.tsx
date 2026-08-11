@@ -570,7 +570,7 @@ export default function Portfolio() {
                     const rest = bio1.slice(1);
                     return (
                       <>
-                        <span className="float-left text-6xl md:text-7xl font-black leading-[0.8] pr-3 pt-2" style={{ fontFamily: 'var(--font-display)', color: 'var(--accent)' }}>
+                        <span className="float-left text-[4.5rem] md:text-[5.5rem] font-bold leading-[0.8] pr-3 pt-2" style={{ fontFamily: 'var(--font-serif)', color: 'var(--accent)' }}>
                           {firstLetter}
                         </span>
                         {rest.split('{university}').map((part, i) =>
@@ -584,7 +584,7 @@ export default function Portfolio() {
                 </motion.div>
 
                 <motion.div variants={fadeUp} className="relative pl-5 py-1 mb-8 border-l-4 z-10" style={{ borderColor: 'var(--accent-mid)' }}>
-                  <p className="text-base md:text-[1.05rem] italic leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                  <p className="text-[1.05rem] md:text-[1.15rem] italic leading-relaxed" style={{ fontFamily: 'var(--font-serif)', color: 'var(--text-secondary)' }}>
                     {t('about.bio2')
                       .split(/\{cinema\}|\{ai\}/)
                       .map((part, i) => {
