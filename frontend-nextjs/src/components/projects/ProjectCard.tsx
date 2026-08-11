@@ -30,9 +30,9 @@ export function ProjectCard({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.55, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className={`card group ${isFeatured ? 'md:col-span-2 md:grid md:grid-cols-2 md:gap-0' : ''}`}
+            className={`card group ${isFeatured ? 'md:col-span-2' : 'col-span-1'}`}
             style={{
-                display: isFeatured ? undefined : "flex",
+                display: "flex",
                 flexDirection: "column",
                 overflow: "hidden",
                 borderRadius: "var(--radius-xl)",
@@ -49,8 +49,7 @@ export function ProjectCard({
                 style={{
                     display: "block",
                     position: "relative",
-                    height: isFeatured ? "100%" : "200px",
-                    minHeight: isFeatured ? "300px" : "200px",
+                    height: isFeatured ? "400px" : "240px",
                     background: "var(--surface-raised)",
                     overflow: "hidden",
                     flexShrink: 0,
@@ -59,7 +58,7 @@ export function ProjectCard({
                 <img
                     src={project.image_url}
                     alt={project.title}
-                    style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.85, transition: "transform 0.5s ease" }}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", opacity: 0.85, transition: "transform 0.5s ease" }}
                     className="group-hover:scale-105"
                     onError={e => { e.currentTarget.style.display = "none"; }}
                 />
