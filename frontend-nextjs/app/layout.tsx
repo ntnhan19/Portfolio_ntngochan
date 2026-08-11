@@ -170,7 +170,7 @@ export default function RootLayout({
               maxHeight: "700px",
               borderRadius: "50%",
               background:
-                "radial-gradient(circle, rgba(37,99,168,0.07) 0%, transparent 70%)",
+                "radial-gradient(circle, rgba(106, 117, 167, 0.15) 0%, transparent 70%)", /* #6A75A7 */
               filter: "blur(80px)",
             }}
           />
@@ -186,7 +186,7 @@ export default function RootLayout({
               maxHeight: "560px",
               borderRadius: "50%",
               background:
-                "radial-gradient(circle, rgba(26,58,92,0.05) 0%, transparent 70%)",
+                "radial-gradient(circle, rgba(106, 167, 166, 0.12) 0%, transparent 70%)", /* #6AA7A6 */
               filter: "blur(80px)",
             }}
           />
@@ -202,7 +202,7 @@ export default function RootLayout({
               maxHeight: "480px",
               borderRadius: "50%",
               background:
-                "radial-gradient(circle, rgba(219,234,254,0.4) 0%, transparent 70%)",
+                "radial-gradient(circle, rgba(136, 189, 242, 0.08) 0%, transparent 70%)", /* #88BDF2 */
               filter: "blur(100px)",
             }}
           />

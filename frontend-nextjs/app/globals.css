@@ -9,15 +9,15 @@
 :root,
 [data-theme="light"] {
   /* === BACKGROUNDS === */
-  --bg-base:        #ffffff;        /* page background */
-  --bg-subtle:      #f4f6f9;        /* alternate section bg */
-  --bg-muted:       #eef1f6;        /* input, code bg */
-  --bg-overlay:     rgba(255,255,255,0.85); /* nav glass */
+  --bg-base:        #ffffff;
+  --bg-subtle:      #f8fafc;
+  --bg-muted:       #f1f5f9;
+  --bg-overlay:     rgba(255, 255, 255, 0.85);
 
   /* === SURFACES (cards, panels) === */
   --surface:        #ffffff;
   --surface-raised: #f8fafc;
-  --surface-hover:  #f0f4f8;
+  --surface-hover:  #f1f5f9;
   --surface-1:      var(--surface);
   --surface-2:      var(--surface-raised);
 
@@ -27,33 +27,33 @@
   --surface-overlay-2: rgba(220, 230, 240, 0.40);
 
   /* === BORDERS === */
-  --border:         #dde3ec;
-  --border-strong:  #b8c4d4;
+  --border:         rgba(123, 129, 132, 0.3); /* #7B8184 at 30% */
+  --border-strong:  #678298;
   --border-subtle:  var(--border);
 
   /* === TEXT === */
-  --text-primary:   #1a2634;        /* Dark navy/slate */
-  --text-secondary: #4a5c6e;
-  --text-muted:     #778188;        /* User's retro gray */
-  --text-faint:     #7B8184;        /* User's lighter gray */
+  --text-primary:   #0F172A;        
+  --text-secondary: #475569;
+  --text-muted:     #778188;        
+  --text-faint:     #7B8184;        
   --text-tertiary:  var(--text-muted);
   --black:          var(--bg-base);
   --gray-900:       var(--surface-raised);
 
   /* === ACCENT === */
-  --accent:         #6A89A7;        /* User's primary retro blue */
-  --accent-mid:     #88BDF2;        /* User's soft baby blue */
-  --accent-light:   rgba(106, 137, 167, 0.12);
+  --accent:         #6A89A7;        
+  --accent-mid:     #88BDF2;        
+  --accent-light:   rgba(136, 189, 242, 0.15); /* #88BDF2 opacity 15% */
   --accent-border:  rgba(106, 137, 167, 0.35);
 
   /* === STATUS === */
-  --success:        #6AA7A6;        /* User's vintage teal */
-  --warning:        #6A9DA7;        /* User's blue-teal */
-  --danger:         #6A7FA7;        /* User's vintage purple */
+  --success:        #6AA7A6;        
+  --warning:        #d97706;        
+  --danger:         #6A75A7;        
   --info:           #88BDF2;
 
   /* === SCROLL PROGRESS === */
-  --progress-from:  #6AA7A6;
+  --progress-from:  #6A89A7;
   --progress-to:    #88BDF2;
 
   /* === SYNTAX (terminal card) === */
@@ -76,31 +76,31 @@
 /* ─── DARK MODE ─────────────────────────────────────────── */
 [data-theme="dark"] {
   /* === BACKGROUNDS === */
-  --bg-base:        #151c24; /* Very dark shade of 6A89A7 */
-  --bg-subtle:      #1a242e;
-  --bg-muted:       #212c38;
-  --bg-overlay:     rgba(21, 28, 36, 0.85);
+  --bg-base:        #0B1120;
+  --bg-subtle:      #0F172A;
+  --bg-muted:       #1E293B;
+  --bg-overlay:     rgba(11, 17, 32, 0.85);
 
   /* === SURFACES === */
-  --surface:        #1c2631;
-  --surface-raised: #24313f;
-  --surface-hover:  #2d3d4e;
+  --surface:        rgba(99, 129, 156, 0.1); /* #63819C at 10% */
+  --surface-raised: rgba(99, 129, 156, 0.15);
+  --surface-hover:  rgba(99, 129, 156, 0.2);
   --surface-1:      var(--surface);
   --surface-2:      var(--surface-raised);
 
   /* === GRADIENT OVERLAY (hero gradient for light text on image in dark mode) === */
-  --surface-overlay-0: rgba(28, 38, 49, 0.95);
-  --surface-overlay-1: rgba(36, 49, 63, 0.75);
-  --surface-overlay-2: rgba(45, 61, 78, 0.35);
+  --surface-overlay-0: rgba(11, 17, 32, 0.95);
+  --surface-overlay-1: rgba(15, 23, 42, 0.75);
+  --surface-overlay-2: rgba(30, 41, 59, 0.35);
 
   /* === BORDERS === */
-  --border:         #3a4b5c;
-  --border-strong:  #4d6278;
+  --border:         rgba(123, 129, 132, 0.2); /* #7B8184 at 20% */
+  --border-strong:  #678298;
   --border-subtle:  var(--border);
 
   /* === TEXT === */
-  --text-primary:   #e2eaf2; 
-  --text-secondary: #a3b8cc; 
+  --text-primary:   #F8FAFC; 
+  --text-secondary: #94A3B8; 
   --text-muted:     #73828C; /* User's gray */
   --text-faint:     #6F8290; /* User's gray */
   --text-tertiary:  var(--text-muted);
@@ -108,15 +108,15 @@
   --gray-900:       var(--surface-raised);
 
   /* === ACCENT === */
-  --accent:         #88BDF2; /* User's baby blue for visibility in dark mode */
-  --accent-mid:     #6A89A7; /* User's primary retro blue */
+  --accent:         #88BDF2; /* Nút bấm chính / Glowing CTA */
+  --accent-mid:     #6A89A7; 
   --accent-light:   rgba(136, 189, 242, 0.15);
-  --accent-border:  rgba(106, 137, 167, 0.4);
+  --accent-border:  rgba(136, 189, 242, 0.4);
 
   /* === STATUS === */
-  --success:        #6AA7A6; /* User's vintage teal */
-  --warning:        #6A9DA7; /* User's blue-teal */
-  --danger:         #6A7FA7; /* User's vintage purple */
+  --success:        #6AA7A6; 
+  --warning:        #6A9DA7; 
+  --danger:         #6A75A7; 
   --info:           #88BDF2;
 
   /* === SCROLL PROGRESS === */
