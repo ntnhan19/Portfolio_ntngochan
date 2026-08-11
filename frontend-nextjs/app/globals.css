@@ -76,52 +76,52 @@
 /* ─── DARK MODE ─────────────────────────────────────────── */
 [data-theme="dark"] {
   /* === BACKGROUNDS === */
-  --bg-base:        #0d1117;
-  --bg-subtle:      #161b22;
-  --bg-muted:       #1c2333;
-  --bg-overlay:     rgba(13,17,23,0.85);
+  --bg-base:        #141b29; /* Deep misty navy */
+  --bg-subtle:      #1a2333;
+  --bg-muted:       #212c40;
+  --bg-overlay:     rgba(20, 27, 41, 0.85);
 
   /* === SURFACES === */
-  --surface:        #161b22;
-  --surface-raised: #1c2333;
-  --surface-hover:  #21293a;
+  --surface:        #1c2638;
+  --surface-raised: #243046;
+  --surface-hover:  #2b3a54;
   --surface-1:      var(--surface);
   --surface-2:      var(--surface-raised);
 
   /* === GRADIENT OVERLAY (hero gradient for light text on image in dark mode) === */
-  --surface-overlay-0: rgba(28, 35, 51, 0.95);
-  --surface-overlay-1: rgba(33, 41, 58, 0.75);
-  --surface-overlay-2: rgba(50, 65, 90, 0.35);
+  --surface-overlay-0: rgba(28, 38, 56, 0.95);
+  --surface-overlay-1: rgba(36, 48, 70, 0.75);
+  --surface-overlay-2: rgba(43, 58, 84, 0.35);
 
   /* === BORDERS === */
-  --border:         #2d3748;
-  --border-strong:  #4a5568;
+  --border:         #33435c;
+  --border-strong:  #4b6080;
   --border-subtle:  var(--border);
 
   /* === TEXT === */
-  --text-primary:   #e6edf3;
-  --text-secondary: #8b949e;
-  --text-muted:     #6e7681;
-  --text-faint:     #484f58;
+  --text-primary:   #eef2f6; /* Soft cool white */
+  --text-secondary: #a8b8cc; /* Pastel blue-gray */
+  --text-muted:     #7a8b9f;
+  --text-faint:     #52657a;
   --text-tertiary:  var(--text-muted);
   --black:          var(--bg-base);
   --gray-900:       var(--surface-raised);
 
   /* === ACCENT === */
-  --accent:         #58a6ff;
-  --accent-mid:     #79c0ff;
-  --accent-light:   #1c2d3f;
-  --accent-border:  #2d4a6e;
+  --accent:         #93c5fd; /* Soft pastel sky blue */
+  --accent-mid:     #bfdbfe; /* Lighter pastel blue */
+  --accent-light:   rgba(147, 197, 253, 0.1);
+  --accent-border:  rgba(147, 197, 253, 0.3);
 
   /* === STATUS === */
-  --success:        #3fb950;
-  --warning:        #d29922;
-  --danger:         #f85149;
-  --info:           #58a6ff;
+  --success:        #6ee7b7; /* Pastel green */
+  --warning:        #fcd34d; /* Pastel yellow */
+  --danger:         #fca5a5; /* Pastel red */
+  --info:           #93c5fd;
 
   /* === SCROLL PROGRESS === */
-  --progress-from:  #58a6ff;
-  --progress-to:    #79c0ff;
+  --progress-from:  #93c5fd;
+  --progress-to:    #bfdbfe;
 
   /* === SYNTAX === */
   --syn-keyword:    #ff7b72;
