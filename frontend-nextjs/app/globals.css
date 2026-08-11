@@ -32,29 +32,29 @@
   --border-subtle:  var(--border);
 
   /* === TEXT === */
-  --text-primary:   #0f1c2e;        /* navy-950 — headlines */
-  --text-secondary: #3d5166;        /* navy-700 — body */
-  --text-muted:     #7a90a8;        /* navy-400 — captions */
-  --text-faint:     #b0bfcc;        /* placeholders */
+  --text-primary:   #1a2634;        /* Dark navy/slate */
+  --text-secondary: #4a5c6e;
+  --text-muted:     #778188;        /* User's retro gray */
+  --text-faint:     #7B8184;        /* User's lighter gray */
   --text-tertiary:  var(--text-muted);
   --black:          var(--bg-base);
   --gray-900:       var(--surface-raised);
 
-  /* === ACCENT (navy) === */
-  --accent:         #1a3a5c;        /* primary navy */
-  --accent-mid:     #2563a8;        /* navy-600 — links, highlights */
-  --accent-light:   #dbeafe;        /* navy tint bg */
-  --accent-border:  #93b4d4;        /* accent border */
+  /* === ACCENT === */
+  --accent:         #6A89A7;        /* User's primary retro blue */
+  --accent-mid:     #88BDF2;        /* User's soft baby blue */
+  --accent-light:   rgba(106, 137, 167, 0.12);
+  --accent-border:  rgba(106, 137, 167, 0.35);
 
   /* === STATUS === */
-  --success:        #16a34a;
-  --warning:        #d97706;
-  --danger:         #dc2626;
-  --info:           #2563eb;
+  --success:        #6AA7A6;        /* User's vintage teal */
+  --warning:        #6A9DA7;        /* User's blue-teal */
+  --danger:         #6A7FA7;        /* User's vintage purple */
+  --info:           #88BDF2;
 
   /* === SCROLL PROGRESS === */
-  --progress-from:  #1a3a5c;
-  --progress-to:    #2563a8;
+  --progress-from:  #6AA7A6;
+  --progress-to:    #88BDF2;
 
   /* === SYNTAX (terminal card) === */
   --syn-keyword:    #2563a8;        /* const, let */
@@ -76,52 +76,52 @@
 /* ─── DARK MODE ─────────────────────────────────────────── */
 [data-theme="dark"] {
   /* === BACKGROUNDS === */
-  --bg-base:        #171e26; /* Very dark vintage slate */
-  --bg-subtle:      #1f2936;
-  --bg-muted:       #2b3848;
-  --bg-overlay:     rgba(23, 30, 38, 0.85);
+  --bg-base:        #151c24; /* Very dark shade of 6A89A7 */
+  --bg-subtle:      #1a242e;
+  --bg-muted:       #212c38;
+  --bg-overlay:     rgba(21, 28, 36, 0.85);
 
   /* === SURFACES === */
-  --surface:        #232f3e;
-  --surface-raised: #2c3a4a;
-  --surface-hover:  #37485a;
+  --surface:        #1c2631;
+  --surface-raised: #24313f;
+  --surface-hover:  #2d3d4e;
   --surface-1:      var(--surface);
   --surface-2:      var(--surface-raised);
 
   /* === GRADIENT OVERLAY (hero gradient for light text on image in dark mode) === */
-  --surface-overlay-0: rgba(35, 47, 62, 0.95);
-  --surface-overlay-1: rgba(44, 58, 74, 0.75);
-  --surface-overlay-2: rgba(55, 72, 90, 0.35);
+  --surface-overlay-0: rgba(28, 38, 49, 0.95);
+  --surface-overlay-1: rgba(36, 49, 63, 0.75);
+  --surface-overlay-2: rgba(45, 61, 78, 0.35);
 
   /* === BORDERS === */
-  --border:         #3f5166;
-  --border-strong:  #5a718a;
+  --border:         #3a4b5c;
+  --border-strong:  #4d6278;
   --border-subtle:  var(--border);
 
   /* === TEXT === */
-  --text-primary:   #dfe7ed; /* Very pale icy blue */
-  --text-secondary: #abc0d1; /* Soft muted blue-gray */
-  --text-muted:     #849bae;
-  --text-faint:     #5a718a;
+  --text-primary:   #e2eaf2; 
+  --text-secondary: #a3b8cc; 
+  --text-muted:     #73828C; /* User's gray */
+  --text-faint:     #6F8290; /* User's gray */
   --text-tertiary:  var(--text-muted);
   --black:          var(--bg-base);
   --gray-900:       var(--surface-raised);
 
   /* === ACCENT === */
-  --accent:         #6c8ca3; /* The primary retro steel blue */
-  --accent-mid:     #8ba9c0; /* A lighter tint of it */
-  --accent-light:   rgba(108, 140, 163, 0.15);
-  --accent-border:  rgba(108, 140, 163, 0.35);
+  --accent:         #88BDF2; /* User's baby blue for visibility in dark mode */
+  --accent-mid:     #6A89A7; /* User's primary retro blue */
+  --accent-light:   rgba(136, 189, 242, 0.15);
+  --accent-border:  rgba(106, 137, 167, 0.4);
 
   /* === STATUS === */
-  --success:        #62a39f; /* Vintage teal */
-  --warning:        #d4b271; /* Vintage mustard */
-  --danger:         #c97a7e; /* Dusty rose */
-  --info:           #6c8ca3;
+  --success:        #6AA7A6; /* User's vintage teal */
+  --warning:        #6A9DA7; /* User's blue-teal */
+  --danger:         #6A7FA7; /* User's vintage purple */
+  --info:           #88BDF2;
 
   /* === SCROLL PROGRESS === */
-  --progress-from:  #6c8ca3;
-  --progress-to:    #8ba9c0;
+  --progress-from:  #88BDF2;
+  --progress-to:    #6AA7A6;
 
   /* === SYNTAX === */
   --syn-keyword:    #ff7b72;
