@@ -271,24 +271,25 @@ export default function Portfolio() {
               transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
               className="hidden lg:block"
             >
-              <div className="relative">
-                <div className="rounded-2xl overflow-hidden aspect-square w-full"
-                  style={{ boxShadow: '0 24px 64px rgba(26,58,92,0.14)', border: '1px solid var(--border)' }}>
-                  <img
-                    src={profile.avatar_hero}
-                    alt={profile.full_name}
-                    className="w-full h-full object-cover object-center"
-                  />
+                <div className="relative">
+                  <div className="absolute inset-0 bg-blue-500/20 blur-3xl rounded-full translate-y-4" />
+                  <div className="relative rounded-2xl overflow-hidden aspect-square w-full"
+                    style={{ boxShadow: '0 24px 64px rgba(26,58,92,0.14)', border: '1px solid var(--border)' }}>
+                    <img
+                      src={profile.avatar_hero}
+                      alt={profile.full_name}
+                      className="w-full h-full object-cover object-center"
+                    />
+                  </div>
+                  {/* Floating status badge */}
+                  <div className="absolute -bottom-3 -left-3 px-4 py-2.5 rounded-xl flex items-center gap-2"
+                    style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: '0 4px 16px rgba(26,58,92,0.1)' }}>
+                    <span style={{ width: 10, height: 10, borderRadius: '50%', background: 'var(--success)', display: 'inline-block' }} className="animate-pulse" />
+                    <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-primary)', fontFamily: 'var(--font-mono)' }}>
+                      {t('hero.openToWork')}
+                    </span>
+                  </div>
                 </div>
-                {/* Floating status badge */}
-                <div className="absolute -bottom-3 -left-3 px-3 py-2 rounded-xl flex items-center gap-2"
-                  style={{ background: 'var(--surface)', border: '1px solid var(--border)', boxShadow: '0 4px 16px rgba(26,58,92,0.1)' }}>
-                  <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--success)', display: 'inline-block', animation: 'blink 1.5s ease infinite' }} />
-                  <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-primary)', fontFamily: 'var(--font-mono)' }}>
-                    {t('hero.openToWork')}
-                  </span>
-                </div>
-              </div>
             </motion.div>
 
           </div>
@@ -339,7 +340,7 @@ export default function Portfolio() {
                 key={project.id}
                 project={project}
                 index={idx}
-                variant="featured"
+                variant={idx === 0 ? "featured" : "default"}
               />
             ))}
           </div>
@@ -512,18 +513,31 @@ export default function Portfolio() {
                 </Link>
               </motion.div>
 
-              {/* Currently learning */}
+              {/* Currently learning - Infinite Marquee */}
               <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-                className="mt-8 p-5 rounded-xl flex flex-wrap items-center gap-3"
+                className="mt-8 py-4 rounded-xl overflow-hidden relative flex items-center"
                 style={{ background: 'var(--accent-light)', border: '1px solid var(--accent-border)' }}>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', color: 'var(--accent)' }}>
+                <div className="absolute left-0 top-0 bottom-0 w-12 z-10" style={{ background: 'linear-gradient(to right, var(--accent-light), transparent)' }} />
+                <div className="absolute right-0 top-0 bottom-0 w-12 z-10" style={{ background: 'linear-gradient(to left, var(--accent-light), transparent)' }} />
+                
+                <span className="shrink-0 z-20 px-4 py-1.5 rounded-r-lg font-mono text-xs font-bold uppercase tracking-widest" style={{ background: 'var(--accent)', color: 'var(--bg-base)' }}>
                   {t('skills.currentlyLearning')}
                 </span>
-                {['NestJS', 'Microservices Architecture', 'Docker Compose', 'System Design'].map(item => (
-                  <span key={item} className="badge" style={{ color: 'var(--accent)', borderColor: 'var(--accent-border)', background: 'transparent' }}>
-                    {item}
-                  </span>
-                ))}
+                
+                {/* Marquee Content */}
+                <div className="flex flex-1 overflow-hidden">
+                  <motion.div 
+                    className="flex whitespace-nowrap items-center gap-6 px-6"
+                    animate={{ x: ["0%", "-50%"] }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  >
+                    {[...['NestJS', 'Microservices Architecture', 'Docker Compose', 'System Design', 'React Native'], ...['NestJS', 'Microservices Architecture', 'Docker Compose', 'System Design', 'React Native']].map((item, i) => (
+                      <span key={i} className="font-semibold text-sm" style={{ color: 'var(--accent-mid)' }}>
+                        • {item}
+                      </span>
+                    ))}
+                  </motion.div>
+                </div>
               </motion.div>
             </>
           )}
@@ -543,17 +557,19 @@ export default function Portfolio() {
               </motion.h2>
             </motion.div>
 
-            <div className="grid lg:grid-cols-[1fr_minmax(280px,360px)] gap-10 lg:gap-14 items-start">
-              {/* Left: bio + social proof stats */}
-              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-                <motion.p variants={fadeUp} className="text-base leading-relaxed mb-4" style={{ color: 'var(--text-secondary)' }}>
+            <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 lg:gap-6 items-start">
+              {/* Box 1: Bio */}
+              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} 
+                className="col-span-1 md:col-span-2 md:row-span-2 p-6 lg:p-8 rounded-2xl flex flex-col justify-center h-full"
+                style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
+                <motion.p variants={fadeUp} className="text-lg md:text-xl font-medium leading-relaxed mb-6" style={{ color: 'var(--text-primary)' }}>
                   {t('about.bio1').split('{university}').map((part, i) =>
                     i === 0 ? part : (
-                      <span key={i}><strong style={{ color: 'var(--text-primary)' }}>HUTECH</strong>{part}</span>
+                      <span key={i}><strong style={{ color: 'var(--accent-mid)' }}>HUTECH</strong>{part}</span>
                     )
                   )}
                 </motion.p>
-                <motion.p variants={fadeUp} className="text-base leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>
+                <motion.p variants={fadeUp} className="text-base leading-relaxed mb-8" style={{ color: 'var(--text-secondary)' }}>
                   {t('about.bio2')
                     .split(/\{cinema\}|\{ai\}/)
                     .map((part, i) => {
@@ -563,39 +579,13 @@ export default function Portfolio() {
                     })
                   }
                 </motion.p>
-
-                {/* Mini stats — social proof */}
-                <motion.div variants={fadeUp} className="grid grid-cols-3 gap-3 mb-6">
-                  {[
-                    { value: '3.33', label: t('about.stats.gpa'), sub: t('about.stats.gpaSub') },
-                    { value: String(projects.length), label: t('about.stats.projects'), sub: t('about.stats.projectsSub') },
-                    { value: String(certificates.length), label: t('about.stats.certificates'), sub: t('about.stats.certificatesSub') },
-                  ].map((stat) => (
-                    <div
-                      key={stat.label}
-                      className="rounded-xl px-3 py-3 text-center"
-                      style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
-                    >
-                      <p style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '1.35rem', color: 'var(--accent)', lineHeight: 1.1 }}>
-                        {stat.value}
-                      </p>
-                      <p style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--text-primary)', marginTop: '0.25rem' }}>
-                        {stat.label}
-                      </p>
-                      <p style={{ fontSize: '0.65rem', color: 'var(--text-muted)', marginTop: '0.15rem', lineHeight: 1.3 }}>
-                        {stat.sub}
-                      </p>
-                    </div>
-                  ))}
-                </motion.div>
-
-                {/* Project anchors — visual tie to bio mentions */}
-                <motion.div variants={fadeUp} className="flex flex-wrap gap-2">
+                {/* Project anchors */}
+                <motion.div variants={fadeUp} className="flex flex-wrap gap-2 mt-auto">
                   {projects.filter((p) => p.featured).map((p) => (
                     <Link
                       key={p.id}
                       href={`/projects/${p.slug}`}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-colors"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-colors hover:bg-slate-100 dark:hover:bg-slate-800"
                       style={{ background: 'var(--bg-base)', border: '1px solid var(--border)', color: 'var(--text-secondary)' }}
                     >
                       <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--success)' }} />
@@ -605,172 +595,112 @@ export default function Portfolio() {
                 </motion.div>
               </motion.div>
 
-              {/* Right: avatar + cert preview + compelling CTA */}
+              {/* Box 5: Image */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                className="flex flex-col gap-4"
+                transition={{ duration: 0.5 }}
+                className="col-span-1 md:col-span-1 md:row-span-2 h-full min-h-[300px] rounded-2xl overflow-hidden relative group"
+                style={{ border: '1px solid var(--border)' }}
               >
-                {/* Visual anchor */}
-                <div
-                  className="rounded-2xl overflow-hidden"
-                  style={{ border: '1px solid var(--border)', boxShadow: '0 16px 48px rgba(26,58,92,0.1)' }}
-                >
-                  {/* Image container */}
-                  <div className="aspect-[4/3] relative">
-                    <img
-                      src={profile.avatar_about}
-                      alt={profile.full_name}
-                      className="w-full h-full object-cover object-center"
-                    />
-                    <div
-                      className="absolute inset-0"
-                      style={{ background: 'linear-gradient(to top, rgba(15,28,46,0.55) 0%, transparent 50%)' }}
-                    />
-                  </div>
-                  
-                  {/* Certificate thumb strip — below image */}
-                  <div className="px-4 py-3 flex items-center gap-2" style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)' }}>
-                    {certificates.slice(0, 3).map((cert) => (
-                      <div
-                        key={cert.id}
-                        className="rounded-md overflow-hidden flex-1"
-                        style={{
-                          border: '1px solid var(--border)',
-                          boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-                          aspectRatio: '4/3',
-                          background: 'var(--surface)',
-                        }}
-                      >
-                        <img src={cert.image_url} alt={cert.name} title={cert.name} className="w-full h-full object-cover" />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Full profile CTA with preview */}
-                <div
-                  className="card p-5 flex flex-col gap-4"
-                  style={{ background: 'var(--surface)' }}
-                >
-                  <div>
-                    <p style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1rem', color: 'var(--text-primary)', marginBottom: '0.35rem' }}>
-                      {t('about.profilePreviewTitle')}
-                    </p>
-                    <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
-                      {t('about.profilePreviewDesc')}
-                    </p>
-                  </div>
-                  <ul className="flex flex-col gap-2.5 list-none m-0 p-0">
-                    {[
-                      { icon: Award, text: t('about.profilePreviewCerts', { count: String(certificates.length) }) },
-                      { icon: Heart, text: t('about.profilePreviewActivities') },
-                      { icon: GraduationCap, text: t('about.profilePreviewEducation') },
-                    ].map(({ icon: Icon, text }) => (
-                      <li key={text} className="flex items-center gap-2.5 text-sm" style={{ color: 'var(--text-secondary)' }}>
-                        <span
-                          className="flex items-center justify-center shrink-0 rounded-lg"
-                          style={{ width: 28, height: 28, background: 'var(--accent-light)', border: '1px solid var(--accent-border)' }}
-                        >
-                          <Icon size={14} style={{ color: 'var(--accent)' }} />
-                        </span>
-                        {text}
-                      </li>
-                    ))}
-                  </ul>
-                  <Link href="/about" className="btn btn-primary w-full justify-center text-sm">
+                <img
+                  src={profile.avatar_about}
+                  alt={profile.full_name}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-80" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <Link href="/about" className="btn btn-primary w-full justify-center text-sm shadow-xl backdrop-blur-md bg-white/90 text-slate-900 border-none hover:bg-white">
                     {t('about.fullProfile')} <ArrowRight size={14} />
                   </Link>
                 </div>
               </motion.div>
+
+              {/* Stats Boxes 2, 3, 4 */}
+              {[
+                { value: '3.33', label: t('about.stats.gpa'), sub: t('about.stats.gpaSub'), icon: GraduationCap },
+                { value: String(projects.length), label: t('about.stats.projects'), sub: t('about.stats.projectsSub'), icon: Zap },
+                { value: String(certificates.length), label: t('about.stats.certificates'), sub: t('about.stats.certificatesSub'), icon: Award },
+              ].map((stat, i) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 * i }}
+                  className="col-span-1 md:col-span-1 md:row-span-1 rounded-2xl p-5 flex flex-col justify-center relative overflow-hidden group"
+                  style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
+                >
+                  <stat.icon className="absolute -right-4 -bottom-4 w-24 h-24 text-slate-500 opacity-5 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-12" />
+                  <div className="relative z-10">
+                    <p style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '2rem', color: 'var(--accent)', lineHeight: 1 }}>
+                      {stat.value}
+                    </p>
+                    <p style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', marginTop: '0.5rem' }}>
+                      {stat.label}
+                    </p>
+                    <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
+                      {stat.sub}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>
       )}
 
       {/* ═══════════════════════════════════════
-          CONTACT SECTION
+          CONTACT & FOOTER (MERGED)
       ═══════════════════════════════════════ */}
-      <section id="contact" className="section-gap" style={{ background: 'var(--bg-subtle)', borderTop: '1px solid var(--border)' }}>
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="max-w-2xl mx-auto text-center">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-              <motion.span variants={fadeUp} className="section-label block mb-3">{t('contact.sectionLabel')}</motion.span>
-              <motion.h2 variants={fadeUp} className="text-section-heading mb-4" style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}>
-                {t('contact.title')}
-              </motion.h2>
-              <motion.p variants={fadeUp} className="text-base leading-relaxed mb-8" style={{ color: 'var(--text-secondary)' }}>
-                {t('contact.description', { role: t('contact.role') })}
-              </motion.p>
-              <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href={`mailto:${profile.email}`} className="btn btn-primary" style={{ fontSize: '0.95rem', padding: '0.75rem 1.75rem' }}>
-                  <Mail size={17} /> {t('contact.sendEmail')}
-                </a>
-                <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ fontSize: '0.95rem', padding: '0.75rem 1.75rem' }}>
-                  <Linkedin size={17} /> {t('contact.messageLinkedIn')}
-                </a>
-              </motion.div>
+      <section id="contact" className="py-20 relative overflow-hidden text-slate-50" style={{ background: 'var(--text-primary)' }}>
+        {/* Subtle decorative circles */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-3xl pointer-events-none translate-x-1/3 -translate-y-1/3" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-3xl pointer-events-none -translate-x-1/3 translate-y-1/3" />
 
-              <motion.div variants={fadeUp} className="flex items-center justify-center gap-5 mt-10 pt-8"
-                style={{ borderTop: '1px solid var(--border)' }}>
-                {[
-                  { icon: Github, href: profile.github, label: 'GitHub' },
-                  { icon: Linkedin, href: profile.linkedin, label: 'LinkedIn' },
-                  { icon: Mail, href: `mailto:${profile.email}`, label: 'Email' },
-                ].map(social => {
-                  const Icon = social.icon;
-                  return (
-                    <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer"
-                      className="flex flex-col items-center gap-1.5 group" style={{ color: 'var(--text-muted)' }}>
-                      <div className="p-3 rounded-xl transition-all"
-                        style={{ border: '1px solid var(--border)', background: 'var(--surface)' }}
-                        onMouseEnter={e => {
-                          (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-mid)';
-                          (e.currentTarget as HTMLElement).style.color = 'var(--accent-mid)';
-                        }}
-                        onMouseLeave={e => {
-                          (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)';
-                          (e.currentTarget as HTMLElement).style.color = 'var(--text-muted)';
-                        }}>
-                        <Icon size={18} />
-                      </div>
-                      <span style={{ fontSize: '0.7rem', fontFamily: 'var(--font-mono)' }}>{social.label}</span>
-                    </a>
-                  );
-                })}
-              </motion.div>
+        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="flex flex-col items-center">
+            <motion.h2 variants={fadeUp} className="text-4xl md:text-6xl font-black tracking-tight mb-6">
+              {t('contact.title')}
+            </motion.h2>
+            <motion.p variants={fadeUp} className="text-lg md:text-xl opacity-80 mb-10 max-w-2xl">
+              {t('contact.description', { role: t('contact.role') })}
+            </motion.p>
+            
+            <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4 mb-16">
+              <a href={`mailto:${profile.email}`} className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold transition-transform hover:-translate-y-1" style={{ background: 'var(--bg-base)', color: 'var(--text-primary)' }}>
+                <Mail size={18} /> {t('contact.sendEmail')}
+              </a>
             </motion.div>
-          </div>
+
+            {/* Enlarged Social Icons */}
+            <motion.div variants={fadeUp} className="flex gap-6 mb-16">
+              {[
+                { icon: Github, href: profile.github, label: 'GitHub' },
+                { icon: Linkedin, href: profile.linkedin, label: 'LinkedIn' },
+              ].map(social => (
+                <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer"
+                  className="p-5 rounded-full border border-slate-700 hover:bg-slate-800 transition-all hover:-translate-y-1 group"
+                  aria-label={social.label}>
+                  <social.icon size={24} className="opacity-70 group-hover:opacity-100 transition-opacity" />
+                </a>
+              ))}
+            </motion.div>
+
+            {/* Footer Bottom */}
+            <motion.div variants={fadeUp} className="w-full pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-sm opacity-60">
+              <p>
+                © 2025 <span className="font-semibold">{profile.full_name}</span>. {t('footer.builtWith')}
+              </p>
+              <div className="flex gap-6">
+                <Link href="/projects" className="hover:text-white transition-colors">{t('nav.projects')}</Link>
+                <Link href="/about" className="hover:text-white transition-colors">{t('nav.about')}</Link>
+              </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
-
-      {/* ═══════════════════════════════════════
-          FOOTER
-      ═══════════════════════════════════════ */}
-      <footer className="py-8" style={{ borderTop: '1px solid var(--border)', background: 'var(--bg-subtle)' }}>
-        <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
-            © 2025{' '}
-            <em style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', color: 'var(--text-secondary)' }}>
-              {profile.full_name}
-            </em>
-            {'. '}{t('footer.builtWith')}
-          </p>
-          <div className="flex items-center gap-5">
-            {[
-              { label: t('nav.projects'), href: '/projects' },
-              { label: t('nav.about'), href: '/about' },
-            ].map(link => (
-              <Link key={link.label} href={link.href} className="link-hover"
-                style={{ fontSize: '0.78rem', fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>
-                {link.label}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </footer>
 
       {/* ── SCROLL TO TOP ── */}
       <AnimatePresence>
