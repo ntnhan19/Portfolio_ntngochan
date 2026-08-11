@@ -1,10 +1,10 @@
 {
     "sectionLabel":  "04. Giới thiệu",
     "title":  "Về mình",
-    "bio1":  "Mình là sinh viên năm 4 chuyên ngành Kỹ thuật Phần mềm tại {university}, GPA 3.33/4.0, xây dựng ứng dụng web fullstack với PERN stack.",
-    "bio2":  "Công việc gần đây bao gồm {cinema} với Redis distributed locking, và {ai} sử dụng RAG pipeline với LangChain \u0026 Pinecone.",
+    "bio1":  "Mình là sinh viên năm 4 chuyên ngành Kỹ thuật Phần mềm tại {university}, GPA 3.33/4.0. Mình tập trung phát triển các ứng dụng Fullstack hiện đại, kết hợp kiến trúc hệ thống vững chắc và công nghệ AI để giải quyết các bài toán thực tế.",
+    "bio2":  "Các dự án gần đây của mình bao gồm {cinema} ứng dụng Redis distributed locking, và {ai} cho phép tìm kiếm ngữ nghĩa với pgvector \u0026 ChromaDB.",
     "cinema":  "hệ thống đặt vé rạp chiếu phim real-time",
-    "ai":  "trợ lý tài liệu AI",
+    "ai":  "nền tảng phân tích truyền thông AI",
     "fullProfile":  "Hồ sơ đầy đủ",
     "profilePreviewTitle":  "Xem thêm trên hồ sơ đầy đủ",
     "profilePreviewDesc":  "Ngoài dự án nổi bật — chứng chỉ, hoạt động ngoại khóa và toàn bộ kỹ năng.",

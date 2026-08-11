@@ -1,10 +1,10 @@
 {
     "sectionLabel":  "04. About",
     "title":  "About Me",
-    "bio1":  "I\u0027m a 4th-year Software Engineering student at {university} with a GPA of 3.33/4.0, building full-stack web applications using the PERN stack.",
-    "bio2":  "My recent work includes a {cinema} with Redis distributed locking, and an {ai} using RAG pipeline with LangChain \u0026 Pinecone.",
+    "bio1":  "I\u0027m a 4th-year Software Engineering student at {university} with a GPA of 3.33/4.0. I focus on developing modern Fullstack applications, blending robust system architecture with AI technologies to solve real-world problems.",
+    "bio2":  "My recent projects include a {cinema} utilizing Redis distributed locking, and an {ai} featuring semantic search with pgvector \u0026 ChromaDB.",
     "cinema":  "real-time cinema booking system",
-    "ai":  "AI-powered document assistant",
+    "ai":  "AI media analytics platform",
     "fullProfile":  "Full profile",
     "profilePreviewTitle":  "More on the full profile",
     "profilePreviewDesc":  "Beyond the project highlights — credentials, campus life, and the full skill breakdown.",
