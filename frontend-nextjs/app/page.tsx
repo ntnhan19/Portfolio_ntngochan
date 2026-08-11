@@ -319,7 +319,7 @@ export default function Portfolio() {
           </motion.div>
 
           {/* Card grid — 2 columns */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-24 lg:gap-x-12 lg:gap-y-32">
             {projects.map((project, idx) => (
               <ProjectCard
                 key={project.id}

@@ -37,27 +37,16 @@ export function ProjectCard({
                 href={`/projects/${project.slug}`}
                 tabIndex={-1}
                 aria-hidden="true"
-                className="w-full md:w-[55%] shrink-0 relative overflow-hidden rounded-xl shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-200 dark:border-slate-700"
+                className="w-full md:w-[55%] shrink-0 relative overflow-hidden rounded-xl shadow-sm border border-slate-200 dark:border-slate-800"
                 style={{ display: "block" }}
             >
-                <div className="w-full h-full bg-slate-50 dark:bg-slate-900 flex flex-col">
-                    {/* Browser Top Bar */}
-                    <div className="bg-slate-100 dark:bg-slate-800 px-4 py-3 flex items-center gap-2 border-b border-slate-200 dark:border-slate-700">
-                        <div className="w-3 h-3 rounded-full bg-red-400"></div>
-                        <div className="w-3 h-3 rounded-full bg-amber-400"></div>
-                        <div className="w-3 h-3 rounded-full bg-green-400"></div>
-                    </div>
-                    {/* The actual image */}
-                    <div className="relative w-full aspect-[4/3] md:aspect-video overflow-hidden bg-white dark:bg-black">
-                        <img
-                            src={project.image_url}
-                            alt={project.title}
-                            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", opacity: 0.9 }}
-                            className="transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-                            onError={e => { e.currentTarget.style.display = "none"; }}
-                        />
-                    </div>
-                </div>
+                <img
+                    src={project.image_url}
+                    alt={project.title}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top", opacity: 0.9 }}
+                    className="aspect-[4/3] md:aspect-video transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                    onError={e => { e.currentTarget.style.display = "none"; }}
+                />
                 {/* Year badge */}
                 <div style={{
                     position: "absolute", top: "1rem", right: "1rem",
@@ -71,7 +60,7 @@ export function ProjectCard({
             </Link>
 
             {/* Body */}
-            <div className="w-full md:w-[45%] flex flex-col justify-center" style={{ gap: "1rem" }}>
+            <div className="w-full md:w-[45%] flex flex-col justify-center h-full min-h-[300px]" style={{ gap: "1rem" }}>
                 {/* Meta: category · team · role */}
                 <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "wrap" }}>
                     {[
@@ -121,7 +110,7 @@ export function ProjectCard({
                 )}
 
                 {/* Tech badges (Gallery style) */}
-                <div style={{ marginTop: isFeatured ? "0.5rem" : "auto" }}>
+                <div style={{ marginTop: "auto" }}>
                     <p className="font-serif italic text-slate-500" style={{ fontSize: "0.95rem", lineHeight: 1.5 }}>
                         {project.tech_stack.join(', ')}
                     </p>
@@ -129,11 +118,11 @@ export function ProjectCard({
 
                 {/* Footer links */}
                 <div style={{
-                    display: "flex", alignItems: "center", justifyContent: "space-between",
-                    marginTop: isFeatured ? "1rem" : "1rem", paddingTop: "1rem",
+                    display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem",
+                    marginTop: "0", paddingTop: "1.5rem",
                     borderTop: "1px solid var(--border)",
                 }}>
-                    <div style={{ display: "flex", gap: "1rem" }}>
+                    <div className="flex flex-wrap gap-4">
                         {project.repo_url && (
                             <a href={project.repo_url} target="_blank" rel="noopener noreferrer"
                                 className="link-hover"
