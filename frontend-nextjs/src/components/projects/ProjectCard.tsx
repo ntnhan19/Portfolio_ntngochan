@@ -33,6 +33,10 @@ export function ProjectCard({
             className={`card group flex flex-col md:flex-row gap-0 items-center overflow-hidden ${isFeatured ? 'md:col-span-2' : 'col-span-1'}`}
         >
             {/* Thumbnail */}
+            <Link
+                href={`/projects/${project.slug}`}
+                tabIndex={-1}
+                aria-hidden="true"
                 className="w-full md:w-[55%] shrink-0 relative overflow-hidden"
                 style={{
                     display: "block",
