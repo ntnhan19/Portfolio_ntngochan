@@ -220,13 +220,14 @@ body::before {
 /* ─── CARD ───────────────────────────────────────────────── */
 .card {
   background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-2xl, 1.5rem);
-  transition: transform 0.7s ease-out, background 0.3s ease, border-color 0.3s ease;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.04);
 }
 
-[data-theme="light"] .card {
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); /* shadow-sm */
+[data-theme="dark"] .card {
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
 }
 
 /* Remove hover backgrounds/borders from standard cards in magazine layout */

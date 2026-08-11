@@ -307,7 +307,7 @@ export default function Portfolio() {
       {/* ═══════════════════════════════════════
           PROJECTS SECTION
       ═══════════════════════════════════════ */}
-      <section id="projects" className="section-gap" style={{ borderTop: '1px solid var(--border)', background: 'var(--bg-subtle)' }}>
+      <section id="projects" className="section-gap" style={{ background: 'var(--bg-subtle)' }}>
         <div className="max-w-6xl mx-auto px-6">
 
           {/* Header */}
@@ -350,7 +350,7 @@ export default function Portfolio() {
       {/* ═══════════════════════════════════════
           SKILLS SECTION
       ═══════════════════════════════════════ */}
-      <section id="skills" className="section-gap" style={{ background: 'var(--bg-base)', borderTop: '1px solid var(--border)' }}>
+      <section id="skills" className="section-gap" style={{ background: 'var(--bg-base)' }}>
         <div className="max-w-6xl mx-auto px-6">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }} variants={stagger} className="mb-10">
             <motion.span variants={fadeUp} className="section-label block mb-3">{t('skills.sectionLabel')}</motion.span>
@@ -533,7 +533,7 @@ export default function Portfolio() {
           ABOUT SECTION
       ═══════════════════════════════════════ */}
       {!isRecruiterMode && (
-        <section id="about" className="section-gap" style={{ background: 'var(--bg-subtle)', borderTop: '1px solid var(--border)' }}>
+        <section id="about" className="section-gap" style={{ background: 'var(--bg-subtle)' }}>
           <div className="max-w-6xl mx-auto px-6">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="mb-10">
               <motion.span variants={fadeUp} className="section-label block mb-3">{t('about.sectionLabel')}</motion.span>
@@ -545,8 +545,8 @@ export default function Portfolio() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 items-stretch auto-rows-fr">
               {/* Box 1: Bio */}
               <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} 
-                className="col-span-1 md:col-span-2 lg:col-span-2 lg:row-span-2 p-6 lg:p-8 rounded-2xl flex flex-col justify-center h-full relative overflow-hidden"
-                style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
+                className="card col-span-1 md:col-span-2 lg:col-span-2 lg:row-span-2 p-6 lg:p-8 flex flex-col justify-center h-full relative"
+              >
                 {/* Subtle watermark background */}
                 <div className="absolute -right-20 -top-20 opacity-[0.03] pointer-events-none">
                   <span style={{ fontFamily: 'var(--font-display)', fontSize: '20rem', fontWeight: 900 }}>&quot;</span>
@@ -604,8 +604,7 @@ export default function Portfolio() {
               {/* Box 2: Stats - GPA */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
-                className="col-span-1 lg:col-span-1 lg:row-span-1 rounded-2xl p-5 flex flex-col justify-center relative overflow-hidden group"
-                style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
+                className="card col-span-1 lg:col-span-1 lg:row-span-1 p-5 flex flex-col justify-center relative group"
               >
                 <GraduationCap className="absolute -right-4 -bottom-4 w-24 h-24 text-slate-500 opacity-5 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-12" />
                 <div className="relative z-10">
@@ -618,8 +617,7 @@ export default function Portfolio() {
               {/* Box 3: Stats - Projects */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
-                className="col-span-1 lg:col-span-1 lg:row-span-1 rounded-2xl p-5 flex flex-col justify-center relative overflow-hidden group"
-                style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
+                className="card col-span-1 lg:col-span-1 lg:row-span-1 p-5 flex flex-col justify-center relative group"
               >
                 <Zap className="absolute -right-4 -bottom-4 w-24 h-24 text-slate-500 opacity-5 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-12" />
                 <div className="relative z-10">
@@ -632,8 +630,7 @@ export default function Portfolio() {
               {/* Box 4: Avatar Image */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }}
-                className="col-span-1 md:col-span-2 lg:col-span-1 lg:row-span-1 h-full min-h-[250px] rounded-2xl overflow-hidden relative group"
-                style={{ border: '1px solid var(--border)' }}
+                className="card col-span-1 md:col-span-2 lg:col-span-1 lg:row-span-1 h-full min-h-[250px] relative group"
               >
                 <img
                   src={profile.avatar_about}
@@ -651,8 +648,7 @@ export default function Portfolio() {
               {/* Box 5: Stats - Certificates */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.4 }}
-                className="col-span-1 lg:col-span-1 lg:row-span-1 rounded-2xl p-5 flex flex-col justify-center relative overflow-hidden group"
-                style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
+                className="card col-span-1 lg:col-span-1 lg:row-span-1 p-5 flex flex-col justify-center relative group"
               >
                 <Award className="absolute -right-4 -bottom-4 w-24 h-24 text-slate-500 opacity-5 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-12" />
                 <div className="relative z-10">

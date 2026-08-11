@@ -37,7 +37,7 @@ export function ProjectCard({
                 href={`/projects/${project.slug}`}
                 tabIndex={-1}
                 aria-hidden="true"
-                className={`w-full shrink-0 relative overflow-hidden rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 ${isFeatured ? 'md:w-[55%]' : ''}`}
+                className={`card w-full shrink-0 relative ${isFeatured ? 'md:w-[55%]' : ''}`}
                 style={{ display: "block" }}
             >
                 <img
@@ -120,7 +120,6 @@ export function ProjectCard({
                 <div style={{
                     display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem",
                     marginTop: "auto", paddingTop: "1.5rem",
-                    borderTop: "1px solid var(--border)",
                 }}>
                     <div className="flex flex-wrap gap-4">
                         {project.repo_url && (
