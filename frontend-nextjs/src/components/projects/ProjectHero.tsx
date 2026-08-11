@@ -33,7 +33,7 @@ export default function ProjectHero({ project, t }: ProjectHeroProps) {
                             {t(`projectData.${project.slug}.category`)}
                         </span>
                         
-                        <h1 style={{ fontFamily: 'var(--font-body)', fontWeight: 800, fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', letterSpacing: '-0.03em', lineHeight: 1.1, color: 'var(--text-primary)', marginBottom: '1rem' }}>
+                        <h1 style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', letterSpacing: '-0.02em', lineHeight: 1.1, color: 'var(--text-primary)', marginBottom: '1rem' }}>
                             {project.title}
                         </h1>
                         
