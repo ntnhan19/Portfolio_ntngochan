@@ -329,12 +329,8 @@ export default function Portfolio() {
             </motion.h2>
           </motion.div>
 
-          {/* Card grid — 2 columns, auto-wraps as more projects are added */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '1.25rem',
-          }}>
+          {/* Card grid — 2 columns */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
             {projects.map((project, idx) => (
               <ProjectCard
                 key={project.id}
