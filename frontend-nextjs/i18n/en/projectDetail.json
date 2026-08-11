@@ -1,11 +1,9 @@
 {
-    "back":  "Back",
-    "meta":  {
-                 "duration":  "Duration",
-                 "team":  "Team",
-                 "stack":  "Stack",
-                 "membersCount": "{count} members",
-                 "techCount": "{count} technologies"
-             },
-    "highlights":  "Highlights"
+    "back": "Back",
+    "duration": "Duration",
+    "team": "Team",
+    "stack": "Stack",
+    "highlights": "Highlights",
+    "membersCount": "{n} members",
+    "techCount": "{n} technologies"
 }

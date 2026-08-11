@@ -73,7 +73,7 @@ export default function ProjectDetailClient({ slug, contentEn, contentVi }: { sl
                     onError={e => { e.currentTarget.style.display = 'none'; }}
                 />
                 {/* Gradient overlay — theme-aware */}
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--surface-overlay-0), var(--surface-overlay-1), var(--surface-overlay-2))' }} />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--bg-base) 0%, color-mix(in srgb, var(--bg-base) 40%, transparent) 50%, transparent 100%)' }} />
 
                 {/* Hero content */}
                 <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '2.5rem 1.5rem' }}>
@@ -138,9 +138,9 @@ export default function ProjectDetailClient({ slug, contentEn, contentVi }: { sl
                     borderRadius: 'var(--radius-lg)',
                 }}>
                     {[
-                        { icon: <Clock size={13} />, label: t('projectDetail.meta.duration'), value: t(`projectData.${project.slug}.duration`) },
-                        { icon: <Users size={13} />, label: t('projectDetail.meta.team'), value: t('projectDetail.meta.membersCount', { count: String(project.team_size) }) },
-                        { icon: <Code2 size={13} />, label: t('projectDetail.meta.stack'), value: t('projectDetail.meta.techCount', { count: String(project.tech_stack.length) }) },
+                        { icon: <Clock size={13} />, label: t('projectDetail.duration'), value: t(`projectData.${project.slug}.duration`) },
+                        { icon: <Users size={13} />, label: t('projectDetail.team'), value: t('projectDetail.membersCount', { n: String(project.team_size) }) },
+                        { icon: <Code2 size={13} />, label: t('projectDetail.stack'), value: t('projectDetail.techCount', { n: String(project.tech_stack.length) }) },
                     ].map(item => (
                         <div key={item.label} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                             <span style={{ color: 'var(--text-muted)' }}>{item.icon}</span>
@@ -152,7 +152,7 @@ export default function ProjectDetailClient({ slug, contentEn, contentVi }: { sl
 
                 {/* Tech stack */}
                 <div style={{ marginBottom: '2rem' }}>
-                    <p className="section-label" style={{ marginBottom: '0.75rem' }}>Tech Stack</p>
+                    <p className="section-label" style={{ marginBottom: '0.75rem' }}>{t('projectDetail.stack')}</p>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
                         {project.tech_stack.map(tech => (
                             <span key={tech} className="badge">{tech}</span>

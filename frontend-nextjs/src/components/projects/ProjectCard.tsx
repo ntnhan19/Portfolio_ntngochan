@@ -6,6 +6,7 @@ import { Github, ExternalLink, ArrowRight, Users } from "lucide-react";
 import { motion } from "framer-motion";
 import type { Project } from "@/src/data/staticData";
 import { useLocale } from "@/src/context/LocaleContext";
+import { useRecruiterMode } from "@/src/context/RecruiterModeContext";
 
 interface ProjectCardProps {
     project: Project;
@@ -19,6 +20,7 @@ export function ProjectCard({
     variant = "default",
 }: ProjectCardProps) {
     const { t } = useLocale();
+    const { isRecruiterMode } = useRecruiterMode();
     const isFeatured = variant === "featured";
     const MAX_TAGS = isFeatured ? 5 : 4;
 
@@ -80,7 +82,7 @@ export function ProjectCard({
                 <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", flexWrap: "wrap" }}>
                     {[
                         t(`projectData.${project.slug}.category`),
-                        <><Users size={10} /> {t('projectDetail.meta.membersCount', { count: String(project.team_size) })}</>,
+                        <><Users size={10} /> {t('projectDetail.membersCount', { n: String(project.team_size) })}</>,
                         t(`projectData.${project.slug}.role`),
                     ].map((item, i) => (
                         <span key={i} style={{ display: "flex", alignItems: "center", gap: "3px", fontFamily: "var(--font-mono)", fontSize: "0.67rem", color: "var(--text-muted)", letterSpacing: "0.08em", textTransform: "uppercase" }}>
@@ -113,7 +115,7 @@ export function ProjectCard({
                     </p>
                 </div>
 
-                {isFeatured && (
+                {isFeatured && !isRecruiterMode && (
                     <p style={{
                         fontFamily: "var(--font-body)", fontSize: "0.82rem",
                         color: "var(--text-secondary)", lineHeight: 1.65,

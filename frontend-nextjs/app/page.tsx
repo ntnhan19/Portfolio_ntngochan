@@ -9,12 +9,13 @@ import {
   Mail, Github, Linkedin, ArrowUp, Menu, X,
   ExternalLink, ArrowRight,
   Database, Server, Zap, Globe, GitBranch, Check,
-  Award, GraduationCap, Heart
+  Award, GraduationCap, Heart, Briefcase
 } from 'lucide-react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { usePortfolioTheme } from '@/src/hooks/usePortfolioTheme';
+import { useRecruiterMode } from '@/src/context/RecruiterModeContext';
 
 /* ─── ANIMATION VARIANTS ──────────────────────────────── */
 const fadeUp = {
@@ -47,7 +48,8 @@ export default function Portfolio() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const { theme, toggleTheme } = usePortfolioTheme();
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
+  const { isRecruiterMode, toggleRecruiterMode } = useRecruiterMode();
   const { scrollYProgress } = useScroll();
   const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
@@ -103,7 +105,7 @@ export default function Portfolio() {
             onClick={() => scrollTo('#home')}
             style={{ fontFamily: 'var(--font-display)', fontWeight: 800, color: 'var(--text-primary)', fontSize: '1.2rem', letterSpacing: '-0.02em' }}
           >
-            HN<span style={{ color: 'var(--text-muted)' }}>.</span>
+            {profile.navbar_brand}
           </button>
 
           {/* Desktop nav */}
@@ -132,6 +134,19 @@ export default function Portfolio() {
             <div className="hidden md:flex">
               <LanguageToggle />
             </div>
+            <button
+              onClick={toggleRecruiterMode}
+              className="p-2 rounded-md transition-all flex items-center gap-1.5"
+              style={{
+                color: isRecruiterMode ? 'var(--bg-base)' : 'var(--text-secondary)',
+                background: isRecruiterMode ? 'var(--text-primary)' : 'transparent',
+                fontSize: '0.8rem', fontWeight: 600
+              }}
+              title="Toggle Recruiter View"
+            >
+              <Briefcase size={16} />
+              <span className="hidden md:inline">{isRecruiterMode ? 'Recruiter View' : 'Recruiter View'}</span>
+            </button>
             <ThemeToggle theme={theme} onToggle={toggleTheme} />
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -204,7 +219,7 @@ export default function Portfolio() {
                   {t('hero.greeting')}
                 </p>
                 <h1 className="text-hero" style={{ color: 'var(--text-primary)' }}>
-                  {profile.full_name}
+                  {locale === 'vi' ? profile.display_name_vi : profile.display_name_en}
                 </h1>
               </motion.div>
 
@@ -221,11 +236,13 @@ export default function Portfolio() {
               </motion.div>
 
               {/* Description */}
-              <motion.div variants={fadeUp} custom={0.15}>
-                <p style={{ fontSize: '1rem', lineHeight: 1.75, color: 'var(--text-secondary)', maxWidth: '520px' }}>
-                  {t('hero.description')}
-                </p>
-              </motion.div>
+              {!isRecruiterMode && (
+                <motion.div variants={fadeUp} custom={0.15}>
+                  <p style={{ fontSize: '1rem', lineHeight: 1.75, color: 'var(--text-secondary)', maxWidth: '520px' }}>
+                    {t('hero.description')}
+                  </p>
+                </motion.div>
+              )}
 
               {/* CTAs */}
               <motion.div variants={fadeUp} custom={0.2} className="flex flex-wrap items-center gap-3 pt-1">
@@ -390,282 +407,288 @@ export default function Portfolio() {
           </motion.div>
 
           {/* 4 domain groups with core vs familiar hierarchy */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {homepageSkillGroups.map((group, idx) => {
-              const Icon = skillIcons[group.key as keyof typeof skillIcons];
-              return (
-                <motion.div
-                  key={group.key}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: idx * 0.08 }}
-                  className="card p-5 flex flex-col gap-4"
-                >
-                  <div className="flex items-center gap-3">
-                    <div
-                      className="p-2 rounded-lg"
-                      style={{
-                        background: `color-mix(in srgb, var(${group.colorVar}) 12%, transparent)`,
-                        border: `1px solid color-mix(in srgb, var(${group.colorVar}) 25%, transparent)`,
-                      }}
+          {!isRecruiterMode && (
+            <>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                {homepageSkillGroups.map((group, idx) => {
+                  const Icon = skillIcons[group.key as keyof typeof skillIcons];
+                  return (
+                    <motion.div
+                      key={group.key}
+                      initial={{ opacity: 0, y: 24 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: idx * 0.08 }}
+                      className="card p-5 flex flex-col gap-4"
                     >
-                      <Icon size={18} style={{ color: `var(${group.colorVar})` }} />
+                      <div className="flex items-center gap-3">
+                        <div
+                          className="p-2 rounded-lg"
+                          style={{
+                            background: `color-mix(in srgb, var(${group.colorVar}) 12%, transparent)`,
+                            border: `1px solid color-mix(in srgb, var(${group.colorVar}) 25%, transparent)`,
+                          }}
+                        >
+                          <Icon size={18} style={{ color: `var(${group.colorVar})` }} />
+                        </div>
+                        <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-primary)' }}>
+                          {group.title}
+                        </span>
+                      </div>
+
+                      <div className="flex flex-col gap-3">
+                        <div>
+                          <p style={{ fontSize: '0.65rem', fontFamily: 'var(--font-mono)', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>
+                            {t('skills.coreLabel')}
+                          </p>
+                          <ul className="flex flex-col gap-2 list-none m-0 p-0">
+                            {group.core.map((skill) => (
+                              <li key={skill} className="flex items-center gap-2">
+                                <Check size={14} strokeWidth={2.5} style={{ color: `var(${group.colorVar})`, flexShrink: 0 }} />
+                                <span style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)', lineHeight: 1.35 }}>
+                                  {skill}
+                                </span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        {group.secondary.length > 0 && (
+                          <div style={{ borderTop: '1px solid var(--border)', paddingTop: '0.75rem' }}>
+                            <p style={{ fontSize: '0.65rem', fontFamily: 'var(--font-mono)', fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '0.4rem' }}>
+                              {t('skills.familiarLabel')}
+                            </p>
+                            <ul className="flex flex-col gap-1.5 list-none m-0 p-0">
+                              {group.secondary.map((skill) => (
+                                <li key={skill} className="flex items-center gap-2">
+                                  <span style={{ width: 3, height: 3, borderRadius: '50%', background: 'var(--text-muted)', flexShrink: 0, opacity: 0.5 }} />
+                                  <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: 1.35 }}>
+                                    {skill}
+                                  </span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              {/* DevOps — visible on homepage + link to full breakdown on /about */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="mt-5 p-5 rounded-xl flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+                style={{ background: 'var(--bg-subtle)', border: '1px solid var(--border)' }}
+              >
+                <div className="flex flex-col md:flex-row md:items-start gap-4 flex-1 min-w-0">
+                  <div className="flex items-center gap-3 shrink-0">
+                    <div className="p-2 rounded-lg" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
+                      <GitBranch size={18} style={{ color: 'var(--text-secondary)' }} />
                     </div>
                     <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-primary)' }}>
-                      {group.title}
+                      {devopsSkillGroup.title}
                     </span>
                   </div>
-
-                  <div className="flex flex-col gap-3">
-                    <div>
-                      <p style={{ fontSize: '0.65rem', fontFamily: 'var(--font-mono)', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>
-                        {t('skills.coreLabel')}
-                      </p>
-                      <ul className="flex flex-col gap-2 list-none m-0 p-0">
-                        {group.core.map((skill) => (
-                          <li key={skill} className="flex items-center gap-2">
-                            <Check size={14} strokeWidth={2.5} style={{ color: `var(${group.colorVar})`, flexShrink: 0 }} />
-                            <span style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--text-primary)', lineHeight: 1.35 }}>
-                              {skill}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {group.secondary.length > 0 && (
-                      <div style={{ borderTop: '1px solid var(--border)', paddingTop: '0.75rem' }}>
-                        <p style={{ fontSize: '0.65rem', fontFamily: 'var(--font-mono)', fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '0.4rem' }}>
-                          {t('skills.familiarLabel')}
-                        </p>
-                        <ul className="flex flex-col gap-1.5 list-none m-0 p-0">
-                          {group.secondary.map((skill) => (
-                            <li key={skill} className="flex items-center gap-2">
-                              <span style={{ width: 3, height: 3, borderRadius: '50%', background: 'var(--text-muted)', flexShrink: 0, opacity: 0.5 }} />
-                              <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: 1.35 }}>
-                                {skill}
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+                    {devopsSkillGroup.core.map((skill) => (
+                      <span key={skill} className="inline-flex items-center gap-1.5 text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
+                        <Check size={13} strokeWidth={2.5} style={{ color: 'var(--success)' }} />
+                        {skill}
+                      </span>
+                    ))}
+                    {devopsSkillGroup.secondary.map((skill) => (
+                      <span key={skill} className="text-sm" style={{ color: 'var(--text-muted)' }}>
+                        {skill}
+                      </span>
+                    ))}
                   </div>
-                </motion.div>
-              );
-            })}
-          </div>
-
-          {/* DevOps — visible on homepage + link to full breakdown on /about */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mt-5 p-5 rounded-xl flex flex-col md:flex-row md:items-center md:justify-between gap-4"
-            style={{ background: 'var(--bg-subtle)', border: '1px solid var(--border)' }}
-          >
-            <div className="flex flex-col md:flex-row md:items-start gap-4 flex-1 min-w-0">
-              <div className="flex items-center gap-3 shrink-0">
-                <div className="p-2 rounded-lg" style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}>
-                  <GitBranch size={18} style={{ color: 'var(--text-secondary)' }} />
                 </div>
-                <span style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-primary)' }}>
-                  {devopsSkillGroup.title}
-                </span>
-              </div>
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-                {devopsSkillGroup.core.map((skill) => (
-                  <span key={skill} className="inline-flex items-center gap-1.5 text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
-                    <Check size={13} strokeWidth={2.5} style={{ color: 'var(--success)' }} />
-                    {skill}
-                  </span>
-                ))}
-                {devopsSkillGroup.secondary.map((skill) => (
-                  <span key={skill} className="text-sm" style={{ color: 'var(--text-muted)' }}>
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-            <Link href="/about#skills" className="btn btn-secondary text-sm shrink-0 self-start md:self-center">
-              {t('skills.viewFullBreakdown')} <ArrowRight size={14} />
-            </Link>
-          </motion.div>
+                <Link href="/about#skills" className="btn btn-secondary text-sm shrink-0 self-start md:self-center">
+                  {t('skills.viewFullBreakdown')} <ArrowRight size={14} />
+                </Link>
+              </motion.div>
 
-          {/* Currently learning */}
-          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-            className="mt-8 p-5 rounded-xl flex flex-wrap items-center gap-3"
-            style={{ background: 'var(--accent-light)', border: '1px solid var(--accent-border)' }}>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', color: 'var(--accent)' }}>
-              {t('skills.currentlyLearning')}
-            </span>
-            {['NestJS', 'Microservices Architecture', 'Docker Compose', 'System Design'].map(item => (
-              <span key={item} className="badge" style={{ color: 'var(--accent)', borderColor: 'var(--accent-border)', background: 'transparent' }}>
-                {item}
-              </span>
-            ))}
-          </motion.div>
+              {/* Currently learning */}
+              <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+                className="mt-8 p-5 rounded-xl flex flex-wrap items-center gap-3"
+                style={{ background: 'var(--accent-light)', border: '1px solid var(--accent-border)' }}>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', color: 'var(--accent)' }}>
+                  {t('skills.currentlyLearning')}
+                </span>
+                {['NestJS', 'Microservices Architecture', 'Docker Compose', 'System Design'].map(item => (
+                  <span key={item} className="badge" style={{ color: 'var(--accent)', borderColor: 'var(--accent-border)', background: 'transparent' }}>
+                    {item}
+                  </span>
+                ))}
+              </motion.div>
+            </>
+          )}
         </div>
       </section>
 
       {/* ═══════════════════════════════════════
           ABOUT SECTION
       ═══════════════════════════════════════ */}
-      <section id="about" className="section-gap" style={{ background: 'var(--bg-subtle)', borderTop: '1px solid var(--border)' }}>
-        <div className="max-w-6xl mx-auto px-6">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="mb-10">
-            <motion.span variants={fadeUp} className="section-label block mb-3">{t('about.sectionLabel')}</motion.span>
-            <motion.h2 variants={fadeUp} className="text-section-heading" style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}>
-              {t('about.title')}
-            </motion.h2>
-          </motion.div>
-
-          <div className="grid lg:grid-cols-[1fr_minmax(280px,360px)] gap-10 lg:gap-14 items-start">
-            {/* Left: bio + social proof stats */}
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
-              <motion.p variants={fadeUp} className="text-base leading-relaxed mb-4" style={{ color: 'var(--text-secondary)' }}>
-                {t('about.bio1').split('{university}').map((part, i) =>
-                  i === 0 ? part : (
-                    <span key={i}><strong style={{ color: 'var(--text-primary)' }}>HUTECH</strong>{part}</span>
-                  )
-                )}
-              </motion.p>
-              <motion.p variants={fadeUp} className="text-base leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>
-                {t('about.bio2')
-                  .split(/\{cinema\}|\{ai\}/)
-                  .map((part, i) => {
-                    if (i === 1) return <span key={i}><strong style={{ color: 'var(--text-primary)' }}>{t('about.cinema')}</strong>{part}</span>;
-                    if (i === 2) return <span key={i}><strong style={{ color: 'var(--text-primary)' }}>{t('about.ai')}</strong>{part}</span>;
-                    return part;
-                  })
-                }
-              </motion.p>
-
-              {/* Mini stats — social proof */}
-              <motion.div variants={fadeUp} className="grid grid-cols-3 gap-3 mb-6">
-                {[
-                  { value: '3.33', label: t('about.stats.gpa'), sub: t('about.stats.gpaSub') },
-                  { value: String(projects.length), label: t('about.stats.projects'), sub: t('about.stats.projectsSub') },
-                  { value: String(certificates.length), label: t('about.stats.certificates'), sub: t('about.stats.certificatesSub') },
-                ].map((stat) => (
-                  <div
-                    key={stat.label}
-                    className="rounded-xl px-3 py-3 text-center"
-                    style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
-                  >
-                    <p style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '1.35rem', color: 'var(--accent)', lineHeight: 1.1 }}>
-                      {stat.value}
-                    </p>
-                    <p style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--text-primary)', marginTop: '0.25rem' }}>
-                      {stat.label}
-                    </p>
-                    <p style={{ fontSize: '0.65rem', color: 'var(--text-muted)', marginTop: '0.15rem', lineHeight: 1.3 }}>
-                      {stat.sub}
-                    </p>
-                  </div>
-                ))}
-              </motion.div>
-
-              {/* Project anchors — visual tie to bio mentions */}
-              <motion.div variants={fadeUp} className="flex flex-wrap gap-2">
-                {projects.filter((p) => p.featured).map((p) => (
-                  <Link
-                    key={p.id}
-                    href={`/projects/${p.slug}`}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-colors"
-                    style={{ background: 'var(--bg-base)', border: '1px solid var(--border)', color: 'var(--text-secondary)' }}
-                  >
-                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--success)' }} />
-                    {p.title}
-                  </Link>
-                ))}
-              </motion.div>
+      {!isRecruiterMode && (
+        <section id="about" className="section-gap" style={{ background: 'var(--bg-subtle)', borderTop: '1px solid var(--border)' }}>
+          <div className="max-w-6xl mx-auto px-6">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} className="mb-10">
+              <motion.span variants={fadeUp} className="section-label block mb-3">{t('about.sectionLabel')}</motion.span>
+              <motion.h2 variants={fadeUp} className="text-section-heading" style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}>
+                {t('about.title')}
+              </motion.h2>
             </motion.div>
 
-            {/* Right: avatar + cert preview + compelling CTA */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-col gap-4"
-            >
-              {/* Visual anchor */}
-              <div
-                className="rounded-2xl overflow-hidden"
-                style={{ border: '1px solid var(--border)', boxShadow: '0 16px 48px rgba(26,58,92,0.1)' }}
-              >
-                {/* Image container */}
-                <div className="aspect-[4/3] relative">
-                  <img
-                    src={profile.avatar_about}
-                    alt={profile.full_name}
-                    className="w-full h-full object-cover object-center"
-                  />
-                  <div
-                    className="absolute inset-0"
-                    style={{ background: 'linear-gradient(to top, rgba(15,28,46,0.55) 0%, transparent 50%)' }}
-                  />
-                </div>
-                
-                {/* Certificate thumb strip — below image */}
-                <div className="px-4 py-3 flex items-center gap-2" style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)' }}>
-                  {certificates.slice(0, 3).map((cert) => (
+            <div className="grid lg:grid-cols-[1fr_minmax(280px,360px)] gap-10 lg:gap-14 items-start">
+              {/* Left: bio + social proof stats */}
+              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
+                <motion.p variants={fadeUp} className="text-base leading-relaxed mb-4" style={{ color: 'var(--text-secondary)' }}>
+                  {t('about.bio1').split('{university}').map((part, i) =>
+                    i === 0 ? part : (
+                      <span key={i}><strong style={{ color: 'var(--text-primary)' }}>HUTECH</strong>{part}</span>
+                    )
+                  )}
+                </motion.p>
+                <motion.p variants={fadeUp} className="text-base leading-relaxed mb-6" style={{ color: 'var(--text-secondary)' }}>
+                  {t('about.bio2')
+                    .split(/\{cinema\}|\{ai\}/)
+                    .map((part, i) => {
+                      if (i === 1) return <span key={i}><strong style={{ color: 'var(--text-primary)' }}>{t('about.cinema')}</strong>{part}</span>;
+                      if (i === 2) return <span key={i}><strong style={{ color: 'var(--text-primary)' }}>{t('about.ai')}</strong>{part}</span>;
+                      return part;
+                    })
+                  }
+                </motion.p>
+
+                {/* Mini stats — social proof */}
+                <motion.div variants={fadeUp} className="grid grid-cols-3 gap-3 mb-6">
+                  {[
+                    { value: '3.33', label: t('about.stats.gpa'), sub: t('about.stats.gpaSub') },
+                    { value: String(projects.length), label: t('about.stats.projects'), sub: t('about.stats.projectsSub') },
+                    { value: String(certificates.length), label: t('about.stats.certificates'), sub: t('about.stats.certificatesSub') },
+                  ].map((stat) => (
                     <div
-                      key={cert.id}
-                      className="rounded-md overflow-hidden flex-1"
-                      style={{
-                        border: '1px solid var(--border)',
-                        boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
-                        aspectRatio: '4/3',
-                        background: 'var(--surface)',
-                      }}
+                      key={stat.label}
+                      className="rounded-xl px-3 py-3 text-center"
+                      style={{ background: 'var(--surface)', border: '1px solid var(--border)' }}
                     >
-                      <img src={cert.image_url} alt={cert.name} title={cert.name} className="w-full h-full object-cover" />
+                      <p style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '1.35rem', color: 'var(--accent)', lineHeight: 1.1 }}>
+                        {stat.value}
+                      </p>
+                      <p style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--text-primary)', marginTop: '0.25rem' }}>
+                        {stat.label}
+                      </p>
+                      <p style={{ fontSize: '0.65rem', color: 'var(--text-muted)', marginTop: '0.15rem', lineHeight: 1.3 }}>
+                        {stat.sub}
+                      </p>
                     </div>
                   ))}
-                </div>
-              </div>
+                </motion.div>
 
-              {/* Full profile CTA with preview */}
-              <div
-                className="card p-5 flex flex-col gap-4"
-                style={{ background: 'var(--surface)' }}
-              >
-                <div>
-                  <p style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1rem', color: 'var(--text-primary)', marginBottom: '0.35rem' }}>
-                    {t('about.profilePreviewTitle')}
-                  </p>
-                  <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
-                    {t('about.profilePreviewDesc')}
-                  </p>
-                </div>
-                <ul className="flex flex-col gap-2.5 list-none m-0 p-0">
-                  {[
-                    { icon: Award, text: t('about.profilePreviewCerts', { count: String(certificates.length) }) },
-                    { icon: Heart, text: t('about.profilePreviewActivities') },
-                    { icon: GraduationCap, text: t('about.profilePreviewEducation') },
-                  ].map(({ icon: Icon, text }) => (
-                    <li key={text} className="flex items-center gap-2.5 text-sm" style={{ color: 'var(--text-secondary)' }}>
-                      <span
-                        className="flex items-center justify-center shrink-0 rounded-lg"
-                        style={{ width: 28, height: 28, background: 'var(--accent-light)', border: '1px solid var(--accent-border)' }}
-                      >
-                        <Icon size={14} style={{ color: 'var(--accent)' }} />
-                      </span>
-                      {text}
-                    </li>
+                {/* Project anchors — visual tie to bio mentions */}
+                <motion.div variants={fadeUp} className="flex flex-wrap gap-2">
+                  {projects.filter((p) => p.featured).map((p) => (
+                    <Link
+                      key={p.id}
+                      href={`/projects/${p.slug}`}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-colors"
+                      style={{ background: 'var(--bg-base)', border: '1px solid var(--border)', color: 'var(--text-secondary)' }}
+                    >
+                      <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--success)' }} />
+                      {p.title}
+                    </Link>
                   ))}
-                </ul>
-                <Link href="/about" className="btn btn-primary w-full justify-center text-sm">
-                  {t('about.fullProfile')} <ArrowRight size={14} />
-                </Link>
-              </div>
-            </motion.div>
+                </motion.div>
+              </motion.div>
+
+              {/* Right: avatar + cert preview + compelling CTA */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                className="flex flex-col gap-4"
+              >
+                {/* Visual anchor */}
+                <div
+                  className="rounded-2xl overflow-hidden"
+                  style={{ border: '1px solid var(--border)', boxShadow: '0 16px 48px rgba(26,58,92,0.1)' }}
+                >
+                  {/* Image container */}
+                  <div className="aspect-[4/3] relative">
+                    <img
+                      src={profile.avatar_about}
+                      alt={profile.full_name}
+                      className="w-full h-full object-cover object-center"
+                    />
+                    <div
+                      className="absolute inset-0"
+                      style={{ background: 'linear-gradient(to top, rgba(15,28,46,0.55) 0%, transparent 50%)' }}
+                    />
+                  </div>
+                  
+                  {/* Certificate thumb strip — below image */}
+                  <div className="px-4 py-3 flex items-center gap-2" style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)' }}>
+                    {certificates.slice(0, 3).map((cert) => (
+                      <div
+                        key={cert.id}
+                        className="rounded-md overflow-hidden flex-1"
+                        style={{
+                          border: '1px solid var(--border)',
+                          boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+                          aspectRatio: '4/3',
+                          background: 'var(--surface)',
+                        }}
+                      >
+                        <img src={cert.image_url} alt={cert.name} title={cert.name} className="w-full h-full object-cover" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Full profile CTA with preview */}
+                <div
+                  className="card p-5 flex flex-col gap-4"
+                  style={{ background: 'var(--surface)' }}
+                >
+                  <div>
+                    <p style={{ fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: '1rem', color: 'var(--text-primary)', marginBottom: '0.35rem' }}>
+                      {t('about.profilePreviewTitle')}
+                    </p>
+                    <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
+                      {t('about.profilePreviewDesc')}
+                    </p>
+                  </div>
+                  <ul className="flex flex-col gap-2.5 list-none m-0 p-0">
+                    {[
+                      { icon: Award, text: t('about.profilePreviewCerts', { count: String(certificates.length) }) },
+                      { icon: Heart, text: t('about.profilePreviewActivities') },
+                      { icon: GraduationCap, text: t('about.profilePreviewEducation') },
+                    ].map(({ icon: Icon, text }) => (
+                      <li key={text} className="flex items-center gap-2.5 text-sm" style={{ color: 'var(--text-secondary)' }}>
+                        <span
+                          className="flex items-center justify-center shrink-0 rounded-lg"
+                          style={{ width: 28, height: 28, background: 'var(--accent-light)', border: '1px solid var(--accent-border)' }}
+                        >
+                          <Icon size={14} style={{ color: 'var(--accent)' }} />
+                        </span>
+                        {text}
+                      </li>
+                    ))}
+                  </ul>
+                  <Link href="/about" className="btn btn-primary w-full justify-center text-sm">
+                    {t('about.fullProfile')} <ArrowRight size={14} />
+                  </Link>
+                </div>
+              </motion.div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ═══════════════════════════════════════
           CONTACT SECTION

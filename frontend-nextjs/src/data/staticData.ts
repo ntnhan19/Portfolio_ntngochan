@@ -84,7 +84,10 @@ export const coreStackSkills = [
 // ─── PROFILE ──────────────────────────────────────────────
 
 export const profile = {
-  full_name: "Han Nguyen",
+  full_name: "Nguyễn Trần Ngọc Hân",
+  display_name_vi: "Ngọc Hân",
+  display_name_en: "Han Nguyen",
+  navbar_brand: "nghan.",
   title: "Fullstack Developer Intern — PERN · React.js · FastAPI",
   bio: `Year 4 Software Engineering student at HUTECH with a solid foundation in Backend Development, built through academic projects and self-study.
 

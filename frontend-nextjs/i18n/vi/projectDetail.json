@@ -1,11 +1,9 @@
 {
-    "back":  "Quay lại",
-    "meta":  {
-                 "duration":  "Thời gian",
-                 "team":  "Team",
-                 "stack":  "Stack",
-                 "membersCount": "{count} thành viên",
-                 "techCount": "{count} công nghệ"
-             },
-    "highlights":  "Điểm nổi bật"
+    "back": "Quay lại",
+    "duration": "Thời gian",
+    "team": "Team",
+    "stack": "Stack",
+    "highlights": "Điểm nổi bật",
+    "membersCount": "{n} thành viên",
+    "techCount": "{n} công nghệ"
 }

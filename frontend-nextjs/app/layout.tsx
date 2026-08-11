@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { LocaleProvider } from '@/src/context/LocaleContext';
+import { RecruiterModeProvider } from '@/src/context/RecruiterModeContext';
 
 const basePath =
   process.env.NODE_ENV === "production" ? "/Portfolio_ntngochan" : "";
@@ -208,7 +209,9 @@ export default function RootLayout({
         </div>
 
         <LocaleProvider>
-          {children}
+          <RecruiterModeProvider>
+            {children}
+          </RecruiterModeProvider>
         </LocaleProvider>
       </body>
     </html>
