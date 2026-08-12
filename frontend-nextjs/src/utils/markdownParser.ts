@@ -44,7 +44,7 @@ export function parseProjectMarkdown(content: string): ProjectSections {
 
     // Parse list of features formatted as "**Title:** Description" or "**Title** Description"
     const features: { title: string; description: string }[] = [];
-    const featureMatches = featuresStr.split(/(?=\*\*.*?\*\*)/);
+    const featureMatches = featuresStr.split(/(?=^\*\*.*?\*\*)/m);
     featureMatches.forEach((match) => {
         const trimmed = match.trim();
         if (!trimmed) return;
@@ -65,7 +65,7 @@ export function parseProjectMarkdown(content: string): ProjectSections {
 
     // Parse list of challenges formatted as "**Title:** Description" or "**Title** Description"
     const challenges: { title: string; description: string }[] = [];
-    const challengeMatches = challengesStr.split(/(?=\*\*.*?\*\*)/);
+    const challengeMatches = challengesStr.split(/(?=^\*\*.*?\*\*)/m);
     challengeMatches.forEach((match) => {
         const trimmed = match.trim();
         if (!trimmed) return;
@@ -81,7 +81,7 @@ export function parseProjectMarkdown(content: string): ProjectSections {
     // Parse the decisions string into an array of { title, description }
     // Usually formatted as "**Title:** Description" or "**Title** Description"
     const decisions: { title: string; description: string }[] = [];
-    const decisionMatches = decisionsStr.split(/(?=\*\*.*?\*\*)/);
+    const decisionMatches = decisionsStr.split(/(?=^\*\*.*?\*\*)/m);
 
     decisionMatches.forEach((match) => {
         const trimmed = match.trim();
