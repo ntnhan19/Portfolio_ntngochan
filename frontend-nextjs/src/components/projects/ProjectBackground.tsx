@@ -8,10 +8,11 @@ import type { Project } from '@/src/data/staticData';
 interface ProjectBackgroundProps {
     project: Project;
     backgroundText: string;
+    locale: string;
     t: (key: string) => string;
 }
 
-export default function ProjectBackground({ project, backgroundText, t }: ProjectBackgroundProps) {
+export default function ProjectBackground({ project, backgroundText, locale, t }: ProjectBackgroundProps) {
     if (!backgroundText && project.highlights.length === 0) return null;
 
     return (
@@ -27,10 +28,9 @@ export default function ProjectBackground({ project, backgroundText, t }: Projec
                         transition={{ duration: 0.6 }}
                     >
                         <h2 style={{ fontFamily: 'var(--font-display)', fontSize: '2rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '1.5rem' }}>
-                            {t('aboutPage.timeline.title') === 'aboutPage.timeline.title' ? 'Background' : 'Bối cảnh'}
-                            {/* Note: since 'Bối cảnh' label wasn't specified in requirements, we hardcode English/Vietnamese based on locale check if needed, or just let i18n handle it if added. For now, we'll just check if t('projectDetail.highlights') is 'Điểm nổi bật' to know it's Vietnamese. */}
+                            {locale === 'vi' ? 'Bối cảnh' : 'Background'}
                         </h2>
-                        <article className="prose" style={{ fontSize: '1.05rem', lineHeight: 1.8, color: 'var(--text-secondary)' }}>
+                        <article className="prose max-w-none" style={{ fontSize: '1.05rem', lineHeight: 1.8, color: 'var(--text-secondary)' }}>
                             <ReactMarkdown>{backgroundText}</ReactMarkdown>
                         </article>
                     </motion.div>

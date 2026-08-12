@@ -67,7 +67,7 @@ export default function ProjectArchitecture({ architectureText, locale, slug }: 
 
                     {/* Description Text */}
                     <div className="max-w-3xl mx-auto">
-                        <article className="prose" style={{ fontSize: '1.05rem', lineHeight: 1.8, color: 'var(--text-secondary)' }}>
+                        <article className="prose max-w-none" style={{ fontSize: '1.05rem', lineHeight: 1.8, color: 'var(--text-secondary)' }}>
                             <ReactMarkdown>{architectureText}</ReactMarkdown>
                         </article>
                     </div>

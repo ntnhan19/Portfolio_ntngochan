@@ -37,7 +37,7 @@ export default function ProjectResults({ resultsText, locale }: ProjectResultsPr
 
     return (
         <section className="py-24">
-            <div className="max-w-4xl mx-auto px-6">
+            <div className="max-w-6xl mx-auto px-6">
                 
                 <motion.div 
                     initial={{ opacity: 0, y: 20 }}
@@ -61,7 +61,7 @@ export default function ProjectResults({ resultsText, locale }: ProjectResultsPr
                     transition={{ duration: 0.6, delay: 0.2 }}
                     className=""
                 >
-                    <article className="prose" style={{ fontSize: '1.1rem', lineHeight: 1.8, color: 'var(--text-secondary)' }}>
+                    <article className="prose max-w-none" style={{ fontSize: '1.1rem', lineHeight: 1.8, color: 'var(--text-secondary)' }}>
                         <ReactMarkdown
                             components={{
                                 li: ({ node, ...props }) => (
