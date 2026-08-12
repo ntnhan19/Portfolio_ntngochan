@@ -18,33 +18,6 @@ DHLCinema is an online movie ticket booking system supporting real-time seat sel
 
 ## Architecture
 
-```mermaid
-flowchart TD
-    subgraph Client
-        React[React.js Frontend]
-    end
-
-    subgraph Server
-        Node[Node.js + Express API]
-        Cron[Node-Cron]
-    end
-
-    subgraph External
-        VNPay[VNPay Sandbox]
-        TMDB[TMDB API]
-    end
-
-    subgraph Storage
-        Postgres[(PostgreSQL)]
-    end
-
-    React <-->|HTTP / WebSocket| Node
-    Node -->|Database Transaction| Postgres
-    Node <-->|Webhook / Callback| VNPay
-    Cron -->|Fetch latest movies| TMDB
-    Cron -->|Generate showtimes| Postgres
-```
-
 The system uses a modern decoupled architecture:
 - **Client**: React.js SPA managing the interface and state.
 - **Server**: Node.js & Express API, combined with Socket.io for bi-directional communication.

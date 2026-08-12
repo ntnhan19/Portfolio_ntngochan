@@ -183,7 +183,7 @@ export const projects: Project[] = [
     title: "DHLCinema",
     tagline: "Real-time seat booking — zero double-booking under concurrent load",
     description:
-      "Cinema ticket booking system solving the concurrent seat selection problem. Implemented Redis distributed lock (SET NX EX) for atomic reservation, Socket.io for real-time seat-map sync across all clients, VNPay sandbox for payment. Load tested with Artillery: 100 concurrent requests → 1 success, 0 double bookings.",
+      "Cinema ticket booking system solving the concurrent seat selection problem. Implemented database transactions for atomic reservation and time-limited locks, Socket.io for real-time seat-map sync across all clients, VNPay sandbox for payment, and Node-Cron for daily TMDB data sync.",
     tech_stack: [
       "Node.js",
       "Express",
@@ -195,10 +195,10 @@ export const projects: Project[] = [
       "VNPay",
     ],
     highlights: [
-      "Redis distributed lock — zero double booking",
+      "Database transactions — zero double booking",
       "Socket.io real-time seat-map broadcast",
-      "Load tested: 100 concurrent → 1 success, p95 187ms",
       "VNPay sandbox payment integration",
+      "Node-Cron automated TMDB data sync",
     ],
     category: "Fullstack",
     role: "Fullstack — Backend + Real-time",

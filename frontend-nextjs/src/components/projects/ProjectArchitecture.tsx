@@ -48,8 +48,8 @@ export default function ProjectArchitecture({ architectureText, locale, slug }: 
                     >
                         {slug === 'dhlcinema' ? (
                             <img 
-                                src="https://mermaid.ink/svg/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG4gICAgcGFydGljaXBhbnQgSFIgYXMgVXNlclxuICAgIHBhcnRpY2lwYW50IFJlbmRlciBhcyBOb2RlLmpzIChCYWNrZW5kKVxuICAgIHBhcnRpY2lwYW50IFRNRGIgYXMgVE1EYiBBUElcbiAgICBwYXJ0aWNpcGFudCBEQiBhcyBQb3N0Z3JlU1FMXG5cbiAgICBIUi0+PlJlbmRlcjogMS4gVmlzaXQgV2ViIChXYWtlcyBTZXJ2ZXIpXG4gICAgYWN0aXZhdGUgUmVuZGVyXG4gICAgUmVuZGVyLT4+VE1EYjogMi4gRmV0Y2ggTGF0ZXN0IE1vdmllc1xuICAgIFRNRGItLT4+UmVuZGVyOiBKU09OIChOb3cgUGxheWluZyAmIFVwY29taW5nKVxuICAgIFJlbmRlci0+PkRCOiAzLiBHYXJiYWdlIENvbGxlY3Rpb24gKE9sZCBUaWNrZXRzICYgTW92aWVzKVxuICAgIFJlbmRlci0+PkRCOiA0LiBTYXZlIE1vdmllcyAmIEdlbmVyYXRlIFNob3VzYW5kcyBvZiBTZWF0cylcbiAgICBSZW5kZXItLT4+SFI6IDYuIFNlcnZlIFBlcmZlY3QgV2ViIEludGVyZmFjZVxuICAgIGRlYWN0aXZhdGUgUmVuZGVyXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ" 
-                                alt="Self-Healing Architecture Sequence Diagram"
+                                src="https://mermaid.ink/svg/eyJjb2RlIjoiZmxvd2NoYXJ0IFREXG4gICAgc3ViZ3JhcGggQ2xpZW50XG4gICAgICAgIFJlYWN0W1JlYWN0LmpzIEZyb250ZW5kXVxuICAgIGVuZFxuXG4gICAgc3ViZ3JhcGggU2VydmVyXG4gICAgICAgIE5vZGVbTm9kZS5qcyArIEV4cHJlc3MgQVBJXVxuICAgICAgICBDcm9uW05vZGUtQ3Jvbl1cbiAgICBlbmRcblxuICAgIHN1YmdyYXBoIEV4dGVybmFsXG4gICAgICAgIFZOUGF5W1ZOUGF5IFNhbmRib3hdXG4gICAgICAgIFRNREJbVE1EQiBBUEldXG4gICAgZW5kXG5cbiAgICBzdWJncmFwaCBTdG9yYWdlXG4gICAgICAgIFBvc3RncmVzWyhQb3N0Z3JlU1FMKV1cbiAgICBlbmRcblxuICAgIFJlYWN0IDwtLT58SFRUUCAvIFdlYlNvY2tldHwgTm9kZVxuICAgIE5vZGUgLS0+fERhdGFiYXNlIFRyYW5zYWN0aW9ufCBQb3N0Z3Jlc1xuICAgIE5vZGUgPC0tPnxXZWJob29rIC8gQ2FsbGJhY2t8IFZOUGF5XG4gICAgQ3JvbiAtLT58RmV0Y2ggbGF0ZXN0IG1vdmllc3wgVE1EQlxuICAgIENyb24gLS0+fEdlbmVyYXRlIHNob3d0aW1lc3wgUG9zdGdyZXMiLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ==" 
+                                alt="DHLCinema Architecture Flowchart"
                                 style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '1rem' }}
                             />
                         ) : (

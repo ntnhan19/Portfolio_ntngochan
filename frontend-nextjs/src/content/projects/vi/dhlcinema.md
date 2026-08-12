@@ -18,33 +18,6 @@ DHLCinema là hệ thống đặt vé xem phim trực tuyến hỗ trợ chọn 
 
 ## Kiến trúc
 
-```mermaid
-flowchart TD
-    subgraph Client
-        React[React.js Frontend]
-    end
-
-    subgraph Server
-        Node[Node.js + Express API]
-        Cron[Node-Cron]
-    end
-
-    subgraph External
-        VNPay[VNPay Sandbox]
-        TMDB[TMDB API]
-    end
-
-    subgraph Storage
-        Postgres[(PostgreSQL)]
-    end
-
-    React <-->|HTTP / WebSocket| Node
-    Node -->|Database Transaction| Postgres
-    Node <-->|Webhook / Callback| VNPay
-    Cron -->|Fetch latest movies| TMDB
-    Cron -->|Generate showtimes| Postgres
-```
-
 Hệ thống sử dụng kiến trúc phân tách hiện đại:
 - **Client**: Ứng dụng React.js SPA quản lý giao diện và trạng thái.
 - **Server**: API Node.js & Express, kết hợp Socket.io cho giao tiếp hai chiều.
