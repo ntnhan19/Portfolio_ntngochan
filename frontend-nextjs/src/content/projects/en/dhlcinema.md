@@ -2,82 +2,28 @@
 
 This project was built to solve one of the most challenging problems in e-commerce systems: handling high-concurrency traffic and maintaining real-time data integrity.
 
-**Specific problem:** When 100 users simultaneously click the same seat, how do you guarantee that only 1 person books successfully while the other 99 receive an instant notification?
+## Background
 
-## Technical Solution
+This project was built to solve one of the most challenging problems in e-commerce systems: handling high-concurrency traffic and maintaining real-time data integrity. When hundreds of users access the system simultaneously, standard database row-locking is often insufficient or creates bottlenecks.
 
-### Redis Distributed Lock
+## Architecture
 
-```javascript
-const lockKey = `seat:${movieId}:${seatId}`;
-const acquired = await redis.set(lockKey, userId, 'EX', 30, 'NX');
-// EX 30 — auto-expire after 30s (prevents deadlock if server crashes)
-// NX    — only set if key does not exist (atomic check-and-set)
+The system utilizes a modern decoupled architecture:
+- **Client**: React.js SPA managing real-time websocket connections.
+- **Server**: Node.js & Express API, heavily relying on Socket.io for bidirectional communication.
+- **Database**: PostgreSQL (via Prisma ORM) for persistent data, and Redis for distributed caching and atomic operations (locks).
+- **Automation Engine**: A Node-Cron background service seamlessly integrates with the TMDb API to provide a self-healing data pipeline.
 
-if (!acquired) {
-  socket.emit('seat:error', { message: 'Seat already taken' });
-  return;
-}
+## Decisions
 
-await db.query(
-  'UPDATE seats SET status=$1, user_id=$2 WHERE id=$3',
-  ['locked', userId, seatId]
-);
+**Race Conditions in Seat Booking:**
+If 100 users click the same seat at the exact same millisecond, a standard database might double-book it. We implemented a **Redis Distributed Lock** (`SET NX EX`) to guarantee atomicity. The seat is locked in RAM instantly, and Socket.io broadcasts the update to all other clients, turning the seat gray in real-time.
 
-io.to(`room:${movieId}`).emit('seat:updated', { seatId, status: 'locked' });
-```
-
-**Why Redis instead of a DB transaction?** PostgreSQL row-locks work, but when scaling horizontally across multiple Node processes, each process has its own connection pool — the lock is not shared. Redis is single-threaded and guarantees atomicity cross-process.
-
-### Socket.io Room Management
-
-Each showtime is a Socket.io room. Clients join the room when they open the seat-selection page and leave when they exit. Seat-map updates are broadcast to the entire room — no polling needed.
-
-## Self-Healing Architecture
-
-**Problem:** Demo projects are often abandoned after a few months. When recruiters visit, they see outdated movie schedules from last year and empty data.
-
-**Solution:** Integrated a Background Cronjob with the TMDb API. Even if the system goes to "sleep" on a free host, the moment a user visits, the server automatically wakes up, fetches new movies, generates thousands of seats, and performs garbage collection on old tickets. The project is 100% self-sustaining and maintenance-free.
-
-```mermaid
-sequenceDiagram
-    participant HR as User
-    participant Render as Node.js (Backend)
-    participant TMDb as TMDb API
-    participant DB as PostgreSQL
-
-    HR->>Render: 1. Visit Web (Wakes Server)
-    activate Render
-    Render->>TMDb: 2. Fetch Latest Movies
-    TMDb-->>Render: JSON (Now Playing & Upcoming)
-    Render->>DB: 3. Garbage Collection (Old Tickets & Movies)
-    Render->>DB: 4. Save Movies & Generate Showtimes
-    Render->>DB: 5. Seat Mapping (Generate Thousands of Seats)
-    Render-->>HR: 6. Serve Perfect Web Interface
-    deactivate Render
-```
-
-## Load Testing
-
-```bash
-# 100 virtual users all selecting seat ID 42
-artillery run load-test.yml
-
-# Results:
-# Success (seat booked): 1
-# Failed (seat taken): 99
-# Response time p95: 187ms
-# Double bookings: 0
-```
-
-## Bugs & Fixes
-
-**Bug 1 — Redis lock not released on server crash:** TTL was 30s, but if the server crashed mid-flow, the seat stayed locked. Fix: reduced TTL to 10s and added a heartbeat to extend the lock while the user is in the payment flow.
-
-**Bug 2 — Socket reconnect loses seat state:** After reconnecting, the client had no way to know which seats were locked. Fix: when joining a room, the server now emits the full current seat-map from Redis.
+**The "Ghost Project" Portfolio Problem:**
+Demo projects usually display outdated data after a few months of neglect. We built a **Self-Healing Architecture**. When a recruiter visits the site, the dormant backend wakes up, fetches the latest "Now Playing" movies from TMDb, dynamically generates thousands of fresh cinema seats, and purges old tickets. The project remains 100% maintenance-free and always fresh.
 
 ## Results
 
-- Zero double bookings across load tests with 100 concurrent users
-- Response time p95: 187ms
-- Project grade: 9/10
+- **Zero Double-Bookings**: Successfully withstood Artillery load testing with 100 concurrent booking requests.
+- **High Performance**: Achieved a p95 response time of 187ms under heavy load.
+- **Self-Sustaining**: The system has run without manual intervention since deployment, dynamically syncing real-world movie data.

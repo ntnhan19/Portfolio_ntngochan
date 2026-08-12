@@ -76,7 +76,7 @@ export default function ProjectDetailClient({ slug, contentEn, contentVi }: { sl
             {/* ── SECTIONS ── */}
             <ProjectHero project={project} t={t} />
             <ProjectBackground project={project} backgroundText={background} t={t} />
-            <ProjectArchitecture architectureText={architecture} locale={locale} />
+            <ProjectArchitecture architectureText={architecture} locale={locale} slug={slug} />
             <ProjectDecisions decisions={decisions} locale={locale} />
             <ProjectResults resultsText={results} locale={locale} />
             
