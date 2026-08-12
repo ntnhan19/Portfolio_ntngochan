@@ -12,7 +12,7 @@
     "2": { "name": "A Complete Tet — A Whole Spring 2025", "role": "Volunteer — Faculty of IT Student Association", "description": "Packed 500+ Tet gift packages for low-income families in Ho Chi Minh City. 50+ volunteers over 2 consecutive days." }
   },
   "timeline": {
-    "1": { "date": "Semester 1 / 2025", "description": "Cinema ticket booking system solving the concurrent seat selection problem. Implemented Redis distributed lock (SET NX EX) for atomic reservation, Socket.io for real-time seat-map sync across all clients, VNPay sandbox for payment. Load tested with Artillery: 100 concurrent requests → 1 success, 0 double bookings." },
+    "1": { "date": "Semester 1 / 2025", "description": "Cinema ticket booking system solving the concurrent seat selection problem. Implemented database transactions for atomic reservation and time-limited locks, Socket.io for real-time seat-map sync across all clients, VNPay sandbox for payment, and Node-Cron for daily TMDB data sync." },
     "2": { "date": "Jan 2025", "description": "Packed 500+ Tet gift packages for low-income families in Ho Chi Minh City. 50+ volunteers over 2 consecutive days." },
     "3": { "date": "2024", "description": "Recognised for academic performance, leadership, volunteering, and all-round student contribution at faculty level." },
     "4": { "date": "2024", "description": "Faculty-level distinction awarded for strong study results and active participation in student and departmental activities." },

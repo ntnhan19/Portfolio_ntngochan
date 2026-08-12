@@ -12,7 +12,7 @@
     "2": { "name": "Một cái Tết vẹn toàn - Trọn vẹn một mùa xuân 2025", "role": "Tình nguyện viên - Đoàn Hội Khoa CNTT", "description": "Tham gia đóng gói và phát hơn 500 phần quà Tết cho những gia đình có hoàn cảnh khó khăn tại TP.HCM. Cùng 50+ tình nguyện viên làm việc trong 2 ngày liên tục." }
   },
   "timeline": {
-    "1": { "date": "Học kỳ 1 / 2025", "description": "Xây dựng hệ thống đặt vé xem phim giải quyết bài toán tranh chấp ghế đồng thời. Triển khai khóa phân tán với Redis, Socket.io để đồng bộ sơ đồ ghế thời gian thực, tích hợp cổng thanh toán VNPay sandbox. Kiểm thử tải với 100 người dùng đồng thời: 0 lỗi trùng ghế." },
+    "1": { "date": "Học kỳ 1 / 2025", "description": "Xây dựng hệ thống đặt vé xem phim giải quyết bài toán tranh chấp ghế đồng thời. Triển khai cơ chế giữ chỗ bằng database transactions kết hợp với TTL, Socket.IO để đồng bộ sơ đồ ghế thời gian thực, tích hợp cổng thanh toán VNPay sandbox và sử dụng Node-Cron để đồng bộ dữ liệu phim tự động." },
     "2": { "date": "Tháng 1, 2025", "description": "Tham gia đóng gói và phát hơn 500 phần quà Tết cho những gia đình có hoàn cảnh khó khăn tại TP.HCM cùng 50+ tình nguyện viên làm việc trong 2 ngày liên tục." },
     "3": { "date": "2024", "description": "Được vinh danh nhờ thành tích học tập xuất sắc, tích cực tham gia các phong trào tình nguyện và cống hiến cho hoạt động Đoàn Hội cấp Khoa." },
     "4": { "date": "2024", "description": "Giải thưởng cấp khoa dành cho sinh viên có kết quả học tập giỏi và tích cực tham gia các hoạt động phong trào." },
