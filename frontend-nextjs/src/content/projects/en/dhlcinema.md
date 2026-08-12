@@ -1,6 +1,6 @@
 ## Background
 
-This was the capstone project for the **Network Programming** module (Semester 1 / 2024), built by a team of 3. Requirement: build a real-time system capable of handling race conditions.
+This project was built to solve one of the most challenging problems in e-commerce systems: handling high-concurrency traffic and maintaining real-time data integrity.
 
 **Specific problem:** When 100 users simultaneously click the same seat, how do you guarantee that only 1 person books successfully while the other 99 receive an instant notification?
 

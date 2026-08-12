@@ -1,6 +1,6 @@
 ## Bối cảnh
 
-Đây là đồ án môn học **Lập trình Mạng** (Học kỳ 1 / 2024), được thực hiện bởi nhóm 3 sinh viên. Yêu cầu: xây dựng một hệ thống thời gian thực có khả năng xử lý bài toán tranh chấp dữ liệu (race conditions).
+Dự án được xây dựng với mục tiêu giải quyết một trong những bài toán hóc búa nhất của hệ thống thương mại điện tử: xử lý lưu lượng truy cập cao (high concurrency) và tính toàn vẹn dữ liệu thời gian thực.
 
 **Vấn đề cụ thể:** Khi có 100 người dùng cùng lúc bấm chọn mua cùng một ghế ngồi, làm sao để đảm bảo chắc chắn chỉ có 1 người đặt thành công, trong khi 99 người còn lại sẽ nhận được thông báo ngay lập tức?
 
