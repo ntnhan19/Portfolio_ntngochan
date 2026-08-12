@@ -31,7 +31,29 @@ io.to(`room:${movieId}`).emit('seat:updated', { seatId, status: 'locked' });
 
 ### Quản lý phòng bằng Socket.io
 
-Mỗi suất chiếu là một phòng (room) trong Socket.io. Client sẽ tham gia (join) vào phòng khi mở trang chọn ghế và rời đi (leave) khi thoát. Các cập nhật sơ đồ ghế sẽ được broadcast cho toàn bộ người trong phòng — loại bỏ hoàn toàn việc phải gửi polling liên tục.
+## Kiến trúc Tự phục hồi (Self-Healing Architecture)
+
+**Vấn đề:** Các dự án Demo thường bị bỏ xó sau vài tháng. Khi nhà tuyển dụng truy cập, họ sẽ thấy lịch chiếu từ năm ngoái và dữ liệu trống rỗng.
+
+**Giải pháp:** Tích hợp Background Cronjob và API của TMDb (The Movie Database). Dù hệ thống có bị "ngủ đông" (sleep) trên host miễn phí, thì ngay khi có lượt truy cập đầu tiên, server sẽ tự động thức dậy, kéo phim mới, tự sinh hàng ngàn ghế và dọn dẹp rác (vé cũ). Dự án tự vận hành 100% không cần bảo trì.
+
+```mermaid
+sequenceDiagram
+    participant HR as Người dùng
+    participant Render as Node.js (Backend)
+    participant TMDb as TMDb API
+    participant DB as PostgreSQL
+
+    HR->>Render: 1. Truy cập Web (Đánh thức Server)
+    activate Render
+    Render->>TMDb: 2. Fetch Phim Mới Nhất
+    TMDb-->>Render: JSON (Now Playing & Upcoming)
+    Render->>DB: 3. Dọn dẹp Vé & Phim cũ (Garbage Collection)
+    Render->>DB: 4. Lưu Phim mới & Sinh Lịch Chiếu
+    Render->>DB: 5. Sinh hàng ngàn Ghế (Seat Mapping)
+    Render-->>HR: 6. Trả về giao diện Web hoàn hảo
+    deactivate Render
+```
 
 ## Load Testing (Kiểm thử tải)
 
