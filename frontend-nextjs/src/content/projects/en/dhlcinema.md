@@ -26,18 +26,29 @@ The system utilizes a modern decoupled architecture:
 ## Engineering Challenges
 
 **Race Conditions in Seat Booking:**
-When 100 users click the same seat at the exact same millisecond, a standard database will double-book. The solution was using a Redis Distributed Lock (`SET NX EX`) to guarantee atomicity. The seat is locked in RAM instantly. *Challenge:* Initially, the TTL was set to 30s. If the server crashed or the client disconnected, the seat stayed locked and became unbookable. *Solution:* Reduced TTL to 10s and implemented a heartbeat mechanism from the client to continually extend the lock as long as the user remains active.
+- **Problem:** When 100 users click the same seat at the exact same millisecond, a standard database will double-book. 
+- **Solution:** The solution was using a Redis Distributed Lock (`SET NX EX`) to guarantee atomicity. The seat is locked in RAM instantly. 
+- **Challenge:** Initially, the TTL was set to 30s. If the server crashed or the client disconnected, the seat stayed locked and became unbookable. 
+- **Fix:** Reduced TTL to 10s and implemented a heartbeat mechanism from the client to continually extend the lock as long as the user remains active.
 
 **State Desync on Reconnection:**
-Each showtime operates as a dedicated Socket.io room. *Problem:* When a user loses internet connection and reconnects, they lose all seat status updates broadcasted during the downtime. *Solution:* Instead of solely broadcasting delta events, the server automatically emits the full current seat map (stored in Redis) to the client immediately upon rejoining the room. *Trade-off:* Consumes slightly more bandwidth upon reconnection, but guarantees 100% data consistency on the UI.
+- **Context:** Each showtime operates as a dedicated Socket.io room. 
+- **Problem:** When a user loses internet connection and reconnects, they lose all seat status updates broadcasted during the downtime. 
+- **Solution:** Instead of solely broadcasting delta events, the server automatically emits the full current seat map (stored in Redis) to the client immediately upon rejoining the room. 
+- **Trade-off:** Consumes slightly more bandwidth upon reconnection, but guarantees 100% data consistency on the UI.
 
 ## Technical Decisions
 
 **Self-Healing Architecture:**
-*Problem:* Demo projects typically display outdated or empty data after months of neglect. *Decision:* Integrate Node-Cron with The Movie Database (TMDb) API. *Implementation:* When a recruiter visits the site, the dormant backend wakes up, fetches the latest movies, generates thousands of cinema seats for new showtimes, and purges old tickets. *Reason:* Keeps the project alive, fresh, and ready to demo at any time with zero maintenance cost.
+- **Problem:** Demo projects typically display outdated or empty data after months of neglect. 
+- **Decision:** Integrate Node-Cron with The Movie Database (TMDb) API. 
+- **Implementation:** When a recruiter visits the site, the dormant backend wakes up, fetches the latest movies, generates thousands of cinema seats for new showtimes, and purges old tickets. 
+- **Reason:** Keeps the project alive, fresh, and ready to demo at any time with zero maintenance cost.
 
 **E-commerce Transaction Management:**
-*Problem:* How to ensure tickets are not issued if the payment fails, while not keeping seats locked forever. *Decision:* Decouple the "Reservation" and "Payment" flows. *Implementation:* Seats are only marked as "Sold" in the database strictly when a successful, cryptographically verified Webhook payload is received from the VNPay server.
+- **Problem:** How to ensure tickets are not issued if the payment fails, while not keeping seats locked forever. 
+- **Decision:** Decouple the "Reservation" and "Payment" flows. 
+- **Implementation:** Seats are only marked as "Sold" in the database strictly when a successful, cryptographically verified Webhook payload is received from the VNPay server.
 
 ## Results
 

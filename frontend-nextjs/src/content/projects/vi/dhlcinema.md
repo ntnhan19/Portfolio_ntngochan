@@ -26,18 +26,29 @@ Hệ thống sử dụng kiến trúc phân tách hiện đại:
 ## Thách thức Kỹ thuật
 
 **Xử lý tranh chấp ghế đồng thời (Race Condition):**
-Khi 100 người dùng chọn cùng một ghế ở cùng một phần nghìn giây, cơ sở dữ liệu thông thường sẽ bị lỗi đặt trùng. Giải pháp là dùng Khóa phân tán (`SET NX EX`) trên Redis để đảm bảo tính nguyên tử tuyệt đối. Chiếc ghế được khóa trên RAM ngay lập tức. *Thách thức phát sinh:* Ban đầu thiết lập TTL là 30s, nhưng nếu server sập hoặc client mất mạng giữa chừng, ghế bị khóa cứng không ai đặt được. *Cách giải quyết:* Giảm TTL xuống 10s và xây dựng cơ chế Heartbeat từ client để gia hạn lock liên tục chừng nào người dùng còn đang thao tác.
+- **Bối cảnh:** Khi 100 người dùng chọn cùng một ghế ở cùng một phần nghìn giây, cơ sở dữ liệu thông thường sẽ bị lỗi đặt trùng (Double-booking). 
+- **Giải pháp:** Dùng Khóa phân tán (`SET NX EX`) trên Redis để đảm bảo tính nguyên tử tuyệt đối. Chiếc ghế được khóa trên RAM ngay lập tức. 
+- **Thách thức phát sinh:** Ban đầu thiết lập TTL là 30s, nhưng nếu server sập hoặc client mất mạng giữa chừng, ghế bị khóa cứng không ai đặt được. 
+- **Cách khắc phục:** Giảm TTL xuống 10s và xây dựng cơ chế Heartbeat từ client để gia hạn lock liên tục chừng nào người dùng còn đang thao tác.
 
 **Mất đồng bộ trạng thái khi rớt mạng:**
-Mỗi suất chiếu là một phòng (Socket.io room). *Vấn đề:* Khi người dùng rớt mạng và kết nối lại, họ sẽ mất toàn bộ các sự kiện ghế bị người khác đặt trong khoảng thời gian mất mạng đó. *Cách giải quyết:* Thay vì chỉ phát sóng (broadcast) sự kiện thay đổi, server sẽ tự động gửi toàn bộ sơ đồ ghế hiện tại đang lưu trong Redis cho client ngay khi họ join lại phòng. *Sự đánh đổi:* Tốn thêm một chút băng thông khi reconnect, nhưng đảm bảo tính nhất quán dữ liệu 100% trên giao diện.
+- **Bối cảnh:** Mỗi suất chiếu là một phòng (Socket.io room).
+- **Vấn đề:** Khi người dùng rớt mạng và kết nối lại, họ sẽ mất toàn bộ các sự kiện ghế bị người khác đặt trong khoảng thời gian mất mạng đó. 
+- **Cách giải quyết:** Thay vì chỉ phát sóng (broadcast) sự kiện thay đổi, server sẽ tự động gửi toàn bộ sơ đồ ghế hiện tại đang lưu trong Redis cho client ngay khi họ join lại phòng. 
+- **Sự đánh đổi:** Tốn thêm một chút băng thông khi reconnect, nhưng đảm bảo tính nhất quán dữ liệu 100% trên giao diện.
 
 ## Quyết định Kỹ thuật
 
 **Vận hành tự động (Self-Healing Architecture):**
-*Vấn đề:* Các dự án Demo thường hiển thị dữ liệu cũ rích hoặc trống rỗng sau vài tháng bị bỏ quên. *Quyết định:* Tích hợp Node-Cron kết hợp API của The Movie Database (TMDb). *Triển khai:* Khi nhà tuyển dụng truy cập, backend đang ngủ đông sẽ thức dậy, tự động kéo danh sách phim mới nhất, sinh hàng ngàn ghế ngồi cho các suất chiếu và dọn dẹp vé cũ. *Lý do:* Giữ cho dự án luôn sống động và sẵn sàng để demo mà không tốn chi phí bảo trì hệ thống.
+- **Vấn đề:** Các dự án Demo thường hiển thị dữ liệu cũ rích hoặc trống rỗng sau vài tháng bị bỏ quên. 
+- **Quyết định:** Tích hợp Node-Cron kết hợp API của The Movie Database (TMDb). 
+- **Triển khai:** Khi nhà tuyển dụng truy cập, backend đang ngủ đông sẽ thức dậy, tự động kéo danh sách phim mới nhất, sinh hàng ngàn ghế ngồi cho các suất chiếu và dọn dẹp vé cũ. 
+- **Lý do:** Giữ cho dự án luôn sống động và sẵn sàng để demo mà không tốn chi phí bảo trì hệ thống.
 
 **Quản lý giao dịch E-commerce:**
-*Vấn đề:* Làm sao để không phát hành vé nếu người dùng thanh toán thất bại, nhưng cũng không giữ ghế vĩnh viễn. *Quyết định:* Tách luồng "Giữ chỗ" và "Thanh toán". *Triển khai:* Ghế chỉ được đánh dấu "Đã bán" trong Database khi và chỉ khi Webhook từ VNPay gửi tín hiệu thành công về Server, xác thực bằng chữ ký hash an toàn.
+- **Vấn đề:** Làm sao để không phát hành vé nếu người dùng thanh toán thất bại, nhưng cũng không giữ ghế vĩnh viễn. 
+- **Quyết định:** Tách luồng "Giữ chỗ" và "Thanh toán". 
+- **Triển khai:** Ghế chỉ được đánh dấu "Đã bán" trong Database khi và chỉ khi Webhook từ VNPay gửi tín hiệu thành công về Server, xác thực bằng chữ ký hash an toàn.
 
 ## Kết quả
 
