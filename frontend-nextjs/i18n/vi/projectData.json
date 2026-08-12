@@ -27,13 +27,14 @@
   },
   "dhlcinema": {
     "tagline": "Đặt vé xem phim thời gian thực — không bị trùng ghế khi chịu tải cao",
-    "description": "Hệ thống đặt vé xem phim giải quyết bài toán tranh chấp ghế đồng thời. Triển khai khóa phân tán (Distributed Lock) với Redis (SET NX EX) để giữ chỗ an toàn, Socket.io để đồng bộ sơ đồ ghế thời gian thực trên tất cả thiết bị, tích hợp thanh toán qua VNPay sandbox. Kiểm thử tải với Artillery: 100 request cùng lúc → 1 thành công, 0 trùng ghế.",
+    "description": "Hệ thống đặt vé xem phim giải quyết bài toán tranh chấp ghế đồng thời. Triển khai khóa phân tán (Distributed Lock) với Redis (SET NX EX) để giữ chỗ an toàn, Socket.io để đồng bộ sơ đồ ghế thời gian thực, tích hợp thanh toán qua VNPay. MỚI: Tích hợp kiến trúc Tự phục hồi (Self-Healing) với Cronjob và API TMDb, tự động đồng bộ phim mới, sinh lịch chiếu và dọn rác DB để hệ thống tự vận hành 100% không cần bảo trì.",
     "role": "Fullstack",
     "category": "Fullstack",
     "duration": "2 tháng",
     "highlights": [
-      "Khóa phân tán Redis để đảm bảo tính nguyên tử khi đặt vé",
-      "Socket.io để đồng bộ sơ đồ ghế thời gian thực",
+      "Kiến trúc Tự phục hồi & Tự động đồng bộ TMDb API",
+      "Khóa phân tán Redis đảm bảo tính nguyên tử khi đặt vé",
+      "Socket.io đồng bộ sơ đồ ghế thời gian thực",
       "Kiểm thử tải bằng Artillery (100 người dùng đồng thời)",
       "Tích hợp cổng thanh toán VNPay Sandbox"
     ]

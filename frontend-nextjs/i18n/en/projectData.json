@@ -27,11 +27,12 @@
   },
   "dhlcinema": {
     "tagline": "Real-time seat booking — zero double-booking under concurrent load",
-    "description": "Cinema ticket booking system solving the concurrent seat selection problem. Implemented Redis distributed lock (SET NX EX) for atomic reservation, Socket.io for real-time seat-map sync across all clients, VNPay sandbox for payment. Load tested with Artillery: 100 concurrent requests → 1 success, 0 double bookings.",
+    "description": "Cinema ticket booking system solving the concurrent seat selection problem. Implemented Redis distributed lock (SET NX EX) for atomic reservation, Socket.io for real-time seat-map sync, and VNPay for payment. NEW: Integrated Self-Healing architecture with Cronjobs and TMDb API for automated movie syncing, dynamic schedule generation, and DB garbage collection, making the project 100% self-sustaining.",
     "role": "Fullstack",
     "category": "Fullstack",
     "duration": "2 months",
     "highlights": [
+      "Self-Healing Architecture & Automated TMDb Sync",
       "Redis Distributed Lock for atomic booking",
       "Socket.io for real-time seat-map updates",
       "Artillery load testing (100 concurrent)",
