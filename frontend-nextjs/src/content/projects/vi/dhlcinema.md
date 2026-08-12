@@ -15,7 +15,7 @@ Hệ thống sử dụng kiến trúc phân tách hiện đại:
 **Xử lý tranh chấp ghế (Redis Distributed Lock):**
 Nếu 100 người dùng chọn cùng một ghế ở cùng một phần nghìn giây, cơ sở dữ liệu thông thường sẽ bị lỗi đặt trùng. Giải pháp là dùng Khóa phân tán (`SET NX EX`) để đảm bảo tính nguyên tử tuyệt đối. Chiếc ghế được khóa trên RAM ngay lập tức. *Thách thức:* Ban đầu thiết lập TTL là 30s, nhưng nếu server sập giữa chừng, ghế bị khóa cứng. Khắc phục bằng cách giảm TTL xuống 10s và dùng cơ chế heartbeat để gia hạn lock liên tục.
 
-![Real-time Booking Demo Placeholder](https://placehold.co/800x450/e2e8f0/64748b?text=Real-time+Booking+Demo+(GIF/Video))
+![Demo Đặt ghế Real-time](/images/projects/dhlcinema/realtime-booking.gif)
 
 **Đồng bộ thời gian thực (Socket.io):**
 Mỗi suất chiếu là một phòng (room). Khi người dùng chọn ghế, trạng thái mới được broadcast cho toàn bộ người trong phòng ngay lập tức — loại bỏ hoàn toàn polling. *Thách thức:* Mất mạng và reconnect sẽ làm mất trạng thái ghế. Khắc phục: Khi client join lại phòng, server tự động emit toàn bộ sơ đồ ghế hiện tại đang lưu trong Redis.

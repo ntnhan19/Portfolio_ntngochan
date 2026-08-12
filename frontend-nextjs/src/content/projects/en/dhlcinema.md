@@ -15,7 +15,7 @@ The system utilizes a modern decoupled architecture:
 **Race Conditions in Seat Booking (Redis Distributed Lock):**
 If 100 users click the same seat at the exact same millisecond, a standard database will double-book. We implemented a Redis Distributed Lock (`SET NX EX`) to guarantee atomicity. *Challenge:* Initially set TTL to 30s, but if the server crashed, the seat stayed locked. *Fix:* Reduced TTL to 10s and added a heartbeat to continually extend the lock while the user is active.
 
-![Real-time Booking Demo Placeholder](https://placehold.co/800x450/e2e8f0/64748b?text=Real-time+Booking+Demo+(GIF/Video))
+![Real-time Booking Demo](/images/projects/dhlcinema/realtime-booking.gif)
 
 **Real-time Synchronization (Socket.io):**
 Each showtime operates as a dedicated Room. Seat state changes are broadcast instantly to everyone in the room, completely eliminating the need for client polling. *Challenge:* Users lost seat states upon network reconnect. *Fix:* Upon rejoining, the server immediately emits the full current seat map stored in Redis.
