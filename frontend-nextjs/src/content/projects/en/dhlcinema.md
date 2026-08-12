@@ -16,11 +16,17 @@ The system utilizes a modern decoupled architecture:
 
 ## Decisions
 
-**Race Conditions in Seat Booking:**
-If 100 users click the same seat at the exact same millisecond, a standard database might double-book it. We implemented a **Redis Distributed Lock** (`SET NX EX`) to guarantee atomicity. The seat is locked in RAM instantly, and Socket.io broadcasts the update to all other clients, turning the seat gray in real-time.
+**Race Conditions in Seat Booking (Redis Distributed Lock):**
+If 100 users click the same seat at the exact same millisecond, a standard database will double-book. We implemented a Redis Distributed Lock (`SET NX EX`) to guarantee atomicity. *Challenge:* Initially set TTL to 30s, but if the server crashed, the seat stayed locked. *Fix:* Reduced TTL to 10s and added a heartbeat to continually extend the lock while the user is active.
 
-**The "Ghost Project" Portfolio Problem:**
-Demo projects usually display outdated data after a few months of neglect. We built a **Self-Healing Architecture**. When a recruiter visits the site, the dormant backend wakes up, fetches the latest "Now Playing" movies from TMDb, dynamically generates thousands of fresh cinema seats, and purges old tickets. The project remains 100% maintenance-free and always fresh.
+**Real-time Synchronization (Socket.io):**
+Each showtime operates as a dedicated Room. Seat state changes are broadcast instantly to everyone in the room, completely eliminating the need for client polling. *Challenge:* Users lost seat states upon network reconnect. *Fix:* Upon rejoining, the server immediately emits the full current seat map stored in Redis.
+
+**Payment Integration (VNPay Sandbox):**
+Integrated a localized payment gateway to handle checkout transactions. Implemented secure webhook/callback endpoints to verify bank responses before officially booking the ticket in the database, ensuring e-commerce data integrity.
+
+**The "Ghost Project" Problem (Self-Healing Architecture):**
+Demo projects usually display outdated data after months of neglect. We integrated a Node-Cron background service with the TMDb API. When a recruiter visits the site, the dormant backend wakes up, fetches the latest "Now Playing" movies, dynamically generates thousands of fresh cinema seats, and purges old tickets. The project remains 100% maintenance-free and always fresh.
 
 ## Results
 

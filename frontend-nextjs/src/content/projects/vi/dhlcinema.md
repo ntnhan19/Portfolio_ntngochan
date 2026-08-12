@@ -12,11 +12,17 @@ Hệ thống sử dụng kiến trúc phân tách hiện đại:
 
 ## Quyết định
 
-**Bài toán tranh chấp ghế (Race Condition):**
-Nếu 100 người dùng chọn cùng một ghế ở cùng một phần nghìn giây, cơ sở dữ liệu thông thường có thể gặp lỗi đặt trùng. Chúng tôi đã triển khai **Khóa phân tán Redis (Distributed Lock)** (`SET NX EX`) để đảm bảo tính nguyên tử tuyệt đối. Chiếc ghế được khóa trên RAM ngay lập tức, và Socket.io phát tín hiệu cập nhật cho toàn bộ client khác, biến ghế đó thành màu xám theo thời gian thực.
+**Xử lý tranh chấp ghế (Redis Distributed Lock):**
+Nếu 100 người dùng chọn cùng một ghế ở cùng một phần nghìn giây, cơ sở dữ liệu thông thường sẽ bị lỗi đặt trùng. Giải pháp là dùng Khóa phân tán (`SET NX EX`) để đảm bảo tính nguyên tử tuyệt đối. Chiếc ghế được khóa trên RAM ngay lập tức. *Thách thức:* Ban đầu thiết lập TTL là 30s, nhưng nếu server sập giữa chừng, ghế bị khóa cứng. Khắc phục bằng cách giảm TTL xuống 10s và dùng cơ chế heartbeat để gia hạn lock liên tục.
 
-**Vấn đề "Dự án ma" trên Portfolio:**
-Các dự án Demo thường hiển thị dữ liệu cũ rích sau vài tháng bị bỏ quên. Chúng tôi đã xây dựng **Kiến trúc Tự phục hồi (Self-Healing Architecture)**. Khi nhà tuyển dụng truy cập trang web, backend đang ngủ đông sẽ thức dậy, tự kéo các bộ phim "Đang chiếu" mới nhất từ TMDb, tự sinh hàng ngàn ghế ngồi mới và dọn dẹp vé cũ. Dự án duy trì 100% tự động vận hành và luôn luôn tươi mới.
+**Đồng bộ thời gian thực (Socket.io):**
+Mỗi suất chiếu là một phòng (room). Khi người dùng chọn ghế, trạng thái mới được broadcast cho toàn bộ người trong phòng ngay lập tức — loại bỏ hoàn toàn polling. *Thách thức:* Mất mạng và reconnect sẽ làm mất trạng thái ghế. Khắc phục: Khi client join lại phòng, server tự động emit toàn bộ sơ đồ ghế hiện tại đang lưu trong Redis.
+
+**Tích hợp thanh toán (VNPay Sandbox):**
+Đảm bảo giao dịch an toàn bằng cách đấu nối cổng thanh toán VNPay. Xử lý luồng callback/webhook để xác thực giao dịch thành công từ ngân hàng trước khi chốt vé vào Database, đảm bảo tính toàn vẹn của quy trình E-commerce.
+
+**Vận hành tự động (Self-Healing Architecture):**
+Các dự án Demo thường hiển thị dữ liệu cũ rích sau vài tháng bị bỏ quên. Chúng tôi đã tích hợp Node-Cron và API của TMDb (The Movie Database). Khi nhà tuyển dụng truy cập, backend đang ngủ đông sẽ thức dậy, tự kéo phim mới, sinh hàng ngàn ghế ngồi mới và dọn dẹp vé cũ. Hệ thống tự động vận hành 100% không cần bảo trì.
 
 ## Kết quả
 
