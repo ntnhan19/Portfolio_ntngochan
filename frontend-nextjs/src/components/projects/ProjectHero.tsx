@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowLeft, Github, ExternalLink, Clock, Users, Layers } from 'lucide-react';
+import { ArrowLeft, Github, ExternalLink, Clock, Users, Briefcase } from 'lucide-react';
 import Link from 'next/link';
 import type { Project } from '@/src/data/staticData';
 
@@ -118,11 +118,11 @@ export default function ProjectHero({ project, t }: ProjectHeroProps) {
 
                     <div className="flex items-center gap-4 p-2 border-l" style={{ borderColor: 'var(--border)' }}>
                         <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: 'var(--bg-subtle)' }}>
-                            <Layers size={18} style={{ color: 'var(--success)' }} />
+                            <Briefcase size={18} style={{ color: 'var(--success)' }} />
                         </div>
                         <div>
-                            <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{t('projectDetail.stack')}</p>
-                            <p style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '0.9rem' }}>{t('projectDetail.techCount', { n: String(project.tech_stack.length) })}</p>
+                            <p style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{t('projectDetail.role')}</p>
+                            <p style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '0.9rem' }}>{project.role}</p>
                         </div>
                     </div>
                 </motion.div>
