@@ -10,10 +10,10 @@ DHLCinema là hệ thống đặt vé xem phim trực tuyến thời gian thực
 
 ## Đóng góp của tôi
 
-- **Designed** và triển khai hệ thống Khóa phân tán (Distributed Lock) bằng Redis để xử lý bài toán tranh chấp ghế.
-- **Implemented** kiến trúc đồng bộ thời gian thực bằng Socket.io cho cả Backend và Frontend, tối ưu hóa băng thông bằng cách quản lý theo từng phòng (Room).
-- **Integrated** cổng thanh toán VNPay Sandbox, xây dựng luồng Webhook để xác thực tính hợp lệ của giao dịch trước khi chốt vé.
-- **Developed** các Cron job chạy ngầm trên Node.js để tự động hóa hoàn toàn luồng lấy dữ liệu từ TMDB và dọn dẹp vé quá hạn.
+- **Thiết kế** và triển khai hệ thống Khóa phân tán (Distributed Lock) bằng Redis để xử lý bài toán tranh chấp ghế.
+- **Xây dựng** kiến trúc đồng bộ thời gian thực bằng Socket.io cho cả Backend và Frontend, tối ưu hóa băng thông bằng cách quản lý theo từng phòng (Room).
+- **Tích hợp** cổng thanh toán VNPay Sandbox, xây dựng luồng Webhook để xác thực tính hợp lệ của giao dịch trước khi chốt vé.
+- **Phát triển** các Cron job chạy ngầm trên Node.js để tự động hóa hoàn toàn luồng lấy dữ liệu từ TMDB và dọn dẹp vé quá hạn.
 
 ## Kiến trúc
 
