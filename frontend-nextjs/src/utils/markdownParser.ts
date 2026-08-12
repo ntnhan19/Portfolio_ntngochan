@@ -40,7 +40,7 @@ export function parseProjectMarkdown(content: string): ProjectSections {
         if (!trimmed) return;
 
         // Extract title inside ** **
-        const titleMatch = trimmed.match(/^\*\*(.*?)\*\*(.*)/);
+        const titleMatch = trimmed.match(/^\*\*(.*?)\*\*([\s\S]*)/);
         if (titleMatch) {
             decisions.push({
                 title: titleMatch[1].replace(':', '').trim(),

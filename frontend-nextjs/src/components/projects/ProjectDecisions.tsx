@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Lightbulb, Server, Database, Code, Cloud } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
 
 interface Decision {
     title: string;
@@ -62,9 +63,9 @@ export default function ProjectDecisions({ decisions, locale }: ProjectDecisions
                                 <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.15rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '1rem', lineHeight: 1.4 }}>
                                     {decision.title}
                                 </h3>
-                                <p style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>
-                                    {decision.description}
-                                </p>
+                                <div className="prose max-w-none mt-2" style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>
+                                    <ReactMarkdown>{decision.description}</ReactMarkdown>
+                                </div>
                             </motion.div>
                         );
                     })}
