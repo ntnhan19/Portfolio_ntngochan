@@ -25,6 +25,7 @@ export interface Project {
   repo_url?: string;
   demo_url?: string;
   image_url: string;
+  hover_image_url?: string;
   featured: boolean;
   status: "completed" | "in-progress" | "archived";
 }
@@ -207,6 +208,7 @@ export const projects: Project[] = [
     repo_url: "https://github.com/ntnhan19/DHLCinema",
     demo_url: "https://dhl-cinema-user.vercel.app",
     image_url: `${BASE_PATH}/images/projects/cinema.png`,
+    hover_image_url: "/images/projects/dhlcinema/realtime-booking.gif",
     featured: true,
     status: "completed",
   },

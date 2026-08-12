@@ -72,13 +72,20 @@ export default function ProjectHero({ project, t }: ProjectHeroProps) {
 
                     {/* Right: Mockup Image */}
                     <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="relative">
-                        <div className="card w-full" style={{ padding: 0 }}>
+                        <div className="card w-full group relative overflow-hidden" style={{ padding: 0 }}>
                             <img
                                 src={project.image_url}
                                 alt={`${project.title} mockup`}
-                                className="w-full h-auto object-cover"
+                                className="w-full h-auto object-cover transition-opacity duration-700"
                                 style={{ aspectRatio: '16/10' }}
                             />
+                            {project.hover_image_url && (
+                                <img
+                                    src={project.hover_image_url}
+                                    alt={`${project.title} demo`}
+                                    className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+                                />
+                            )}
                         </div>
                         {/* Decorative blob behind the mockup */}
                         <div className="absolute -inset-4 z-[-1] opacity-30 rounded-[3rem] blur-3xl" style={{ background: 'linear-gradient(45deg, var(--accent), transparent)' }} />

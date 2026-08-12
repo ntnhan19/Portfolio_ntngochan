@@ -42,7 +42,7 @@ export default function ProjectDecisions({ decisions, locale }: ProjectDecisions
                     </h2>
                 </motion.div>
 
-                <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+                <div className="flex flex-col gap-16 lg:gap-24 mt-8">
                     {decisions.map((decision, i) => {
                         const Icon = getDecisionIcon(decision.title);
                         return (
@@ -51,20 +51,27 @@ export default function ProjectDecisions({ decisions, locale }: ProjectDecisions
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: "-100px" }}
-                                transition={{ duration: 0.5, delay: i * 0.15 }}
-                                className="group flex flex-col items-start transition-all duration-300"
+                                transition={{ duration: 0.5, delay: i * 0.1 }}
+                                className="grid md:grid-cols-12 gap-6 md:gap-12 items-start border-b border-color pb-16 lg:pb-24 last:border-0 last:pb-0"
                             >
-                                <div 
-                                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110"
-                                    style={{ background: 'color-mix(in srgb, var(--accent) 15%, transparent)' }}
-                                >
-                                    <Icon size={24} style={{ color: 'var(--accent)' }} />
+                                {/* Left Column: Icon & Title */}
+                                <div className="md:col-span-4 flex flex-col items-start md:sticky top-24">
+                                    <div 
+                                        className="w-12 h-12 rounded-xl flex items-center justify-center mb-6"
+                                        style={{ background: 'color-mix(in srgb, var(--accent) 15%, transparent)' }}
+                                    >
+                                        <Icon size={24} style={{ color: 'var(--accent)' }} />
+                                    </div>
+                                    <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.25rem', fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1.4 }}>
+                                        {decision.title}
+                                    </h3>
                                 </div>
-                                <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.15rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '1rem', lineHeight: 1.4 }}>
-                                    {decision.title}
-                                </h3>
-                                <div className="prose max-w-none mt-2" style={{ fontSize: '0.95rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>
-                                    <ReactMarkdown>{decision.description}</ReactMarkdown>
+                                
+                                {/* Right Column: Description & Media */}
+                                <div className="md:col-span-8 w-full overflow-hidden">
+                                    <div className="prose max-w-none" style={{ fontSize: '1.05rem', color: 'var(--text-secondary)', lineHeight: 1.8 }}>
+                                        <ReactMarkdown>{decision.description}</ReactMarkdown>
+                                    </div>
                                 </div>
                             </motion.div>
                         );
