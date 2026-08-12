@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { UserCog, ArrowRight } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
 
 interface ProjectContributionProps {
     contribution: string[];
@@ -40,18 +41,14 @@ export default function ProjectContribution({ contribution, locale }: ProjectCon
                 >
                     <ul className="space-y-6">
                         {contribution.map((item, i) => {
-                            // Extract action word (first word) to bold it
-                            const words = item.split(' ');
-                            const actionWord = words[0];
-                            const rest = words.slice(1).join(' ');
                             return (
                                 <li key={i} className="flex items-start gap-4">
                                     <div className="flex-shrink-0 mt-1">
                                         <ArrowRight size={18} style={{ color: 'var(--accent)' }} />
                                     </div>
-                                    <p style={{ fontSize: '1.05rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>
-                                        <strong style={{ color: 'var(--text-primary)' }}>{actionWord}</strong> {rest}
-                                    </p>
+                                    <div className="prose prose-p:my-0 max-w-none" style={{ fontSize: '1.05rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>
+                                        <ReactMarkdown>{item}</ReactMarkdown>
+                                    </div>
                                 </li>
                             );
                         })}

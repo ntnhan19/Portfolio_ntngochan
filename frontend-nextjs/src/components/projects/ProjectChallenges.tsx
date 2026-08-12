@@ -27,7 +27,7 @@ export default function ProjectChallenges({ challenges, locale }: ProjectChallen
     if (!challenges || challenges.length === 0) return null;
 
     return (
-        <section className="py-24" style={{ background: 'var(--bg-subtle)' }}>
+        <section className="py-24" style={{ background: 'var(--bg-base)' }}>
             <div className="max-w-6xl mx-auto px-6">
                 
                 <motion.div 

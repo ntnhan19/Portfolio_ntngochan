@@ -14,7 +14,7 @@ export default function ProjectArchitecture({ architectureText, locale, slug }: 
     if (!architectureText) return null;
 
     return (
-        <section className="py-24">
+        <section className="py-24" style={{ background: 'var(--bg-subtle)' }}>
             <div className="max-w-6xl mx-auto px-6">
                 
                 <motion.div 
