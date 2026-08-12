@@ -4,30 +4,58 @@ DHLCinema is an online movie ticket booking system supporting real-time seat sel
 
 ## Key Features
 
-**Real-time Seat Booking:** Seat statuses are updated and reflected instantly for all users viewing the same showtime.
-**Integrated Payments:** VNPay Sandbox is directly integrated, supporting secure webhook transaction verification.
-**Automated Data Sync:** The system automatically fetches currently playing movies from the TMDB API and generates new showtimes daily.
+**Seat Booking & Reservation:** Seats are temporarily locked for a limited time and automatically released if the transaction is not completed.
+**Real-time State Synchronization:** Socket.IO updates seat status changes for clients viewing the same showtime.
+**VNPay Payment:** Integrated VNPay Sandbox with callback/webhook to confirm transaction status.
+**Automated Movie Data Sync:** Node-Cron periodically fetches data from TMDB and updates the system.
 
 ## My Contribution
 
-- **Designed** a seat locking mechanism using Database Transactions (Prisma) and a time-based expiration strategy to handle concurrent booking attempts.
-- **Built** a real-time synchronization architecture using Socket.io for both Frontend and Backend.
-- **Integrated** the VNPay Sandbox payment gateway, implementing a Webhook flow to verify cryptographic signatures (HMAC SHA512) before confirming tickets.
-- **Developed** background Cron jobs in Node.js to completely automate movie data synchronization and system cleanup.
+- **Designed** a seat reservation mechanism using Database Transactions (Prisma), combined with expiration time and a cleanup job to handle overdue locked seats.
+- **Built** a real-time state synchronization mechanism using Socket.IO between Frontend and Backend.
+- **Integrated** VNPay Sandbox, developing a webhook and validating the HMAC SHA512 signature before updating the transaction status.
+- **Developed** background Cron jobs in Node.js to automatically synchronize movie data and release overdue reserved seats.
 
 ## Architecture
+
+```mermaid
+flowchart TD
+    subgraph Client
+        React[React.js Frontend]
+    end
+
+    subgraph Server
+        Node[Node.js + Express API]
+        Cron[Node-Cron]
+    end
+
+    subgraph External
+        VNPay[VNPay Sandbox]
+        TMDB[TMDB API]
+    end
+
+    subgraph Storage
+        Postgres[(PostgreSQL)]
+    end
+
+    React <-->|HTTP / WebSocket| Node
+    Node -->|Database Transaction| Postgres
+    Node <-->|Webhook / Callback| VNPay
+    Cron -->|Fetch latest movies| TMDB
+    Cron -->|Generate showtimes| Postgres
+```
 
 The system uses a modern decoupled architecture:
 - **Client**: React.js SPA managing the interface and state.
 - **Server**: Node.js & Express API, combined with Socket.io for bi-directional communication.
-- **Database**: PostgreSQL (via Prisma ORM) for all persistent and transactional data state.
-- **Automation Engine**: Node-Cron tightly integrated with the TMDb API for automated data flows.
+- **Database**: PostgreSQL (via Prisma ORM) stores users, movies, showtimes, seats, and transactions data.
+- **Automation Engine**: Node-Cron periodically calls the TMDb API and handles scheduled cleanup tasks.
 
 ## Engineering Challenges
 
 **Concurrency in Seat Booking:**
 - **Context:** When multiple users click the same seat at the exact same time, a standard database approach will double-book. 
-- **Solution:** Utilized database transactions to ensure data integrity. Seat statuses are checked and updated atomically in the Database.
+- **Solution:** Utilized Database Transactions to check and update seat statuses within the same execution flow.
 - **Challenge:** Users might lock a seat but never complete the payment, leading to seats being permanently "stuck".
 - **Fix:** Implemented a 5-minute Time-To-Live (TTL) lock duration in the database, paired with a background Cleanup Job to periodically free up expired seats.
 
@@ -51,7 +79,7 @@ The system uses a modern decoupled architecture:
 
 ## Results
 
-- **Concurrency Handled**: Successfully implemented a robust seat locking and safe expiration mechanism backed entirely by the Database.
-- **Real-time Synchronization**: Fast and reliable seat UI updates via Socket.io.
-- **Secure Payments**: Successfully integrated VNPay Sandbox with strict signature validation flows.
-- **Automation**: The system automatically synchronizes movie data from TMDB, ensuring the project is always in a fresh state for demonstrations.
+- **Concurrent Seat Booking**: Implemented a time-limited seat reservation and state handling mechanism through Database Transactions.
+- **Real-time Synchronization**: Seat statuses are updated among clients via Socket.IO.
+- **Payment**: Integrated VNPay Sandbox and verified callbacks before updating transaction statuses.
+- **Automation**: Utilized Node-Cron to synchronize movie data from TMDB and process periodic tasks.
