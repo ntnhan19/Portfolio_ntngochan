@@ -12,7 +12,10 @@ import { parseProjectMarkdown } from '@/src/utils/markdownParser';
 
 import ProjectHero from '@/src/components/projects/ProjectHero';
 import ProjectBackground from '@/src/components/projects/ProjectBackground';
+import ProjectFeatures from '@/src/components/projects/ProjectFeatures';
+import ProjectContribution from '@/src/components/projects/ProjectContribution';
 import ProjectArchitecture from '@/src/components/projects/ProjectArchitecture';
+import ProjectChallenges from '@/src/components/projects/ProjectChallenges';
 import ProjectDecisions from '@/src/components/projects/ProjectDecisions';
 import ProjectResults from '@/src/components/projects/ProjectResults';
 
@@ -42,7 +45,7 @@ export default function ProjectDetailClient({ slug, contentEn, contentVi }: { sl
     }
 
     const markdownContent = locale === 'vi' ? contentVi : contentEn;
-    const { background, architecture, decisions, results } = parseProjectMarkdown(markdownContent);
+    const { background, features, contribution, challenges, architecture, decisions, results } = parseProjectMarkdown(markdownContent);
 
     return (
         <main style={{ background: 'var(--bg-base)', color: 'var(--text-primary)', minHeight: '100vh', overflowX: 'hidden' }}>
@@ -76,7 +79,10 @@ export default function ProjectDetailClient({ slug, contentEn, contentVi }: { sl
             {/* ── SECTIONS ── */}
             <ProjectHero project={project} t={t} />
             <ProjectBackground project={project} backgroundText={background} locale={locale} t={t} />
+            <ProjectFeatures features={features} locale={locale} />
+            <ProjectContribution contribution={contribution} locale={locale} />
             <ProjectArchitecture architectureText={architecture} locale={locale} slug={slug} />
+            <ProjectChallenges challenges={challenges} locale={locale} />
             <ProjectDecisions decisions={decisions} locale={locale} />
             <ProjectResults resultsText={results} locale={locale} />
             
