@@ -52,6 +52,12 @@ export default function ProjectArchitecture({ architectureText, locale, slug }: 
                                 alt="DHLCinema Architecture Flowchart"
                                 style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '1rem' }}
                             />
+                        ) : slug === 'sma' ? (
+                            <img 
+                                src="https://mermaid.ink/svg/eyJjb2RlIjoiZmxvd2NoYXJ0IFREXG4gICAgc3ViZ3JhcGggQ2xpZW50XG4gICAgICAgIFJlYWN0W1JlYWN0IERhc2hib2FyZF1cbiAgICBlbmRcblxuICAgIHN1YmdyYXBoIEFQSSBMYXllclxuICAgICAgICBBUElbRmFzdEFQSSBCYWNrZW5kXVxuICAgICAgICBXU1tXZWJTb2NrZXQgSHViXVxuICAgIGVuZFxuXG4gICAgc3ViZ3JhcGggQUkgUGlwZWxpbmVcbiAgICAgICAgUXVldWVbKEV2ZW50IEJ1cyAvIFNRUyldXG4gICAgICAgIFdvcmtlcltBSSBXb3JrZXIgLSBFQ1MgRmFyZ2F0ZV1cbiAgICAgICAgTW9kZWxzW1doaXNwZXIgJiBWaXNpb24gTW9kZWxzXVxuICAgIGVuZFxuXG4gICAgc3ViZ3JhcGggU3RvcmFnZVxuICAgICAgICBQR1soUG9zdGdyZVNRTCArIHBndmVjdG9yKV1cbiAgICAgICAgUzNbKEFXUyBTMyldXG4gICAgZW5kXG5cbiAgICBSZWFjdCA8LS0+fEhUVFAvUkVTVHwgQVBJXG4gICAgUmVhY3QgPC0tPnxXZWJTb2NrZXR8IFdTXG4gICAgQVBJIC0uLT58RXZlbnRzfCBRdWV1ZVxuICAgIFF1ZXVlIC0tPnxUcmlnZ2Vyc3wgV29ya2VyXG4gICAgV29ya2VyIC0tPnxJbmZlcmVuY2V8IE1vZGVsc1xuICAgIFdvcmtlciAtLT58U2F2ZSBNZXRhZGF0YXwgUEdcbiAgICBXb3JrZXIgLS0+fFN0YXR1cyBVcGRhdGVzfCBXU1xuICAgIEFQSSA8LS0+fFJlYWQvV3JpdGV8IFBHXG4gICAgQVBJIDwtLT58VXBsb2Fkc3wgUzMiLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ==" 
+                                alt="SMA Architecture Flowchart"
+                                style={{ width: '100%', height: '100%', objectFit: 'contain', padding: '1rem' }}
+                            />
                         ) : (
                             <div className="text-center p-6">
                                 <Network size={48} style={{ color: 'var(--text-muted)', margin: '0 auto 1rem', opacity: 0.5 }} />
