@@ -1,58 +1,96 @@
 ## Bối cảnh
 
-Smart Media Analytics (SMA) là hệ thống quản lý tài sản truyền thông (Media Asset Management) tích hợp AI. Dự án giải quyết bài toán tốn thời gian khi phải tìm kiếm thủ công trong thư viện video khổng lồ bằng cách cho phép người dùng tìm kiếm ngữ nghĩa (Semantic Search) bằng ngôn ngữ tự nhiên, đồng thời trả về kết quả chính xác đến từng giây của phân cảnh.
+Việc tìm kiếm một đoạn nội dung cụ thể trong video thường đòi hỏi editor phải xem lại lượng lớn footage và xác định thủ công từng scene. SMA được xây dựng nhằm tự động hóa quá trình này bằng cách phân tích video, phát hiện scene, trích xuất nội dung thoại và tạo metadata có thể tìm kiếm. 
+
+Người dùng chỉ cần upload video, hệ thống sẽ đưa video vào pipeline xử lý bất đồng bộ để thực hiện scene detection, transcription và AI-based content analysis trước khi lập chỉ mục nội dung cho việc tìm kiếm.
+
+## Điểm nổi bật
+
+- 🎬 **Automatic Scene Detection** — phân tách video thành các scene dựa trên thay đổi hình ảnh.
+- 🎙️ **Speech-to-Text** — chuyển nội dung thoại thành transcript bằng Whisper.
+- 🧠 **AI Scene Understanding** — sử dụng vision model để tạo mô tả/metadata cho từng scene.
+- 🔎 **Semantic Search** — lập chỉ mục embedding để tìm scene dựa trên nội dung thay vì chỉ matching keyword.
+- ⚡ **Asynchronous Processing** — tách các tác vụ AI nặng khỏi request lifecycle.
+- 📡 **Realtime Progress** — cập nhật tiến trình ingestion cho frontend thông qua WebSocket/Redis Pub/Sub.
 
 ## Tính năng chính
 
-- **Tìm kiếm ngữ nghĩa (Semantic Search):** Tìm kiếm nội dung video/hình ảnh bằng ngôn ngữ tự nhiên (ví dụ: "cảnh hoàng hôn trên biển").
-- **Seek theo Timestamp:** Kết quả tìm kiếm liên kết trực tiếp đến đúng giây xảy ra phân cảnh trong video.
-- **Nhận diện phân cảnh tự động (Scene Detection):** Sử dụng PySceneDetect để cắt video thành các đoạn có ý nghĩa trước khi index.
-- **Phiên mã âm thanh (Audio Transcription):** Trích xuất hội thoại từ audio thông qua mô hình AI Whisper.
-- **Cập nhật thời gian thực:** Dashboard tự động phản ánh trạng thái tiến trình xử lý pipeline của từng video nhờ WebSocket.
+**01 — Upload & Ingestion**
+Người dùng upload video qua giao diện, backend khởi tạo tài sản (asset) và đưa vào pipeline xử lý bất đồng bộ.
+
+**02 — Video Processing**
+Video được luân chuyển qua luồng xử lý độc lập: `FFmpeg` / `OpenCV` cắt khung hình, `PySceneDetect` nhận diện cảnh, `Whisper` phiên mã âm thanh và Vision Model phân tích nội dung hình ảnh.
+
+**03 — Scene Intelligence**
+Mỗi phân cảnh (scene) được làm giàu thông qua: mô tả hình ảnh, transcript hội thoại, siêu dữ liệu (metadata) và embedding vector.
+
+**04 — Search**
+Người dùng có thể tìm kiếm nội dung bằng ngôn ngữ tự nhiên và truy xuất ngay tới đúng phân cảnh tương ứng trong video.
+
+**05 — Realtime Progress**
+Frontend nhận báo cáo tiến trình xử lý từ Backend thông qua kết nối WebSocket, thay vì phải polling HTTP liên tục.
 
 ## Đóng góp của tôi
 
-- **Thiết kế** kiến trúc AI Worker phân tách hoàn toàn khỏi Backend API để cô lập các tác vụ xử lý nặng, tránh gây nghẽn luồng (blocking).
-- **Triển khai** AI pipeline lên AWS ECS Fargate với cơ chế gọi theo yêu cầu (on-demand), giúp tự động mở rộng và tiết kiệm chi phí.
-- **Thiết lập** AWS Step Functions và Amazon EventBridge để điều phối luồng xử lý AI bất đồng bộ (Asynchronous processing).
-- **Xây dựng** tích hợp WebSocket trên Backend FastAPI để báo cáo tiến trình xử lý media thời gian thực cho Frontend.
-- **Cấu hình** luồng CI/CD qua GitHub Actions để tự động kiểm thử, đóng gói Docker và deploy lên môi trường Cloud.
-- **Viết** bộ Unit Test toàn diện (Pytest) cho các luồng Ingest và Search APIs.
+**Backend & API**
+Xây dựng FastAPI backend và các API phục vụ quản lý asset, scene, media stream và luồng ingestion (ingestion workflow).
 
-## Kiến trúc
+**Realtime Processing**
+Thiết kế luồng cập nhật tiến trình xử lý thông qua Redis Pub/Sub và WebSocket giữa AI pipeline, backend và frontend.
 
-Hệ thống sử dụng kiến trúc Hướng sự kiện (Event-driven) phân tán:
-- **Client**: Ứng dụng React 19 SPA quản lý giao diện (Vite, Tailwind CSS).
-- **Backend API**: Node trung tâm bằng FastAPI (Python) quản lý định tuyến, tương tác cơ sở dữ liệu và WebSocket.
-- **AI Worker**: Tác vụ độc lập trên AWS ECS Fargate chứa mô hình Whisper và Computer Vision (Ollama).
-- **Database**: PostgreSQL (qua `pgvector` extension) lưu trữ vector nhúng (embeddings) và metadata.
-- **Storage**: Amazon S3 lưu trữ các tệp media gốc và siêu dữ liệu.
+**Data & Search**
+Tích hợp PostgreSQL/pgvector cho việc lưu trữ và truy xuất vector data, đồng thời xây dựng adapter phục vụ semantic search.
+
+**Cloud & Deployment**
+Tham gia containerization và triển khai các thành phần của hệ thống trên AWS trong giai đoạn tham gia chương trình FCAJ.
+
+**Team Engineering**
+Tham gia xây dựng API contract, sprint planning/task tracking và review/testing để đồng bộ giữa Backend, Frontend và AI.
 
 ## Thách thức Kỹ thuật
 
-**Xử lý Video dung lượng lớn không gây nghẽn API (Non-blocking AI Pipeline):**
-- **Bối cảnh:** Nhận diện phân cảnh, trích xuất audio và chạy mô hình AI trên video rất tốn tài nguyên. Nếu xử lý đồng bộ trên API Server sẽ dẫn đến timeout và sập hệ thống.
-- **Giải pháp:** Tách biệt AI Pipeline thành một Worker độc lập. Backend API chỉ làm nhiệm vụ nhận file, lưu vào S3, lưu metadata tạm thời và gửi sự kiện (Event) kích hoạt Worker.
-- **Thách thức phát sinh:** Quản lý hạ tầng để worker tự động mở rộng (scale) khi có nhiều video tải lên nhưng không tốn chi phí khi hệ thống nhàn rỗi.
-- **Cách khắc phục:** Triển khai Worker lên AWS ECS Fargate dưới dạng các tác vụ (tasks) On-demand. Hệ thống sẽ tự động cấp phát tài nguyên khi có sự kiện từ EventBridge và tự tắt khi xử lý xong.
+**Challenge 1 — Long-running AI Processing**
+- **Problem:** Video processing và AI inference có thời gian xử lý dài, không phù hợp với synchronous HTTP request.
+- **Solution:** Tách ingestion khỏi quá trình xử lý, cho phép pipeline chạy bất đồng bộ và backend theo dõi trạng thái job.
+
+**Challenge 2 — Realtime Progress**
+- **Problem:** Người dùng cần biết video đang ở bước nào (uploading → scene detection → transcription → AI analysis → completed).
+- **Solution:** Sử dụng Redis Pub/Sub để truyền trạng thái giữa processing services và backend, sau đó WebSocket đẩy progress tới frontend.
+
+**Challenge 3 — Multi-stage AI Pipeline**
+- **Problem:** Pipeline gồm nhiều bước phụ thuộc lẫn nhau. Một video không thể chỉ chạy một model duy nhất.
+- **Solution:** Thiết kế pipeline theo từng processing stage, giúp các bước scene detection, transcription và visual analysis có thể được xử lý độc lập.
+
+**Challenge 4 — Deployment / Cost**
+- **Problem:** AI workload và cloud infrastructure có chi phí vận hành đáng kể đối với student project.
+- **Decision:** AWS được sử dụng trong chương trình FCAJ để validate/deploy hệ thống, sau đó shutdown khi kết thúc giai đoạn cần thiết và định hướng self-host để giảm recurring cost.
 
 ## Quyết định Kỹ thuật
 
-**Cập nhật tiến trình thời gian thực (Real-time Progress Updates):**
-- **Vấn đề:** Quá trình phân tích video kéo dài nhiều phút, người dùng cần biết chính xác tiến trình hiện tại (Đang tải lên, Cắt cảnh, Phiên mã, Lập chỉ mục).
-- **Quyết định:** Sử dụng WebSocket trên FastAPI để phát (broadcast) trạng thái.
-- **Triển khai:** AI Worker liên tục gửi cập nhật tiến trình (Progress Status) về Backend API. Backend sau đó đẩy sự kiện này qua kết nối WebSocket tới đúng Client đang theo dõi Job ID đó.
-- **Lý do:** Giúp giao diện mượt mà và trực quan, loại bỏ việc Client phải liên tục HTTP Polling gây quá tải server.
+**Why Docker?**
+Containerize các service để đảm bảo môi trường chạy nhất quán giữa development và deployment.
 
-**Chuyển đổi Vector Database sang pgvector:**
-- **Vấn đề:** Ban đầu hệ thống sử dụng ChromaDB riêng lẻ. Tuy nhiên, việc phải duy trì cả Cơ sở dữ liệu quan hệ (PostgreSQL) và Vector DB riêng biệt gây phức tạp trong việc đồng bộ hóa dữ liệu và sao lưu.
-- **Quyết định:** Gộp cả hai vào PostgreSQL sử dụng extension `pgvector`.
-- **Triển khai:** Lưu trữ cấu trúc quan hệ (asset, metadata, scenes) và embeddings (vector nhúng) trong cùng một cơ sở dữ liệu duy nhất trên Amazon RDS.
-- **Lý do:** Giảm thiểu độ trễ truy vấn qua mạng, tận dụng được tính năng ACID của SQL và đơn giản hóa kiến trúc lưu trữ.
+**Why WebSocket + Redis Pub/Sub?**
+WebSocket chịu trách nhiệm giao tiếp realtime với client, trong khi Redis Pub/Sub giúp tách việc phát sinh progress event khỏi consumer phía backend.
 
-## Kết quả
+**Why PostgreSQL + pgvector?**
+Dùng PostgreSQL cho persistent application data và pgvector để lưu/truy xuất vector embedding trong cùng một hệ sinh thái dữ liệu, tránh phân mảnh.
 
-- **Xử lý bất đồng bộ:** Tách biệt thành công luồng xử lý AI nặng, giúp API Server luôn đạt tốc độ phản hồi rất nhanh (dưới 100ms) ngay cả khi đang có video render.
-- **Tối ưu hạ tầng Cloud:** Mô hình Serverless với ECS Fargate giúp loại bỏ hoàn toàn chi phí máy chủ nhàn rỗi (idle compute cost).
-- **Đồng bộ thời gian thực:** Trạng thái xử lý video được cập nhật ngay lập tức đến Frontend qua WebSocket.
-- **Vận hành tự động:** Triển khai CI/CD pipeline tự động hóa hoàn toàn quy trình đóng gói và triển khai hệ thống.
+**Why Self-host?**
+Không cần duy trì cloud infrastructure liên tục (và tốn kém) khi project không có traffic ở môi trường production.
+
+## Trạng thái dự án
+
+**Development / Archived Cloud Deployment**
+SMA đã hoàn thành giai đoạn phát triển và deployment trên AWS trong chương trình FCAJ. Cloud infrastructure hiện được shutdown để tránh chi phí duy trì không cần thiết.
+
+*Next step: self-host the containerized system for future demonstrations and continued development.*
+
+## Kết quả đạt được
+
+- Xây dựng end-to-end video ingestion pipeline từ bước upload đến lúc phân tích AI.
+- Tự động phân tách video thành các scene và enrich scene bằng transcript cùng AI-generated metadata.
+- Đồng bộ processing progress theo thời gian thực giữa backend và frontend.
+- Containerize các thành phần chính để phục vụ local development và deployment.
+- Hoàn thiện cloud deployment trong giai đoạn FCAJ.
+- Thiết kế hướng self-hosting nhằm giảm chi phí vận hành sau giai đoạn cloud deployment.

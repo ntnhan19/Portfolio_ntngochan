@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowLeft, Github, ExternalLink, Clock, Users, Briefcase } from 'lucide-react';
+import { ArrowLeft, Github, ExternalLink, Clock, Users, Briefcase, Play } from 'lucide-react';
 import Link from 'next/link';
 import type { Project } from '@/src/data/staticData';
 
@@ -51,6 +51,11 @@ export default function ProjectHero({ project, t }: ProjectHeroProps) {
                             {project.demo_url && (
                                 <a href={project.demo_url} target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ padding: '0.75rem 1.5rem', fontSize: '0.9rem' }}>
                                     <ExternalLink size={16} /> Live Demo
+                                </a>
+                            )}
+                            {project.video_url && (
+                                <a href={project.video_url} target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ padding: '0.75rem 1.5rem', fontSize: '0.9rem', backgroundColor: '#eef2ff', color: 'var(--primary)', borderColor: '#c7d2fe' }}>
+                                    <Play size={16} /> Demo Video
                                 </a>
                             )}
                         </div>

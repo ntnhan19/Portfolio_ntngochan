@@ -1,58 +1,96 @@
-## Overview
+## Background
 
-Smart Media Analytics (SMA) is an AI-powered Media Asset Management system. The project solves the time-consuming problem of manually scrubbing through huge video libraries by allowing users to perform Semantic Search using natural language, returning exact timestamp-level scene results.
+Searching for a specific segment in a video usually requires editors to manually scrub through hours of footage and identify scenes one by one. SMA was built to automate this process by analyzing videos, detecting scenes, extracting voice content, and generating searchable metadata.
+
+Users simply upload a video, and the system places it into an asynchronous processing pipeline for scene detection, transcription, and AI-based content analysis before indexing the content for search.
+
+## Highlights
+
+- 🎬 **Automatic Scene Detection** — splits video into meaningful scenes based on visual changes.
+- 🎙️ **Speech-to-Text** — converts spoken content into transcripts using Whisper.
+- 🧠 **AI Scene Understanding** — utilizes vision models to generate descriptions and metadata for each scene.
+- 🔎 **Semantic Search** — indexes embeddings to find scenes based on content meaning rather than just keyword matching.
+- ⚡ **Asynchronous Processing** — offloads heavy AI tasks from the main request lifecycle.
+- 📡 **Realtime Progress** — updates the ingestion progress to the frontend via WebSocket and Redis Pub/Sub.
 
 ## Key Features
 
-- **Semantic Search:** Search video/image content using natural language (e.g., "sunset over the ocean").
-- **Timestamp-Level Seek:** Search results link directly to the exact second inside a video where a scene occurs.
-- **Automatic Scene Detection:** Utilizes PySceneDetect to split videos into meaningful scenes before indexing.
-- **Audio Transcription:** Extracts dialogues and narration from audio tracks via the Whisper AI model.
-- **Real-time Updates:** The dashboard automatically reflects the pipeline processing progress for each video via WebSocket.
+**01 — Upload & Ingestion**
+Users upload videos via the UI; the backend creates an asset and pushes it into the asynchronous processing pipeline.
+
+**02 — Video Processing**
+The video flows through an independent processing pipeline: `FFmpeg` / `OpenCV` extract frames, `PySceneDetect` identifies scenes, `Whisper` transcribes audio, and Vision Models analyze visual content.
+
+**03 — Scene Intelligence**
+Each scene is enriched with: visual descriptions, dialogue transcripts, metadata, and vector embeddings.
+
+**04 — Search**
+Users can search for related content using natural language and immediately retrieve the exact matching video scene.
+
+**05 — Realtime Progress**
+The frontend receives processing progress reports from the backend via WebSocket connections, eliminating the need for continuous HTTP polling.
 
 ## My Contribution
 
-- **Designed** an AI Worker architecture completely decoupled from the Backend API to isolate heavy processing tasks and prevent blocking.
-- **Deployed** the AI pipeline to AWS ECS Fargate using an on-demand invocation mechanism, enabling automatic scaling and cost savings.
-- **Configured** AWS Step Functions and Amazon EventBridge to orchestrate the asynchronous AI processing workflow.
-- **Built** WebSocket integration on the FastAPI backend to report real-time media processing progress to the Frontend.
-- **Configured** a CI/CD pipeline via GitHub Actions to automate testing, Docker containerization, and cloud deployment.
-- **Tested** the Ingest and Search APIs extensively by writing a comprehensive Unit Test suite (Pytest).
+**Backend & API**
+Built the FastAPI backend and APIs for managing assets, scenes, media streaming, and the ingestion workflow.
 
-## Architecture
+**Realtime Processing**
+Designed the progress update flow using Redis Pub/Sub and WebSocket between the AI pipeline, backend, and frontend.
 
-The system utilizes a distributed Event-driven architecture:
-- **Client**: React 19 SPA managing the user interface (Vite, Tailwind CSS).
-- **Backend API**: Central Node powered by FastAPI (Python) managing routing, database interactions, and WebSockets.
-- **AI Worker**: Isolated task on AWS ECS Fargate running Whisper and Computer Vision (Ollama) models.
-- **Database**: PostgreSQL (via `pgvector` extension) storing vector embeddings and metadata.
-- **Storage**: Amazon S3 storing raw media files and asset metadata.
+**Data & Search**
+Integrated PostgreSQL/pgvector for storing and querying vector data, and built adapters for semantic search.
 
-## Engineering Challenges
+**Cloud & Deployment**
+Participated in containerization and deployed system components on AWS during the FCAJ program phase.
 
-**Non-blocking AI Pipeline for Large Video Assets:**
-- **Context:** Scene detection, audio transcription, and running AI models on videos are highly resource-intensive. Running these synchronously on the API Server leads to timeouts and crashes.
-- **Solution:** Decoupled the AI Pipeline into an isolated Worker. The Backend API strictly handles receiving files, uploading to S3, saving temporary metadata, and emitting an Event to trigger the Worker.
-- **Challenge:** Managing infrastructure so the worker scales up automatically during bulk uploads but costs nothing when the system is idle.
-- **Fix:** Deployed the Worker to AWS ECS Fargate as On-demand tasks. The system automatically provisions resources upon receiving EventBridge events and spins down immediately after processing.
+**Team Engineering**
+Collaborated on API contracts, sprint planning/task tracking, and review/testing to synchronize work across Backend, Frontend, and AI components.
+
+## Technical Challenges
+
+**Challenge 1 — Long-running AI Processing**
+- **Problem:** Video processing and AI inference take a long time, making them unsuitable for synchronous HTTP requests.
+- **Solution:** Decoupled ingestion from processing, allowing the pipeline to run asynchronously while the backend monitors job status.
+
+**Challenge 2 — Realtime Progress**
+- **Problem:** Users need to know which step a video is currently on (uploading → scene detection → transcription → AI analysis → completed).
+- **Solution:** Used Redis Pub/Sub to pass states between processing services and the backend, then WebSocket pushes progress to the frontend.
+
+**Challenge 3 — Multi-stage AI Pipeline**
+- **Problem:** The pipeline consists of multiple interdependent steps. A single model cannot process everything in one go.
+- **Solution:** Designed the pipeline by processing stage, allowing scene detection, transcription, and visual analysis to be processed independently.
+
+**Challenge 4 — Deployment / Cost**
+- **Problem:** AI workloads and cloud infrastructure incur significant operational costs for a student project.
+- **Decision:** AWS was used during FCAJ to validate/deploy the system, then shut down after the necessary phase. The direction shifted to self-hosting to reduce recurring costs.
 
 ## Technical Decisions
 
-**Real-time Progress Updates:**
-- **Problem:** Video analysis takes several minutes. Users need precise visibility into the current progress state (Uploading, Scene Detection, Transcribing, Indexing).
-- **Decision:** Use WebSocket on FastAPI to broadcast status updates.
-- **Implementation:** The AI Worker continuously reports its progress to the Backend API. The backend then pushes this event via WebSocket directly to the Client tracking that specific Job ID.
-- **Reason:** Provides a smooth, intuitive UX while eliminating the need for constant HTTP polling from the client, which would otherwise overload the server.
+**Why Docker?**
+Containerize services to ensure a consistent execution environment between development and deployment.
 
-**Migrating Vector Database to pgvector:**
-- **Problem:** Initially, the system utilized a standalone ChromaDB instance. Maintaining a relational DB (PostgreSQL) alongside a separate Vector DB created complexities in data synchronization and backups.
-- **Decision:** Consolidated both into PostgreSQL using the `pgvector` extension.
-- **Implementation:** Stored the relational schema (assets, metadata, scenes) and embeddings within a single unified database on Amazon RDS.
-- **Reason:** Minimized network query latency, leveraged SQL ACID compliance, and drastically simplified the storage architecture.
+**Why WebSocket + Redis Pub/Sub?**
+WebSocket handles real-time communication with the client, while Redis Pub/Sub isolates the emission of progress events from the backend consumers.
+
+**Why PostgreSQL + pgvector?**
+Use PostgreSQL for persistent application data and pgvector to store/query vector embeddings within the same data ecosystem, avoiding fragmentation.
+
+**Why Self-host?**
+No need to maintain continuous (and expensive) cloud infrastructure when the project lacks production traffic.
+
+## Deployment Status
+
+**Development / Archived Cloud Deployment**
+SMA completed development and deployment on AWS during the FCAJ program. The cloud infrastructure is currently shut down to avoid unnecessary maintenance costs.
+
+*Next step: self-host the containerized system for future demonstrations and continued development.*
 
 ## Results
 
-- **Asynchronous Processing:** Successfully decoupled heavy AI workloads, allowing the API Server to consistently maintain ultra-low response times (under 100ms) even during heavy video rendering.
-- **Cloud Infrastructure Optimization:** Utilizing a Serverless model with ECS Fargate completely eliminated idle compute costs.
-- **Real-time Synchronization:** Video processing statuses are instantly reflected on the Frontend via WebSockets.
-- **Automated Operations:** Deployed a CI/CD pipeline that fully automates the packaging and deployment process.
+- Built an end-to-end video ingestion pipeline from upload to AI analysis.
+- Automatically split videos into scenes and enriched them with transcripts and AI-generated metadata.
+- Synchronized processing progress in real-time between backend and frontend.
+- Containerized core components for local development and deployment.
+- Completed cloud deployment during the FCAJ phase.
+- Designed towards self-hosting to reduce operational costs post-cloud deployment.

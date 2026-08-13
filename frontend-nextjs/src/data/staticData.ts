@@ -17,13 +17,14 @@ export interface Project {
   description: string;
   tech_stack: string[];
   highlights: string[];
-  category: "AI/ML" | "Fullstack" | "Backend" | "Frontend";
+  category: "AI/ML" | "Fullstack" | "Backend" | "Frontend" | "AI Engineering";
   role: string;
   team_size: number;
   duration: string;
   year: number;
   repo_url?: string;
   demo_url?: string;
+  video_url?: string;
   image_url: string;
   hover_image_url?: string;
   featured: boolean;
@@ -116,24 +117,23 @@ export const projects: Project[] = [
     title: "Smart Media Analytics (SMA)",
     tagline: "AI-Powered Media Asset Management & Semantic Search System",
     description:
-      "Architected a cloud-ready AI system enabling natural-language semantic search across video and image libraries with timestamp-level scene retrieval. Separated a dedicated AI Worker from the Backend API to isolate heavy tasks (Whisper transcription, OpenCV scene detection).",
+      "AI-powered video analysis platform for automatic scene understanding, transcription, and semantic search.",
     tech_stack: [
-      "Python",
       "FastAPI",
       "React",
       "PostgreSQL/pgvector",
+      "Redis",
       "Docker",
-      "GitHub Actions",
-      "AWS (ECS Fargate, RDS, S3, EventBridge)",
+      "AWS",
     ],
     highlights: [
-      "Decoupled AI Worker from Backend API",
-      "AWS ECS Fargate on-demand invocation",
-      "WebSocket for real-time progress updates",
-      "Event-driven architecture via EventBridge",
+      "Async AI Processing",
+      "Scene Detection & Speech-to-Text",
+      "Semantic Search",
+      "Realtime Progress via WebSocket",
     ],
-    category: "Backend",
-    role: "Team Lead & DevOps",
+    category: "AI Engineering",
+    role: "Software Engineering · Team Lead",
     team_size: 4,
     duration: "4 months",
     year: 2026,
@@ -141,7 +141,7 @@ export const projects: Project[] = [
     demo_url: "",
     image_url: `${BASE_PATH}/images/projects/sma.png`,
     featured: true,
-    status: "completed",
+    status: "archived",
   },
   {
     id: 1,

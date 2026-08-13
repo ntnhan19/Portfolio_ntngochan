@@ -1,15 +1,15 @@
 {
   "sma": {
     "tagline": "AI-Powered Media Asset Management & Semantic Search System",
-    "description": "Architected a cloud-ready AI system enabling natural-language semantic search across video and image libraries, returning exact timestamp-level scene results. Decoupled an AI Worker from the Backend API to isolate heavy inference tasks (Whisper transcription, OpenCV scene detection).",
-    "role": "Team Lead & DevOps",
-    "category": "Backend",
+    "description": "AI-powered video analysis platform for automatic scene understanding, transcription, and semantic search.",
+    "role": "Software Engineering · Team Lead",
+    "category": "AI Engineering",
     "duration": "4 months",
     "highlights": [
-      "Decoupled AI Worker from Backend API",
-      "AWS ECS Fargate on-demand invocation",
-      "WebSocket for real-time progress updates",
-      "Event-driven architecture via EventBridge"
+      "Async AI Processing",
+      "Scene Detection & Speech-to-Text",
+      "Semantic Search",
+      "Realtime Progress via WebSocket"
     ]
   },
   "docmentor": {
