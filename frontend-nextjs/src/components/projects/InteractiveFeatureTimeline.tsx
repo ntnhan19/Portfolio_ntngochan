@@ -114,8 +114,7 @@ export default function InteractiveFeatureTimeline({ features, locale, slug }: I
                                                     layoutId="activeFeaturePulse"
                                                     className="absolute inset-0 rounded-full"
                                                     style={{ background: 'var(--accent)', opacity: 0.2 }}
-                                                    animate={{ scale: [1, 1.5, 1], opacity: [0.3, 0, 0.3] }}
-                                                    transition={{ duration: 2, repeat: Infinity }}
+                                                    transition={{ duration: 0.3 }}
                                                 />
                                             )}
                                             {/* The dot */}

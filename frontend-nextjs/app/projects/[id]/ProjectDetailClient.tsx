@@ -48,7 +48,7 @@ export default function ProjectDetailClient({ slug, contentEn, contentVi }: { sl
     const { background, features, contribution, challenges, architecture, decisions, results } = parseProjectMarkdown(markdownContent);
 
     return (
-        <main style={{ background: 'var(--bg-base)', color: 'var(--text-primary)', minHeight: '100vh', overflowX: 'hidden' }}>
+        <main style={{ background: 'var(--bg-base)', color: 'var(--text-primary)', minHeight: '100vh', overflowX: 'clip' }}>
             
             {/* ── NAVBAR ── */}
             <header
