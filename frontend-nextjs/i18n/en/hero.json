@@ -1,11 +1,11 @@
 {
-    "status":  "Available for internship",
-    "greeting":  "Hi, I\u0027m",
-    "role":  "Fullstack Software Engineer — Web Systems \u0026 AI Integration",
-    "gpa":  "GPA 3.33 / 4.0",
-    "university":  "HUTECH · Software Engineering · Year 4",
-    "description":  "4th-year Software Engineering student at HUTECH. I am passionate about building scalable web systems and integrating AI features. My experience spans real-time processing with Redis, RAG pipelines, and designing decoupled AI workers with vector search (pgvector, ChromaDB).",
-    "viewProjects":  "View Projects",
-    "getInTouch":  "Get in touch",
-    "openToWork":  "open_to_work"
+    "status": "Available for internship",
+    "greeting": "Hi, I\u0027m",
+    "role": "Fullstack Software Engineer - Web Systems \u0026 AI Integration",
+    "gpa": "GPA 3.34 / 4.0",
+    "university": "HUTECH - Software Engineering - Year 4",
+    "description": "4th-year Software Engineering student at HUTECH. I am passionate about building scalable web systems and integrating AI features. My experience spans real-time processing with Redis, RAG pipelines, and designing decoupled AI workers with vector search (pgvector, ChromaDB).",
+    "viewProjects": "View Projects",
+    "getInTouch": "Get in touch",
+    "openToWork": "open_to_work"
 }

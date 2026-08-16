@@ -2,7 +2,7 @@
   "sma": {
     "tagline": "AI-Powered Media Asset Management & Semantic Search System",
     "description": "AI-powered video analysis platform for automatic scene understanding, transcription, and semantic search.",
-    "role": "Software Engineering · Team Lead",
+    "role": "Software Engineering - Team Lead",
     "category": "AI Engineering",
     "duration": "4 months",
     "highlights": [
@@ -13,9 +13,9 @@
     ]
   },
   "docmentor": {
-    "tagline": "AI document Q&A — upload PDF, ask anything",
+    "tagline": "AI document Q&A - upload PDF, ask anything",
     "description": "Built a RAG pipeline that lets users upload PDF/DOCX and ask natural-language questions. Chunks with RecursiveCharacterTextSplitter (512 tokens, overlap 50), embeds via Sentence Transformers, stores in Pinecone, retrieves top-5 chunks as context for Gemini Pro. Streaming response via FastAPI SSE.",
-    "role": "Fullstack — Backend lead",
+    "role": "Fullstack - Backend lead",
     "category": "AI/ML",
     "duration": "3 months",
     "highlights": [
@@ -26,13 +26,13 @@
     ]
   },
   "dhlcinema": {
-    "tagline": "Real-time seat booking — zero double-booking under concurrent load",
+    "tagline": "Real-time seat booking - zero double-booking under concurrent load",
     "description": "Cinema ticket booking system solving the concurrent seat selection problem. Implemented database transactions for atomic reservation and time-limited locks, Socket.io for real-time seat-map sync across all clients, VNPay sandbox for payment, and Node-Cron for daily TMDB data sync.",
     "role": "Fullstack",
     "category": "Fullstack",
-    "duration": "2 months",
+    "duration": "3 months",
     "highlights": [
-      "Database transactions — zero double booking",
+      "Database transactions - zero double booking",
       "Socket.io real-time seat-map broadcast",
       "VNPay sandbox payment integration",
       "Node-Cron automated TMDB data sync"

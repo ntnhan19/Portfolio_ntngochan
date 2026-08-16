@@ -1,66 +1,66 @@
 {
-    "backHome":  "Quay lại trang chủ",
-    "statusBadge":  "Online • Sẵn sàng hợp tác",
+    "backHome": "Quay lại trang chủ",
+    "statusBadge": "Online - Sẵn sàng hợp tác",
     "profile": {
-        "title": "Thực tập sinh Fullstack Developer — PERN · React.js · FastAPI",
+        "title": "Thực tập sinh Fullstack Developer - PERN, React.js, FastAPI",
         "bio": "Sinh viên năm 4 ngành Kỹ thuật Phần mềm tại HUTECH với nền tảng vững chắc về Backend Development, được xây dựng qua các đồ án môn học và tự học.\n\n**Điểm mạnh:**\n- Xây dựng RESTful API với Node.js (Express)\n- Thiết kế schema CSDL và tối ưu hóa truy vấn với PostgreSQL\n- Giao tiếp thời gian thực với WebSocket / Socket.io\n- Làm việc với AI/LLM: Kiến trúc RAG, Vector Databases (Pinecone)\n\n**Mục tiêu:** Tìm kiếm vị trí Thực tập sinh Backend/Fullstack tại một công ty công nghệ để tích lũy kinh nghiệm thực tế với các hệ thống lớn, kiến trúc microservices và học hỏi những best practices từ các anh chị đi trước."
     },
-    "stats":  {
-                  "projects":  "Dự án nổi bật",
-                  "certificates":  "Chứng chỉ",
-                  "awards":  "Giải thưởng",
-                  "blog":  "Blog posts"
-              },
-    "skills":  {
-                   "title":  "Công nghệ \u0026 Kỹ năng",
-                   "subtitle":  "Những công nghệ mình đã và đang thành thạo",
-                   "categories":  {
-                                      "backend":  "Lập trình Backend",
-                                      "frontend":  "Lập trình Frontend",
-                                      "database":  "Cơ sở dữ liệu",
-                                      "ai":  "AI \u0026 LLM",
-                                      "devops":  "DevOps \u0026 Công cụ"
-                                  }
-               },
-    "education":  {
-                      "university":  "Đại học Công nghệ TP.HCM (HUTECH)",
-                      "degree":  "Cử nhân Kỹ thuật Phần mềm • 2022 – 2026",
-                      "year":  "Năm 4 (Dự kiến tốt nghiệp 2026)",
-                      "gpa":  "GPA: 3.34/4.0"
-                  },
-    "certificates":  {
-                         "title":  "Chứng chỉ \u0026 Giải thưởng",
-                         "subtitle":  "Những thành tựu và chứng nhận chính thức mình đã đạt được",
-                         "viewCert":  "Xem chứng chỉ"
-                     },
-    "timeline":  {
-                     "title":  "Hành trình phát triển",
-                     "subtitle":  "Tổng hợp dự án, chứng chỉ, giải thưởng và hoạt động nổi bật theo dòng thời gian",
-                     "cta":  "Xem chi tiết →"
-                 },
-    "hobbies":  {
-                    "title":  "Sở thích \u0026 Hoạt động ngoại khóa",
-                    "subtitle":  "Mình tin rằng sự cân bằng giữa công việc và cuộc sống là rất quan trọng",
-                    "items":  [
-                                  {
-                                      "title":  "Bóng đá nữ",
-                                      "desc":  "Thành viên đội bóng đá nữ Khoa CNTT – Giải Nhì Hội thao HUTECH 2024"
-                                  },
-                                  {
-                                      "title":  "Tình nguyện",
-                                      "desc":  "Tham gia gói quà Tết, hoạt động cộng đồng"
-                                  },
-                                  {
-                                      "title":  "Đọc sách",
-                                      "desc":  "Thích sách về công nghệ, tâm lý và phát triển bản thân"
-                                  }
-                              ]
-                },
-    "cta":  {
-                "title":  "Sẵn sàng bắt đầu hành trình Intern cùng team!",
-                "desc":  "Mình đang tìm kiếm cơ hội {role} tại các công ty công nghệ, đặc biệt trong lĩnh vực AI/ML, hệ thống real-time và microservices.",
-                "role":  "Fullstack Developer Intern",
-                "contact":  "Liên hệ ngay",
-                "cv":  "Tải CV"
+    "stats": {
+        "projects": "Dự án nổi bật",
+        "certificates": "Chứng chỉ",
+        "awards": "Giải thưởng",
+        "blog": "Blog posts"
+    },
+    "skills": {
+        "title": "Công nghệ \u0026 Kỹ năng",
+        "subtitle": "Những công nghệ mình đã và đang thành thạo",
+        "categories": {
+            "backend": "Lập trình Backend",
+            "frontend": "Lập trình Frontend",
+            "database": "Cơ sở dữ liệu",
+            "ai": "AI \u0026 LLM",
+            "devops": "DevOps \u0026 Công cụ"
+        }
+    },
+    "education": {
+        "university": "Đại học Công nghệ TP.HCM (HUTECH)",
+        "degree": "Cử nhân Kỹ thuật Phần mềm - 2022 – 2026",
+        "year": "Năm 4 (Dự kiến tốt nghiệp 2026)",
+        "gpa": "GPA: 3.34/4.0"
+    },
+    "certificates": {
+        "title": "Chứng chỉ \u0026 Giải thưởng",
+        "subtitle": "Những thành tựu và chứng nhận chính thức mình đã đạt được",
+        "viewCert": "Xem chứng chỉ"
+    },
+    "timeline": {
+        "title": "Hành trình phát triển",
+        "subtitle": "Tổng hợp dự án, chứng chỉ, giải thưởng và hoạt động nổi bật theo dòng thời gian",
+        "cta": "Xem chi tiết →"
+    },
+    "hobbies": {
+        "title": "Sở thích \u0026 Hoạt động ngoại khóa",
+        "subtitle": "Mình tin rằng sự cân bằng giữa công việc và cuộc sống là rất quan trọng",
+        "items": [
+            {
+                "title": "Bóng đá nữ",
+                "desc": "Thành viên đội bóng đá nữ Khoa CNTT – Giải Nhì Hội thao HUTECH 2024"
+            },
+            {
+                "title": "Tình nguyện",
+                "desc": "Tham gia gói quà Tết, hoạt động cộng đồng"
+            },
+            {
+                "title": "Đọc sách",
+                "desc": "Thích sách về công nghệ, tâm lý và phát triển bản thân"
             }
+        ]
+    },
+    "cta": {
+        "title": "Sẵn sàng bắt đầu hành trình Intern cùng team!",
+        "desc": "Mình đang tìm kiếm cơ hội {role} tại các công ty công nghệ, đặc biệt trong lĩnh vực AI/ML, hệ thống real-time và microservices.",
+        "role": "Fullstack Developer Intern",
+        "contact": "Liên hệ ngay",
+        "cv": "Tải CV"
+    }
 }

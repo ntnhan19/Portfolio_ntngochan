@@ -90,7 +90,7 @@ export const profile = {
   display_name_vi: "Ngọc Hân",
   display_name_en: "Han Nguyen",
   navbar_brand: "nghan.",
-  title: "Fullstack Developer Intern — PERN · React.js · FastAPI",
+  title: "Fullstack Developer Intern - PERN, React.js, FastAPI",
   bio: `Year 4 Software Engineering student at HUTECH with a solid foundation in Backend Development, built through academic projects and self-study.
 
 **Strengths:**
@@ -203,7 +203,7 @@ export const projects: Project[] = [
     role: "Fullstack — Backend + Real-time",
     team_size: 3,
     duration: "3 months",
-    year: 2024,
+    year: 2025,
     repo_url: "https://github.com/ntnhan19/DHLCinema",
     demo_url: "https://dhl-cinema-user.vercel.app",
     image_url: `${BASE_PATH}/images/projects/cinema.png`,
@@ -246,7 +246,7 @@ export const timelineData = ([
   },
   {
     id: 1,
-    date: "Semester 1 / 2025",
+    date: "Sep - Dec 2025",
     year: 2025,
     type: "project",
     title: projects[1].title,
@@ -254,6 +254,17 @@ export const timelineData = ([
     description: projects[1].description,
     tags: projects[1].tech_stack.slice(0, 4),
     link: `/projects/${projects[1].slug}`,
+  },
+  {
+    id: 9,
+    date: "Mar - Jun 2025",
+    year: 2025,
+    type: "project",
+    title: projects[2].title,
+    subtitle: projects[2].role,
+    description: projects[2].description,
+    tags: projects[2].tech_stack.slice(0, 4),
+    link: `/projects/${projects[2].slug}`,
   },
   {
     id: 2,
@@ -328,17 +339,7 @@ export const timelineData = ([
     description: "Won 3rd place in an innovation competition by contributing ideas, product direction, and collaborative execution.",
     tags: ["Competition", "Innovation", "Teamwork"],
   },
-  {
-    id: 9,
-    date: "Semester 1 / 2024",
-    year: 2024,
-    type: "project",
-    title: projects[2].title,
-    subtitle: projects[2].role,
-    description: projects[2].description,
-    tags: projects[2].tech_stack.slice(0, 4),
-    link: `/projects/${projects[2].slug}`,
-  },
+
   {
     id: 10,
     date: "Mar 2024",

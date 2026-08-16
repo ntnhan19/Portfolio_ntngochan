@@ -39,23 +39,23 @@ export const metadata: Metadata = {
     type: "website",
     locale: "vi_VN",
     url: "https://ntnhan19.github.io/Portfolio_ntngochan/",
-    siteName: "Han Nguyen — Fullstack Developer",
-    title: "Han Nguyen — Fullstack Developer",
+    siteName: "Han Nguyen - Fullstack Developer",
+    title: "Han Nguyen - Fullstack Developer",
     description:
-      "PERN Stack · Next.js · FastAPI · RAG — building scalable web apps and AI-powered tools.",
+      "PERN Stack, Next.js, FastAPI, RAG - building scalable web apps and AI-powered tools.",
     images: [
       {
         url: "https://ntnhan19.github.io/Portfolio_ntngochan/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Han Nguyen — Fullstack Developer Portfolio",
+        alt: "Han Nguyen - Fullstack Developer Portfolio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Han Nguyen — Fullstack Developer",
-    description: "PERN Stack · Next.js · FastAPI · AI/RAG",
+    title: "Han Nguyen - Fullstack Developer",
+    description: "PERN Stack, Next.js, FastAPI, AI/RAG",
   },
   robots: { index: true, follow: true },
   category: "technology",
@@ -120,7 +120,7 @@ export default function RootLayout({
               ],
               jobTitle: "Fullstack Developer",
               description:
-                "Fullstack Developer intern — PERN Stack, Next.js, FastAPI. HUTECH Software Engineering Year 4, GPA 3.30/4.0.",
+                "Fullstack Developer intern - PERN Stack, Next.js, FastAPI. HUTECH Software Engineering Year 4, GPA 3.34/4.0.",
               alumniOf: {
                 "@type": "CollegeOrUniversity",
                 name: "HUTECH University",

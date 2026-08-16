@@ -1,24 +1,24 @@
 {
-    "sectionLabel":  "04. About",
-    "title":  "About Me",
-    "bio1":  "I\u0027m a 4th-year Software Engineering student at {university} with a GPA of 3.33/4.0. I focus on developing modern Fullstack applications, blending robust system architecture with AI technologies to solve real-world problems.",
-    "bio2":  "My recent projects include a {cinema} utilizing Redis distributed locking, and an {ai} featuring semantic search with pgvector \u0026 ChromaDB.",
-    "cinema":  "real-time cinema booking system",
-    "ai":  "AI media analytics platform",
-    "fullProfile":  "Full profile",
-    "profilePreviewTitle":  "More on the full profile",
-    "profilePreviewDesc":  "Beyond the project highlights — credentials, campus life, and the full skill breakdown.",
-    "profilePreviewCerts":  "Certificates \u0026 awards ({count})",
-    "profilePreviewActivities":  "Volunteering \u0026 campus activities",
-    "profilePreviewEducation":  "Education, skills \u0026 hobbies",
-    "stats":  {
-                  "projects":  "Projects Built",
-                  "projectsSub":  "Full-stack applications",
-                  "certificates":  "Certificates",
-                  "certificatesSub":  "Professional \u0026 academic",
-                  "gpa":  "GPA",
-                  "gpaSub":  "Out of 4.0",
-                  "stack":  "Stack",
-                  "stackSub":  "PostgreSQL · Express · React · Node"
-              }
+    "sectionLabel": "04. About",
+    "title": "About Me",
+    "bio1": "I\u0027m a 4th-year Software Engineering student at {university} with a GPA of 3.34/4.0. I focus on developing modern Fullstack applications, blending robust system architecture with AI technologies to solve real-world problems.",
+    "bio2": "My recent projects include a {cinema} utilizing Redis distributed locking, and an {ai} featuring semantic search with pgvector \u0026 ChromaDB.",
+    "cinema": "real-time cinema booking system",
+    "ai": "AI media analytics platform",
+    "fullProfile": "Full profile",
+    "profilePreviewTitle": "More on the full profile",
+    "profilePreviewDesc": "Beyond the project highlights — credentials, campus life, and the full skill breakdown.",
+    "profilePreviewCerts": "Certificates \u0026 awards ({count})",
+    "profilePreviewActivities": "Volunteering \u0026 campus activities",
+    "profilePreviewEducation": "Education, skills \u0026 hobbies",
+    "stats": {
+        "projects": "Projects Built",
+        "projectsSub": "Full-stack applications",
+        "certificates": "Certificates",
+        "certificatesSub": "Professional \u0026 academic",
+        "gpa": "GPA",
+        "gpaSub": "Out of 4.0",
+        "stack": "Stack",
+        "stackSub": "PostgreSQL · Express · React · Node"
+    }
 }

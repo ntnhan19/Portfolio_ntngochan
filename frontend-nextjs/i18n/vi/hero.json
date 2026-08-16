@@ -2,7 +2,7 @@
     "status":  "Sẵn sàng thực tập",
     "greeting":  "Xin chào, mình là",
     "role":  "Lập trình viên Fullstack — Tối ưu Hệ thống \u0026 Tích hợp AI",
-    "gpa":  "GPA 3.33 / 4.0",
+    "gpa":  "GPA 3.34 / 4.0",
     "university":  "HUTECH · Kỹ thuật Phần mềm · Năm 4",
     "description":  "Sinh viên năm 4 Kỹ thuật Phần mềm tại HUTECH. Mình đam mê xây dựng các hệ thống web tối ưu và tích hợp AI. Kinh nghiệm của mình trải dài từ xử lý real-time với Redis, xây dựng RAG pipeline, cho đến thiết kế AI Worker độc lập và tìm kiếm vector (pgvector, ChromaDB).",
     "viewProjects":  "Xem dự án",

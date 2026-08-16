@@ -2,7 +2,7 @@
   "sma": {
     "tagline": "Hệ thống quản lý và tìm kiếm tài sản truyền thông bằng AI",
     "description": "Nền tảng phân tích video sử dụng AI, tự động phát hiện scene, chuyển giọng nói thành văn bản và lập chỉ mục nội dung để tìm kiếm theo ngữ nghĩa.",
-    "role": "Software Engineering · Team Lead",
+    "role": "Software Engineering - Team Lead",
     "category": "AI Engineering",
     "duration": "4 tháng",
     "highlights": [
@@ -13,9 +13,9 @@
     ]
   },
   "docmentor": {
-    "tagline": "Hỏi đáp tài liệu bằng AI — tải lên PDF, hỏi bất cứ điều gì",
+    "tagline": "Hỏi đáp tài liệu bằng AI - tải lên PDF, hỏi bất cứ điều gì",
     "description": "Xây dựng hệ thống RAG cho phép người dùng tải lên PDF/DOCX và đặt câu hỏi bằng ngôn ngữ tự nhiên. Phân tách văn bản bằng RecursiveCharacterTextSplitter (512 tokens, overlap 50), tạo vector bằng Sentence Transformers, lưu trữ trong Pinecone, trích xuất 5 đoạn văn bản liên quan nhất làm ngữ cảnh cho Gemini Pro. Trả về kết quả thời gian thực qua FastAPI SSE.",
-    "role": "Fullstack — Backend lead",
+    "role": "Fullstack - Backend lead",
     "category": "AI/ML",
     "duration": "3 tháng",
     "highlights": [
@@ -26,11 +26,11 @@
     ]
   },
   "dhlcinema": {
-    "tagline": "Đặt vé xem phim thời gian thực — không bị trùng ghế khi chịu tải cao",
+    "tagline": "Đặt vé xem phim thời gian thực - không bị trùng ghế khi chịu tải cao",
     "description": "Hệ thống đặt vé xem phim giải quyết bài toán tranh chấp ghế đồng thời. Triển khai cơ chế giữ chỗ bằng database transactions kết hợp với TTL, Socket.IO để đồng bộ sơ đồ ghế thời gian thực, tích hợp thanh toán qua VNPay và sử dụng Node-Cron để đồng bộ dữ liệu phim tự động từ TMDB.",
     "role": "Fullstack",
     "category": "Fullstack",
-    "duration": "2 tháng",
+    "duration": "3 tháng",
     "highlights": [
       "Database transactions giải quyết bài toán đặt trùng ghế",
       "Socket.IO đồng bộ sơ đồ ghế thời gian thực",
