@@ -59,9 +59,9 @@ export default function ProjectResults({ resultsText, locale }: ProjectResultsPr
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.6, delay: 0.2 }}
-                    className=""
+                    className="max-w-3xl mx-auto bg-white/50 dark:bg-black/20 p-8 rounded-3xl border border-slate-200 dark:border-slate-800"
                 >
-                    <article className="prose max-w-none" style={{ fontSize: '1.1rem', lineHeight: 1.8, color: 'var(--text-secondary)' }}>
+                    <article className="prose max-w-none" style={{ fontSize: '1.05rem', lineHeight: 1.8, color: 'var(--text-secondary)' }}>
                         <ReactMarkdown
                             components={{
                                 li: ({ node, ...props }) => (

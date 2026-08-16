@@ -44,7 +44,7 @@ export default function ProjectFeatures({ features, locale }: ProjectFeaturesPro
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
                             transition={{ duration: 0.5, delay: i * 0.1 }}
-                            className="flex gap-4 p-6 rounded-2xl border border-color"
+                            className={`flex gap-4 p-6 rounded-2xl border border-color ${features.length % 2 !== 0 && i === features.length - 1 ? 'md:col-span-2 md:max-w-2xl md:mx-auto w-full' : ''}`}
                             style={{ background: 'var(--surface)' }}
                         >
                             <div className="flex-shrink-0 mt-1">
