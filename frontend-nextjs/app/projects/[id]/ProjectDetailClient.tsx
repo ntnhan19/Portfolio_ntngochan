@@ -12,7 +12,7 @@ import { parseProjectMarkdown } from '@/src/utils/markdownParser';
 
 import ProjectHero from '@/src/components/projects/ProjectHero';
 import ProjectBackground from '@/src/components/projects/ProjectBackground';
-import ProjectFeatures from '@/src/components/projects/ProjectFeatures';
+import InteractiveFeatureTimeline from '@/src/components/projects/InteractiveFeatureTimeline';
 import ProjectContribution from '@/src/components/projects/ProjectContribution';
 import ProjectArchitecture from '@/src/components/projects/ProjectArchitecture';
 import ProjectChallenges from '@/src/components/projects/ProjectChallenges';
@@ -79,7 +79,7 @@ export default function ProjectDetailClient({ slug, contentEn, contentVi }: { sl
             {/* ── SECTIONS ── */}
             <ProjectHero project={project} t={t} />
             <ProjectBackground project={project} backgroundText={background} locale={locale} t={t} />
-            <ProjectFeatures features={features} locale={locale} />
+            <InteractiveFeatureTimeline features={features} locale={locale} slug={slug} />
             <ProjectContribution contribution={contribution} locale={locale} />
             <ProjectArchitecture architectureText={architecture} locale={locale} slug={slug} />
             <ProjectChallenges challenges={challenges} locale={locale} />
