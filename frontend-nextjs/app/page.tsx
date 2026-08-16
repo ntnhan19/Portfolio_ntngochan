@@ -230,7 +230,7 @@ export default function Portfolio() {
                 </p>
                 <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', display: 'flex', alignItems: 'center', gap: '0.45rem', flexWrap: 'wrap' }}>
                   <span>{t('hero.gpa')}</span>
-                  <span style={{ opacity: 0.3 }}>·</span>
+                  <span style={{ opacity: 0.3 }}>-</span>
                   <span>{t('hero.university')}</span>
                 </p>
               </motion.div>
@@ -262,23 +262,29 @@ export default function Portfolio() {
               transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
               className="hidden lg:block"
             >
-                <div className="relative flex flex-col items-center md:items-end">
-                  <div className="relative overflow-visible w-full aspect-[4/5] max-h-[500px] rounded-2xl border border-slate-200 dark:border-slate-800"
-                    style={{ background: 'var(--surface-raised)' }}>
-                    <img
-                      src={profile.avatar_hero}
-                      alt={profile.full_name}
-                      className="w-full h-full object-cover object-center rounded-2xl"
-                    />
-                    {/* Floating status text overlapping bottom edge */}
-                    <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-white/80 dark:bg-black/50 backdrop-blur-md px-4 py-1.5 rounded-full shadow-md border border-black/5 dark:border-white/10 whitespace-nowrap">
-                      <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--success)', display: 'inline-block' }} className="animate-pulse" />
-                      <span style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-primary)', fontFamily: 'var(--font-body)', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-                        {t('hero.openToWork')}
-                      </span>
-                    </div>
+              <div className="relative flex flex-col items-center md:items-end">
+                <div className="relative overflow-visible w-full aspect-[4/5] max-h-[500px] rounded-2xl border border-slate-200 dark:border-slate-800"
+                  style={{ background: 'var(--surface-raised)' }}>
+                  <img
+                    src={profile.avatar_hero}
+                    alt={profile.full_name}
+                    className="w-full h-full object-cover object-center rounded-2xl"
+                  />
+                  {/* Floating status text overlapping bottom edge */}
+                  <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-1.5 rounded-full whitespace-nowrap"
+                    style={{ 
+                      background: 'var(--surface)', 
+                      border: '1px solid var(--border)', 
+                      boxShadow: '0 8px 32px rgba(0,0,0,0.15)',
+                      backdropFilter: 'blur(8px)'
+                    }}>
+                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--success)', display: 'inline-block' }} className="animate-pulse" />
+                    <span style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-primary)', fontFamily: 'var(--font-body)', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
+                      {t('hero.openToWork')}
+                    </span>
                   </div>
                 </div>
+              </div>
             </motion.div>
 
           </div>
@@ -504,14 +510,14 @@ export default function Portfolio() {
                 style={{ background: 'var(--accent-light)', border: '1px solid var(--accent-border)' }}>
                 <div className="absolute left-0 top-0 bottom-0 w-12 z-10" style={{ background: 'linear-gradient(to right, var(--accent-light), transparent)' }} />
                 <div className="absolute right-0 top-0 bottom-0 w-12 z-10" style={{ background: 'linear-gradient(to left, var(--accent-light), transparent)' }} />
-                
+
                 <span className="shrink-0 z-20 px-4 py-1.5 rounded-r-lg font-mono text-xs font-bold uppercase tracking-widest" style={{ background: 'var(--accent)', color: 'var(--bg-base)' }}>
                   {t('skills.currentlyLearning')}
                 </span>
-                
+
                 {/* Marquee Content */}
                 <div className="flex flex-1 overflow-hidden">
-                  <motion.div 
+                  <motion.div
                     className="flex whitespace-nowrap items-center gap-6 px-6"
                     animate={{ x: ["0%", "-50%"] }}
                     transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
@@ -544,14 +550,14 @@ export default function Portfolio() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 items-stretch auto-rows-fr">
               {/* Box 1: Bio */}
-              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger} 
+              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}
                 className="card col-span-1 md:col-span-2 lg:col-span-2 lg:row-span-2 p-6 lg:p-8 flex flex-col justify-center h-full relative"
               >
                 {/* Subtle watermark background */}
                 <div className="absolute -right-20 -top-20 opacity-[0.03] pointer-events-none">
                   <span style={{ fontFamily: 'var(--font-display)', fontSize: '20rem', fontWeight: 900 }}>&quot;</span>
                 </div>
-                
+
                 <motion.div variants={fadeUp} className="text-lg md:text-xl font-medium leading-relaxed mb-6 z-10" style={{ color: 'var(--text-primary)' }}>
                   {(() => {
                     const bio1 = t('about.bio1');
@@ -584,7 +590,7 @@ export default function Portfolio() {
                     }
                   </p>
                 </motion.div>
-                
+
                 {/* Project anchors */}
                 <motion.div variants={fadeUp} className="flex flex-wrap gap-2 mt-auto z-10">
                   {projects.filter((p) => p.featured).map((p) => (
@@ -608,7 +614,7 @@ export default function Portfolio() {
               >
                 <GraduationCap className="absolute -right-4 -bottom-4 w-24 h-24 text-slate-500 opacity-5 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-12" />
                 <div className="relative z-10">
-                  <p style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '2.5rem', color: 'var(--accent)', lineHeight: 1 }}>3.33</p>
+                  <p style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '2.5rem', color: 'var(--accent)', lineHeight: 1 }}>3.34</p>
                   <p style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', marginTop: '0.5rem' }}>{t('about.stats.gpa')}</p>
                   <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>{t('about.stats.gpaSub')}</p>
                 </div>
@@ -621,7 +627,7 @@ export default function Portfolio() {
               >
                 <Zap className="absolute -right-4 -bottom-4 w-24 h-24 text-slate-500 opacity-5 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-12" />
                 <div className="relative z-10">
-                  <p style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '2.5rem', color: 'var(--accent)', lineHeight: 1 }}>{projects.length}</p>
+                  <p style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '2.5rem', color: 'var(--accent)', lineHeight: 1 }}>{projects.length}+</p>
                   <p style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-primary)', marginTop: '0.5rem' }}>{t('about.stats.projects')}</p>
                   <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>{t('about.stats.projectsSub')}</p>
                 </div>
@@ -675,7 +681,7 @@ export default function Portfolio() {
             <motion.p variants={fadeUp} className="text-lg md:text-xl opacity-80 mb-10 max-w-2xl">
               {t('contact.description', { role: t('contact.role') })}
             </motion.p>
-            
+
             <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4 mb-16">
               <a href={`mailto:${profile.email}`} className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-bold transition-transform hover:-translate-y-1 bg-white text-stone-900">
                 <Mail size={18} /> {t('contact.sendEmail')}
